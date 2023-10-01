@@ -1,9 +1,10 @@
-import ECommerce from "@/components/Dashboard/E-commerce";
-import { Metadata } from "next";
+import type { Metadata } from 'next';
+
+import ECommerce from '@/components/Dashboard/E-commerce';
 
 export const metadata: Metadata = {
-  title: "TailAdmin | Next.js E-commerce Dashboard Template",
-  description: "This is Home Blog page for TailAdmin Next.js",
+  title: 'Plataforma Igreja Pentecostal reformada',
+  description: 'Página Inicial',
   // other metadata
 };
 
