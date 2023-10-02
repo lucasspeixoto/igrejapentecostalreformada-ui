@@ -1,26 +1,25 @@
+'use client';
+
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
-import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
-
-export const metadata: Metadata = {
-  title: 'Signin Page | Next.js E-commerce Dashboard Template',
-  description: 'This is Signin page for TailAdmin Next.js',
-  // other metadata
-};
-
 const SignIn: React.FC = () => {
+  const router = useRouter();
+
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  const handleSignInClick = () => {
+    router.push('/membros');
+  };
+
   return (
     <>
-      <Breadcrumb pageName="Sign In" />
-
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="flex flex-wrap items-center">
-          <div className="hidden w-full xl:block xl:w-1/2">
-            <div className="px-26 py-17.5 text-center">
+      <div className="h-screen rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div className="md-p-8 lg:md-p-8 flex h-screen flex-wrap items-center justify-center p-0">
+          <div className="hidden w-full md:block md:w-1/2">
+            <div className="flex h-screen flex-col items-center justify-center px-10 py-17.5 text-center">
               <Link className="mb-5.5 inline-block" href="/">
                 <Image
                   className="hidden dark:block"
@@ -39,8 +38,8 @@ const SignIn: React.FC = () => {
               </Link>
 
               <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
+                Bem vindo a plataforma de membros da Igreja Pentecostal
+                Reformada de Campinas
               </p>
 
               <span className="mt-15 inline-block">
@@ -167,11 +166,10 @@ const SignIn: React.FC = () => {
             </div>
           </div>
 
-          <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
-            <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-              <span className="mb-1.5 block font-medium">Start for free</span>
+          <div className="w-full border-stroke dark:border-strokedark md:w-1/2 md:border-l-2">
+            <div className="flex h-screen w-full flex-col justify-center p-4 sm:p-12.5 md:p-17.5">
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign In to TailAdmin
+                Login IPR
               </h2>
 
               <form>
@@ -207,7 +205,7 @@ const SignIn: React.FC = () => {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Re-type Password
+                    Senha
                   </label>
                   <div className="relative">
                     <input
@@ -240,11 +238,12 @@ const SignIn: React.FC = () => {
                 </div>
 
                 <div className="mb-5">
-                  <input
-                    type="submit"
-                    value="Sign In"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-                  />
+                  <button
+                    onClick={() => handleSignInClick()}
+                    type="button"
+                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90">
+                    Entrar
+                  </button>
                 </div>
 
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
@@ -280,14 +279,14 @@ const SignIn: React.FC = () => {
                       </defs>
                     </svg>
                   </span>
-                  Sign in with Google
+                  Entrar com o Google
                 </button>
 
                 <div className="mt-6 text-center">
                   <p>
-                    Don’t have any account?{' '}
-                    <Link href="/auth/signup" className="text-primary">
-                      Sign Up
+                    Não possui conta ?{' '}
+                    <Link href="/cadastro" className="text-primary">
+                      Cadastrar
                     </Link>
                   </p>
                 </div>
