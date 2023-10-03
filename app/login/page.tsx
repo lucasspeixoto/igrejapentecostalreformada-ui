@@ -1,18 +1,22 @@
-'use client';
-
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import Image from '@/components/Image';
 
+export const metadata: Metadata = {
+  title: 'Login | Igreja Pentecostal reformada',
+  description: 'Plataforma de membros da igreja pentecostal reformada (IPR)',
+};
+
 const SignIn: React.FC = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
   // eslint-disable-next-line unused-imports/no-unused-vars
   const handleSignInClick = () => {
-    router.push('/membros');
+    // router.push('/membros');
   };
 
   return (
@@ -127,7 +131,6 @@ const SignIn: React.FC = () => {
 
                 <div className="mb-4 mt-10">
                   <button
-                    onClick={() => handleSignInClick()}
                     type="button"
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90">
                     Entrar

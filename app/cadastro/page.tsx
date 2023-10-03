@@ -5,8 +5,8 @@ import Link from 'next/link';
 import React from 'react';
 
 export const metadata: Metadata = {
-  title: 'Cadastro Plataforma Igreja Pentecostal reformada',
-  description: 'Página de cadastro na plataforma IPR',
+  title: 'Cadastro | Igreja Pentecostal reformada',
+  description: 'Plataforma de membros da igreja pentecostal reformada (IPR)',
 };
 
 const SignUp: React.FC = () => {

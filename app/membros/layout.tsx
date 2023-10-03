@@ -1,17 +1,10 @@
 'use client';
 
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
-import type { Metadata } from 'next';
 import { useState } from 'react';
 
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
-
-export const metadata: Metadata = {
-  title: 'Profile Page | Next.js E-commerce Dashboard Template',
-  description: 'This is Profile page for TailAdmin Next.js',
-  // other metadata
-};
 
 const MembrosLayout = ({ children }: { children: React.ReactNode }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
