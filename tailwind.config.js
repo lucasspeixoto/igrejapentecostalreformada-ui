@@ -55,6 +55,7 @@ module.exports = {
       '3xl': '2000px',
       ...defaultTheme.screens,
     },
+    variants: {},
     extend: {
       fontSize: {
         'title-xxl': ['44px', '55px'],

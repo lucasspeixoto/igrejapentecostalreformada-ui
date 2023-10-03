@@ -4,9 +4,17 @@ import './globals.css';
 import './data-tables-css.css';
 import './satoshi.css';
 
+import type { Metadata } from 'next';
 import { useEffect, useState } from 'react';
 
 import Loader from '@/components/common/Loader';
+import { AuthContextProvider } from '@/providers/AuthContextProvider';
+
+export const metadata: Metadata = {
+  title: 'Bem vindo a plataforma IPR',
+  description: 'Página incial de acesso (login e cadastro) na plataforma IPR',
+  // other metadata
+};
 
 export default function RootLayout({
   children,
@@ -27,7 +35,9 @@ export default function RootLayout({
             <Loader />
           ) : (
             <main>
-              <div className="h-screen w-full p-0">{children}</div>
+              <div className="w-full overflow-auto">
+                <AuthContextProvider>{children}</AuthContextProvider>
+              </div>
             </main>
           )}
         </div>
