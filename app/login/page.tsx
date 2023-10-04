@@ -23,7 +23,7 @@ const SignIn: React.FC = () => {
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="md-p-8 lg:md-p-8 flex flex-wrap items-center justify-center p-0">
-          <div className="hidden w-full md:block md:w-1/2">
+          <div className="hidden w-full  md:block md:w-1/2">
             <div className="flex h-screen flex-col items-center justify-center px-10 py-17.5 text-center">
               <Link className="mb-5.5 inline-block" href="/">
                 <Image
@@ -176,7 +176,9 @@ const SignIn: React.FC = () => {
                 <div className="mt-6 text-center">
                   <p>
                     Não possui conta ?{' '}
-                    <Link href="/cadastro" className="text-primary">
+                    <Link
+                      href="/cadastro"
+                      className="text-primary hover:underline">
                       Cadastrar
                     </Link>
                   </p>
