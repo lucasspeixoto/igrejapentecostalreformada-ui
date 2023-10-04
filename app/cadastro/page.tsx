@@ -1,8 +1,9 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+
+import AuthPagePresentation from '@/components/AuthPagePresentation';
 
 export const metadata: Metadata = {
   title: 'Cadastro | Igreja Pentecostal reformada',
@@ -14,40 +15,7 @@ const SignUp: React.FC = () => {
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="md-p-8 lg:md-p-8 flex flex-wrap items-center justify-center p-0">
-          <div className="hidden w-full md:block md:w-1/2">
-            <div className="flex h-screen flex-col items-center justify-center px-10 py-17.5 text-center">
-              <Link className="mb-5.5 inline-block" href="/">
-                <Image
-                  className="hidden dark:block"
-                  src={'/images/logo/logo.svg'}
-                  alt="Logo"
-                  width={300}
-                  height={80}
-                />
-                <Image
-                  className="dark:hidden"
-                  src={'/images/logo/logo-dark.svg'}
-                  alt="Logo"
-                  width={300}
-                  height={80}
-                />
-              </Link>
-
-              <p className="text-center text-lg leading-loose text-black dark:text-white 2xl:px-20">
-                A Bíblia nos apresenta Deus como o Pai Celestial de todos os que
-                creram no Seu Filho. A Igreja Pentecostal Reformada é uma
-                família de fiéis que descobriram o evangelho, o poder de Deus
-                para a salvação de todo aquele que crê{' '}
-                <span className="text-meta-7">(Rm 1.16,17)</span> e que se
-                reúnem regularmente para partilhar do amor de Deus, encorajar
-                uns aos outros e expressar como uma comunidade local as virtudes
-                do Reino de Deus, procurando crescer no conhecimento de Cristo e
-                na obediência aos seus mandamentos. Se você procura uma igreja
-                cristã bíblica, cristocêntrica e sem os pesados fardos do
-                legalismo religioso, venha nos conhecer!
-              </p>
-            </div>
-          </div>
+          <AuthPagePresentation />
 
           <div className="w-full border-stroke dark:border-strokedark md:w-1/2 md:border-l-2">
             <div className="flex h-screen flex-col justify-center p-4 sm:p-12.5 md:p-17.5">
