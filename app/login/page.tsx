@@ -61,7 +61,7 @@ const SignIn: React.FC = () => {
           <div className="w-full border-stroke dark:border-strokedark md:w-1/2 md:border-l-2">
             <div className="flex h-screen w-full flex-col justify-center p-4 sm:p-12.5 md:p-17.5">
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Login IPR
+                Login
               </h2>
 
               <form>
