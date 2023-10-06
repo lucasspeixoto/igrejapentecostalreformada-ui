@@ -1,11 +1,12 @@
-"use client";
-import React from "react";
-import { VectorMap } from "@react-jvectormap/core";
-import { usAea } from "@react-jvectormap/unitedstates";
+'use client';
+
+import { VectorMap } from '@react-jvectormap/core';
+import { usAea } from '@react-jvectormap/unitedstates';
+import React from 'react';
 
 const MapOne = () => {
   return (
-    <div className="col-span-12 rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-7">
+    <div className="col-span-12 rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark xl:col-span-7">
       <h4 className="mb-2 text-xl font-semibold text-black dark:text-white">
         Region labels
       </h4>
@@ -15,22 +16,22 @@ const MapOne = () => {
           backgroundColor="white"
           regionStyle={{
             initial: {
-              fill: "#D1D5DB",
+              fill: '#D1D5DB',
             },
             hover: {
               fillOpacity: 1,
-              fill: "blue",
+              fill: 'blue',
             },
             selected: {
-              fill: "#FFFB00",
+              fill: '#FFFB00',
             },
           }}
-          onRegionTipShow={function reginalTip(event, label, code) {
-            //@ts-ignore
+          onRegionTipShow={function reginalTip(event, label, _code) {
+            // @ts-ignore
             return label.html(`
                   <div style="background-color: #F8FAFC; color: black; padding: 2px 8px"; >
                     ${
-                      //@ts-ignore
+                      // @ts-ignore
                       label.html()
                     }
                   </div>`);

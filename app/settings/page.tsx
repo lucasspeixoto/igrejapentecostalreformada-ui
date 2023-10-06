@@ -1,10 +1,12 @@
-import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import Image from "next/image";
+/* eslint-disable tailwindcss/migration-from-tailwind-2 */
+import type { Metadata } from 'next';
+import Image from 'next/image';
 
-import { Metadata } from "next";
+import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
+
 export const metadata: Metadata = {
-  title: "Settings Page | Next.js E-commerce Dashboard Template",
-  description: "This is Settings page for TailAdmin Next.js",
+  title: 'Settings Page | Next.js E-commerce Dashboard Template',
+  description: 'This is Settings page for TailAdmin Next.js',
   // other metadata
 };
 
@@ -17,7 +19,7 @@ const Settings = () => {
         <div className="grid grid-cols-5 gap-8">
           <div className="col-span-5 xl:col-span-3">
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-              <div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
+              <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
                 <h3 className="font-medium text-black dark:text-white">
                   Personal Information
                 </h3>
@@ -28,8 +30,7 @@ const Settings = () => {
                     <div className="w-full sm:w-1/2">
                       <label
                         className="mb-3 block text-sm font-medium text-black dark:text-white"
-                        htmlFor="fullName"
-                      >
+                        htmlFor="fullName">
                         Full Name
                       </label>
                       <div className="relative">
@@ -40,8 +41,7 @@ const Settings = () => {
                             height="20"
                             viewBox="0 0 20 20"
                             fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
+                            xmlns="http://www.w3.org/2000/svg">
                             <g opacity="0.8">
                               <path
                                 fillRule="evenodd"
@@ -72,12 +72,11 @@ const Settings = () => {
                     <div className="w-full sm:w-1/2">
                       <label
                         className="mb-3 block text-sm font-medium text-black dark:text-white"
-                        htmlFor="phoneNumber"
-                      >
+                        htmlFor="phoneNumber">
                         Phone Number
                       </label>
                       <input
-                        className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                        className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                         type="text"
                         name="phoneNumber"
                         id="phoneNumber"
@@ -90,8 +89,7 @@ const Settings = () => {
                   <div className="mb-5.5">
                     <label
                       className="mb-3 block text-sm font-medium text-black dark:text-white"
-                      htmlFor="emailAddress"
-                    >
+                      htmlFor="emailAddress">
                       Email Address
                     </label>
                     <div className="relative">
@@ -102,8 +100,7 @@ const Settings = () => {
                           height="20"
                           viewBox="0 0 20 20"
                           fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                          xmlns="http://www.w3.org/2000/svg">
                           <g opacity="0.8">
                             <path
                               fillRule="evenodd"
@@ -134,12 +131,11 @@ const Settings = () => {
                   <div className="mb-5.5">
                     <label
                       className="mb-3 block text-sm font-medium text-black dark:text-white"
-                      htmlFor="Username"
-                    >
+                      htmlFor="Username">
                       Username
                     </label>
                     <input
-                      className="w-full rounded border border-stroke bg-gray py-3 px-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                      className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                       type="text"
                       name="Username"
                       id="Username"
@@ -151,8 +147,7 @@ const Settings = () => {
                   <div className="mb-5.5">
                     <label
                       className="mb-3 block text-sm font-medium text-black dark:text-white"
-                      htmlFor="Username"
-                    >
+                      htmlFor="Username">
                       BIO
                     </label>
                     <div className="relative">
@@ -163,8 +158,7 @@ const Settings = () => {
                           height="20"
                           viewBox="0 0 20 20"
                           fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                          xmlns="http://www.w3.org/2000/svg">
                           <g opacity="0.8" clipPath="url(#clip0_88_10224)">
                             <path
                               fillRule="evenodd"
@@ -193,22 +187,19 @@ const Settings = () => {
                         id="bio"
                         rows={6}
                         placeholder="Write your bio here"
-                        defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque posuere fermentum urna, eu condimentum mauris tempus ut. Donec fermentum blandit aliquet."
-                      ></textarea>
+                        defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque posuere fermentum urna, eu condimentum mauris tempus ut. Donec fermentum blandit aliquet."></textarea>
                     </div>
                   </div>
 
                   <div className="flex justify-end gap-4.5">
                     <button
-                      className="flex justify-center rounded border border-stroke py-2 px-6 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
-                      type="submit"
-                    >
+                      className="flex justify-center rounded border border-stroke px-6 py-2 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
+                      type="submit">
                       Cancel
                     </button>
                     <button
-                      className="flex justify-center rounded bg-primary py-2 px-6 font-medium text-gray hover:bg-opacity-95"
-                      type="submit"
-                    >
+                      className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-95"
+                      type="submit">
                       Save
                     </button>
                   </div>
@@ -218,7 +209,7 @@ const Settings = () => {
           </div>
           <div className="col-span-5 xl:col-span-2">
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-              <div className="border-b border-stroke py-4 px-7 dark:border-strokedark">
+              <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
                 <h3 className="font-medium text-black dark:text-white">
                   Your Photo
                 </h3>
@@ -228,7 +219,7 @@ const Settings = () => {
                   <div className="mb-4 flex items-center gap-3">
                     <div className="h-14 w-14 rounded-full">
                       <Image
-                        src={"/images/user/user-03.png"}
+                        src={'/images/user/user-03.png'}
                         width={55}
                         height={55}
                         alt="User"
@@ -251,8 +242,7 @@ const Settings = () => {
 
                   <div
                     id="FileUpload"
-                    className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-primary bg-gray py-4 px-4 dark:bg-meta-4 sm:py-7.5"
-                  >
+                    className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-primary bg-gray p-4 dark:bg-meta-4 sm:py-7.5">
                     <input
                       type="file"
                       accept="image/*"
@@ -265,8 +255,7 @@ const Settings = () => {
                           height="16"
                           viewBox="0 0 16 16"
                           fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                          xmlns="http://www.w3.org/2000/svg">
                           <path
                             fillRule="evenodd"
                             clipRule="evenodd"
@@ -298,15 +287,13 @@ const Settings = () => {
 
                   <div className="flex justify-end gap-4.5">
                     <button
-                      className="flex justify-center rounded border border-stroke py-2 px-6 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
-                      type="submit"
-                    >
+                      className="flex justify-center rounded border border-stroke px-6 py-2 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white"
+                      type="submit">
                       Cancel
                     </button>
                     <button
-                      className="flex justify-center rounded bg-primary py-2 px-6 font-medium text-gray hover:bg-opacity-95"
-                      type="submit"
-                    >
+                      className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-95"
+                      type="submit">
                       Save
                     </button>
                   </div>

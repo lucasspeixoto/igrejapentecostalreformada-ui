@@ -1,16 +1,22 @@
-import ECommerce from "@/components/Dashboard/E-commerce";
-import { Metadata } from "next";
+'use client';
 
-export const metadata: Metadata = {
-  title: "TailAdmin | Next.js E-commerce Dashboard Template",
-  description: "This is Home Blog page for TailAdmin Next.js",
-  // other metadata
-};
+/* eslint-disable no-console */
+import { useEffect } from 'react';
+
+import { useAuthContext } from '@/providers/AuthContextProvider';
+
+import SignIn from './login/page';
 
 export default function Home() {
+  const { user } = useAuthContext() as any;
+
+  useEffect(() => {
+    console.log(user?.uid);
+  }, [user]);
+
   return (
     <>
-      <ECommerce />
+      <SignIn />
     </>
   );
 }

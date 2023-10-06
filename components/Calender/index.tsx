@@ -1,4 +1,4 @@
-import Breadcrumb from "../Breadcrumbs/Breadcrumb";
+import Breadcrumb from '../Breadcrumbs/Breadcrumb';
 
 const Calendar = () => {
   return (
@@ -9,7 +9,7 @@ const Calendar = () => {
       <div className="w-full max-w-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <table className="w-full">
           <thead>
-            <tr className="grid grid-cols-7 rounded-t-sm bg-primary text-white">
+            <tr className="grid grid-cols-9 rounded-t-sm bg-primary text-white">
               <th className="flex h-15 items-center justify-center rounded-tl-sm p-1 text-xs font-semibold sm:text-base xl:p-5">
                 <span className="hidden lg:block"> Sunday </span>
                 <span className="block lg:hidden"> Sun </span>
@@ -47,7 +47,7 @@ const Calendar = () => {
                 <span className="font-medium text-black dark:text-white">
                   1
                 </span>
-                <div className="group h-16 w-full flex-grow cursor-pointer py-1 md:h-30">
+                <div className="group h-16 w-full grow cursor-pointer py-1 md:h-30">
                   <span className="group-hover:text-primary md:hidden">
                     More
                   </span>
@@ -192,7 +192,7 @@ const Calendar = () => {
                 <span className="font-medium text-black dark:text-white">
                   25
                 </span>
-                <div className="group h-16 w-full flex-grow cursor-pointer py-1 md:h-30">
+                <div className="group h-16 w-full grow cursor-pointer py-1 md:h-30">
                   <span className="group-hover:text-primary md:hidden">
                     More
                   </span>
