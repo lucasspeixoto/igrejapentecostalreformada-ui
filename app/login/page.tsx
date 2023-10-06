@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 import RedirectLink from '../components/RedirectLink';
-import LoginActions from './LoginActions';
+import LoginForm from './LoginForm';
 
 export const metadata: Metadata = {
   title: 'Login | Igreja Pentecostal reformada',
@@ -24,7 +24,7 @@ const SignIn: React.FC = () => {
                 Login
               </h2>
 
-              <LoginActions />
+              <LoginForm />
 
               {/* Footer com redirecionamentos */}
               <div className="mt-6 text-center">
