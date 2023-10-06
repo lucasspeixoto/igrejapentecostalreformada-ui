@@ -1,9 +1,9 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 import AuthPagePresentation from '@appC/AuthPagePresentation';
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import React from 'react';
 
+import RedirectLink from '../components/RedirectLink';
 import SignUpActions from './SignUpActions';
 
 export const metadata: Metadata = {
@@ -160,14 +160,11 @@ const SignUp: React.FC = () => {
                 <SignUpActions />
 
                 <div className="mt-3 text-center">
-                  <p>
-                    Ja possui uma conta?{' '}
-                    <Link
-                      href="/login"
-                      className="text-primary hover:underline">
-                      Logar
-                    </Link>
-                  </p>
+                  <RedirectLink
+                    text="Ja possui uma conta?"
+                    textLink="Logar"
+                    route="/login"
+                  />
                 </div>
               </form>
             </div>
