@@ -50,7 +50,9 @@ const LoginForm: React.FC = () => {
         {/* ---------------------------- E-mail ---------------------------- */}
         <div className="mb-3 gap-2">
           <div className="relative">
-            <label htmlFor="email" className="font-bold text-white">
+            <label
+              htmlFor="email"
+              className="mb-1 block font-medium text-black dark:text-white">
               E-mail
             </label>
             <input
@@ -75,7 +77,9 @@ const LoginForm: React.FC = () => {
         {/* ---------------------------- Senha ---------------------------- */}
         <div className="mb-3 gap-2">
           <div className="relative">
-            <label htmlFor="password" className="font-bold text-white">
+            <label
+              htmlFor="password"
+              className="mb-1 block font-medium text-black dark:text-white">
               Senha
             </label>
             <input

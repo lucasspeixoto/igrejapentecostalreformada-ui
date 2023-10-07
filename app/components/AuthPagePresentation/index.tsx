@@ -4,26 +4,26 @@ import Image from '@/components/Image';
 
 const AuthPagePresentation = () => {
   return (
-    <div className="hidden w-full md:block md:w-1/2">
+    <div className="hidden w-full bg-[url('/images/wallpaper.png')] bg-cover bg-repeat md:block md:w-1/2">
       <div className="flex h-screen flex-col items-center justify-center px-10 py-17.5 text-center">
         <Link className="mb-5.5 inline-block" href="/">
           <Image
-            className="hidden dark:block"
+            /*  className="hidden dark:block" */
             src={'/images/logo/logo.svg'}
             alt="Logo"
             width={300}
             height={80}
           />
-          <Image
+          {/* <Image
             className="dark:hidden"
             src={'/images/logo/logo-dark.svg'}
             alt="Logo"
             width={300}
             height={80}
-          />
+          /> */}
         </Link>
 
-        <p className="text-center text-sm leading-loose text-black dark:text-white 2xl:px-20">
+        <p className="text-center text-lg leading-loose text-white 2xl:px-20">
           A Bíblia nos apresenta Deus como o Pai Celestial de todos os que
           creram no Seu Filho. A Igreja Pentecostal Reformada é uma família de
           fiéis que descobriram o evangelho, o poder de Deus para a salvação de
