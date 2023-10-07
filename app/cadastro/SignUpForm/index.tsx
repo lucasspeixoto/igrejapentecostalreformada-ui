@@ -3,51 +3,15 @@
 
 'use client';
 
-import RedirectLink from '@appC/RedirectLink';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BsPersonLock } from 'react-icons/bs';
 import { MdLockOutline, MdOutlineMarkEmailUnread } from 'react-icons/md';
-import { z } from 'zod';
 
 import { GoogleLogo } from '@/components/common/Icons';
-
-const createUserFormSchema = z
-  .object({
-    name: z
-      .string()
-      .min(3, 'O Nome precisa conter no mínimo 3 caracteres!')
-      .transform(name => {
-        return name
-          .trim()
-          .split(' ')
-          .map(word => {
-            return word[0].toLocaleUpperCase().concat(word.substring(1));
-          })
-          .join(' ');
-      }),
-    email: z
-      .string()
-      .min(1, 'E-mail é obrigatório!')
-      .email('E-mail em formato inválido!')
-      .toLowerCase()
-      .refine(email => {
-        return email.endsWith('.com');
-      }, 'Domínio de email incorreto'),
-    password: z
-      .string()
-      .min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
-    confirmedPassword: z
-      .string()
-      .min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
-  })
-  .refine(data => data.password === data.confirmedPassword, {
-    message: 'As senhas precisam ser iguais',
-    path: ['confirmedPassword'], // path of error
-  });
-
-type CreateUserFormData = z.infer<typeof createUserFormSchema>;
+import type { CreateUserFormData } from '@/schemas/signup-schema';
+import { createUserFormSchema } from '@/schemas/signup-schema';
 
 const SignUpForm: React.FC = () => {
   const {
@@ -86,7 +50,7 @@ const SignUpForm: React.FC = () => {
 
             <>
               {errors.name && (
-                <span className="text-xs text-meta-1">
+                <span className="text-xs text-meta-1 dark:text-meta-7">
                   {errors.name.message}
                 </span>
               )}
@@ -113,7 +77,7 @@ const SignUpForm: React.FC = () => {
 
             <>
               {errors.email && (
-                <span className="text-xs text-meta-1">
+                <span className="text-xs text-meta-1 dark:text-meta-7">
                   {errors.email.message}
                 </span>
               )}
@@ -142,7 +106,7 @@ const SignUpForm: React.FC = () => {
 
             <>
               {errors.password && (
-                <span className="text-xs text-meta-1">
+                <span className="text-xs text-meta-1 dark:text-meta-7">
                   {errors.password.message}
                 </span>
               )}
@@ -169,7 +133,7 @@ const SignUpForm: React.FC = () => {
 
             <>
               {errors.confirmedPassword && (
-                <span className="text-xs text-meta-1">
+                <span className="text-xs text-meta-1 dark:text-meta-7">
                   {errors.confirmedPassword.message}
                 </span>
               )}
@@ -191,14 +155,6 @@ const SignUpForm: React.FC = () => {
           <GoogleLogo size={22} />
           Cadastrar com Google
         </button>
-
-        <div className="mt-3 text-center">
-          <RedirectLink
-            text="Ja possui uma conta?"
-            textLink="Logar"
-            route="/login"
-          />
-        </div>
       </form>
     </>
   );

@@ -8,23 +8,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BsPersonLock } from 'react-icons/bs';
 import { MdOutlineMarkEmailUnread } from 'react-icons/md';
-import { z } from 'zod';
 
 import { GoogleLogo } from '@/components/common/Icons';
-
-const loginUserFormSchema = z.object({
-  email: z
-    .string()
-    .min(1, 'E-mail é obrigatório!')
-    .email('E-mail em formato inválido!')
-    .toLowerCase()
-    .refine(email => {
-      return email.endsWith('.com');
-    }, 'Domínio de email incorreto'),
-  password: z.string().min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
-});
-
-type LoginUserFormData = z.infer<typeof loginUserFormSchema>;
+import type { LoginUserFormData } from '@/schemas/signin-schema';
+import { loginUserFormSchema } from '@/schemas/signin-schema';
 
 const LoginForm: React.FC = () => {
   const router = useRouter();
@@ -67,7 +54,7 @@ const LoginForm: React.FC = () => {
 
           <>
             {errors.email && (
-              <span className="text-sm text-meta-1">
+              <span className="text-sm text-meta-1 dark:text-meta-7">
                 {errors.email.message}
               </span>
             )}
@@ -94,7 +81,7 @@ const LoginForm: React.FC = () => {
 
           <>
             {errors.password && (
-              <span className="text-sm text-meta-1">
+              <span className="text-sm text-meta-1 dark:text-meta-7">
                 {errors.password.message}
               </span>
             )}
