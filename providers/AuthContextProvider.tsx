@@ -7,7 +7,15 @@ import firebase_app from '../firebase/config';
 
 const auth = getAuth(firebase_app);
 
-export const AuthContext = createContext({});
+type AuthContextType = {
+  user: unknown;
+  isLoadingAuthProcess: boolean;
+  updateLoadingAuthProcess: (isLoading: boolean) => void;
+};
+
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined
+);
 
 export const useAuthContext = () => useContext(AuthContext);
 
@@ -16,25 +24,33 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [user, setUser] = useState<unknown>(null);
 
-  const [loading, setLoading] = useState(true);
+  const [isLoadingAuthProcess, setIsLoadingAuthProcess] = useState(false);
+
+  const updateLoadingAuthProcess = (isLoading: boolean) => {
+    setIsLoadingAuthProcess(isLoading);
+  };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, _user => {
+    const authStateUnsubscribe = onAuthStateChanged(auth, _user => {
       if (_user) {
         setUser(_user);
+        // eslint-disable-next-line no-console
         console.log(_user.uid);
       } else {
         setUser(null);
       }
-      setLoading(false);
+
+      updateLoadingAuthProcess(false);
     });
 
-    return () => unsubscribe();
+    return () => authStateUnsubscribe();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user }}>
-      {loading ? <div>Loading...</div> : children}
+    <AuthContext.Provider
+      value={{ user, isLoadingAuthProcess, updateLoadingAuthProcess }}>
+      {/*  {isLoadingAuthProcess ? <Loader /> : children} */}
+      {children}
     </AuthContext.Provider>
   );
 };

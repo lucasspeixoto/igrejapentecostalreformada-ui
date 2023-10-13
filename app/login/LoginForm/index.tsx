@@ -10,12 +10,15 @@ import { useForm } from 'react-hook-form';
 import { BsPersonLock } from 'react-icons/bs';
 import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 
-import { GoogleLogo } from '@/components/common/Icons';
+import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
+import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/signin-schema';
 import { loginUserFormSchema } from '@/schemas/signin-schema';
 
-const LoginForm: React.FC = () => {
+const LoginForm = () => {
   const router = useRouter();
+
+  const authContext = useAuthContext()!;
 
   const {
     register,
@@ -29,6 +32,8 @@ const LoginForm: React.FC = () => {
     email: string,
     password: string
   ): Promise<void> => {
+    authContext.updateLoadingAuthProcess(true);
+
     const { result, error } = await signIn(email, password);
 
     if (error) {
@@ -37,6 +42,10 @@ const LoginForm: React.FC = () => {
 
     // else successful
     console.log(result);
+
+    setTimeout(() => {
+      authContext.updateLoadingAuthProcess(false);
+    }, 2000);
   };
 
   const getLoginUserFormDataHandler = async (data: LoginUserFormData) => {
@@ -109,8 +118,10 @@ const LoginForm: React.FC = () => {
         {/* Botões de ações */}
         <div className="mb-4 mt-10">
           <button
+            disabled={authContext.isLoadingAuthProcess}
             type="submit"
-            className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+            className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+            {authContext.isLoadingAuthProcess && <SpinnerLogo size={22} />}
             Entrar
           </button>
         </div>
