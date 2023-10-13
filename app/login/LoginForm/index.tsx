@@ -2,6 +2,7 @@
 
 'use client';
 
+import signIn from '@fire/auth/signin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -24,16 +25,33 @@ const LoginForm: React.FC = () => {
     resolver: zodResolver(loginUserFormSchema),
   });
 
-  const loginUserHandler = (data: LoginUserFormData) => {
+  const loginUserHandler = async (
+    email: string,
+    password: string
+  ): Promise<void> => {
+    const { result, error } = await signIn(email, password);
+
+    if (error) {
+      console.log(error);
+    }
+
+    // else successful
+    console.log(result);
+  };
+
+  const getLoginUserFormDataHandler = async (data: LoginUserFormData) => {
     // eslint-disable-next-line no-console
     console.log(data);
 
-    router.push('/membros');
+    const { email, password } = data;
+
+    loginUserHandler(email, password);
   };
+
   return (
     <React.Fragment>
       {/* Formulário */}
-      <form onSubmit={handleSubmit(loginUserHandler)}>
+      <form onSubmit={handleSubmit(getLoginUserFormDataHandler)}>
         {/* ---------------------------- E-mail ---------------------------- */}
         <div className="mb-3 gap-2">
           <div className="relative">

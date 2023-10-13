@@ -60,10 +60,10 @@
         "tailwindcss/no-custom-classname": "off", // Disabled otherwise nightmare to allow each custom tailwind classes
         "simple-import-sort/imports": "error", // Import configuration for `eslint-plugin-simple-import-sort`
         "simple-import-sort/exports": "error", // Export configuration for `eslint-plugin-simple-import-sort`
-        "@typescript-eslint/no-unused-vars": "off",
-        "unused-imports/no-unused-imports": "error",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "unused-imports/no-unused-imports": "warn",
         "unused-imports/no-unused-vars": [
-          "error",
+          "warn",
           { "argsIgnorePattern": "^_" }
         ]
       }

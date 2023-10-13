@@ -22,6 +22,7 @@
     "paths": {
       "@/*": ["./*"],
       "@app/*": ["./app/*"],
+      "@fire/*": ["./firebase/*"],
       "@appC/*": ["./app/components/*"]
     }
   },

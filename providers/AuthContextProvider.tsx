@@ -22,6 +22,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const unsubscribe = onAuthStateChanged(auth, (_user: unknown) => {
       if (_user) {
         setUser(_user);
+        console.log(_user);
       } else {
         setUser(null);
       }
