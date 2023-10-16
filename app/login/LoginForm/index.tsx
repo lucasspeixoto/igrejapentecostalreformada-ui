@@ -45,6 +45,8 @@ const LoginForm = () => {
 
     setTimeout(() => {
       authContext.updateLoadingAuthProcess(false);
+
+      router.push('/membros');
     }, 2000);
   };
 
