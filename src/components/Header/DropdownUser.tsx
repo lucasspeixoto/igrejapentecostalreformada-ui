@@ -2,13 +2,34 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+
+import signOutUserHandler from '@/firebase/auth/signout';
+import firebaseMessages from '@/firebase/messages';
+import { useAuthContext } from '@/providers/AuthContextProvider';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
 
+  const authContext = useAuthContext()!;
+
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+
+  const signOutUser = async (): Promise<void> => {
+    const { error } = await signOutUserHandler();
+
+    if (error) {
+      toast.error(firebaseMessages[error.code]);
+
+      authContext.updateLoadingAuthProcess(false);
+    } else {
+      router.push('/login');
+
+      authContext.updateLoadingAuthProcess(false);
+    }
+  };
 
   // close on click outside
   useEffect(() => {
@@ -151,7 +172,7 @@ const DropdownUser = () => {
           </li>
         </ul>
         <button
-          onClick={() => router.push('/login')}
+          onClick={signOutUser}
           className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
           <svg
             className="fill-current"

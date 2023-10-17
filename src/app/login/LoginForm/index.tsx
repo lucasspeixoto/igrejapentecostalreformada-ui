@@ -1,16 +1,22 @@
-/* eslint-disable tailwindcss/migration-from-tailwind-2 */
-
 'use client';
 
-import signIn from '@fire/auth/signin';
+/* eslint-disable no-console */
+/* eslint-disable tailwindcss/migration-from-tailwind-2 */
+/* import signIn from '@fire/auth/signin'; */
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BsPersonLock } from 'react-icons/bs';
 import { MdOutlineMarkEmailUnread } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
+import signInUserHandler from '@/firebase/auth/signin';
+import signInWithGoogle from '@/firebase/auth/signin-with-google';
+import addData from '@/firebase/firestore/addData';
+import firebaseMessages from '@/firebase/messages';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/signin-schema';
 import { loginUserFormSchema } from '@/schemas/signin-schema';
@@ -28,31 +34,49 @@ const LoginForm = () => {
     resolver: zodResolver(loginUserFormSchema),
   });
 
+  const singInWithGoogleHandler = async (): Promise<void> => {
+    const { result, error } = await signInWithGoogle();
+
+    if (error) {
+      toast.error(firebaseMessages[error.code]);
+
+      authContext.updateLoadingAuthProcess(false);
+    } else {
+      const userAuthCollection = {
+        admin: false,
+        name: result?.user.displayName,
+        photoUrl: result?.user.photoURL,
+        email: result?.user.email,
+        userId: result?.user.uid,
+      };
+
+      await addData('users', result?.user.uid, { auth: userAuthCollection });
+
+      authContext.updateLoadingAuthProcess(false);
+
+      router.push('/membros');
+    }
+  };
+
   const loginUserHandler = async (
     email: string,
     password: string
   ): Promise<void> => {
-    authContext.updateLoadingAuthProcess(true);
-
-    const { result, error } = await signIn(email, password);
+    const { error } = await signInUserHandler(email, password);
 
     if (error) {
-      console.log(error);
-    }
+      toast.error(firebaseMessages[error.code]);
 
-    // else successful
-    console.log(result);
-
-    setTimeout(() => {
+      authContext.updateLoadingAuthProcess(false);
+    } else {
       authContext.updateLoadingAuthProcess(false);
 
       router.push('/membros');
-    }, 2000);
+    }
   };
 
   const getLoginUserFormDataHandler = async (data: LoginUserFormData) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    authContext.updateLoadingAuthProcess(true);
 
     const { email, password } = data;
 
@@ -129,8 +153,10 @@ const LoginForm = () => {
         </div>
 
         <button
+          disabled={authContext.isLoadingAuthProcess}
+          onClick={singInWithGoogleHandler}
           type="button"
-          className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+          className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
           <GoogleLogo size={22} />
           Entrar com o Google
         </button>

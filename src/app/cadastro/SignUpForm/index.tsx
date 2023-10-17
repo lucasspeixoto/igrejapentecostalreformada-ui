@@ -8,27 +8,88 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BsPersonLock } from 'react-icons/bs';
 import { MdLockOutline, MdOutlineMarkEmailUnread } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import { GoogleLogo } from '@/components/common/Icons';
+import signInWithGoogle from '@/firebase/auth/signin-with-google';
+import signUp from '@/firebase/auth/signup';
+import addData from '@/firebase/firestore/addData';
+import firebaseMessages from '@/firebase/messages';
+import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { CreateUserFormData } from '@/schemas/signup-schema';
 import { createUserFormSchema } from '@/schemas/signup-schema';
 
 const SignUpForm: React.FC = () => {
+  const authContext = useAuthContext()!;
+
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<CreateUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
 
-  function createUserHandler(data: CreateUserFormData) {
-    console.log(data);
-  }
+  const singUpWithGoogleHandler = async (): Promise<void> => {
+    const { name } = getValues();
+    const { result, error } = await signInWithGoogle();
+
+    if (error) {
+      toast.error(firebaseMessages[error.code]);
+
+      authContext.updateLoadingAuthProcess(false);
+    } else {
+      const userAuthCollection = {
+        admin: false,
+        name,
+        photoUrl: result?.user.photoURL,
+        email: result?.user.email,
+        userId: result?.user.uid,
+      };
+
+      await addData('users', result?.user.uid, { auth: userAuthCollection });
+
+      authContext.updateLoadingAuthProcess(false);
+    }
+  };
+
+  const signupUserHandler = async (
+    name: string,
+    email: string,
+    password: string
+  ): Promise<void> => {
+    const { result, error } = await signUp(name, email, password);
+
+    if (error) {
+      toast.error(firebaseMessages[error.code]);
+
+      authContext.updateLoadingAuthProcess(false);
+    } else {
+      const userAuthCollection = {
+        name,
+        photoUrl: '',
+        email: result?.user.email,
+        userId: result?.user.uid,
+      };
+
+      await addData('users', result?.user.uid, { auth: userAuthCollection });
+
+      authContext.updateLoadingAuthProcess(false);
+    }
+  };
+
+  const getSignupUserFormDataHandler = async (data: CreateUserFormData) => {
+    authContext.updateLoadingAuthProcess(true);
+
+    const { name, email, password } = data;
+
+    signupUserHandler(name, email, password);
+  };
 
   return (
     <>
-      <form onSubmit={handleSubmit(createUserHandler)}>
+      <form onSubmit={handleSubmit(getSignupUserFormDataHandler)}>
         {/* ---------------------------- Nome ---------------------------- */}
         <div className="mb-3">
           <label
@@ -150,6 +211,7 @@ const SignUpForm: React.FC = () => {
         </div>
 
         <button
+          onClick={singUpWithGoogleHandler}
           type="button"
           className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
           <GoogleLogo size={22} />

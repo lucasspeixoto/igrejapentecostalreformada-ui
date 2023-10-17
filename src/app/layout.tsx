@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 import Loader from '@/components/common/Loader';
 import { AuthContextProvider } from '@/providers/AuthContextProvider';
+import { ToastProvider } from '@/providers/ToastProvider';
 
 export default function RootLayout({
   children,
@@ -29,7 +30,9 @@ export default function RootLayout({
           ) : (
             <main>
               <div className="w-full overflow-auto">
-                <AuthContextProvider>{children}</AuthContextProvider>
+                <AuthContextProvider>
+                  <ToastProvider>{children}</ToastProvider>
+                </AuthContextProvider>
               </div>
             </main>
           )}

@@ -34,6 +34,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const authStateUnsubscribe = onAuthStateChanged(auth, _user => {
       if (_user) {
         setUser(_user);
+
         // eslint-disable-next-line no-console
         console.log(_user.uid);
       } else {
@@ -48,8 +49,11 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <AuthContext.Provider
-      value={{ user, isLoadingAuthProcess, updateLoadingAuthProcess }}>
-      {/*  {isLoadingAuthProcess ? <Loader /> : children} */}
+      value={{
+        user,
+        isLoadingAuthProcess,
+        updateLoadingAuthProcess,
+      }}>
       {children}
     </AuthContext.Provider>
   );
