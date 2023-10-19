@@ -8,19 +8,11 @@ const AuthPagePresentation = () => {
       <div className="flex h-screen flex-col items-center justify-center px-10 py-17.5 text-center">
         <Link className="mb-5.5 inline-block" href="/">
           <Image
-            /*  className="hidden dark:block" */
             src={'/images/logo/logo.svg'}
             alt="Logo"
             width={300}
             height={80}
           />
-          {/* <Image
-            className="dark:hidden"
-            src={'/images/logo/logo-dark.svg'}
-            alt="Logo"
-            width={300}
-            height={80}
-          /> */}
         </Link>
 
         <p className="text-center text-lg leading-loose text-white 2xl:px-20">

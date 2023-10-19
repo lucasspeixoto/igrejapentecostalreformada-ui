@@ -1,7 +1,7 @@
+'use client';
+
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
-
-'use client';
 
 import { useEffect, useState } from 'react';
 

@@ -3,6 +3,10 @@
 
 'use client';
 
+import signInWithGoogle from '@fire/auth/signin-with-google';
+import signUp from '@fire/auth/signup';
+import addData from '@fire/firestore/addData';
+import firebaseMessages from '@fire/messages';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,10 +15,6 @@ import { MdLockOutline, MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import { GoogleLogo } from '@/components/common/Icons';
-import signInWithGoogle from '@/firebase/auth/signin-with-google';
-import signUp from '@/firebase/auth/signup';
-import addData from '@/firebase/firestore/addData';
-import firebaseMessages from '@/firebase/messages';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { CreateUserFormData } from '@/schemas/signup-schema';
 import { createUserFormSchema } from '@/schemas/signup-schema';
@@ -48,7 +48,7 @@ const SignUpForm: React.FC = () => {
         userId: result?.user.uid,
       };
 
-      await addData('users', result?.user.uid, { auth: userAuthCollection });
+      await addData('users', result?.user.uid!, { auth: userAuthCollection });
 
       authContext.updateLoadingAuthProcess(false);
     }
@@ -73,7 +73,7 @@ const SignUpForm: React.FC = () => {
         userId: result?.user.uid,
       };
 
-      await addData('users', result?.user.uid, { auth: userAuthCollection });
+      await addData('users', result?.user.uid!, { auth: userAuthCollection });
 
       authContext.updateLoadingAuthProcess(false);
     }

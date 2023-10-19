@@ -22,7 +22,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
-      "@fire/*": ["./src/firebase/*"],
+      "@fire/*": ["./src/lib/firebase/*"],
       "@appC/*": ["./src/app/components/*"]
     }
   },
