@@ -1,10 +1,15 @@
+import type { PartialWithFieldValue } from 'firebase/firestore';
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
 
 import firebase_app from '../config';
 
 const db = getFirestore(firebase_app);
 
-export default async function addData(colllection: string, id: any, data: any) {
+export default async function addData(
+  colllection: string,
+  id: string,
+  data: PartialWithFieldValue<unknown>
+) {
   let result = null;
   let error = null;
 

@@ -4,6 +4,10 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 /* import signIn from '@fire/auth/signin'; */
 
+import signInUserHandler from '@fire/auth/signin';
+import signInWithGoogle from '@fire/auth/signin-with-google';
+import addDocumentData from '@fire/firestore/addData';
+import firebaseMessages from '@fire/messages';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -13,13 +17,10 @@ import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
-import signInUserHandler from '@/firebase/auth/signin';
-import signInWithGoogle from '@/firebase/auth/signin-with-google';
-import addData from '@/firebase/firestore/addData';
-import firebaseMessages from '@/firebase/messages';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/signin-schema';
 import { loginUserFormSchema } from '@/schemas/signin-schema';
+import type { UserAuth } from '@/types/user-auth';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -42,15 +43,17 @@ const LoginForm = () => {
 
       authContext.updateLoadingAuthProcess(false);
     } else {
-      const userAuthCollection = {
+      const userAuthCollection: UserAuth = {
         admin: false,
-        name: result?.user.displayName,
-        photoUrl: result?.user.photoURL,
-        email: result?.user.email,
-        userId: result?.user.uid,
+        name: result?.user.displayName!,
+        photoUrl: result?.user.photoURL!,
+        email: result?.user.email!,
+        userId: result?.user.uid!,
       };
 
-      await addData('users', result?.user.uid, { auth: userAuthCollection });
+      await addDocumentData('users', result?.user.uid!, {
+        auth: userAuthCollection,
+      });
 
       authContext.updateLoadingAuthProcess(false);
 

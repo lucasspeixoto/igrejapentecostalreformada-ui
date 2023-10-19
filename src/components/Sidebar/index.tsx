@@ -172,7 +172,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       {/* <!-- Dropdown Menu Start --> */}
                       <div
                         className={`translate overflow-hidden${
-                          !open && 'hidden'
+                          !open && ' hidden'
                         }`}>
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
@@ -316,7 +316,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       {/* <!-- Dropdown Menu Start --> */}
                       <div
                         className={`translate overflow-hidden${
-                          !open && 'hidden'
+                          !open && ' hidden'
                         }`}>
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
@@ -545,7 +545,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       {/* <!-- Dropdown Menu Start --> */}
                       <div
                         className={`translate overflow-hidden${
-                          !open && 'hidden'
+                          !open && ' hidden'
                         }`}>
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
@@ -644,7 +644,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       {/* <!-- Dropdown Menu Start --> */}
                       <div
                         className={`translate overflow-hidden${
-                          !open && 'hidden'
+                          !open && ' hidden'
                         }`}>
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>

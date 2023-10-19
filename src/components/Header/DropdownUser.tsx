@@ -1,23 +1,28 @@
+import signOutUserHandler from '@fire/auth/signout';
+import firebaseMessages from '@fire/messages';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import signOutUserHandler from '@/firebase/auth/signout';
-import firebaseMessages from '@/firebase/messages';
 import { useAuthContext } from '@/providers/AuthContextProvider';
+import { useUserProfileContext } from '@/providers/UserProfileContextProvider';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
 
-  const authContext = useAuthContext()!;
+  const userProfileContext = useUserProfileContext();
+
+  const authContext = useAuthContext();
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
 
   const signOutUser = async (): Promise<void> => {
+    router.push('/login');
+
     const { error } = await signOutUserHandler();
 
     if (error) {
@@ -25,8 +30,6 @@ const DropdownUser = () => {
 
       authContext.updateLoadingAuthProcess(false);
     } else {
-      router.push('/login');
-
       authContext.updateLoadingAuthProcess(false);
     }
   };
@@ -66,16 +69,18 @@ const DropdownUser = () => {
         href="#">
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Lucas Peixoto
+            {userProfileContext.authData?.name}
           </span>
-          <span className="block text-xs">Professor</span>
+          <span className="block text-xs">
+            {userProfileContext.authData?.role!}
+          </span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
           <Image
             width={112}
             height={112}
-            src={'/images/user/user-00.png'}
+            src={userProfileContext.authData?.photoUrl!}
             alt="User"
           />
         </span>
