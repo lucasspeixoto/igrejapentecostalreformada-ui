@@ -57,7 +57,7 @@ const LoginForm = () => {
 
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros');
+      router.push('/membros/cadastro/pessoal');
     }
   };
 
@@ -74,7 +74,7 @@ const LoginForm = () => {
     } else {
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros');
+      router.push('/membros/cadastro/pessoal');
     }
   };
 

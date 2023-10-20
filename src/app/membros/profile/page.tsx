@@ -5,15 +5,15 @@ import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
 export const metadata: Metadata = {
-  title: 'Profile Page | Next.js E-commerce Dashboard Template',
-  description: 'This is Profile page for TailAdmin Next.js',
+  title: 'Perfil',
+  description: 'Meu perfil na plataforma IPR',
   // other metadata
 };
 
 const Profile = () => {
   return (
     <>
-      <Breadcrumb pageName="Profile" />
+      <Breadcrumb pageName="Perfil" />
 
       <div className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="relative z-20 h-35 md:h-65">

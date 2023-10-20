@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import ECommerce from '@/components/Dashboard/E-commerce';
 
 export const metadata: Metadata = {
-  title: 'Plataforma Igreja Pentecostal reformada',
-  description: 'Página Inicial',
+  title: 'Igreja Pentecostal reformada',
+  description: 'Cadastro',
   // other metadata
 };
 
