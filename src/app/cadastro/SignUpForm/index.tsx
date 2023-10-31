@@ -16,8 +16,8 @@ import { toast } from 'react-toastify';
 
 import { GoogleLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import type { CreateUserFormData } from '@/schemas/signup-schema';
-import { createUserFormSchema } from '@/schemas/signup-schema';
+import type { CreateUserFormData } from '@/schemas/authentication/signup-schema';
+import { createUserFormSchema } from '@/schemas/authentication/signup-schema';
 
 const SignUpForm: React.FC = () => {
   const authContext = useAuthContext()!;

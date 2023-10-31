@@ -18,8 +18,8 @@ import { toast } from 'react-toastify';
 
 import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import type { LoginUserFormData } from '@/schemas/signin-schema';
-import { loginUserFormSchema } from '@/schemas/signin-schema';
+import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
+import { loginUserFormSchema } from '@/schemas/authentication/signin-schema';
 import type { UserAuth } from '@/types/user-auth';
 
 const LoginForm = () => {

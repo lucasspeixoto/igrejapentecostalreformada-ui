@@ -1,86 +1,66 @@
 'use client';
 
-/* eslint-disable no-console */
-/* eslint-disable tailwindcss/migration-from-tailwind-2 */
-/* import signIn from '@fire/auth/signin'; */
-
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
+import { SpinnerLogo } from '@/components/common/Icons';
+import addData from '@/lib/firebase/firestore/addData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import type { LoginUserFormData } from '@/schemas/signin-schema';
-import { loginUserFormSchema } from '@/schemas/signin-schema';
+import {
+  type CreatePersonalContactFormData,
+  createPersonalContactFormSchema,
+} from '@/schemas/register/personal-schema';
 
 const ContactForm = () => {
-  const router = useRouter();
-
   const authContext = useAuthContext()!;
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  /* The code is using the `useForm` hook from the `react-hook-form` library to
+  handle form validation and submission. */
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginUserFormData>({
-    resolver: zodResolver(loginUserFormSchema),
+  } = useForm<CreatePersonalContactFormData>({
+    resolver: zodResolver(createPersonalContactFormSchema),
   });
 
-  /*  const singInWithGoogleHandler = async (): Promise<void> => {
-    const { result, error } = await signInWithGoogle();
+  /**
+   * The function `getPersonalUserContactDataHandler` takes in personal contact
+   * data, combines it into a user contact collection object, adds it to a user's
+   * data in a Firestore database, and handles loading state.
+   * @param {CreatePersonalContactFormData} data - The `data` parameter is of type
+   * `CreatePersonalContactFormData`. It is an object that contains the personal
+   * contact data of a user. The properties of this object include:
+   */
+  const getPersonalUserContactDataHandler = async (
+    data: CreatePersonalContactFormData
+  ) => {
+    setIsLoading(true);
 
-    if (error) {
-      toast.error(firebaseMessages[error.code]);
+    const { name, lastName, sex, cellphone, telephone, birthday } = data;
 
-      authContext.updateLoadingAuthProcess(false);
-    } else {
-      const userAuthCollection: UserAuth = {
-        admin: false,
-        name: result?.user.displayName!,
-        photoUrl: result?.user.photoURL!,
-        email: result?.user.email!,
-        userId: result?.user.uid!,
-      };
+    const userPersonalContactCollection = {
+      name: `${name} ${lastName}`,
+      sex,
+      cellphone,
+      telephone,
+      birth_date: birthday,
+    };
 
-      await addDocumentData('users', result?.user.uid!, {
-        auth: userAuthCollection,
-      });
+    await addData('users', authContext.user?.uid!, {
+      personal: userPersonalContactCollection,
+    });
 
-      authContext.updateLoadingAuthProcess(false);
-
-      router.push('/membros/cadastro/pessoal');
-    }
-  }; */
-
-  /* const loginUserHandler = async (
-    email: string,
-    password: string
-  ): Promise<void> => {
-    const { error } = await signInUserHandler(email, password);
-
-    if (error) {
-      toast.error(firebaseMessages[error.code]);
-
-      authContext.updateLoadingAuthProcess(false);
-    } else {
-      authContext.updateLoadingAuthProcess(false);
-
-      router.push('/membros/cadastro/pessoal');
-    }
-  }; */
-
-  const getLoginUserFormDataHandler = async (data: LoginUserFormData) => {
-    authContext.updateLoadingAuthProcess(true);
-
-    const { email, password } = data;
-
-    // loginUserHandler(email, password);
+    setIsLoading(false);
   };
 
   return (
     <React.Fragment>
       {/* Formulário */}
-      <form action="#">
+      <form onSubmit={handleSubmit(getPersonalUserContactDataHandler)}>
         <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
           <div className="w-full xl:w-1/2">
             <label className="mb-2.5 block text-black dark:text-white">
@@ -89,8 +69,16 @@ const ContactForm = () => {
             <input
               type="text"
               placeholder="Digite seu nome"
+              {...register('name')}
               className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
             />
+            <>
+              {errors.name && (
+                <span className="text-xs text-meta-1 dark:text-meta-7">
+                  {errors.name.message}
+                </span>
+              )}
+            </>
           </div>
 
           <div className="w-full xl:w-1/2">
@@ -100,21 +88,17 @@ const ContactForm = () => {
             <input
               type="text"
               placeholder="Digite seu sobrenome"
+              {...register('lastName')}
               className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
             />
+            <>
+              {errors.lastName && (
+                <span className="text-xs text-meta-1 dark:text-meta-7">
+                  {errors.lastName.message}
+                </span>
+              )}
+            </>
           </div>
-        </div>
-
-        <div className="mb-4.5">
-          <label className="mb-2.5 block text-black dark:text-white">
-            Email <span className="text-meta-1">*</span>
-          </label>
-          <input
-            disabled
-            type="email"
-            placeholder="Confirme seu e-mail"
-            className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-          />
         </div>
 
         <div className="mb-4.5">
@@ -122,7 +106,9 @@ const ContactForm = () => {
             Sexo <span className="text-meta-1">*</span>
           </label>
           <div className="relative z-20 bg-transparent dark:bg-form-input">
-            <select className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            <select
+              {...register('sex')}
+              className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
               <option value="">Selecione seu sexo</option>
               <option value="Feminino">Feminino</option>
               <option value="Masculino">Masculino</option>
@@ -145,6 +131,13 @@ const ContactForm = () => {
               </svg>
             </span>
           </div>
+          <>
+            {errors.sex && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.sex.message}
+              </span>
+            )}
+          </>
         </div>
 
         <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
@@ -153,10 +146,18 @@ const ContactForm = () => {
               Celular <span className="text-meta-1">*</span>
             </label>
             <input
-              type="text"
+              type="number"
               placeholder="Digite seu celular"
+              {...register('cellphone')}
               className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
             />
+            <>
+              {errors.cellphone && (
+                <span className="text-xs text-meta-1 dark:text-meta-7">
+                  {errors.cellphone.message}
+                </span>
+              )}
+            </>
           </div>
 
           <div className="w-full xl:w-1/2">
@@ -166,6 +167,7 @@ const ContactForm = () => {
             <input
               type="text"
               placeholder="Digite seu telefone"
+              {...register('telephone')}
               className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
             />
           </div>
@@ -178,22 +180,17 @@ const ContactForm = () => {
           <div className="relative">
             <input
               type="date"
+              {...register('birthday')}
               className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
             />
           </div>
         </div>
 
-        {/* <div className="mb-6">
-          <label className="mb-2.5 block text-black dark:text-white">
-            Message
-          </label>
-          <textarea
-            rows={6}
-            placeholder="Type your message"
-            className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"></textarea>
-        </div> */}
-
-        <button className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+          {isLoading && <SpinnerLogo size={22} />}
           Salvar
         </button>
       </form>

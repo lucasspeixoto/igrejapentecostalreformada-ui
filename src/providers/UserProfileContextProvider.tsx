@@ -3,7 +3,7 @@
 import firebase_app from '@fire/config';
 import { getCollection } from '@fire/firestore/getData';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React from 'react';
 
 import type { UserAuth } from '@/types/user-auth';
 
@@ -22,22 +22,22 @@ type UserProfileContextType = {
 };
 
 export const UserProfileContext =
-  createContext<UserProfileContextType>(initialState);
+  React.createContext<UserProfileContextType>(initialState);
 
-export const useUserProfileContext = () => useContext(UserProfileContext);
+export const useUserProfileContext = () => React.useContext(UserProfileContext);
 
 export const UserProfileContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [authData, setAuthData] = useState<UserAuth | null>(null);
+  const [authData, setAuthData] = React.useState<UserAuth | null>(null);
 
-  const [isLoadingData, setIsLoadingData] = useState(false);
+  const [isLoadingData, setIsLoadingData] = React.useState(false);
 
   const updateIsLoadingData = (isLoading: boolean) => {
     setIsLoadingData(isLoading);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const authStateUnsubscribe = onAuthStateChanged(auth, _user => {
       if (_user) {
         const authUserData = getCollection('users', _user.uid, 'auth');
