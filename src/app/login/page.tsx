@@ -21,7 +21,7 @@ const SignIn: React.FC = () => {
           <div className="w-full border-stroke dark:border-strokedark md:w-1/2 md:border-l-2">
             <div className="flex h-screen w-full flex-col items-center justify-center px-4 md:px-0">
               <div className="w-full md:w-9/12 lg:w-8/12">
-                <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+                <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                   Login
                 </h2>
 
@@ -32,6 +32,14 @@ const SignIn: React.FC = () => {
                     text="Não possui conta ?"
                     textLink="Cadastrar"
                     route="/cadastro"
+                  />
+                </div>
+                <div className="mt-6 text-center">
+                  <RedirectLink
+                    text="Acesse a "
+                    textLink="Bíblia IPR"
+                    route="https://ipr-biblia.vercel.app/"
+                    target="blank"
                   />
                 </div>
               </div>

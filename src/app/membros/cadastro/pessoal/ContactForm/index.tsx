@@ -3,10 +3,12 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 import { SpinnerLogo } from '@/components/common/Icons';
 import addData from '@/lib/firebase/firestore/addData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
+import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
 import {
   type CreatePersonalContactFormData,
   createPersonalContactFormSchema,
@@ -14,6 +16,8 @@ import {
 
 const ContactForm = () => {
   const authContext = useAuthContext()!;
+
+  const personalContext = usePersonalContext()!;
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -23,9 +27,26 @@ const ContactForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<CreatePersonalContactFormData>({
     resolver: zodResolver(createPersonalContactFormSchema),
   });
+
+  React.useEffect(() => {
+    if (personalContext.personalData) {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { name, sex, cellphone, telephone, birthday } =
+        personalContext.personalData;
+      reset({
+        name: name.split(' ')[0],
+        lastName: name.split(' ')[1],
+        sex,
+        cellphone,
+        telephone,
+        birthday,
+      });
+    }
+  }, [personalContext]);
 
   /**
    * The function `getPersonalUserContactDataHandler` takes in personal contact
@@ -47,12 +68,20 @@ const ContactForm = () => {
       sex,
       cellphone,
       telephone,
-      birth_date: birthday,
+      birthday,
     };
 
-    await addData('users', authContext.user?.uid!, {
+    const { error } = await addData('users', authContext.user?.uid!, {
       personal: userPersonalContactCollection,
     });
+
+    if (error) {
+      toast.error(
+        'Error ao salvar dados de contato. Tente novamente mais tarde ou contate admim.'
+      );
+    } else {
+      toast.success('Dados de contato atualizados!');
+    }
 
     setIsLoading(false);
   };

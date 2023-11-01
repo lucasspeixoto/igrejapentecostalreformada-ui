@@ -145,7 +145,7 @@ const LoginForm = () => {
         </div>
 
         {/* Botões de ações */}
-        <div className="mb-4 mt-10">
+        <div className="mb-4 mt-5">
           <button
             disabled={authContext.isLoadingAuthProcess}
             type="submit"

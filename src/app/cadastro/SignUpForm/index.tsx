@@ -202,7 +202,7 @@ const SignUpForm: React.FC = () => {
           </div>
         </div>
 
-        <div className="mb-4 mt-10">
+        <div className="mb-4 mt-5">
           <button
             type="submit"
             className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50">

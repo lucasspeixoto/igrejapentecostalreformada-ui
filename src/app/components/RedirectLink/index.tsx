@@ -1,20 +1,25 @@
 import Link from 'next/link';
 
-interface RedirectLinkProps {
+type RedirectLinkProps = {
   text: string;
   textLink: string;
   route: string;
-}
+  target?: string;
+};
 
 const RedirectLink: React.FC<RedirectLinkProps> = ({
   text,
   textLink,
   route,
+  target,
 }) => {
   return (
     <p>
       {text}{' '}
-      <Link href={route} className="text-primary hover:underline">
+      <Link
+        href={route}
+        target={target || ''}
+        className="text-primary hover:underline">
         {textLink}
       </Link>
     </p>

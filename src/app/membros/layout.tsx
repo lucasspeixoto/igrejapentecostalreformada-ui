@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
+import { PersonalContextProvider } from '@/providers/register/PersonalContextProvider';
 import { UserProfileContextProvider } from '@/providers/UserProfileContextProvider';
 
 const MembrosLayout = ({ children }: { children: React.ReactNode }) => {
@@ -27,7 +28,7 @@ const MembrosLayout = ({ children }: { children: React.ReactNode }) => {
             {/* <!-- ===== Main Content Start ===== --> */}
             <main>
               <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-                {children}
+                <PersonalContextProvider>{children}</PersonalContextProvider>
               </div>
             </main>
             {/* <!-- ===== Main Content End ===== --> */}
