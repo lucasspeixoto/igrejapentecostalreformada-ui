@@ -10,8 +10,8 @@ import { parameters } from '@/constants/form-parameters';
 import addData from '@/lib/firebase/firestore/addData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
-import type { CreatePersonalAddressFormData } from '@/schemas/register/address-schema';
-import { createPersonalAddressFormSchema } from '@/schemas/register/address-schema';
+import type { CreatePersonalAddressFormData } from '@/schemas/register/personal/address-schema';
+import { createPersonalAddressFormSchema } from '@/schemas/register/personal/address-schema';
 
 const AddressForm = () => {
   const authContext = useAuthContext()!;

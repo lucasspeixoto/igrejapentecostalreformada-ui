@@ -41,8 +41,8 @@ export const PersonalContextProvider: React.FC<{
   React.useEffect(() => {
     const authStateUnsubscribe = onAuthStateChanged(auth, _user => {
       if (_user) {
-        const authUserData = getCollection('users', _user.uid, 'personal');
-        authUserData
+        const personalUserData = getCollection('users', _user.uid, 'personal');
+        personalUserData
           .then(data => {
             setPersonalData(data?.result);
           })

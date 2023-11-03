@@ -12,7 +12,7 @@ import { usePersonalContext } from '@/providers/register/PersonalContextProvider
 import {
   type CreatePersonalDocsFormData,
   createPersonalDocsFormSchema,
-} from '@/schemas/register/docs-schema';
+} from '@/schemas/register/personal/docs-schema';
 
 const DocsForm = () => {
   const authContext = useAuthContext()!;

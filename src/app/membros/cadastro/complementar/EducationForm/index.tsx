@@ -14,7 +14,7 @@ import {
   createPersonalContactFormSchema,
 } from '@/schemas/register/personal/personal-schema';
 
-const ContactForm = () => {
+const EducationForm = () => {
   const authContext = useAuthContext()!;
 
   const personalContext = usePersonalContext()!;
@@ -90,49 +90,9 @@ const ContactForm = () => {
     <React.Fragment>
       {/* Formulário */}
       <form onSubmit={handleSubmit(getPersonalUserContactDataHandler)}>
-        <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Nome <span className="text-meta-1">*</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Digite seu nome"
-              {...register('name')}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <>
-              {errors.name && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.name.message}
-                </span>
-              )}
-            </>
-          </div>
-
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Sobrenome <span className="text-meta-1">*</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Digite seu sobrenome"
-              {...register('lastName')}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <>
-              {errors.lastName && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.lastName.message}
-                </span>
-              )}
-            </>
-          </div>
-        </div>
-
         <div className="mb-4.5">
           <label className="mb-2.5 block text-black dark:text-white">
-            Sexo <span className="text-meta-1">*</span>
+            Escolaridade <span className="text-meta-1">*</span>
           </label>
           <div className="relative z-20 bg-transparent dark:bg-form-input">
             <select
@@ -169,48 +129,15 @@ const ContactForm = () => {
           </>
         </div>
 
-        <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Celular <span className="text-meta-1">*</span>
-            </label>
-            <input
-              type="number"
-              placeholder="Digite seu celular"
-              {...register('cellphone')}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <>
-              {errors.cellphone && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.cellphone.message}
-                </span>
-              )}
-            </>
-          </div>
-
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Telefone <span className="text-meta-1">*</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Digite seu telefone"
-              {...register('telephone')}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-          </div>
-        </div>
-
         <div className="mb-4.5">
           <label className="mb-3 block text-black dark:text-white">
-            Data de nascimento
+            Profissão
           </label>
           <div className="relative">
             <input
-              type="date"
+              type="text"
               {...register('birthday')}
-              className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
             />
           </div>
         </div>
@@ -227,4 +154,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default EducationForm;
