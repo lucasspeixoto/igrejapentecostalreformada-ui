@@ -1,7 +1,6 @@
-'use client';
-
 // import Map from "../Maps/TestMap";
 // without this the component renders on server and throws an error
+import type { Metadata } from 'next';
 import React from 'react';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
@@ -13,9 +12,10 @@ import ChatCard from '@/components/Chat/ChatCard';
 import MapOne from '@/components/Maps/MapOne';
 import TableOne from '@/components/Tables/TableOne';
 
-/* const MapOne = dynamic(() => import('.'), {
-  ssr: false,
-}); */
+export const metadata: Metadata = {
+  title: 'Indicadores',
+  description: 'Página de indicadores gerais',
+};
 
 const ECommerce: React.FC = () => {
   return (
