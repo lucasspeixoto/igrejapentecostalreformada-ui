@@ -5,23 +5,22 @@ import Image from 'next/image';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
 export const metadata: Metadata = {
-  title: 'Settings Page | Next.js E-commerce Dashboard Template',
-  description: 'This is Settings page for TailAdmin Next.js',
-  // other metadata
+  title: 'Configurações',
+  description: 'Página de edição de configurações',
 };
 
 const Settings = () => {
   return (
     <>
       <div className="mx-auto max-w-270">
-        <Breadcrumb pageName="Settings" />
+        <Breadcrumb pageName="Configurações" />
 
         <div className="grid grid-cols-5 gap-8">
           <div className="col-span-5 xl:col-span-3">
             <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
               <div className="border-b border-stroke px-7 py-4 dark:border-strokedark">
                 <h3 className="font-medium text-black dark:text-white">
-                  Personal Information
+                  Dados Pessoais
                 </h3>
               </div>
               <div className="p-7">

@@ -5,7 +5,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { SpinnerLogo } from '@/components/common/Icons';
+import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import { parameters } from '@/constants/form-parameters';
 import addData from '@/lib/firebase/firestore/addData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
@@ -19,6 +19,8 @@ const FamilyForm = () => {
   const supplementaryContext = useSupplementaryContext()!;
 
   const { maritalStatusOptions } = parameters;
+
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const {
     register,
@@ -40,7 +42,7 @@ const FamilyForm = () => {
   const getSupplementaryUserContactDataHandler = async (
     data: CreateSupplementaryFamilyFormData
   ) => {
-    supplementaryContext.updateLoadingSupplementaryProcess(true);
+    setIsLoading(true);
 
     const supplementaryData = data;
 
@@ -56,7 +58,7 @@ const FamilyForm = () => {
       toast.success('Dados de família atualizados!');
     }
 
-    supplementaryContext.updateLoadingSupplementaryProcess(false);
+    setIsLoading(false);
   };
 
   return (
@@ -80,21 +82,7 @@ const FamilyForm = () => {
                 )}
               </select>
               <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
-                <svg
-                  className="fill-current"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <g opacity="0.8">
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
-                      fill=""></path>
-                  </g>
-                </svg>
+                <SelectChevroletLogo size={24} />
               </span>
             </div>
             <>
@@ -167,11 +155,9 @@ const FamilyForm = () => {
 
         <button
           type="submit"
-          disabled={supplementaryContext.isLoadingSupplementaryProcess}
+          disabled={isLoading}
           className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
-          {supplementaryContext.isLoadingSupplementaryProcess && (
-            <SpinnerLogo size={22} />
-          )}
+          {isLoading && <SpinnerLogo size={22} />}
           Salvar
         </button>
       </form>
