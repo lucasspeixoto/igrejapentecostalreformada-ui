@@ -2,8 +2,6 @@ import { z } from 'zod';
 
 import { phoneRegex } from '@/constants/regex';
 
-/* The code is defining a schema for a personal contact form. The schema is created
-using the `zod` library, which is a TypeScript runtime type checking library. */
 export const createPersonalContactFormSchema = z.object({
   name: z
     .string()

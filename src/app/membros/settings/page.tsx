@@ -226,14 +226,14 @@ const Settings = () => {
                     </div>
                     <div>
                       <span className="mb-1.5 text-black dark:text-white">
-                        Edit your photo
+                        Editar sua Foto
                       </span>
                       <span className="flex gap-2.5">
                         <button className="text-sm hover:text-primary">
-                          Delete
+                          Deletar
                         </button>
                         <button className="text-sm hover:text-primary">
-                          Update
+                          Editar
                         </button>
                       </span>
                     </div>

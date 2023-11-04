@@ -51,7 +51,7 @@ const Profile = () => {
                   />
                 </svg>
               </span>
-              <span>Edit</span>
+              <span>Editar</span>
             </label>
           </div>
         </div>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const FormLayout = () => {
+const PersonalForm = () => {
   return (
     <>
       <Breadcrumb pageName="Dados Pessoais" />
@@ -26,7 +26,6 @@ const FormLayout = () => {
                 Contato
               </h3>
             </div>
-            {/* */}
 
             <div className="p-6.5">
               <ContactForm />
@@ -64,4 +63,4 @@ const FormLayout = () => {
   );
 };
 
-export default FormLayout;
+export default PersonalForm;

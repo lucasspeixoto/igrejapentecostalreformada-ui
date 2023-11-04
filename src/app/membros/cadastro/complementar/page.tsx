@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const FormLayout = () => {
+const SupplementaryForm = () => {
   return (
     <>
       <Breadcrumb pageName="Dados Complementares" />
@@ -49,4 +49,4 @@ const FormLayout = () => {
   );
 };
 
-export default FormLayout;
+export default SupplementaryForm;

@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-/* The code is defining a schema for a personal contact form. The schema is created
-using the `zod` library, which is a TypeScript runtime type checking library. */
 export const createPersonalAddressFormSchema = z.object({
   cep: z.coerce.number().gte(1, 'Número inválido'),
   state: z.string(),
