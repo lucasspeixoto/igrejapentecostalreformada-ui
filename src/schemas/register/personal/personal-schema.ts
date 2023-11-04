@@ -15,21 +15,14 @@ export const createPersonalContactFormSchema = z.object({
         })
         .join(' ');
     }),
-  lastName: z
-    .string()
-    .min(3, 'O Sobre nome precisa conter no mínimo 3 caracteres!')
-    .transform(lastName => {
-      return lastName
-        .trim()
-        .split(' ')
-        .map(word => {
-          return word[0].toLocaleUpperCase().concat(word.substring(1));
-        })
-        .join(' ');
-    }),
   sex: z.string(),
   cellphone: z.string().regex(phoneRegex, 'Número de celular inválido!'),
-  telephone: z.string().regex(phoneRegex, 'Número de telefone inválido!'),
+  telephone: z
+    .string()
+    .regex(phoneRegex, 'Número de telefone inválido!')
+    .optional()
+    .or(z.literal('')),
+
   birthday: z.string(),
 });
 

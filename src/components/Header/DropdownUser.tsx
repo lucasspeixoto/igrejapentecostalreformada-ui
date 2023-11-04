@@ -76,13 +76,24 @@ const DropdownUser = () => {
           </span>
         </span>
 
-        <span className="h-12 w-12 rounded-full">
-          <Image
-            width={112}
-            height={112}
-            src={userProfileContext.authData?.photoUrl!}
-            alt="User"
-          />
+        <span className="h-12 w-12">
+          {userProfileContext.authData?.photoUrl ? (
+            <Image
+              width={112}
+              height={112}
+              className="rounded-full"
+              src={userProfileContext.authData?.photoUrl}
+              alt="User"
+            />
+          ) : (
+            <Image
+              width={112}
+              height={112}
+              className="rounded-full"
+              src={'/images/user/dummy-user.png'}
+              alt="User"
+            />
+          )}
         </span>
 
         <svg

@@ -38,8 +38,7 @@ const ContactForm = () => {
       const { name, sex, cellphone, telephone, birthday } =
         personalContext.personalData;
       reset({
-        name: name.split(' ')[0],
-        lastName: name.split(' ')[1],
+        name,
         sex,
         cellphone,
         telephone,
@@ -61,10 +60,10 @@ const ContactForm = () => {
   ) => {
     setIsLoading(true);
 
-    const { name, lastName, sex, cellphone, telephone, birthday } = data;
+    const { name, sex, cellphone, telephone, birthday } = data;
 
     const userPersonalContactCollection = {
-      name: `${name} ${lastName}`,
+      name,
       sex,
       cellphone,
       telephone,
@@ -90,44 +89,23 @@ const ContactForm = () => {
     <React.Fragment>
       {/* Formulário */}
       <form onSubmit={handleSubmit(getPersonalUserContactDataHandler)}>
-        <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Nome <span className="text-meta-1">*</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Digite seu nome"
-              {...register('name')}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <>
-              {errors.name && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.name.message}
-                </span>
-              )}
-            </>
-          </div>
-
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Sobrenome <span className="text-meta-1">*</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Digite seu sobrenome"
-              {...register('lastName')}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <>
-              {errors.lastName && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.lastName.message}
-                </span>
-              )}
-            </>
-          </div>
+        <div className="mb-4.5">
+          <label className="mb-2.5 block text-black dark:text-white">
+            Nome <span className="text-meta-1">*</span>
+          </label>
+          <input
+            type="text"
+            placeholder="Digite seu nome"
+            {...register('name')}
+            className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
+          <>
+            {errors.name && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.name.message}
+              </span>
+            )}
+          </>
         </div>
 
         <div className="mb-4.5">
@@ -177,7 +155,7 @@ const ContactForm = () => {
 
           <div className="w-full xl:w-1/2">
             <label className="mb-2.5 block text-black dark:text-white">
-              Telefone <span className="text-meta-1">*</span>
+              Telefone
             </label>
             <input
               type="text"
@@ -185,12 +163,19 @@ const ContactForm = () => {
               {...register('telephone')}
               className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
             />
+            <>
+              {errors.telephone && (
+                <span className="text-xs text-meta-1 dark:text-meta-7">
+                  {errors.telephone.message}
+                </span>
+              )}
+            </>
           </div>
         </div>
 
         <div className="mb-4.5">
           <label className="mb-3 block text-black dark:text-white">
-            Data de nascimento
+            Data de nascimento <span className="text-meta-1">*</span>
           </label>
           <div className="relative">
             <input

@@ -127,63 +127,60 @@ const MemberForm = () => {
           </div>
         </div>
 
-        <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Última igreja que frequentou{' '}
-              <span className="text-meta-1">*</span>
-            </label>
-            <div className="relative z-20 bg-transparent dark:bg-form-input">
-              <select
-                {...register('communities')}
-                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                <option value="">Selecione a igreja</option>
-                {React.Children.toArray(
-                  communitiesOption.map(community => (
-                    <option value={community}>{community}</option>
-                  ))
-                )}
-              </select>
-              <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
-                <SelectChevroletLogo size={24} />
-              </span>
-            </div>
-            <>
-              {errors.communities && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.communities.message}
-                </span>
+        <div className="mb-4.5">
+          <label className="mb-2.5 block text-black dark:text-white">
+            Última igreja que frequentou <span className="text-meta-1">*</span>
+          </label>
+          <div className="relative z-20 bg-transparent dark:bg-form-input">
+            <select
+              {...register('communities')}
+              className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+              <option value="">Selecione a igreja</option>
+              {React.Children.toArray(
+                communitiesOption.map(community => (
+                  <option value={community}>{community}</option>
+                ))
               )}
-            </>
+            </select>
+            <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+              <SelectChevroletLogo size={24} />
+            </span>
           </div>
+          <>
+            {errors.communities && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.communities.message}
+              </span>
+            )}
+          </>
+        </div>
 
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Principal interesse <span className="text-meta-1">*</span>
-            </label>
-            <div className="relative z-20 bg-transparent dark:bg-form-input">
-              <select
-                {...register('interests')}
-                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                <option value="">Selecione o interesse</option>
-                {React.Children.toArray(
-                  interestsOption.map(interest => (
-                    <option value={interest}>{interest}</option>
-                  ))
-                )}
-              </select>
-              <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
-                <SelectChevroletLogo size={24} />
-              </span>
-            </div>
-            <>
-              {errors.interests && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.interests.message}
-                </span>
+        <div className="mb-4.5">
+          <label className="mb-2.5 block text-black dark:text-white">
+            Principal interesse <span className="text-meta-1">*</span>
+          </label>
+          <div className="relative z-20 bg-transparent dark:bg-form-input">
+            <select
+              {...register('interests')}
+              className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+              <option value="">Selecione o interesse</option>
+              {React.Children.toArray(
+                interestsOption.map(interest => (
+                  <option value={interest}>{interest}</option>
+                ))
               )}
-            </>
+            </select>
+            <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+              <SelectChevroletLogo size={24} />
+            </span>
           </div>
+          <>
+            {errors.interests && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.interests.message}
+              </span>
+            )}
+          </>
         </div>
 
         <button

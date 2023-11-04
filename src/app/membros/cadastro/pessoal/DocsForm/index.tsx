@@ -71,7 +71,9 @@ const DocsForm = () => {
       {/* Formulário */}
       <form onSubmit={handleSubmit(getPersonalUserDocsDataHandler)}>
         <div className="mb-4.5">
-          <label className="mb-3 block text-black dark:text-white">RG</label>
+          <label className="mb-3 block text-black dark:text-white">
+            RG <span className="text-meta-1">*</span>
+          </label>
           <div className="relative">
             <input
               type="number"
@@ -89,7 +91,9 @@ const DocsForm = () => {
         </div>
 
         <div className="mb-4.5">
-          <label className="mb-3 block text-black dark:text-white">CPF</label>
+          <label className="mb-3 block text-black dark:text-white">
+            CPF <span className="text-meta-1">*</span>
+          </label>
           <div className="relative">
             <input
               type="number"

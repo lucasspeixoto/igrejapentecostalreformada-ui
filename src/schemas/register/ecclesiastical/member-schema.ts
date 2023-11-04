@@ -6,10 +6,6 @@ export const createEcclesiasticalMemberFormSchema = z.object({
 
   communities: z.string(),
   interests: z.string(),
-
-  /* baptism: z.string(),
-  baptismDate: z.string(),
-  baptismShepherd: z.string(), */
 });
 
 export type CreateEcclesiasticalMemberFormData = z.infer<
