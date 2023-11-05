@@ -3,6 +3,7 @@
 import firebase_app from '@fire/config';
 import { getCollection } from '@fire/firestore/getData';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import type { UserAuth } from '@/types/user-auth';
@@ -33,11 +34,15 @@ export const UserProfileContextProvider: React.FC<{
 
   const [isLoadingData, setIsLoadingData] = React.useState(false);
 
+  const router = useRouter();
+
   const updateIsLoadingData = (isLoading: boolean) => {
     setIsLoadingData(isLoading);
   };
 
   React.useEffect(() => {
+    updateIsLoadingData(true);
+
     const authStateUnsubscribe = onAuthStateChanged(auth, _user => {
       if (_user) {
         const authUserData = getCollection('users', _user.uid, 'auth');
@@ -49,6 +54,7 @@ export const UserProfileContextProvider: React.FC<{
             throw new Error(error.message);
           });
       } else {
+        router.push('/login');
         setAuthData(null);
       }
 
