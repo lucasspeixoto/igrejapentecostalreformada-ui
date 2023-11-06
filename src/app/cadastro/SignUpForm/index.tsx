@@ -8,6 +8,7 @@ import signUp from '@fire/auth/signup';
 import addData from '@fire/firestore/addData';
 import firebaseMessages from '@fire/messages';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BsPersonLock } from 'react-icons/bs';
@@ -15,11 +16,14 @@ import { MdLockOutline, MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import { GoogleLogo } from '@/components/common/Icons';
+import signInUserHandler from '@/lib/firebase/auth/signin';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { CreateUserFormData } from '@/schemas/authentication/signup-schema';
 import { createUserFormSchema } from '@/schemas/authentication/signup-schema';
 
 const SignUpForm: React.FC = () => {
+  const router = useRouter();
+
   const authContext = useAuthContext()!;
 
   const {
@@ -51,6 +55,25 @@ const SignUpForm: React.FC = () => {
       await addData('users', result?.user.uid!, { auth: userAuthCollection });
 
       authContext.updateLoadingAuthProcess(false);
+
+      router.push('/membros/cadastro/pessoal');
+    }
+  };
+
+  const loginUserHandler = async (
+    email: string,
+    password: string
+  ): Promise<void> => {
+    const { error } = await signInUserHandler(email, password);
+
+    if (error) {
+      toast.error(firebaseMessages[error.code]);
+
+      authContext.updateLoadingAuthProcess(false);
+    } else {
+      authContext.updateLoadingAuthProcess(false);
+
+      router.push('/membros/cadastro/pessoal');
     }
   };
 
@@ -75,7 +98,7 @@ const SignUpForm: React.FC = () => {
 
       await addData('users', result?.user.uid!, { auth: userAuthCollection });
 
-      authContext.updateLoadingAuthProcess(false);
+      loginUserHandler(email, password);
     }
   };
 

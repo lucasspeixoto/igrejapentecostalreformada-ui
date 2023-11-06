@@ -87,84 +87,81 @@ const LoginForm = () => {
   };
 
   return (
-    <React.Fragment>
-      {/* Formulário */}
-      <form onSubmit={handleSubmit(getLoginUserFormDataHandler)}>
-        {/* ---------------------------- E-mail ---------------------------- */}
-        <div className="mb-3 gap-2">
-          <div className="relative">
-            <label
-              htmlFor="email"
-              className="mb-1 block font-medium text-black dark:text-white">
-              E-mail
-            </label>
-            <input
-              type="email"
-              {...register('email')}
-              className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <span className="absolute bottom-2.5 right-4">
-              <MdOutlineMarkEmailUnread size={22} opacity=".5" />
+    <form onSubmit={handleSubmit(getLoginUserFormDataHandler)}>
+      {/* ---------------------------- E-mail ---------------------------- */}
+      <div className="mb-3 gap-2">
+        <div className="relative">
+          <label
+            htmlFor="email"
+            className="mb-1 block font-medium text-black dark:text-white">
+            E-mail
+          </label>
+          <input
+            type="email"
+            {...register('email')}
+            className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
+          <span className="absolute bottom-2.5 right-4">
+            <MdOutlineMarkEmailUnread size={22} opacity=".5" />
+          </span>
+        </div>
+
+        <>
+          {errors.email && (
+            <span className="text-sm text-meta-1 dark:text-meta-7">
+              {errors.email.message}
             </span>
-          </div>
+          )}
+        </>
+      </div>
 
-          <>
-            {errors.email && (
-              <span className="text-sm text-meta-1 dark:text-meta-7">
-                {errors.email.message}
-              </span>
-            )}
-          </>
+      {/* ---------------------------- Senha ---------------------------- */}
+      <div className="mb-3 gap-2">
+        <div className="relative">
+          <label
+            htmlFor="password"
+            className="mb-1 block font-medium text-black dark:text-white">
+            Senha
+          </label>
+          <input
+            type="password"
+            {...register('password')}
+            className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
+          <span className="absolute bottom-2.5 right-4">
+            <BsPersonLock size={22} opacity=".5" />
+          </span>
         </div>
 
-        {/* ---------------------------- Senha ---------------------------- */}
-        <div className="mb-3 gap-2">
-          <div className="relative">
-            <label
-              htmlFor="password"
-              className="mb-1 block font-medium text-black dark:text-white">
-              Senha
-            </label>
-            <input
-              type="password"
-              {...register('password')}
-              className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <span className="absolute bottom-2.5 right-4">
-              <BsPersonLock size={22} opacity=".5" />
+        <>
+          {errors.password && (
+            <span className="text-sm text-meta-1 dark:text-meta-7">
+              {errors.password.message}
             </span>
-          </div>
+          )}
+        </>
+      </div>
 
-          <>
-            {errors.password && (
-              <span className="text-sm text-meta-1 dark:text-meta-7">
-                {errors.password.message}
-              </span>
-            )}
-          </>
-        </div>
-
-        {/* Botões de ações */}
-        <div className="mb-4 mt-5">
-          <button
-            disabled={authContext.isLoadingAuthProcess}
-            type="submit"
-            className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
-            {authContext.isLoadingAuthProcess && <SpinnerLogo size={22} />}
-            Entrar
-          </button>
-        </div>
-
+      {/* Botões de ações */}
+      <div className="mb-4 mt-5">
         <button
           disabled={authContext.isLoadingAuthProcess}
-          onClick={singInWithGoogleHandler}
-          type="button"
-          className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
-          <GoogleLogo size={22} />
-          Entrar com o Google
+          type="submit"
+          className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+          {authContext.isLoadingAuthProcess && <SpinnerLogo size={22} />}
+          Entrar
         </button>
-      </form>
-    </React.Fragment>
+      </div>
+
+      <button
+        disabled={authContext.isLoadingAuthProcess}
+        onClick={singInWithGoogleHandler}
+        type="button"
+        className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+        <GoogleLogo size={22} />
+        Entrar com o Google
+      </button>
+    </form>
   );
 };
 

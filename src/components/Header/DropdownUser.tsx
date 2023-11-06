@@ -81,7 +81,7 @@ const DropdownUser = () => {
             <Image
               width={112}
               height={112}
-              className="rounded-full"
+              className="h-12 w-12 rounded-full"
               src={userProfileContext.authData?.photoUrl}
               alt="User"
             />
@@ -89,7 +89,7 @@ const DropdownUser = () => {
             <Image
               width={112}
               height={112}
-              className="rounded-full"
+              className="h-12 w-12 rounded-full"
               src={'/images/user/dummy-user.png'}
               alt="User"
             />

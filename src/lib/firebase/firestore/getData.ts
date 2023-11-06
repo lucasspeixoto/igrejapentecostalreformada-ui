@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 
 import firebase_app from '../config';

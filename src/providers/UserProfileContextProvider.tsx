@@ -14,12 +14,14 @@ const initialState = {
   authData: null,
   isLoadingData: false,
   updateIsLoadingData: () => {},
+  setUpdatedAuthData: () => {},
 };
 
 type UserProfileContextType = {
   authData: UserAuth | null;
   isLoadingData: boolean;
   updateIsLoadingData: (isLoading: boolean) => void;
+  setUpdatedAuthData: (authData: UserAuth | null) => void;
 };
 
 export const UserProfileContext =
@@ -38,6 +40,10 @@ export const UserProfileContextProvider: React.FC<{
 
   const updateIsLoadingData = (isLoading: boolean) => {
     setIsLoadingData(isLoading);
+  };
+
+  const setUpdatedAuthData = (data: UserAuth | null) => {
+    setAuthData(data);
   };
 
   React.useEffect(() => {
@@ -70,6 +76,7 @@ export const UserProfileContextProvider: React.FC<{
         authData,
         isLoadingData,
         updateIsLoadingData,
+        setUpdatedAuthData,
       }}>
       {children}
     </UserProfileContext.Provider>
