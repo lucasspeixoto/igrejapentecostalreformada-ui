@@ -6,10 +6,10 @@ import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import { useAuthContext } from '@/providers/AuthContextProvider';
+import { AuthUserDataContextProvider } from '@/providers/AuthUserDataContextProvider';
 import { EcclesiasticalContextProvider } from '@/providers/register/EcclesiasticalContextProvider';
 import { PersonalContextProvider } from '@/providers/register/PersonalContextProvider';
 import { SupplementaryContextProvider } from '@/providers/register/SupplementaryContextProvider';
-import { UserProfileContextProvider } from '@/providers/UserProfileContextProvider';
 
 type MembrosLayoutProps = {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ const MembrosLayout = ({ children }: MembrosLayoutProps) => {
     <>
       {useAuth.isAuthenticated ? (
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
-          <UserProfileContextProvider>
+          <AuthUserDataContextProvider>
             <div className="flex h-screen overflow-hidden">
               {/* <!-- ===== Sidebar Start ===== --> */}
               <Sidebar
@@ -58,7 +58,7 @@ const MembrosLayout = ({ children }: MembrosLayoutProps) => {
               </div>
               {/* <!-- ===== Content Area End ===== --> */}
             </div>
-          </UserProfileContextProvider>
+          </AuthUserDataContextProvider>
         </div>
       ) : null}
     </>

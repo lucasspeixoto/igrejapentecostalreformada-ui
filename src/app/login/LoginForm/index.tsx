@@ -44,7 +44,6 @@ const LoginForm = () => {
       authContext.updateLoadingAuthProcess(false);
     } else {
       const userAuthCollection: UserAuth = {
-        admin: false,
         name: result?.user.displayName!,
         photoUrl: result?.user.photoURL!,
         email: result?.user.email!,
@@ -57,7 +56,7 @@ const LoginForm = () => {
 
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros/cadastro/pessoal');
+      router.push('/membros/profile');
     }
   };
 
@@ -74,7 +73,7 @@ const LoginForm = () => {
     } else {
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros/cadastro/pessoal');
+      router.push('/membros/profile');
     }
   };
 

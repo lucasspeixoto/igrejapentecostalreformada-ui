@@ -17,19 +17,20 @@ const initialState = {
   setUpdatedAuthData: () => {},
 };
 
-type UserProfileContextType = {
+type AuthUserDataContextType = {
   authData: UserAuth | null;
   isLoadingData: boolean;
   updateIsLoadingData: (isLoading: boolean) => void;
   setUpdatedAuthData: (authData: UserAuth | null) => void;
 };
 
-export const UserProfileContext =
-  React.createContext<UserProfileContextType>(initialState);
+export const AuthUserDataContext =
+  React.createContext<AuthUserDataContextType>(initialState);
 
-export const useUserProfileContext = () => React.useContext(UserProfileContext);
+export const useAuthUserDataContext = () =>
+  React.useContext(AuthUserDataContext);
 
-export const UserProfileContextProvider: React.FC<{
+export const AuthUserDataContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [authData, setAuthData] = React.useState<UserAuth | null>(null);
@@ -71,7 +72,7 @@ export const UserProfileContextProvider: React.FC<{
   }, []);
 
   return (
-    <UserProfileContext.Provider
+    <AuthUserDataContext.Provider
       value={{
         authData,
         isLoadingData,
@@ -79,6 +80,6 @@ export const UserProfileContextProvider: React.FC<{
         setUpdatedAuthData,
       }}>
       {children}
-    </UserProfileContext.Provider>
+    </AuthUserDataContext.Provider>
   );
 };

@@ -18,7 +18,7 @@ import type { ViaCepResponse } from '@/types/via-cep-response';
 const AddressForm = () => {
   const authContext = useAuthContext()!;
 
-  const personalContext = usePersonalContext()!;
+  const personalContext = usePersonalContext();
 
   const [isLoading, setIsLoading] = React.useState(false);
 
@@ -58,15 +58,10 @@ const AddressForm = () => {
       const { data } = await api.get<ViaCepResponse>(`/${selectedCep}/json`);
 
       if (data) {
-        const { complement, number } = personalContext.personalData!;
-
         reset({
           address: data.logradouro,
-          cep: +selectedCep,
           city: data.localidade,
-          complement,
           district: data.bairro,
-          number,
           state: data.uf,
         });
       }

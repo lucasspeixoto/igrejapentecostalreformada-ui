@@ -7,13 +7,13 @@ import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import { useUserProfileContext } from '@/providers/UserProfileContextProvider';
+import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
 
-  const userProfileContext = useUserProfileContext();
+  const userProfileContext = useAuthUserDataContext();
 
   const authContext = useAuthContext();
 
@@ -67,13 +67,11 @@ const DropdownUser = () => {
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className="flex items-center gap-4"
         href="#">
-        <span className="hidden text-right lg:block">
+        <span className="hidden text-left lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
             {userProfileContext.authData?.name}
           </span>
-          <span className="block text-xs">
-            {userProfileContext.authData?.role!}
-          </span>
+          <span className="block text-xs">Graça e paz 🙏</span>
         </span>
 
         <span className="h-12 w-12">

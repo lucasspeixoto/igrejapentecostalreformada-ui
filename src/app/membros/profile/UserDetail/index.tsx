@@ -10,17 +10,21 @@ import Image from '@/components/Image';
 import { storage } from '@/lib/firebase/config';
 import addData from '@/lib/firebase/firestore/addData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import { useUserProfileContext } from '@/providers/UserProfileContextProvider';
+import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
 import type { UserAuth } from '@/types/user-auth';
 
 const UserDetail: React.FC = () => {
-  const userProfileContext = useUserProfileContext()!;
+  const userProfileContext = useAuthUserDataContext()!;
 
   const authContext = useAuthContext()!;
 
   const [loadPhotoProgress, setLoadPhotoProgress] = React.useState(0);
 
   const [isLoadingUploadPhoto, setIsLoadingUploadPhoto] = React.useState(false);
+
+  React.useEffect(() => {
+    toast.warn('Graça e paz 🙏. Mantenha o seu cadastro atualizado.');
+  }, []);
 
   const hasPhotoUploaded = !!userProfileContext.authData?.photoUrl;
 
@@ -95,18 +99,20 @@ const UserDetail: React.FC = () => {
           <div className="relative z-30 mx-auto -mt-22 flex h-30 w-full max-w-30 items-center justify-center rounded-full border-2 border-primary bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
             <div className="relative flex flex-col items-center justify-center gap-2 drop-shadow-2">
               <div className="h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"></div>
-              <span className="font-bold">{loadPhotoProgress} %</span>
+              <span className="font-bold">
+                {loadPhotoProgress.toFixed(2)} %
+              </span>
             </div>
           </div>
         ) : (
-          <div className="relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
-            <div className="relative -mt-1 flex items-center justify-center drop-shadow-2">
+          <div className="relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 backdrop-blur sm:h-44 sm:max-w-44">
+            <div className="flex items-center justify-center ">
               <>
                 {hasPhotoUploaded ? (
                   <Image
                     width={160}
                     height={160}
-                    className="max-h-[160px] max-w-[160px] rounded-full"
+                    className="h-30 w-full max-w-30 rounded-full sm:h-44 sm:max-w-44 sm:p-3"
                     src={userProfileContext.authData?.photoUrl!}
                     alt="User"
                   />
@@ -114,7 +120,7 @@ const UserDetail: React.FC = () => {
                   <Image
                     width={160}
                     height={160}
-                    className="max-h-[160px] max-w-[160px] rounded-full"
+                    className="h-30 w-full max-w-30 rounded-full sm:h-44 sm:max-w-44 sm:p-3"
                     src={'/images/user/dummy-user.png'}
                     alt="User"
                   />
@@ -140,7 +146,6 @@ const UserDetail: React.FC = () => {
           <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">
             {userProfileContext.authData?.name}
           </h3>
-          <p className="font-medium">{userProfileContext.authData?.role!}</p>
         </div>
       </div>
     </>

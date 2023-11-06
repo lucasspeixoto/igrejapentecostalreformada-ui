@@ -56,7 +56,7 @@ const SignUpForm: React.FC = () => {
 
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros/cadastro/pessoal');
+      router.push('/membros/profile');
     }
   };
 
@@ -68,12 +68,10 @@ const SignUpForm: React.FC = () => {
 
     if (error) {
       toast.error(firebaseMessages[error.code]);
-
-      authContext.updateLoadingAuthProcess(false);
     } else {
-      authContext.updateLoadingAuthProcess(false);
+      router.push('/membros/profile');
 
-      router.push('/membros/cadastro/pessoal');
+      authContext.updateLoadingAuthProcess(false);
     }
   };
 
@@ -111,137 +109,137 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(getSignupUserFormDataHandler)}>
-        {/* ---------------------------- Nome ---------------------------- */}
-        <div className="mb-3">
-          <label
-            htmlFor="name"
-            className="mb-1 block font-medium text-black dark:text-white">
-            Nome
-          </label>
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Digite seu nome"
-              {...register('name')}
-              className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
+    <form onSubmit={handleSubmit(getSignupUserFormDataHandler)}>
+      {/* ---------------------------- Nome ---------------------------- */}
+      <div className="mb-3">
+        <label
+          htmlFor="name"
+          className="mb-1 block font-medium text-black dark:text-white">
+          Nome
+        </label>
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Digite seu nome"
+            {...register('name')}
+            className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
 
-            <span className="absolute right-4 top-2.5">
-              <BsPersonLock size={22} opacity=".5" />
-            </span>
+          <span className="absolute right-4 top-2.5">
+            <BsPersonLock size={22} opacity=".5" />
+          </span>
 
-            <>
-              {errors.name && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.name.message}
-                </span>
-              )}
-            </>
-          </div>
+          <>
+            {errors.name && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.name.message}
+              </span>
+            )}
+          </>
         </div>
+      </div>
 
-        {/* ---------------------------- E-mail ---------------------------- */}
-        <div className="mb-3">
-          <label className="mb-1 block font-medium text-black dark:text-white">
-            Email
-          </label>
-          <div className="relative">
-            <input
-              type="email"
-              placeholder="Digite seu email"
-              {...register('email')}
-              className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
+      {/* ---------------------------- E-mail ---------------------------- */}
+      <div className="mb-3">
+        <label className="mb-1 block font-medium text-black dark:text-white">
+          Email
+        </label>
+        <div className="relative">
+          <input
+            type="email"
+            placeholder="Digite seu email"
+            {...register('email')}
+            className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
 
-            <span className="absolute right-4 top-2.5">
-              <MdOutlineMarkEmailUnread size={22} opacity=".5" />
-            </span>
+          <span className="absolute right-4 top-2.5">
+            <MdOutlineMarkEmailUnread size={22} opacity=".5" />
+          </span>
 
-            <>
-              {errors.email && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.email.message}
-                </span>
-              )}
-            </>
-          </div>
+          <>
+            {errors.email && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.email.message}
+              </span>
+            )}
+          </>
         </div>
+      </div>
 
-        {/* ---------------------------- Senha ---------------------------- */}
-        <div className="mb-3">
-          <label
-            htmlFor="password"
-            className="mb-1 block font-medium text-black dark:text-white">
-            Senha
-          </label>
-          <div className="relative">
-            <input
-              type="password"
-              placeholder="Digite sua senha"
-              {...register('password')}
-              className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
+      {/* ---------------------------- Senha ---------------------------- */}
+      <div className="mb-3">
+        <label
+          htmlFor="password"
+          className="mb-1 block font-medium text-black dark:text-white">
+          Senha
+        </label>
+        <div className="relative">
+          <input
+            type="password"
+            placeholder="Digite sua senha"
+            {...register('password')}
+            className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
 
-            <span className="absolute right-4 top-2.5">
-              <MdLockOutline size={22} opacity=".5" />
-            </span>
+          <span className="absolute right-4 top-2.5">
+            <MdLockOutline size={22} opacity=".5" />
+          </span>
 
-            <>
-              {errors.password && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.password.message}
-                </span>
-              )}
-            </>
-          </div>
+          <>
+            {errors.password && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.password.message}
+              </span>
+            )}
+          </>
         </div>
+      </div>
 
-        {/* ---------------------------- Confirmação Senha ---------------------------- */}
-        <div className="mb-3">
-          <label className="mb-1 block font-medium text-black dark:text-white">
-            Confirmar a Senha
-          </label>
-          <div className="relative">
-            <input
-              type="password"
-              placeholder="Confirmar a Senha"
-              {...register('confirmedPassword')}
-              className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
+      {/* ---------------------------- Confirmação Senha ---------------------------- */}
+      <div className="mb-3">
+        <label className="mb-1 block font-medium text-black dark:text-white">
+          Confirmar a Senha
+        </label>
+        <div className="relative">
+          <input
+            type="password"
+            placeholder="Confirmar a Senha"
+            {...register('confirmedPassword')}
+            className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
 
-            <span className="absolute right-4 top-2.5">
-              <MdLockOutline size={22} opacity=".5" />
-            </span>
+          <span className="absolute right-4 top-2.5">
+            <MdLockOutline size={22} opacity=".5" />
+          </span>
 
-            <>
-              {errors.confirmedPassword && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.confirmedPassword.message}
-                </span>
-              )}
-            </>
-          </div>
+          <>
+            {errors.confirmedPassword && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.confirmedPassword.message}
+              </span>
+            )}
+          </>
         </div>
+      </div>
 
-        <div className="mb-4 mt-5">
-          <button
-            type="submit"
-            className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
-            Cadastrar
-          </button>
-        </div>
-
+      <div className="mb-4 mt-5">
         <button
-          onClick={singUpWithGoogleHandler}
-          type="button"
-          className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
-          <GoogleLogo size={22} />
-          Cadastrar com Google
+          disabled={authContext.isLoadingAuthProcess}
+          type="submit"
+          className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+          Cadastrar
         </button>
-      </form>
-    </>
+      </div>
+
+      <button
+        disabled={authContext.isLoadingAuthProcess}
+        onClick={singUpWithGoogleHandler}
+        type="button"
+        className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
+        <GoogleLogo size={22} />
+        Cadastrar com Google
+      </button>
+    </form>
   );
 };
 

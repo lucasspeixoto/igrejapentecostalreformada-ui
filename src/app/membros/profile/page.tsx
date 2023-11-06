@@ -1,7 +1,6 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { FiCamera } from 'react-icons/fi';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
@@ -26,7 +25,7 @@ const Profile = () => {
             width={970}
             height={260}
           />
-          <div className="absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
+          {/* <div className="absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
             <label
               htmlFor="cover"
               className="flex cursor-pointer items-center justify-center gap-2 rounded bg-primary px-2 py-1 text-sm font-medium text-white hover:bg-opacity-80 xsm:px-4">
@@ -34,7 +33,7 @@ const Profile = () => {
               <FiCamera size={16} />
               <span>Editar</span>
             </label>
-          </div>
+          </div> */}
         </div>
 
         {/* Dados de Perfil */}
