@@ -66,79 +66,20 @@ const MemberForm = () => {
   };
 
   return (
-    <React.Fragment>
-      {/* Formulário */}
-      <form onSubmit={handleSubmit(getEcclesiasticalMemberDataHandler)}>
-        <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Membresia <span className="text-meta-1">*</span>
-            </label>
-            <div className="relative z-20 bg-transparent dark:bg-form-input">
-              <select
-                {...register('membership')}
-                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                <option value="">Selecione o tipo de membro</option>
-                {React.Children.toArray(
-                  membershipOption.map(member => (
-                    <option value={member}>{member}</option>
-                  ))
-                )}
-              </select>
-              <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
-                <SelectChevroletLogo size={24} />
-              </span>
-            </div>
-            <>
-              {errors.membership && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.membership.message}
-                </span>
-              )}
-            </>
-          </div>
-
-          <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Oficio <span className="text-meta-1">*</span>
-            </label>
-            <div className="relative z-20 bg-transparent dark:bg-form-input">
-              <select
-                {...register('craft')}
-                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                <option value="">Selecione o ofício</option>
-                {React.Children.toArray(
-                  craftOption.map(craft => (
-                    <option value={craft}>{craft}</option>
-                  ))
-                )}
-              </select>
-              <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
-                <SelectChevroletLogo size={24} />
-              </span>
-            </div>
-            <>
-              {errors.craft && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.craft.message}
-                </span>
-              )}
-            </>
-          </div>
-        </div>
-
-        <div className="mb-4.5">
+    <form onSubmit={handleSubmit(getEcclesiasticalMemberDataHandler)}>
+      <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+        <div className="w-full xl:w-1/2">
           <label className="mb-2.5 block text-black dark:text-white">
-            Última igreja que frequentou <span className="text-meta-1">*</span>
+            Membresia <span className="text-meta-1">*</span>
           </label>
           <div className="relative z-20 bg-transparent dark:bg-form-input">
             <select
-              {...register('communities')}
+              {...register('membership')}
               className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-              <option value="">Selecione a igreja</option>
+              <option value="">Selecione o tipo de membro</option>
               {React.Children.toArray(
-                communitiesOption.map(community => (
-                  <option value={community}>{community}</option>
+                membershipOption.map(member => (
+                  <option value={member}>{member}</option>
                 ))
               )}
             </select>
@@ -147,27 +88,25 @@ const MemberForm = () => {
             </span>
           </div>
           <>
-            {errors.communities && (
+            {errors.membership && (
               <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.communities.message}
+                {errors.membership.message}
               </span>
             )}
           </>
         </div>
 
-        <div className="mb-4.5">
+        <div className="w-full xl:w-1/2">
           <label className="mb-2.5 block text-black dark:text-white">
-            Principal interesse <span className="text-meta-1">*</span>
+            Oficio <span className="text-meta-1">*</span>
           </label>
           <div className="relative z-20 bg-transparent dark:bg-form-input">
             <select
-              {...register('interests')}
+              {...register('craft')}
               className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-              <option value="">Selecione o interesse</option>
+              <option value="">Selecione o ofício</option>
               {React.Children.toArray(
-                interestsOption.map(interest => (
-                  <option value={interest}>{interest}</option>
-                ))
+                craftOption.map(craft => <option value={craft}>{craft}</option>)
               )}
             </select>
             <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -175,23 +114,79 @@ const MemberForm = () => {
             </span>
           </div>
           <>
-            {errors.interests && (
+            {errors.craft && (
               <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.interests.message}
+                {errors.craft.message}
               </span>
             )}
           </>
         </div>
+      </div>
 
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
-          {isLoading && <SpinnerLogo size={22} />}
-          Salvar
-        </button>
-      </form>
-    </React.Fragment>
+      <div className="mb-4.5">
+        <label className="mb-2.5 block text-black dark:text-white">
+          Última igreja que frequentou <span className="text-meta-1">*</span>
+        </label>
+        <div className="relative z-20 bg-transparent dark:bg-form-input">
+          <select
+            {...register('communities')}
+            className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            <option value="">Selecione a igreja</option>
+            {React.Children.toArray(
+              communitiesOption.map(community => (
+                <option value={community}>{community}</option>
+              ))
+            )}
+          </select>
+          <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+            <SelectChevroletLogo size={24} />
+          </span>
+        </div>
+        <>
+          {errors.communities && (
+            <span className="text-xs text-meta-1 dark:text-meta-7">
+              {errors.communities.message}
+            </span>
+          )}
+        </>
+      </div>
+
+      <div className="mb-4.5">
+        <label className="mb-2.5 block text-black dark:text-white">
+          Principal interesse <span className="text-meta-1">*</span>
+        </label>
+        <div className="relative z-20 bg-transparent dark:bg-form-input">
+          <select
+            {...register('interests')}
+            className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            <option value="">Selecione o interesse</option>
+            {React.Children.toArray(
+              interestsOption.map(interest => (
+                <option value={interest}>{interest}</option>
+              ))
+            )}
+          </select>
+          <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+            <SelectChevroletLogo size={24} />
+          </span>
+        </div>
+        <>
+          {errors.interests && (
+            <span className="text-xs text-meta-1 dark:text-meta-7">
+              {errors.interests.message}
+            </span>
+          )}
+        </>
+      </div>
+
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+        {isLoading && <SpinnerLogo size={22} />}
+        Salvar
+      </button>
+    </form>
   );
 };
 

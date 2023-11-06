@@ -33,7 +33,6 @@ const EducationForm = () => {
 
   React.useEffect(() => {
     if (supplementaryContext.supplementaryData) {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const { schooling, profession } = supplementaryContext.supplementaryData;
       reset({
         schooling,
@@ -65,66 +64,63 @@ const EducationForm = () => {
   };
 
   return (
-    <React.Fragment>
-      {/* Formulário */}
-      <form onSubmit={handleSubmit(getSupplementaryEducationDataHandler)}>
-        <div className="mb-4.5">
-          <label className="mb-2.5 block text-black dark:text-white">
-            Escolaridade <span className="text-meta-1">*</span>
-          </label>
-          <div className="relative z-20 bg-transparent dark:bg-form-input">
-            <select
-              {...register('schooling')}
-              className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-              <option value="">Selecione a escolaridade</option>
-              {React.Children.toArray(
-                schoolingOptions.map(schooling => (
-                  <option value={schooling}>{schooling}</option>
-                ))
-              )}
-            </select>
-            <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
-              <SelectChevroletLogo size={24} />
+    <form onSubmit={handleSubmit(getSupplementaryEducationDataHandler)}>
+      <div className="mb-4.5">
+        <label className="mb-2.5 block text-black dark:text-white">
+          Escolaridade <span className="text-meta-1">*</span>
+        </label>
+        <div className="relative z-20 bg-transparent dark:bg-form-input">
+          <select
+            {...register('schooling')}
+            className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            <option value="">Selecione a escolaridade</option>
+            {React.Children.toArray(
+              schoolingOptions.map(schooling => (
+                <option value={schooling}>{schooling}</option>
+              ))
+            )}
+          </select>
+          <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+            <SelectChevroletLogo size={24} />
+          </span>
+        </div>
+        <>
+          {errors.schooling && (
+            <span className="text-xs text-meta-1 dark:text-meta-7">
+              {errors.schooling.message}
             </span>
-          </div>
+          )}
+        </>
+      </div>
+
+      <div className="mb-4.5">
+        <label className="mb-3 block text-black dark:text-white">
+          Profissão
+        </label>
+        <div className="relative">
+          <input
+            type="text"
+            {...register('profession')}
+            className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
           <>
-            {errors.schooling && (
+            {errors.profession && (
               <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.schooling.message}
+                {errors.profession.message}
               </span>
             )}
           </>
         </div>
+      </div>
 
-        <div className="mb-4.5">
-          <label className="mb-3 block text-black dark:text-white">
-            Profissão
-          </label>
-          <div className="relative">
-            <input
-              type="text"
-              {...register('profession')}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <>
-              {errors.profession && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.profession.message}
-                </span>
-              )}
-            </>
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
-          {isLoading && <SpinnerLogo size={22} />}
-          Salvar
-        </button>
-      </form>
-    </React.Fragment>
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+        {isLoading && <SpinnerLogo size={22} />}
+        Salvar
+      </button>
+    </form>
   );
 };
 

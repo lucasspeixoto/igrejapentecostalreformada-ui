@@ -67,58 +67,55 @@ const DocsForm = () => {
   };
 
   return (
-    <React.Fragment>
-      {/* Formulário */}
-      <form onSubmit={handleSubmit(getPersonalUserDocsDataHandler)}>
-        <div className="mb-4.5">
-          <label className="mb-3 block text-black dark:text-white">
-            RG <span className="text-meta-1">*</span>
-          </label>
-          <div className="relative">
-            <input
-              type="number"
-              {...register('rg')}
-              className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <>
-              {errors.rg && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.rg.message}
-                </span>
-              )}
-            </>
-          </div>
+    <form onSubmit={handleSubmit(getPersonalUserDocsDataHandler)}>
+      <div className="mb-4.5">
+        <label className="mb-3 block text-black dark:text-white">
+          RG <span className="text-meta-1">*</span>
+        </label>
+        <div className="relative">
+          <input
+            type="number"
+            {...register('rg')}
+            className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
+          <>
+            {errors.rg && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.rg.message}
+              </span>
+            )}
+          </>
         </div>
+      </div>
 
-        <div className="mb-4.5">
-          <label className="mb-3 block text-black dark:text-white">
-            CPF <span className="text-meta-1">*</span>
-          </label>
-          <div className="relative">
-            <input
-              type="number"
-              {...register('cpf')}
-              className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-            />
-            <>
-              {errors.cpf && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.cpf.message}
-                </span>
-              )}
-            </>
-          </div>
+      <div className="mb-4.5">
+        <label className="mb-3 block text-black dark:text-white">
+          CPF <span className="text-meta-1">*</span>
+        </label>
+        <div className="relative">
+          <input
+            type="number"
+            {...register('cpf')}
+            className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+          />
+          <>
+            {errors.cpf && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.cpf.message}
+              </span>
+            )}
+          </>
         </div>
+      </div>
 
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
-          {isLoading && <SpinnerLogo size={22} />}
-          Salvar
-        </button>
-      </form>
-    </React.Fragment>
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+        {isLoading && <SpinnerLogo size={22} />}
+        Salvar
+      </button>
+    </form>
   );
 };
 

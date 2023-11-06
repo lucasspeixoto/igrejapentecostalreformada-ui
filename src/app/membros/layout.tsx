@@ -18,17 +18,11 @@ type MembrosLayoutProps = {
 const MembrosLayout = ({ children }: MembrosLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  React.useEffect(() => {
-    setTimeout(() => setIsLoading(false), 1000);
-  }, []);
-
   const useAuth = useAuthContext()!;
 
   return (
     <>
-      {isLoading ? null : (
+      {useAuth.isAuthenticated ? (
         <div className="dark:bg-boxdark-2 dark:text-bodydark">
           <UserProfileContextProvider>
             <div className="flex h-screen overflow-hidden">
@@ -54,7 +48,7 @@ const MembrosLayout = ({ children }: MembrosLayoutProps) => {
                     <PersonalContextProvider>
                       <SupplementaryContextProvider>
                         <EcclesiasticalContextProvider>
-                          {useAuth?.isAuthenticated ? children : null}
+                          {children}
                         </EcclesiasticalContextProvider>
                       </SupplementaryContextProvider>
                     </PersonalContextProvider>
@@ -66,7 +60,7 @@ const MembrosLayout = ({ children }: MembrosLayoutProps) => {
             </div>
           </UserProfileContextProvider>
         </div>
-      )}
+      ) : null}
     </>
   );
 };

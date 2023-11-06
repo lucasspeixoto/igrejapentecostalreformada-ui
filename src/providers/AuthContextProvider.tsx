@@ -51,6 +51,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
       } else {
         router.push('/login');
         setUser(null);
+        setIsAuthenticated(false);
       }
       updateLoadingAuthProcess(false);
     });
