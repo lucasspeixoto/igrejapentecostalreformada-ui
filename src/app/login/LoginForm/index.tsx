@@ -56,7 +56,7 @@ const LoginForm = () => {
 
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros/profile');
+      router.push('/membros/perfil');
     }
   };
 
@@ -73,7 +73,7 @@ const LoginForm = () => {
     } else {
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros/profile');
+      router.push('/membros/perfil');
     }
   };
 

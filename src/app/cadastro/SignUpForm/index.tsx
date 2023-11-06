@@ -56,7 +56,7 @@ const SignUpForm: React.FC = () => {
 
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros/profile');
+      router.push('/membros/perfil');
     }
   };
 
@@ -69,7 +69,7 @@ const SignUpForm: React.FC = () => {
     if (error) {
       toast.error(firebaseMessages[error.code]);
     } else {
-      router.push('/membros/profile');
+      router.push('/membros/perfil');
 
       authContext.updateLoadingAuthProcess(false);
     }
