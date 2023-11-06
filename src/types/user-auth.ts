@@ -1,6 +1,6 @@
 export interface UserAuth {
   role?: string;
-  admin?: boolean;
+  isAdmin?: boolean;
   name: string;
   photoUrl: string;
   email: string;
