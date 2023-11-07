@@ -149,7 +149,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
                   }`}>
-                  <BiUser size={20} className="font-semibold text-white" />
+                  <BiUser size={20} className="text-white" />
                   Perfil
                 </Link>
               </li>
@@ -176,10 +176,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             ? handleClick()
                             : setSidebarExpanded(true);
                         }}>
-                        <FaWpforms
-                          size={20}
-                          className="font-semibold text-white"
-                        />
+                        <FaWpforms size={20} className="text-white" />
                         Cadastro
                         <MenuChevroletIcon open={open} />
                       </Link>
@@ -226,6 +223,21 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 }}
               </SidebarLinkGroup>
 
+              {/* <!-- Membros IPR --> */}
+              {authData?.isAdmin ? (
+                <li>
+                  <Link
+                    href="/membros/listagens-de-membros"
+                    className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
+                      pathname.includes('listagens-de-membros') &&
+                      'bg-graydark dark:bg-meta-4'
+                    }`}>
+                    <BsPeople size={20} className="text-white" />
+                    Membros IPR
+                  </Link>
+                </li>
+              ) : null}
+
               {/* <!-- Indicadores --> */}
               {authData?.isAdmin ? (
                 <SidebarLinkGroup
@@ -248,10 +260,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               ? handleClick()
                               : setSidebarExpanded(true);
                           }}>
-                          <AiOutlinePieChart
-                            size={20}
-                            className="font-semibold text-white"
-                          />
+                          <AiOutlinePieChart size={20} className="text-white" />
                           Indicadores
                           <MenuChevroletIcon open={open} />
                         </Link>
@@ -279,21 +288,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </SidebarLinkGroup>
               ) : null}
 
-              {/* <!-- Membros IPR --> */}
-              {authData?.isAdmin ? (
-                <li>
-                  <Link
-                    href="/membros/tables"
-                    className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                      pathname.includes('tables') &&
-                      'bg-graydark dark:bg-meta-4'
-                    }`}>
-                    <BsPeople size={20} className="font-semibold text-white" />
-                    Membros IPR
-                  </Link>
-                </li>
-              ) : null}
-
               {/* <!-- Calendário --> */}
               <li>
                 <Link
@@ -302,10 +296,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     pathname.includes('calendar') &&
                     'bg-graydark dark:bg-meta-4'
                   }`}>
-                  <BsCalendarDate
-                    size={20}
-                    className="font-semibold text-white"
-                  />
+                  <BsCalendarDate size={20} className="text-white" />
                   Calendário
                 </Link>
               </li>
@@ -318,7 +309,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     pathname.includes('settings') &&
                     'bg-graydark dark:bg-meta-4'
                   }`}>
-                  <FiSettings size={20} className="font-semibold text-white" />
+                  <FiSettings size={20} className="text-white" />
                   Configurações
                 </Link>
               </li>
@@ -348,10 +339,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             ? handleClick()
                             : setSidebarExpanded(true);
                         }}>
-                        <BsLink45Deg
-                          size={20}
-                          className="font-semibold text-white"
-                        />
+                        <BsLink45Deg size={20} className="text-white" />
                         Links Importantes
                         <MenuChevroletIcon open={open} />
                       </Link>

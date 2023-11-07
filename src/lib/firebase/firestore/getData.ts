@@ -1,12 +1,45 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+} from 'firebase/firestore';
+
+import type { UserAuth } from '@/types/user-auth';
+import type { UserData } from '@/types/user-data';
 
 import firebase_app from '../config';
 
-const db = getFirestore(firebase_app);
+export const db = getFirestore(firebase_app);
 
-export async function getDocument(collection: string, id: string) {
-  const docRef = doc(db, collection, id);
+export const usersRef = collection(db, 'users');
+
+export const usersQuery = query(usersRef);
+
+export async function getUsersDocuments() {
+  const result: UserAuth[] = [];
+  let error = null;
+
+  try {
+    const docsSnap = await getDocs(usersQuery);
+
+    docsSnap.forEach(documment => {
+      const data = documment.data() as UserData;
+
+      result.push(data?.auth);
+    });
+  } catch (_error) {
+    error = _error;
+  }
+
+  return { result, error };
+}
+
+export async function getDocument(_collection: string, id: string) {
+  const docRef = doc(db, _collection, id);
 
   let result = null;
   let error = null;
@@ -20,25 +53,13 @@ export async function getDocument(collection: string, id: string) {
   return { result, error };
 }
 
-/**
-const authdata = getDocument('users', user?.uid!);
-
-  authdata
-    .then(response => {
-      console.log(response.result?.get('auth'));
-    })
-    .catch(error => {
-      console.log(error);
-    });
- */
-
 // ! Obter lista de usuários:
 //! const query = collection(db, 'users');
 //! const [docs, loading, error] = useCollectionData(query);
 //! console.log(docs)
 
 export async function getCollection(
-  collection: string,
+  _collection: string,
   id: string,
   target: string
 ) {
@@ -46,7 +67,7 @@ export async function getCollection(
   let error = null;
 
   try {
-    const response = await getDocument(collection, id);
+    const response = await getDocument(_collection, id);
 
     result = response.result?.get(target);
   } catch (_error) {
