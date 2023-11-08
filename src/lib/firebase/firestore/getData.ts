@@ -8,7 +8,6 @@ import {
   query,
 } from 'firebase/firestore';
 
-import type { UserAuth } from '@/types/user-auth';
 import type { UserData } from '@/types/user-data';
 
 import firebase_app from '../config';
@@ -20,7 +19,7 @@ export const usersRef = collection(db, 'users');
 export const usersQuery = query(usersRef);
 
 export async function getUsersDocuments() {
-  const result: UserAuth[] = [];
+  const userData: UserData[] = [];
   let error = null;
 
   try {
@@ -29,13 +28,13 @@ export async function getUsersDocuments() {
     docsSnap.forEach(documment => {
       const data = documment.data() as UserData;
 
-      result.push(data?.auth);
+      userData.push(data);
     });
   } catch (_error) {
     error = _error;
   }
 
-  return { result, error };
+  return { userData, error };
 }
 
 export async function getDocument(_collection: string, id: string) {

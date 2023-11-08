@@ -23,7 +23,7 @@ const UserDetail: React.FC = () => {
   const [isLoadingUploadPhoto, setIsLoadingUploadPhoto] = React.useState(false);
 
   React.useEffect(() => {
-    toast.warn('Graça e paz 🙏. Mantenha o seu cadastro atualizado.');
+    toast.warn('Graça e paz 🙏 Mantenha o seu cadastro atualizado.');
   }, []);
 
   const hasPhotoUploaded = !!userProfileContext.authData?.photoUrl;

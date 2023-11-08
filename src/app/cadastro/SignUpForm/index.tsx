@@ -45,7 +45,8 @@ const SignUpForm: React.FC = () => {
       authContext.updateLoadingAuthProcess(false);
     } else {
       const userAuthCollection = {
-        admin: false,
+        isAdmin: false,
+        role: 'Irmão(ã)',
         name,
         photoUrl: result?.user.photoURL,
         email: result?.user.email,
@@ -89,6 +90,8 @@ const SignUpForm: React.FC = () => {
     } else {
       const userAuthCollection = {
         name,
+        isAdmin: false,
+        role: 'Irmão(ã)',
         photoUrl: '',
         email: result?.user.email,
         userId: result?.user.uid,

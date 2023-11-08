@@ -2,66 +2,28 @@
 
 import Image from 'next/image';
 import React from 'react';
+import { AiOutlineCheckCircle, AiOutlineEye } from 'react-icons/ai';
+import { BiBlock, BiTrash } from 'react-icons/bi';
 
 import { getUsersDocuments } from '@/lib/firebase/firestore/getData';
-import type { BRAND } from '@/types/brand';
-import type { UserAuth } from '@/types/user-auth';
+import type { UserData } from '@/types/user-data';
 
-const brandData: BRAND[] = [
-  {
-    logo: '/images/brand/brand-01.svg',
-    name: 'Google',
-    visitors: 3.5,
-    revenues: '5,768',
-    sales: 590,
-    conversion: 4.8,
-  },
-  {
-    logo: '/images/brand/brand-02.svg',
-    name: 'Twitter',
-    visitors: 2.2,
-    revenues: '4,635',
-    sales: 467,
-    conversion: 4.3,
-  },
-  {
-    logo: '/images/brand/brand-03.svg',
-    name: 'Github',
-    visitors: 2.1,
-    revenues: '4,290',
-    sales: 420,
-    conversion: 3.7,
-  },
-  {
-    logo: '/images/brand/brand-04.svg',
-    name: 'Vimeo',
-    visitors: 1.5,
-    revenues: '3,580',
-    sales: 389,
-    conversion: 2.5,
-  },
-  {
-    logo: '/images/brand/brand-05.svg',
-    name: 'Facebook',
-    visitors: 3.5,
-    revenues: '6,768',
-    sales: 390,
-    conversion: 4.2,
-  },
-];
+import Loader from '../common/Loader';
 
 const MembersList: React.FC = () => {
-  const [userAuthData, setUserAuthData] = React.useState<UserAuth[]>([]);
+  const [userLoadedData, setUserLoadedData] = React.useState<UserData[]>([]);
+
+  const [isLoadingUsers, setIsLoadingUsers] = React.useState(true);
 
   React.useEffect(() => {
     let mounted = true;
 
     (async () => {
-      const { result } = await getUsersDocuments();
+      const { userData } = await getUsersDocuments();
 
-      if (result && mounted) {
-        console.log(result);
-        setUserAuthData(result);
+      if (userData && mounted) {
+        setUserLoadedData(userData);
+        setIsLoadingUsers(false);
       }
     })();
 
@@ -76,69 +38,106 @@ const MembersList: React.FC = () => {
         Membros Cadastrados IPR
       </h4>
 
-      <div className="flex flex-col">
-        <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
-          <div className="p-2.5 xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Nome
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Visitors
-            </h5>
-          </div>
-          <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Revenues
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Sales
-            </h5>
-          </div>
-          <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium uppercase xsm:text-base">
-              Conversion
-            </h5>
-          </div>
-        </div>
-
-        {brandData.map((brand, key) => (
-          <div
-            className={`grid grid-cols-3 sm:grid-cols-5 ${
-              key === brandData.length - 1
-                ? ''
-                : 'border-b border-stroke dark:border-strokedark'
-            }`}
-            key={key}>
-            <div className="flex items-center gap-3 p-2.5 xl:p-5">
-              <div className="shrink-0">
-                <Image src={brand.logo} alt="Brand" width={48} height={48} />
+      <div className="pb-10">
+        {isLoadingUsers || !userLoadedData.length ? (
+          <Loader />
+        ) : (
+          <>
+            <div className="rounded-sm border border-stroke bg-white  shadow-default dark:border-strokedark dark:bg-boxdark ">
+              <div className="max-w-full overflow-x-auto ">
+                <table className="w-full table-auto">
+                  <thead>
+                    <tr className="bg-gray-2 text-left dark:bg-meta-4">
+                      <th className="min-w-[220px] p-4 font-medium text-black dark:text-white xl:pl-11">
+                        Nome
+                      </th>
+                      <th className="min-w-[150px] p-4 font-medium text-black dark:text-white">
+                        Atuação
+                      </th>
+                      <th className="min-w-[120px] p-4 font-medium text-black dark:text-white">
+                        Perfil
+                      </th>
+                      <th className="min-w-[120px] p-4 font-medium text-black dark:text-white">
+                        Cadastro
+                      </th>
+                      <th className="p-4 font-medium text-black dark:text-white">
+                        Ações
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {React.Children.toArray(
+                      userLoadedData?.map(member => (
+                        <tr>
+                          <td className="border-b border-[#eee] px-1 py-5 pl-9 dark:border-strokedark xl:pl-5">
+                            <div className="flex flex-row items-center gap-4 font-medium text-black dark:text-white">
+                              <div className="shrink-0">
+                                <>
+                                  {member.auth?.photoUrl ? (
+                                    <Image
+                                      src={member.auth?.photoUrl!}
+                                      alt="Foto membro"
+                                      width={48}
+                                      height={48}
+                                      className="rounded-full"
+                                    />
+                                  ) : (
+                                    <Image
+                                      src={'/images/user/dummy-user.png'}
+                                      alt="Brand"
+                                      width={48}
+                                      height={48}
+                                      className="rounded-full"
+                                    />
+                                  )}
+                                </>
+                              </div>
+                              <p className="hidden text-black dark:text-white sm:block">
+                                {member.auth?.name.split(' ')[0]}{' '}
+                              </p>
+                            </div>
+                          </td>
+                          <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                            <p className="text-black dark:text-white">
+                              {member?.auth?.role}
+                            </p>
+                          </td>
+                          <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                            <p className="text-black dark:text-white">
+                              {member?.auth?.isAdmin ? 'Admin' : 'Membro'}
+                            </p>
+                          </td>
+                          <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                            <p className="text-black dark:text-white">
+                              {member?.process?.isRegistered ? (
+                                <AiOutlineCheckCircle
+                                  size={20}
+                                  className="text-meta-3"
+                                />
+                              ) : (
+                                <BiBlock size={20} className="text-meta-7" />
+                              )}
+                            </p>
+                          </td>
+                          <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                            <div className="flex items-center space-x-3.5">
+                              <button className="hover:text-meta-5">
+                                <AiOutlineEye size={20} />
+                              </button>
+                              <button className="hover:text-meta-7">
+                                <BiTrash size={20} />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
               </div>
-              <p className="hidden text-black dark:text-white sm:block">
-                {brand.name}
-              </p>
             </div>
-
-            <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-black dark:text-white">{brand.visitors}K</p>
-            </div>
-
-            <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-3">${brand.revenues}</p>
-            </div>
-
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">{brand.sales}</p>
-            </div>
-
-            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-meta-5">{brand.conversion}%</p>
-            </div>
-          </div>
-        ))}
+          </>
+        )}
       </div>
     </div>
   );
