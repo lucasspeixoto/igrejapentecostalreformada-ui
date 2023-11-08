@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import Image from '@/components/Image';
 import { storage } from '@/lib/firebase/config';
 import addData from '@/lib/firebase/firestore/addData';
+import firebaseMessages from '@/lib/firebase/messages';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
 import type { UserAuth } from '@/types/user-auth';
@@ -78,9 +79,7 @@ const UserDetail: React.FC = () => {
         setLoadPhotoProgress(progress);
       },
       error => {
-        toast.error(
-          `Error ao salvar foto. Tente novamente mais tarde!. ${error.message}`
-        );
+        toast.error(firebaseMessages[error.code]);
       },
       () => {
         // Handle successful uploads on complete
