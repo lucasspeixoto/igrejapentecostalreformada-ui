@@ -18,10 +18,7 @@ export const createUserFormSchema = z
       .string()
       .min(1, 'E-mail é obrigatório!')
       .email('E-mail em formato inválido!')
-      .toLowerCase()
-      .refine(email => {
-        return email.endsWith('.com');
-      }, 'Domínio de email incorreto'),
+      .toLowerCase(),
     password: z
       .string()
       .min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
