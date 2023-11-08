@@ -4,14 +4,14 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 import RedirectLink from '../components/RedirectLink';
-import SignUpForm from './SignUpForm';
+import RecoveryPasswordForm from './RecoveryPasswordForm';
 
 export const metadata: Metadata = {
-  title: 'Cadastro | Igreja Pentecostal reformada',
+  title: 'Login | Igreja Pentecostal reformada',
   description: 'Plataforma de membros da igreja pentecostal reformada (IPR)',
 };
 
-const SignUp: React.FC = () => {
+const SignIn: React.FC = () => {
   return (
     <React.Fragment>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -22,14 +22,14 @@ const SignUp: React.FC = () => {
             <div className="flex h-screen w-full flex-col items-center justify-center px-4 md:px-0">
               <div className="w-full md:w-9/12 lg:w-8/12">
                 <h2 className="mb-3 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                  Cadastro
+                  Recuperar Senha
                 </h2>
 
-                <SignUpForm />
+                <RecoveryPasswordForm />
 
-                <div className="mt-4 text-center">
+                <div className="mt-6 text-center">
                   <RedirectLink
-                    text="Ja possui uma conta?"
+                    text="Ja possui conta ?"
                     textLink="Logar"
                     route="/login"
                   />
@@ -43,4 +43,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

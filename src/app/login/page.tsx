@@ -34,12 +34,12 @@ const SignIn: React.FC = () => {
                     route="/cadastro"
                   />
                 </div>
+
                 <div className="mt-6 text-center">
                   <RedirectLink
-                    text="Acesse a "
-                    textLink="Bíblia IPR"
-                    route="https://ipr-biblia.vercel.app/"
-                    target="blank"
+                    text="Esqueceu a senha ?"
+                    textLink=" Recuperar"
+                    route="/recuperar-senha"
                   />
                 </div>
               </div>
