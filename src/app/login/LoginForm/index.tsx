@@ -36,27 +36,35 @@ const LoginForm = () => {
   });
 
   const singInWithGoogleHandler = async (): Promise<void> => {
-    const { result, error } = await signInWithGoogle();
+    const { result, error, isTheUserNew } = await signInWithGoogle();
+
+    let userAuthCollection: UserAuth;
 
     if (error) {
       toast.error(firebaseMessages[error.code]);
 
       authContext.updateLoadingAuthProcess(false);
     } else {
-      const userAuthCollection: UserAuth = {
-        name: result?.user.displayName!,
-        photoUrl: result?.user.photoURL!,
-        email: result?.user.email!,
-        userId: result?.user.uid!,
-      };
+      if (isTheUserNew) {
+        userAuthCollection = {
+          isAdmin: false,
+          role: 'Irmão',
+          name: result?.user.displayName!,
+          photoUrl: result?.user.photoURL!,
+          email: result?.user.email!,
+          userId: result?.user.uid!,
+        };
 
-      await addDocumentData('users', result?.user.uid!, {
-        auth: userAuthCollection,
-      });
+        await addDocumentData('users', result?.user.uid!, {
+          auth: userAuthCollection,
+        });
 
-      authContext.updateLoadingAuthProcess(false);
+        toast.success('Bem vindo a IPR!');
+      }
 
       router.push('/membros/perfil');
+
+      authContext.updateLoadingAuthProcess(false);
     }
   };
 

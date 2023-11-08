@@ -13,12 +13,14 @@ const initialValues = {
   ecclesiasticalData: null,
   isLoadingEcclesiasticalProcess: false,
   updateLoadingEcclesiasticalProcess: () => {},
+  updateIsDataUpdatedInfo: () => {},
 };
 
 type EcclesiasticalContextType = {
   ecclesiasticalData: Ecclesiastical | null;
   isLoadingEcclesiasticalProcess: boolean;
   updateLoadingEcclesiasticalProcess: (isLoading: boolean) => void;
+  updateIsDataUpdatedInfo: () => void;
 };
 
 export const EcclesiasticalContext =
@@ -35,8 +37,14 @@ export const EcclesiasticalContextProvider: React.FC<{
   const [isLoadingEcclesiasticalProcess, setIsLoadingEcclesiasticalProcess] =
     useState(false);
 
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const updateLoadingEcclesiasticalProcess = (isLoading: boolean) => {
     setIsLoadingEcclesiasticalProcess(isLoading);
+  };
+
+  const updateIsDataUpdatedInfo = () => {
+    setIsDataUpdated(true);
   };
 
   React.useEffect(() => {
@@ -62,7 +70,7 @@ export const EcclesiasticalContextProvider: React.FC<{
     });
 
     return () => authStateUnsubscribe();
-  }, []);
+  }, [isDataUpdated]);
 
   return (
     <EcclesiasticalContext.Provider
@@ -70,6 +78,7 @@ export const EcclesiasticalContextProvider: React.FC<{
         ecclesiasticalData,
         isLoadingEcclesiasticalProcess,
         updateLoadingEcclesiasticalProcess,
+        updateIsDataUpdatedInfo,
       }}>
       {children}
     </EcclesiasticalContext.Provider>

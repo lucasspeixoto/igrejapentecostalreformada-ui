@@ -21,8 +21,8 @@ const ContactForm = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
-  /* The code is using the `useForm` hook from the `react-hook-form` library to
-  handle form validation and submission. */
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -34,7 +34,6 @@ const ContactForm = () => {
 
   React.useEffect(() => {
     if (personalContext.personalData) {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const { name, sex, cellphone, telephone, birthday } =
         personalContext.personalData;
       reset({
@@ -45,16 +44,8 @@ const ContactForm = () => {
         birthday,
       });
     }
-  }, [personalContext]);
+  }, [personalContext, isDataUpdated]);
 
-  /**
-   * The function `getPersonalUserContactDataHandler` takes in personal contact
-   * data, combines it into a user contact collection object, adds it to a user's
-   * data in a Firestore database, and handles loading state.
-   * @param {CreatePersonalContactFormData} data - The `data` parameter is of type
-   * `CreatePersonalContactFormData`. It is an object that contains the personal
-   * contact data of a user. The properties of this object include:
-   */
   const getPersonalUserContactDataHandler = async (
     data: CreatePersonalContactFormData
   ) => {
@@ -79,6 +70,10 @@ const ContactForm = () => {
         'Error ao salvar dados de contato. Tente novamente mais tarde ou contate admim.'
       );
     } else {
+      personalContext.updateIsDataUpdatedInfo();
+
+      setIsDataUpdated(true);
+
       toast.success('Dados de contato atualizados!');
     }
 

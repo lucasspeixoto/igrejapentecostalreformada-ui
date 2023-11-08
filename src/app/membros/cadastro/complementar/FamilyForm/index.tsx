@@ -22,6 +22,8 @@ const FamilyForm = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -36,7 +38,7 @@ const FamilyForm = () => {
       const { supplementaryData } = supplementaryContext;
       reset(supplementaryData);
     }
-  }, [supplementaryContext]);
+  }, [supplementaryContext.supplementaryData, isDataUpdated]);
 
   const getSupplementaryUserContactDataHandler = async (
     data: CreateSupplementaryFamilyFormData
@@ -54,6 +56,10 @@ const FamilyForm = () => {
         'Error ao salvar dados de família. Tente novamente mais tarde ou contate admim.'
       );
     } else {
+      supplementaryContext.updateIsDataUpdatedInfo();
+
+      setIsDataUpdated(true);
+
       toast.success('Dados de família atualizados!');
     }
 

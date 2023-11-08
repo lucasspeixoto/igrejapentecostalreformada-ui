@@ -20,6 +20,8 @@ const EducationForm = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const { schoolingOptions } = parameters;
 
   const {
@@ -39,7 +41,7 @@ const EducationForm = () => {
         profession,
       });
     }
-  }, [supplementaryContext]);
+  }, [supplementaryContext.supplementaryData, isDataUpdated]);
 
   const getSupplementaryEducationDataHandler = async (
     data: CreateSupplementaryEducationFormData
@@ -57,6 +59,10 @@ const EducationForm = () => {
         'Error ao salvar dados de educação. Tente novamente mais tarde ou contate admim.'
       );
     } else {
+      supplementaryContext.updateIsDataUpdatedInfo();
+
+      setIsDataUpdated(true);
+
       toast.success('Dados de educação atualizados!');
     }
 

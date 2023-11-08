@@ -22,6 +22,8 @@ const AddressForm = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const states = parameters.stateOptions;
 
   const {
@@ -47,7 +49,7 @@ const AddressForm = () => {
         state,
       });
     }
-  }, [personalContext]);
+  }, [personalContext, isDataUpdated]);
 
   const getAddressByCep = async (event: React.FocusEvent<HTMLElement>) => {
     const targetEvent = event.target as EventTarget & HTMLSelectElement;
@@ -94,6 +96,10 @@ const AddressForm = () => {
         'Error ao salvar dados de enredeço. Tente novamente mais tarde ou contate admim.'
       );
     } else {
+      personalContext.updateIsDataUpdatedInfo();
+
+      setIsDataUpdated(true);
+
       toast.success('Dados de endereço atualizados!');
     }
 

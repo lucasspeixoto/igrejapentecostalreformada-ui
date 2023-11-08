@@ -20,6 +20,8 @@ const BaptismForm = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const { baptismOption } = parameters;
 
   const {
@@ -41,7 +43,7 @@ const BaptismForm = () => {
         baptismShepherd,
       });
     }
-  }, [ecclesiasticalContext]);
+  }, [ecclesiasticalContext.ecclesiasticalData, isDataUpdated]);
 
   const getEcclesiasticalBaptismDataHandler = async (
     data: CreateEcclesiasticalBaptismFormData
@@ -57,6 +59,10 @@ const BaptismForm = () => {
         'Error ao salvar dados eclesiásticos. Tente novamente mais tarde ou contate admim.'
       );
     } else {
+      ecclesiasticalContext.updateIsDataUpdatedInfo();
+
+      setIsDataUpdated(true);
+
       toast.success('Dados eclesiásticos atualizados!');
     }
 

@@ -20,6 +20,8 @@ const MemberForm = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const { membershipOption, craftOption, interestsOption, communitiesOption } =
     parameters;
 
@@ -43,7 +45,7 @@ const MemberForm = () => {
         interests,
       });
     }
-  }, [ecclesiasticalContext]);
+  }, [ecclesiasticalContext.ecclesiasticalData, isDataUpdated]);
 
   const getEcclesiasticalMemberDataHandler = async (
     data: CreateEcclesiasticalMemberFormData
@@ -59,6 +61,10 @@ const MemberForm = () => {
         'Error ao salvar dados eclesiásticos. Tente novamente mais tarde ou contate admim.'
       );
     } else {
+      ecclesiasticalContext.updateIsDataUpdatedInfo();
+
+      setIsDataUpdated(true);
+
       toast.success('Dados eclesiásticos atualizados!');
     }
 

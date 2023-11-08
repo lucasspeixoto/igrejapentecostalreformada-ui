@@ -13,12 +13,14 @@ const initialValues = {
   personalData: null,
   isLoadingPersonalProcess: false,
   updateLoadingPersonalProcess: () => {},
+  updateIsDataUpdatedInfo: () => {},
 };
 
 type PersonalContextType = {
   personalData: Personal | null;
   isLoadingPersonalProcess: boolean;
   updateLoadingPersonalProcess: (isLoading: boolean) => void;
+  updateIsDataUpdatedInfo: () => void;
 };
 
 export const PersonalContext =
@@ -31,6 +33,8 @@ export const PersonalContextProvider: React.FC<{
 }> = ({ children }) => {
   const [personalData, setPersonalData] = useState<Personal | null>(null);
 
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const [isLoadingPersonalProcess, setIsLoadingPersonalProcess] =
     useState(false);
 
@@ -38,10 +42,15 @@ export const PersonalContextProvider: React.FC<{
     setIsLoadingPersonalProcess(isLoading);
   };
 
+  const updateIsDataUpdatedInfo = () => {
+    setIsDataUpdated(true);
+  };
+
   React.useEffect(() => {
     const authStateUnsubscribe = onAuthStateChanged(auth, _user => {
       if (_user) {
         const personalUserData = getCollection('users', _user.uid, 'personal');
+
         personalUserData
           .then(data => {
             setPersonalData(data?.result);
@@ -57,7 +66,7 @@ export const PersonalContextProvider: React.FC<{
     });
 
     return () => authStateUnsubscribe();
-  }, []);
+  }, [isDataUpdated]);
 
   return (
     <PersonalContext.Provider
@@ -65,6 +74,7 @@ export const PersonalContextProvider: React.FC<{
         personalData,
         isLoadingPersonalProcess,
         updateLoadingPersonalProcess,
+        updateIsDataUpdatedInfo,
       }}>
       {children}
     </PersonalContext.Provider>

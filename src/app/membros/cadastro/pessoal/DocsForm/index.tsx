@@ -21,8 +21,8 @@ const DocsForm = () => {
 
   const [isLoading, setIsLoading] = React.useState(false);
 
-  /* The code is using the `useForm` hook from the `react-hook-form` library to
-  handle form validation and submission. */
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const {
     register,
     handleSubmit,
@@ -35,9 +35,10 @@ const DocsForm = () => {
   React.useEffect(() => {
     if (personalContext.personalData) {
       const { rg, cpf } = personalContext.personalData;
+
       reset({ rg, cpf });
     }
-  }, [personalContext]);
+  }, [personalContext.personalData, isDataUpdated]);
 
   const getPersonalUserDocsDataHandler = async (
     data: CreatePersonalDocsFormData
@@ -60,6 +61,10 @@ const DocsForm = () => {
         'Error ao salvar documentos. Tente novamente mais tarde ou contate admim.'
       );
     } else {
+      personalContext.updateIsDataUpdatedInfo();
+
+      setIsDataUpdated(true);
+
       toast.success('Documentos atualizados!');
     }
 

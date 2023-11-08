@@ -13,12 +13,14 @@ const initialValues = {
   supplementaryData: null,
   isLoadingSupplementaryProcess: false,
   updateLoadingSupplementaryProcess: () => {},
+  updateIsDataUpdatedInfo: () => {},
 };
 
 type SupplementaryContextType = {
   supplementaryData: Supplementary | null;
   isLoadingSupplementaryProcess: boolean;
   updateLoadingSupplementaryProcess: (isLoading: boolean) => void;
+  updateIsDataUpdatedInfo: () => void;
 };
 
 export const SupplementaryContext =
@@ -32,11 +34,17 @@ export const SupplementaryContextProvider: React.FC<{
   const [supplementaryData, setSupplementaryData] =
     useState<Supplementary | null>(null);
 
+  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
+
   const [isLoadingSupplementaryProcess, setIsLoadingSupplementaryProcess] =
     useState(false);
 
   const updateLoadingSupplementaryProcess = (isLoading: boolean) => {
     setIsLoadingSupplementaryProcess(isLoading);
+  };
+
+  const updateIsDataUpdatedInfo = () => {
+    setIsDataUpdated(true);
   };
 
   React.useEffect(() => {
@@ -62,7 +70,7 @@ export const SupplementaryContextProvider: React.FC<{
     });
 
     return () => authStateUnsubscribe();
-  }, []);
+  }, [isDataUpdated]);
 
   return (
     <SupplementaryContext.Provider
@@ -70,6 +78,7 @@ export const SupplementaryContextProvider: React.FC<{
         supplementaryData,
         isLoadingSupplementaryProcess,
         updateLoadingSupplementaryProcess,
+        updateIsDataUpdatedInfo,
       }}>
       {children}
     </SupplementaryContext.Provider>
