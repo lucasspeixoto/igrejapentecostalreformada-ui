@@ -1,7 +1,11 @@
 export const fibebaseDateConvert = (date: string): string => {
-  const year = date.split('-')[0];
-  const month = date.split('-')[1];
-  const day = date.split('-')[2];
+  if (date) {
+    const year = date?.split('-')[0];
+    const month = date?.split('-')[1];
+    const day = date?.split('-')[2];
 
-  return `${day}/${month}/${year}`;
+    return `${day}/${month}/${year}`;
+  }
+
+  return date;
 };
