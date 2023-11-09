@@ -10,8 +10,8 @@ const MemberCard: React.FC = () => {
   const userProfileContext = useAuthUserDataContext()!;
 
   return (
-    <div className="flex-column mx-auto flex h-auto w-80 items-center justify-center gap-1 sm:w-full sm:gap-5">
-      <div className="hover:shadow-red relative float-left flex h-56 w-96 justify-start rounded-xl text-white shadow-2xl transition-transform md:h-64 md:w-96">
+    <div className="flex-column mt-5 flex h-auto items-center justify-center gap-1 sm:gap-5 md:mt-0">
+      <div className="hover:shadow-red relative float-left flex h-56 justify-start rounded-xl text-white shadow-2xl transition-transform md:h-64">
         <img
           className="relative h-full w-full rounded-xl object-cover"
           src={'/images/cards/member-card.png'}

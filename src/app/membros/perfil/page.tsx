@@ -18,13 +18,15 @@ const Profile = () => {
       <Breadcrumb pageName="Perfil" />
 
       <div className="mt-5 grid grid-cols-5 gap-8">
-        <div className="col-span-5 xl:col-span-3">
+        <div className="sm-col-span-5 col-span-8 md:col-span-3">
           <UserBio />
         </div>
-        <div className="col-span-3 xl:col-span-2">
-          <MemberCard />
+        <div className="col-span-8 md:col-span-2">
+          <div className="flex w-full flex-col items-center justify-center md:items-start">
+            <MemberCard />
 
-          <UserPhoto />
+            <UserPhoto />
+          </div>
         </div>
       </div>
     </>

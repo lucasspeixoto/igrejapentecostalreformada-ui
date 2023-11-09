@@ -87,7 +87,7 @@ const UserPhoto: React.FC = () => {
   };
 
   return (
-    <div className="mt-5 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+    <div className="mt-5 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark md:w-full">
       <div className="flex items-start border-b border-stroke px-7 py-4 dark:border-strokedark">
         <h3 className="font-medium text-black dark:text-white">Sua Foto</h3>
       </div>
