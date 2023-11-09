@@ -3,7 +3,6 @@ import AuthPagePresentation from '@appC/AuthPagePresentation';
 import type { Metadata } from 'next';
 import React from 'react';
 
-import RedirectLink from '../components/RedirectLink';
 import LoginForm from './LoginForm';
 
 export const metadata: Metadata = {
@@ -26,22 +25,6 @@ const SignIn: React.FC = () => {
                 </h2>
 
                 <LoginForm />
-
-                <div className="mt-6 text-center">
-                  <RedirectLink
-                    text="Não possui conta ?"
-                    textLink="Cadastrar"
-                    route="/cadastro"
-                  />
-                </div>
-
-                <div className="mt-6 text-center">
-                  <RedirectLink
-                    text="Esqueceu a senha ?"
-                    textLink=" Recuperar"
-                    route="/recuperar-senha"
-                  />
-                </div>
               </div>
             </div>
           </div>

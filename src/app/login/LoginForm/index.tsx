@@ -16,6 +16,7 @@ import { BsPersonLock } from 'react-icons/bs';
 import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
+import RedirectLink from '@/app/components/RedirectLink';
 import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
@@ -147,6 +148,24 @@ const LoginForm = () => {
             </span>
           )}
         </>
+      </div>
+
+      <div className="mt-2 flex items-center justify-between gap-2">
+        <div className="text-center">
+          <RedirectLink
+            text="Não possui conta ?"
+            textLink="Cadastrar"
+            route="/cadastro"
+          />
+        </div>
+
+        <div className=" text-center">
+          <RedirectLink
+            text=""
+            textLink="Esqueceu a senha ?"
+            route="/recuperar-senha"
+          />
+        </div>
       </div>
 
       {/* Botões de ações */}
