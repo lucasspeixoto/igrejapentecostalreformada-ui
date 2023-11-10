@@ -16,4 +16,6 @@ export interface Personal {
 
   rg: number;
   cpf: number;
+
+  bio: string;
 }

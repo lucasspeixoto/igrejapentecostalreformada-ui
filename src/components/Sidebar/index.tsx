@@ -7,7 +7,6 @@ import { AiOutlinePieChart } from 'react-icons/ai';
 import { BiUser } from 'react-icons/bi';
 import { BsCalendarDate, BsLink45Deg, BsPeople } from 'react-icons/bs';
 import { FaWpforms } from 'react-icons/fa';
-import { FiSettings } from 'react-icons/fi';
 
 import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
 
@@ -298,19 +297,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   }`}>
                   <BsCalendarDate size={20} className="text-white" />
                   Calendário
-                </Link>
-              </li>
-
-              {/* <!-- Configurações --> */}
-              <li>
-                <Link
-                  href="/membros/settings"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('settings') &&
-                    'bg-graydark dark:bg-meta-4'
-                  }`}>
-                  <FiSettings size={20} className="text-white" />
-                  Configurações
                 </Link>
               </li>
             </ul>

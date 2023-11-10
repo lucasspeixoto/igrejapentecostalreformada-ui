@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { BiUser } from 'react-icons/bi';
 import { FaWpforms } from 'react-icons/fa';
-import { FiSettings } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 
 import { useAuthContext } from '@/providers/AuthContextProvider';
@@ -136,14 +135,6 @@ const DropdownUser = () => {
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
               <FaWpforms size={20} className="text-white" />
               Cadastro
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/membros/settings"
-              className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
-              <FiSettings size={20} className="text-white" />
-              Configurações
             </Link>
           </li>
         </ul>
