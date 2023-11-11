@@ -13,7 +13,9 @@ export const createPersonalAddressFormSchema = z.object({
   number: z.coerce.number().gte(1, 'Número inválido'),
   complement: z
     .string()
-    .min(3, 'O Complemento precisa conter no mínimo 3 caracteres!'),
+    .min(3, 'O Complemento precisa conter no mínimo 3 caracteres!')
+    .optional()
+    .or(z.literal('')),
 });
 
 export type CreatePersonalAddressFormData = z.infer<

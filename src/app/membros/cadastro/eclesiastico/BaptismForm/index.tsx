@@ -95,7 +95,7 @@ const BaptismForm = () => {
 
         <div className="w-full xl:w-1/2">
           <label className="mb-2.5 block text-black dark:text-white">
-            Data de Batismo <span className="text-meta-1">*</span>
+            Data de Batismo
           </label>
 
           <div className="relative">
@@ -104,13 +104,20 @@ const BaptismForm = () => {
               {...register('baptismDate')}
               className="custom-input-date custom-input-date-1 w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
             />
+            <>
+              {errors.baptismDate && (
+                <span className="text-xs text-meta-1 dark:text-meta-7">
+                  {errors.baptismDate.message}
+                </span>
+              )}
+            </>
           </div>
         </div>
       </div>
 
       <div className="mb-4.5">
         <label className="mb-2.5 block text-black dark:text-white">
-          Pastor de Batismo <span className="text-meta-1">*</span>
+          Pastor de Batismo
         </label>
         <input
           type="text"

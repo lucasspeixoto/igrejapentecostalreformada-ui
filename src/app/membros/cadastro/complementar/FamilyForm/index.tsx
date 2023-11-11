@@ -99,7 +99,7 @@ const FamilyForm = () => {
 
         <div className="w-full xl:w-1/2">
           <label className="mb-2.5 block text-black dark:text-white">
-            Nome do Conjuge <span className="text-meta-1">*</span>
+            Nome do Conjuge
           </label>
           <input
             type="text"
@@ -140,6 +140,13 @@ const FamilyForm = () => {
             {...register('fatherName')}
             className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
+          <>
+            {errors.fatherName && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.fatherName.message}
+              </span>
+            )}
+          </>
         </div>
       </div>
 
@@ -153,6 +160,13 @@ const FamilyForm = () => {
             {...register('motherName')}
             className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
+          <>
+            {errors.motherName && (
+              <span className="text-xs text-meta-1 dark:text-meta-7">
+                {errors.motherName.message}
+              </span>
+            )}
+          </>
         </div>
       </div>
 

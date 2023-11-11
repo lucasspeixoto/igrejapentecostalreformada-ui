@@ -6,7 +6,7 @@ export const createSupplementaryFamilyFormSchema = z.object({
   maritalStatus: z.string(),
   spouseName: z
     .string()
-    .min(3, 'O Nome do cônjuge precisa conter no mínimo 3 caracteres!')
+    .min(3, 'O Nome precisa conter no mínimo 3 caracteres!')
     .transform(spouseName => {
       return spouseName
         .trim()
@@ -15,11 +15,13 @@ export const createSupplementaryFamilyFormSchema = z.object({
           return word[0].toLocaleUpperCase().concat(word.substring(1));
         })
         .join(' ');
-    }),
-  weddingDate: z.string(),
+    })
+    .optional()
+    .or(z.literal('')),
+  weddingDate: z.string().optional().or(z.literal('')),
   fatherName: z
     .string()
-    .min(3, 'O Nome do cônjuge precisa conter no mínimo 3 caracteres!')
+    .min(3, 'O Nome precisa conter no mínimo 3 caracteres!')
     .transform(fatherName => {
       return fatherName
         .trim()
@@ -28,10 +30,12 @@ export const createSupplementaryFamilyFormSchema = z.object({
           return word[0].toLocaleUpperCase().concat(word.substring(1));
         })
         .join(' ');
-    }),
+    })
+    .optional()
+    .or(z.literal('')),
   motherName: z
     .string()
-    .min(3, 'O Nome do cônjuge precisa conter no mínimo 3 caracteres!')
+    .min(3, 'O Nome precisa conter no mínimo 3 caracteres!')
     .transform(motherName => {
       return motherName
         .trim()
@@ -40,9 +44,9 @@ export const createSupplementaryFamilyFormSchema = z.object({
           return word[0].toLocaleUpperCase().concat(word.substring(1));
         })
         .join(' ');
-    }),
-  /* schooling: z.string(),
-  profession: z.string(), */
+    })
+    .optional()
+    .or(z.literal('')),
 });
 
 export type CreateSupplementaryFamilyFormData = z.infer<
