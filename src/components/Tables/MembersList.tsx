@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { AiOutlineCheckCircle, AiOutlineEye } from 'react-icons/ai';
 import { BiBlock, BiTrash } from 'react-icons/bi';
@@ -14,6 +15,8 @@ const MembersList: React.FC = () => {
   const [userLoadedData, setUserLoadedData] = React.useState<UserData[]>([]);
 
   const [isLoadingUsers, setIsLoadingUsers] = React.useState(true);
+
+  const router = useRouter();
 
   React.useEffect(() => {
     let mounted = true;
@@ -31,6 +34,21 @@ const MembersList: React.FC = () => {
       mounted = false;
     };
   }, []);
+
+  /**
+   * The function `seeUserDetailHandler` navigates to a user detail page using the
+   * provided user ID.
+   * @param {string} userId - A string representing the unique identifier of a
+   * user.
+   */
+  const seeUserDetailHandler = (userId: string) => {
+    router.push(`detalhe-irmao/${userId}`);
+  };
+
+  const deleteUserHandler = (userId: string) => {
+    // eslint-disable-next-line no-console
+    console.log('delete', userId);
+  };
 
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -122,9 +140,18 @@ const MembersList: React.FC = () => {
                           <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                             <div className="flex items-center space-x-3.5">
                               <button className="hover:text-meta-5">
-                                <AiOutlineEye size={20} />
+                                <AiOutlineEye
+                                  size={20}
+                                  onClick={() =>
+                                    seeUserDetailHandler(member?.auth.userId)
+                                  }
+                                />
                               </button>
-                              <button className="hover:text-meta-7">
+                              <button
+                                className="hover:text-meta-7"
+                                onClick={() =>
+                                  deleteUserHandler(member?.auth.userId)
+                                }>
                                 <BiTrash size={20} />
                               </button>
                             </div>
