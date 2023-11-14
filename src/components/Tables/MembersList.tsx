@@ -5,12 +5,23 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { AiOutlineCheckCircle, AiOutlineEye } from 'react-icons/ai';
 import { BiBlock, BiTrash } from 'react-icons/bi';
+import { toast } from 'react-toastify';
 
+import deleteData from '@/lib/firebase/firestore/deleteData';
+import deletePhoto from '@/lib/firebase/firestore/deletePhoto';
 import { getUsersDocuments } from '@/lib/firebase/firestore/getData';
 import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
 import type { UserData } from '@/types/user-data';
 
 import Loader from '../common/Loader';
+import Modal from '../Modal';
+
+const DELETE_MODAL_TITLE = 'Deletar membro';
+
+const DELETE_MODAL_SUBTITLE =
+  'Deseja realmente deletar este usuário ? A exclusão remove todos os dados ja cadastrados.';
+const DELETE_MODAL_CANCEL_TITLE = 'Cancelar';
+const DELETE_MODAL_CONFIRM_TITLE = 'Confirmar';
 
 const MembersList: React.FC = () => {
   const userContext = useAuthUserDataContext();
@@ -20,6 +31,10 @@ const MembersList: React.FC = () => {
   const [isLoadingUsers, setIsLoadingUsers] = React.useState(true);
 
   const [isAdminOption, setIsAdminOption] = React.useState(false);
+
+  const [userId, setUserId] = React.useState<string | null>(null);
+
+  const [showDeleteUserModal, setShowDeleteUserModal] = React.useState(false);
 
   const router = useRouter();
 
@@ -54,17 +69,54 @@ const MembersList: React.FC = () => {
    * @param {string} userId - A string representing the unique identifier of a
    * user.
    */
-  const seeUserDetailHandler = (userId: string) => {
-    router.push(`detalhe-irmao/${userId}`);
+  const seeUserDetailHandler = (selectedUserId: string) => {
+    setUserId(selectedUserId);
+    router.push(`detalhe-irmao/${selectedUserId}`);
   };
 
-  const deleteUserHandler = (userId: string) => {
-    // eslint-disable-next-line no-console
-    console.log('delete', userId);
+  const deleteUserHandler = (selectedUserId: string) => {
+    setUserId(selectedUserId);
+    setShowDeleteUserModal(true);
+  };
+
+  const onCancelDeleteUser = () => {
+    setShowDeleteUserModal(false);
+  };
+
+  const onConfirmDeleteUser = async () => {
+    userContext.updateIsLoadingData(true);
+
+    setShowDeleteUserModal(false);
+
+    const { error: deleteUserDataError } = await deleteData('users', userId!);
+
+    const { error: deletePhotoError } = await deletePhoto('photos', userId!);
+
+    if (deleteUserDataError || deletePhotoError) {
+      toast.error(
+        'Error ao excluir dados de membro. Tente novamente mais tarde ou contate admim.'
+      );
+    } else {
+      toast.success('Dados de membros excluídos com sucesso!');
+    }
+
+    userContext.updateIsLoadingData(false);
   };
 
   return (
     <>
+      <>
+        {showDeleteUserModal ? (
+          <Modal
+            title={DELETE_MODAL_TITLE}
+            subtitle={DELETE_MODAL_SUBTITLE}
+            cancelTitle={DELETE_MODAL_CANCEL_TITLE}
+            confirmTitle={DELETE_MODAL_CONFIRM_TITLE}
+            onCancel={onCancelDeleteUser}
+            onConfirm={onConfirmDeleteUser}
+          />
+        ) : null}
+      </>
       {isAdminOption ? (
         <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
           <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">

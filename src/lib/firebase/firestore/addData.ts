@@ -6,7 +6,7 @@ import firebase_app from '../config';
 export const db = getFirestore(firebase_app);
 
 export default async function addData(
-  colllection: string,
+  collection: string,
   id: string,
   data: PartialWithFieldValue<unknown>
 ) {
@@ -14,7 +14,7 @@ export default async function addData(
   let error = null;
 
   try {
-    result = await setDoc(doc(db, colllection, id), data, {
+    result = await setDoc(doc(db, collection, id), data, {
       merge: true,
     });
   } catch (e) {
