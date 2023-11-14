@@ -152,8 +152,10 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
             )}
           </div>
           <div className="flex flex-col items-start gap-2">
-            <span className="text-md font-bold">{name}</span>
-            <span className="text-sm">{role}</span>
+            <span className="text-md font-bold text-black dark:text-white">
+              {name}
+            </span>
+            <span className="text-sm text-black dark:text-white">{role}</span>
           </div>
         </div>
 

@@ -12,6 +12,7 @@ import type { UserAuth } from '@/types/user-auth';
 import type { UserData } from '@/types/user-data';
 
 import UserBaseData from '../UserBaseData';
+import UserUploadPhoto from '../UserUploadPhoto';
 
 const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
   const userContext = useAuthUserDataContext()!;
@@ -27,6 +28,8 @@ const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
   >(undefined);
 
   const [isAdminOption, setIsAdminOption] = React.useState(false);
+
+  const [hasMemberDataUpdated, setHasMemberDataUpdated] = React.useState(false);
 
   const router = useRouter();
 
@@ -65,7 +68,11 @@ const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
     return () => {
       mounted = false;
     };
-  }, [userId]);
+  }, [userId, hasMemberDataUpdated]);
+
+  const updateHasMemberDataUpdated = (isLoading: boolean) => {
+    setHasMemberDataUpdated(isLoading);
+  };
 
   return (
     <>
@@ -90,6 +97,13 @@ const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
                 name={selectedAuthUserData?.name!}
                 role={selectedAuthUserData?.role!}
                 birthday={selectedPersonalUserData?.birthday!}
+              />
+
+              <UserUploadPhoto
+                userId={userId}
+                name={selectedAuthUserData?.name!}
+                photoUrl={selectedAuthUserData?.photoUrl!}
+                onUpdateHasMemberDataUpdated={updateHasMemberDataUpdated}
               />
             </div>
           </div>
