@@ -119,9 +119,14 @@ const MembersList: React.FC = () => {
       </>
       {isAdminOption ? (
         <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-          <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-            Membros Cadastrados IPR
-          </h4>
+          <div className="mb-2 flex flex-col justify-start gap-1">
+            <span className="text-xl font-semibold text-black dark:text-white">
+              Membros Cadastrados IPR
+            </span>
+            <span className="text-md font-normal text-black dark:text-white">
+              Total: {userLoadedData.length}
+            </span>
+          </div>
 
           <div className="pb-10">
             {isLoadingUsers || !userLoadedData.length ? (

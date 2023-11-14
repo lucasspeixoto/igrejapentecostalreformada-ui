@@ -123,7 +123,7 @@ const DropdownUser = () => {
         }`}>
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
           <li>
-            <span className="text-meta-4 hover:text-primary dark:text-gray">
+            <span className="leading-loose text-meta-4 opacity-80 hover:opacity-100 dark:text-gray">
               <Link
                 href="/membros/perfil"
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out lg:text-base">
@@ -133,7 +133,7 @@ const DropdownUser = () => {
             </span>
           </li>
           <li>
-            <span className="text-meta-4 hover:text-primary dark:text-gray">
+            <span className="leading-loose text-meta-4 opacity-80 hover:opacity-100 dark:text-gray">
               <Link
                 href="/membros/cadastro/pessoal"
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out lg:text-base">
@@ -145,7 +145,7 @@ const DropdownUser = () => {
         </ul>
         <button
           onClick={signOutUser}
-          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium text-meta-4 duration-300 ease-in-out hover:text-primary dark:text-gray lg:text-base">
+          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium text-meta-4 opacity-80 duration-300 ease-in-out hover:opacity-100 dark:text-gray  lg:text-base">
           <SlLogout size={20} />
           Sair
         </button>

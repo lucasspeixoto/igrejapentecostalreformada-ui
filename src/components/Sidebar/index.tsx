@@ -145,10 +145,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href="/membros/perfil"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
                   }`}>
-                  <BiUser size={20} className="text-white" />
+                  <BiUser size={20} className="text-gray" />
                   Perfil
                 </Link>
               </li>
@@ -164,7 +164,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <React.Fragment>
                       <Link
                         href="#"
-                        className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
+                        className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                           (pathname === '/membros/cadastro' ||
                             pathname.includes('cadastro')) &&
                           'bg-graydark dark:bg-meta-4'
@@ -175,7 +175,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             ? handleClick()
                             : setSidebarExpanded(true);
                         }}>
-                        <FaWpforms size={20} className="text-white" />
+                        <FaWpforms size={20} className="text-gray" />
                         Cadastro
                         <MenuChevroletIcon open={open} />
                       </Link>
@@ -227,11 +227,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 <li>
                   <Link
                     href="/membros/listagens-de-membros"
-                    className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
+                    className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                       pathname.includes('listagens-de-membros') &&
                       'bg-graydark dark:bg-meta-4'
                     }`}>
-                    <BsPeople size={20} className="text-white" />
+                    <BsPeople size={20} className="text-gray" />
                     Membros IPR
                   </Link>
                 </li>
@@ -248,7 +248,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       <React.Fragment>
                         <Link
                           href="#"
-                          className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
+                          className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                             (pathname === '/membros/indicadores' ||
                               pathname.includes('indicadores')) &&
                             'bg-graydark dark:bg-meta-4'
@@ -259,7 +259,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               ? handleClick()
                               : setSidebarExpanded(true);
                           }}>
-                          <AiOutlinePieChart size={20} className="text-white" />
+                          <AiOutlinePieChart size={20} className="text-gray" />
                           Indicadores
                           <MenuChevroletIcon open={open} />
                         </Link>
@@ -271,12 +271,24 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                             <li>
                               <Link
-                                href="/membros/indicadores"
+                                href="/membros/indicadores/estatisticos"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname === '/membros/indicadores' &&
+                                  pathname ===
+                                    '/membros/indicadores/estatisticos' &&
                                   'text-white'
                                 } `}>
-                                Gerais
+                                Estatísticos
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="/membros/indicadores/economicos"
+                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                  pathname ===
+                                    '/membros/indicadores/economicos' &&
+                                  'text-white'
+                                } `}>
+                                Econômicos
                               </Link>
                             </li>
                           </ul>
@@ -291,11 +303,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               <li>
                 <Link
                   href="/membros/calendar"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
+                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('calendar') &&
                     'bg-graydark dark:bg-meta-4'
                   }`}>
-                  <BsCalendarDate size={20} className="text-white" />
+                  <BsCalendarDate size={20} className="text-gray" />
                   Calendário
                 </Link>
               </li>
@@ -318,14 +330,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <React.Fragment>
                       <Link
                         href="#"
-                        className="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4"
+                        className="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4"
                         onClick={e => {
                           e.preventDefault();
                           sidebarExpanded
                             ? handleClick()
                             : setSidebarExpanded(true);
                         }}>
-                        <BsLink45Deg size={20} className="text-white" />
+                        <BsLink45Deg size={20} className="text-gray" />
                         Links Importantes
                         <MenuChevroletIcon open={open} />
                       </Link>
