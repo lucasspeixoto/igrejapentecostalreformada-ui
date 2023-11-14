@@ -1,14 +1,14 @@
 'use client';
 
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
-import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
 import { fibebaseDateConvert } from '@/utils/transforme-date';
 
-const MemberCard: React.FC = () => {
-  const personalContext = usePersonalContext();
+type MemberCardProps = {
+  name: string;
+  role: string;
+  birthday: string;
+};
 
-  const userProfileContext = useAuthUserDataContext()!;
-
+const MemberCard: React.FC<MemberCardProps> = ({ name, role, birthday }) => {
   return (
     <div className="flex-column mt-5 flex h-auto items-center justify-center gap-1 sm:gap-5 md:mt-0">
       <div className="hover:shadow-red relative float-left flex h-56 justify-start rounded-xl text-white shadow-2xl transition-transform md:h-64">
@@ -23,9 +23,7 @@ const MemberCard: React.FC = () => {
             <div className="flex justify-between">
               <div className="flex flex-col items-start">
                 <p className="font-light">Nome</p>
-                <p className="font-medium tracking-widest">
-                  {userProfileContext.authData?.name}
-                </p>
+                <p className="font-medium tracking-widest">{name}</p>
               </div>
               <img
                 className="h-14 w-14"
@@ -36,14 +34,12 @@ const MemberCard: React.FC = () => {
             <div className="flex justify-between">
               <div className="flex flex-col items-start">
                 <p className="font-light">Cargo</p>
-                <p className="font-medium tracking-widest">
-                  {userProfileContext.authData?.role}
-                </p>
+                <p className="font-medium tracking-widest">{role}</p>
               </div>
               <div className="flex flex-col items-start">
                 <p className="font-light">Aniversário</p>
                 <p className="font-medium tracking-widest">
-                  {fibebaseDateConvert(personalContext.personalData?.birthday!)}
+                  {birthday ? fibebaseDateConvert(birthday) : '-/-/-'}
                 </p>
               </div>
             </div>

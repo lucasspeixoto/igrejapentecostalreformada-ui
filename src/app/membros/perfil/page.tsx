@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
-import MemberCard from './MemberCard';
+import ProfileMemberCard from './ProfileMemberCard';
 import UserBio from './UserBio';
 import UserPhoto from './UserPhoto';
 
@@ -23,7 +23,7 @@ const Profile = () => {
         </div>
         <div className="col-span-8 md:col-span-2">
           <div className="flex w-full flex-col items-center justify-center md:items-start">
-            <MemberCard />
+            <ProfileMemberCard />
 
             <UserPhoto />
           </div>

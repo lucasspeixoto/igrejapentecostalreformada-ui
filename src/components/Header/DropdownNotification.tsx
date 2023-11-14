@@ -1,14 +1,14 @@
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 const DropdownNotification = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [notifying, setNotifying] = useState(true);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  const [notifying, setNotifying] = React.useState(true);
 
-  const trigger = useRef<any>(null);
-  const dropdown = useRef<any>(null);
+  const trigger = React.useRef<any>(null);
+  const dropdown = React.useRef<any>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdown.current) return;
       if (
@@ -24,7 +24,7 @@ const DropdownNotification = () => {
   });
 
   // close if the esc key is pressed
-  useEffect(() => {
+  React.useEffect(() => {
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
@@ -72,7 +72,7 @@ const DropdownNotification = () => {
           dropdownOpen === true ? 'block' : 'hidden'
         }`}>
         <div className="px-4.5 py-3">
-          <h5 className="text-sm font-medium text-bodydark2">Notification</h5>
+          <h5 className="text-sm font-medium text-bodydark2">Notificações</h5>
         </div>
 
         <ul className="flex h-auto flex-col overflow-y-auto">

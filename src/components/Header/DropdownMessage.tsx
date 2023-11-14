@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 const DropdownMessage = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [notifying, setNotifying] = useState(true);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
+  const [notifying, setNotifying] = React.useState(true);
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
 
   // close on click outside
-  useEffect(() => {
+  React.useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdown.current) return;
       if (
@@ -26,7 +26,7 @@ const DropdownMessage = () => {
   });
 
   // close if the esc key is pressed
-  useEffect(() => {
+  React.useEffect(() => {
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);
@@ -87,7 +87,7 @@ const DropdownMessage = () => {
           dropdownOpen === true ? 'block' : 'hidden'
         }`}>
         <div className="px-4.5 py-3">
-          <h5 className="text-sm font-medium text-bodydark2">Messages</h5>
+          <h5 className="text-sm font-medium text-bodydark2">Mensagens</h5>
         </div>
 
         <ul className="flex h-auto flex-col overflow-y-auto">

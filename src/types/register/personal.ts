@@ -18,4 +18,6 @@ export interface Personal {
   cpf: number;
 
   bio: string;
+
+  comments?: string;
 }

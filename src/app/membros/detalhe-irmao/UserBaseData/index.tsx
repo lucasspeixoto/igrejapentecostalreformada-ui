@@ -9,82 +9,119 @@ import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import { SpinnerLogo } from '@/components/common/Icons';
+import Image from '@/components/Image';
 import addData from '@/lib/firebase/firestore/addData';
-import { getDocument } from '@/lib/firebase/firestore/getData';
-import { useAuthContext } from '@/providers/AuthContextProvider';
 import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
-import useIsLoading from '@/store/useIsLoading';
-import type { UserData } from '@/types/user-data';
 
-const UserBaseData: React.FC<{ userId: string }> = ({ userId }) => {
-  const authContext = useAuthContext()!;
+type UserBaseDataProps = {
+  userId: string;
+  name: string;
+  cellphone: string;
+  comments: string;
+  email: string;
+  photoUrl: string;
+  role: string;
+  isAdmin: boolean;
+  isRegistered: boolean;
+};
+
+const UserBaseData: React.FC<UserBaseDataProps> = ({
+  userId,
+  name,
+  cellphone,
+  comments,
+  email,
+  photoUrl,
+  role,
+  isAdmin,
+  isRegistered,
+}) => {
+  const hasPhotoUploaded = !!photoUrl;
 
   const personalContext = usePersonalContext()!;
 
-  const [bio, setBio] = React.useState('');
-
   const [isLoading, setIsLoading] = React.useState(false);
 
-  const setIsLoadingStore = useIsLoading(state => state.setIsLoading);
+  const [isAdminOption, setIsAdminOption] = React.useState(false);
 
-  const setIsLoadingStoreHandler = React.useCallback(
-    (isLoadingMember: boolean) => {
-      setIsLoadingStore(isLoadingMember);
-    },
-    []
-  );
+  const [isRegisteredOption, setIsRegisteredOption] = React.useState(false);
 
-  const [selectedUserData, setSelectedUserData] =
-    React.useState<UserData | null>(null);
+  const [newComments, setNewComments] = React.useState('');
 
+  /* Used to update the `isAdminOption` state
+  variable when the `isAdmin` prop changes. */
   React.useEffect(() => {
-    setIsLoadingStoreHandler(true);
     let mounted = true;
 
     (async () => {
-      const { result } = await getDocument(`users`, userId);
-
-      if (result && mounted) {
-        const data = result.data() as UserData;
-
-        setSelectedUserData(data);
+      if (isAdmin && mounted) {
+        setIsAdminOption(isAdmin);
       }
-
-      setIsLoadingStoreHandler(false);
     })();
 
     return () => {
       mounted = false;
     };
-  }, [userId]);
+  }, [isAdmin]);
 
-  const updateUserBioHandler = async () => {
+  /* Used to update the `isRegisteredOption` state
+  variable when the `isRegistered` prop changes. */
+  React.useEffect(() => {
+    let mounted = true;
+
+    (async () => {
+      if (isRegistered && mounted) {
+        setIsRegisteredOption(isRegistered);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [isRegistered]);
+
+  /* Used to update the `newComments` state variable whenever
+   the `comments` prop changes. */
+  React.useEffect(() => {
+    let mounted = true;
+
+    (async () => {
+      if (comments && mounted) {
+        setNewComments(comments);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [comments]);
+
+  /**
+   * The function `updateUserDataHandler` updates user data by adding new comments,
+   * setting admin status, and registration status, and displays success or error
+   * messages.
+   */
+  const updateUserDataHandler = async () => {
     setIsLoading(true);
 
-    const userPersonalContactCollection = {
-      bio,
-    };
-
-    const { error } = await addData('users', authContext.user?.uid!, {
-      personal: userPersonalContactCollection,
+    const { error } = await addData('users', userId, {
+      personal: { comments: newComments },
+      auth: { isAdmin: isAdminOption },
+      process: { isRegistered: isRegisteredOption },
     });
 
     if (error) {
       toast.error(
-        'Error ao salvar biografia. Tente novamente mais tarde ou contate admim.'
+        'Error ao salvar dados do membro. Tente novamente mais tarde ou contate admim.'
       );
     } else {
       personalContext.updateIsDataUpdatedInfo();
 
-      toast.success('Biografia salva com sucesso!');
+      toast.success('Dados de membro salvos com sucesso!');
     }
 
     setIsLoading(false);
   };
-
-  React.useEffect(() => {
-    toast.warn(`Graça e paz 🙏 Mantenha o seu cadastro atualizado.`);
-  }, []);
 
   return (
     <div className="h-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -94,12 +131,38 @@ const UserBaseData: React.FC<{ userId: string }> = ({ userId }) => {
         </h3>
       </div>
       <div className="p-7">
+        <div className="mb-5.5 flex gap-3">
+          <div>
+            {hasPhotoUploaded ? (
+              <Image
+                width={55}
+                height={55}
+                className="h-14 w-14 rounded-full"
+                src={photoUrl}
+                alt="Foto pessoal"
+              />
+            ) : (
+              <Image
+                width={55}
+                height={55}
+                className="rounded-full"
+                src={'/images/user/dummy-user.png'}
+                alt="Foto pessoal"
+              />
+            )}
+          </div>
+          <div className="flex flex-col items-start gap-2">
+            <span className="text-md font-bold">{name}</span>
+            <span className="text-sm">{role}</span>
+          </div>
+        </div>
+
         <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
           <div className="flex w-full flex-col items-start sm:w-1/2">
             <label
               className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="name">
-              Nome Completo
+              htmlFor="role">
+              Atuação
             </label>
             <div className="relative">
               <span className="absolute left-4.5 top-4">
@@ -108,10 +171,11 @@ const UserBaseData: React.FC<{ userId: string }> = ({ userId }) => {
               <input
                 className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
                 type="text"
-                name="name"
-                id="name"
-                placeholder="Nome"
-                defaultValue={personalContext?.personalData?.name}
+                name="role"
+                id="role"
+                placeholder="Atuação"
+                disabled
+                defaultValue={role}
               />
             </div>
           </div>
@@ -128,7 +192,8 @@ const UserBaseData: React.FC<{ userId: string }> = ({ userId }) => {
               name="cellphone"
               id="cellphone"
               placeholder="Celular"
-              defaultValue={personalContext?.personalData?.cellphone}
+              disabled
+              defaultValue={cellphone}
             />
           </div>
         </div>
@@ -146,13 +211,74 @@ const UserBaseData: React.FC<{ userId: string }> = ({ userId }) => {
               <MdOutlineMarkEmailUnread size={20} />
             </span>
             <input
-              className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+              className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark  dark:bg-meta-4 dark:text-white dark:focus:border-primary"
               type="email"
               name="email"
               id="email"
               placeholder="E-mail"
-              defaultValue={authContext?.user?.email!}
+              disabled
+              defaultValue={email}
             />
+          </div>
+        </div>
+
+        <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
+          <div className="flex w-full flex-col items-start sm:w-1/2">
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white">
+              Administrador
+            </label>
+
+            <div>
+              <label
+                htmlFor="isAdmin"
+                className="flex cursor-pointer select-none items-center">
+                <div className="relative">
+                  <input
+                    type="checkbox"
+                    id="isAdmin"
+                    className="sr-only"
+                    onChange={() => {
+                      setIsAdminOption(state => !state);
+                    }}
+                  />
+                  <div className="block h-8 w-14 rounded-full bg-gray dark:bg-meta-4"></div>
+                  <div
+                    className={`absolute left-1 top-1 h-6 w-6 rounded-full bg-meta-7 transition ${
+                      isAdminOption && '!right-1 !translate-x-full !bg-meta-3'
+                    }`}></div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div className="flex w-full flex-col items-start sm:w-1/2">
+            <label
+              className="mb-3 block text-sm font-medium text-black dark:text-white"
+              htmlFor="cellphone">
+              Cadastro Finalizado
+            </label>
+            <div>
+              <label
+                htmlFor="isRegistered"
+                className="flex cursor-pointer select-none items-center">
+                <div className="relative">
+                  <input
+                    type="checkbox"
+                    id="isRegistered"
+                    className="sr-only"
+                    onChange={() => {
+                      setIsRegisteredOption(state => !state);
+                    }}
+                  />
+                  <div className="block h-8 w-14 rounded-full bg-gray dark:bg-meta-4"></div>
+                  <div
+                    className={`absolute left-1 top-1 h-6 w-6 rounded-full bg-meta-7 transition ${
+                      isRegisteredOption &&
+                      '!right-1 !translate-x-full !bg-meta-3'
+                    }`}></div>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -161,7 +287,7 @@ const UserBaseData: React.FC<{ userId: string }> = ({ userId }) => {
             <label
               className="mb-3 block text-sm font-medium text-black dark:text-white"
               htmlFor="bio">
-              Biografia
+              Comentários
             </label>
           </div>
           <div className="relative">
@@ -174,9 +300,9 @@ const UserBaseData: React.FC<{ userId: string }> = ({ userId }) => {
               name="bio"
               id="bio"
               rows={10}
-              placeholder="Escreva um resumo sobre você"
-              onChange={event => setBio(event.target.value)}
-              defaultValue={personalContext?.personalData?.bio}></textarea>
+              placeholder="Escreva aqui comentários referente ao irmão(ã)."
+              onChange={event => setNewComments(event.target.value)}
+              defaultValue={comments}></textarea>
           </div>
         </div>
 
@@ -185,7 +311,7 @@ const UserBaseData: React.FC<{ userId: string }> = ({ userId }) => {
             className="flex justify-center gap-3.5 rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-95 disabled:cursor-not-allowed disabled:opacity-50"
             type="button"
             disabled={isLoading}
-            onClick={updateUserBioHandler}>
+            onClick={updateUserDataHandler}>
             Salvar
             {isLoading && <SpinnerLogo size={22} />}
           </button>
