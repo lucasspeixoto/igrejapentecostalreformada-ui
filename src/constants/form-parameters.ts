@@ -55,7 +55,8 @@ export const parameters = {
     'Presbítero',
     'Líder de Pequeno Grupo',
     'Professor',
-    'Outro',
+    'Músico',
+    'Irmão(ã)',
   ],
   interestsOption: [
     'Louvor',

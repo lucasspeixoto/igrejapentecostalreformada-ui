@@ -1,6 +1,6 @@
 'use client';
 
-import { fibebaseDateConvert } from '@/utils/transforme-date';
+import { fibebaseDateConvert } from '@/utils/transform-date';
 
 type MemberCardProps = {
   name: string;

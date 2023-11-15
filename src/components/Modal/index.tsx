@@ -1,4 +1,3 @@
-/* eslint-disable tailwindcss/no-contradicting-classname */
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 
 import React from 'react';
@@ -21,6 +20,9 @@ const Modal: React.FC<ModalProps> = ({
   onCancel,
   onConfirm,
 }) => {
+  /* Used to add an event listener for the 'keydown'
+  event on the document object and close the Modal that is
+  opened. */
   React.useEffect(() => {
     const keyHandler = ({ key }: KeyboardEvent) => {
       if (key !== 'Escape') return;

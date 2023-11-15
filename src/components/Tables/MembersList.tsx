@@ -74,15 +74,30 @@ const MembersList: React.FC = () => {
     router.push(`detalhe-irmao/${selectedUserId}`);
   };
 
+  /**
+   * The deleteUserHandler function sets the selectedUserId and
+   * setShowDeleteUserModal state variables.
+   * @param {string} selectedUserId - The selectedUserId parameter is a string that
+   * represents the ID of the user that is selected for deletion.
+   */
   const deleteUserHandler = (selectedUserId: string) => {
     setUserId(selectedUserId);
     setShowDeleteUserModal(true);
   };
 
+  /**
+   * The function onCancelDeleteUser sets the state variable setShowDeleteUserModal
+   * to false.
+   */
   const onCancelDeleteUser = () => {
     setShowDeleteUserModal(false);
   };
 
+  /**
+   * The function `onConfirmDeleteUser` updates the loading state, hides the delete
+   * user modal, deletes user data and photo, and displays a success or error
+   * message.
+   */
   const onConfirmDeleteUser = async () => {
     userContext.updateIsLoadingData(true);
 

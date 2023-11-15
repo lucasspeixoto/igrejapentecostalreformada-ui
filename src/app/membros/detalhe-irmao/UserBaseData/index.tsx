@@ -3,13 +3,13 @@
 'use client';
 
 import React from 'react';
-import { FiUser } from 'react-icons/fi';
 import { HiOutlinePencilSquare } from 'react-icons/hi2';
 import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
-import { SpinnerLogo } from '@/components/common/Icons';
+import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import Image from '@/components/Image';
+import { parameters } from '@/constants/form-parameters';
 import addData from '@/lib/firebase/firestore/addData';
 import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
 
@@ -36,6 +36,8 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
   isAdmin,
   isRegistered,
 }) => {
+  const { craftOption: crafts } = parameters;
+
   const hasPhotoUploaded = !!photoUrl;
 
   const personalContext = usePersonalContext()!;
@@ -43,6 +45,8 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
   const [isLoading, setIsLoading] = React.useState(false);
 
   const [isAdminOption, setIsAdminOption] = React.useState(false);
+
+  const [craftOption, setCraftOption] = React.useState('');
 
   const [isRegisteredOption, setIsRegisteredOption] = React.useState(false);
 
@@ -96,6 +100,22 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
     };
   }, [comments]);
 
+  /* The above code is using the `useEffect` hook in a React component. It sets up
+  an asynchronous function that runs when the component mounts. */
+  React.useEffect(() => {
+    let mounted = true;
+
+    (async () => {
+      if (role && mounted) {
+        setCraftOption(role);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [role]);
+
   /**
    * The function `updateUserDataHandler` updates user data by adding new comments,
    * setting admin status, and registration status, and displays success or error
@@ -106,7 +126,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
 
     const { error } = await addData('users', userId, {
       personal: { comments: newComments },
-      auth: { isAdmin: isAdminOption },
+      auth: { isAdmin: isAdminOption, role: craftOption },
       process: { isRegistered: isRegisteredOption },
     });
 
@@ -155,34 +175,33 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
             <span className="text-md font-bold text-black dark:text-white">
               {name}
             </span>
-            <span className="text-sm text-black dark:text-white">{role}</span>
+            <span className="text-sm text-black dark:text-white">
+              {craftOption}
+            </span>
           </div>
         </div>
-
-        <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
-          <div className="flex w-full flex-col items-start sm:w-1/2">
-            <label
-              className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="role">
-              Atuação
+        <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+          <div className="w-full xl:w-1/2">
+            <label className="mb-2.5 block text-black dark:text-white">
+              Ofício
             </label>
-            <div className="relative">
-              <span className="absolute left-4.5 top-4">
-                <FiUser size={20} />
+            <div className="relative z-20 bg-transparent dark:bg-form-input">
+              <select
+                value={craftOption}
+                onChange={event => setCraftOption(event.target.value)}
+                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                <option value="">Selecione um ofício</option>
+                {React.Children.toArray(
+                  crafts.map(craft => <option value={craft}>{craft}</option>)
+                )}
+              </select>
+              <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+                <SelectChevroletLogo size={24} />
               </span>
-              <input
-                className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-                type="text"
-                name="role"
-                id="role"
-                placeholder="Atuação"
-                disabled
-                defaultValue={role}
-              />
             </div>
           </div>
 
-          <div className="flex w-full flex-col items-start sm:w-1/2">
+          <div className="w-full xl:w-1/2">
             <label
               className="mb-3 block text-sm font-medium text-black dark:text-white"
               htmlFor="cellphone">
