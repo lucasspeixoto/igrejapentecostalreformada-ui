@@ -4,7 +4,7 @@ import Image from '@/components/Image';
 
 const AuthPagePresentation = () => {
   return (
-    <div className="hidden w-full bg-[url('/images/wallpaper.png')] bg-cover bg-repeat md:block md:w-1/2">
+    <div className="hidden w-full bg-[url('/images/wallpaper2.png')] bg-cover bg-repeat md:block md:w-1/2">
       <div className="flex h-screen flex-col items-center justify-center px-10 py-17.5 text-center">
         <Link className="mb-5.5 inline-block" href="/">
           <Image

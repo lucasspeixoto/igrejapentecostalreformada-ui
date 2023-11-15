@@ -89,6 +89,8 @@ const SignUpForm: React.FC = () => {
   ): Promise<void> => {
     const { result, error } = await signUp(name, email, password);
 
+    const userId = result?.user.uid!;
+
     if (error) {
       toast.error(firebaseMessages[error.code]);
 
@@ -100,16 +102,16 @@ const SignUpForm: React.FC = () => {
         role: 'Irmão(ã)',
         photoUrl: '',
         email: result?.user.email,
-        userId: result?.user.uid,
+        userId,
       };
 
       const processCollection = {
         isRegistered: false,
       };
 
-      await addData('users', result?.user.uid!, { auth: userAuthCollection });
+      await addData('users', userId, { auth: userAuthCollection });
 
-      await addData('users', result?.user.uid!, { process: processCollection });
+      await addData('users', userId, { process: processCollection });
 
       loginUserHandler(email, password);
     }

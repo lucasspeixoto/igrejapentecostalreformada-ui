@@ -10,7 +10,7 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
 
-interface ManAndWomanState {
+interface ManAndWomanChartState {
   series: number[];
 }
 
@@ -55,7 +55,7 @@ const options: ApexOptions = {
   ],
 };
 
-const ManAndWoman: React.FC<{ userData: UserData[] }> = ({ userData }) => {
+const ManAndWomanChart: React.FC<{ userData: UserData[] }> = ({ userData }) => {
   const totalOfMembers = userData.length;
 
   const personalData = React.useMemo(
@@ -80,7 +80,7 @@ const ManAndWoman: React.FC<{ userData: UserData[] }> = ({ userData }) => {
   }, [userData]);
 
   // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
-  const [sex, setSex] = React.useState<ManAndWomanState>({
+  const [sex, setSex] = React.useState<ManAndWomanChartState>({
     series: [
       isManTotal,
       isWomanTotal,
@@ -143,4 +143,4 @@ const ManAndWoman: React.FC<{ userData: UserData[] }> = ({ userData }) => {
   );
 };
 
-export default ManAndWoman;
+export default ManAndWomanChart;

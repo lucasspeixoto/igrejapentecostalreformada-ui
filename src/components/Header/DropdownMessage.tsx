@@ -61,7 +61,7 @@ const DropdownMessage = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute -right-16 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
+        className={`absolute -right-16 mt-2.5 flex h-auto w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
           dropdownOpen === true ? 'block' : 'hidden'
         }`}>
         <div className="px-4.5 py-3">
@@ -77,17 +77,18 @@ const DropdownMessage = () => {
                 <Image
                   width={112}
                   height={112}
-                  src={'/images/user/user-02.png'}
+                  className="rounded-full"
+                  src={'/images/user/eduardo.png'}
                   alt="User"
                 />
               </div>
 
               <div>
                 <h6 className="text-sm font-medium text-black dark:text-white">
-                  Mariya Desoja
+                  Pastor Sérgio
                 </h6>
-                <p className="text-sm">I like your confidence 💪</p>
-                <p className="text-xs">2min ago</p>
+                <p className="text-sm">Domingo Tem culto!</p>
+                <p className="text-xs">15min ago</p>
               </div>
             </Link>
           </li>
@@ -99,83 +100,18 @@ const DropdownMessage = () => {
                 <Image
                   width={112}
                   height={112}
-                  src={'/images/user/user-01.png'}
+                  className="rounded-full"
+                  src="https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2Fi3TtaUH2y1W0jInkpgHU7MIF5iq1.jpg?alt=media&token=8a26aea3-bcc2-489c-a40d-e6d7c7d445f3"
                   alt="User"
                 />
               </div>
 
               <div>
                 <h6 className="text-sm font-medium text-black dark:text-white">
-                  Robert Jhon
+                  Pastor Daniel
                 </h6>
-                <p className="text-sm">Can you share your offer?</p>
-                <p className="text-xs">10min ago</p>
-              </div>
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="flex gap-4.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              href="/messages">
-              <div className="h-12.5 w-12.5 rounded-full">
-                <Image
-                  width={112}
-                  height={112}
-                  src={'/images/user/user-03.png'}
-                  alt="User"
-                />
-              </div>
-
-              <div>
-                <h6 className="text-sm font-medium text-black dark:text-white">
-                  Henry Dholi
-                </h6>
-                <p className="text-sm">I cam across your profile and...</p>
-                <p className="text-xs">1day ago</p>
-              </div>
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="flex gap-4.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              href="/messages">
-              <div className="h-12.5 w-12.5 rounded-full">
-                <Image
-                  width={112}
-                  height={112}
-                  src={'/images/user/user-04.png'}
-                  alt="User"
-                />
-              </div>
-
-              <div>
-                <h6 className="text-sm font-medium text-black dark:text-white">
-                  Cody Fisher
-                </h6>
-                <p className="text-sm">I’m waiting for you response!</p>
-                <p className="text-xs">5days ago</p>
-              </div>
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="flex gap-4.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-              href="/messages">
-              <div className="h-12.5 w-12.5 rounded-full">
-                <Image
-                  width={112}
-                  height={112}
-                  src={'/images/user/user-02.png'}
-                  alt="User"
-                />
-              </div>
-
-              <div>
-                <h6 className="text-sm font-medium text-black dark:text-white">
-                  Mariya Desoja
-                </h6>
-                <p className="text-sm">I like your confidence 💪</p>
-                <p className="text-xs">2min ago</p>
+                <p className="text-sm">Sexta Feira tem oração!</p>
+                <p className="text-xs">30min ago</p>
               </div>
             </Link>
           </li>

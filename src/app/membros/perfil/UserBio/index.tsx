@@ -11,12 +11,15 @@ import { toast } from 'react-toastify';
 import { SpinnerLogo } from '@/components/common/Icons';
 import addData from '@/lib/firebase/firestore/addData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
+import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
 import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
 
 const UserBio: React.FC = () => {
-  const authContext = useAuthContext()!;
+  const authContext = useAuthContext();
 
-  const personalContext = usePersonalContext()!;
+  const personalContext = usePersonalContext();
+
+  const userProfileContext = useAuthUserDataContext();
 
   const [bio, setBio] = React.useState('');
 
@@ -65,7 +68,7 @@ const UserBio: React.FC = () => {
               htmlFor="name">
               Nome Completo
             </label>
-            <div className="relative">
+            <div className="relative w-full">
               <span className="absolute left-4.5 top-4">
                 <FiUser size={20} />
               </span>
@@ -75,7 +78,8 @@ const UserBio: React.FC = () => {
                 name="name"
                 id="name"
                 placeholder="Nome"
-                defaultValue={personalContext?.personalData?.name}
+                defaultValue={userProfileContext?.authData?.name!}
+                disabled
               />
             </div>
           </div>
@@ -86,14 +90,20 @@ const UserBio: React.FC = () => {
               htmlFor="cellphone">
               Celular
             </label>
-            <input
-              className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
-              type="text"
-              name="cellphone"
-              id="cellphone"
-              placeholder="Celular"
-              defaultValue={personalContext?.personalData?.cellphone}
-            />
+            <div className="relative w-full">
+              <span className="absolute left-4.5 top-4">
+                <FiUser size={20} />
+              </span>
+              <input
+                className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                type="text"
+                name="cellphone"
+                id="cellphone"
+                placeholder="Celular"
+                defaultValue={personalContext?.personalData?.cellphone}
+                disabled
+              />
+            </div>
           </div>
         </div>
 
@@ -116,6 +126,7 @@ const UserBio: React.FC = () => {
               id="email"
               placeholder="E-mail"
               defaultValue={authContext?.user?.email!}
+              disabled
             />
           </div>
         </div>

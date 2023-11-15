@@ -7,7 +7,8 @@ import { getUsersDocuments } from '@/lib/firebase/firestore/getData';
 import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
 import type { UserData } from '@/types/user-data';
 
-import ManAndWoman from '../ManAndWoman';
+import CityDistribuitionChart from '../CityDistribuitionChart';
+import ManAndWomanChart from '../ManAndWomanChart';
 import StatisticTotals from '../Totals';
 
 const StatisticsContainer: React.FC = () => {
@@ -55,7 +56,9 @@ const StatisticsContainer: React.FC = () => {
             <StatisticTotals userData={userLoadedData} />
           </div>
           <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-            <ManAndWoman userData={userLoadedData} />
+            <ManAndWomanChart userData={userLoadedData} />
+
+            <CityDistribuitionChart userData={userLoadedData} />
           </div>
         </>
       ) : null}
