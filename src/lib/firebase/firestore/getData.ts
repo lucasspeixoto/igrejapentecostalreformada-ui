@@ -52,11 +52,6 @@ export async function getDocument(_collection: string, id: string) {
   return { result, error };
 }
 
-// ! Obter lista de usuários:
-//! const query = collection(db, 'users');
-//! const [docs, loading, error] = useCollectionData(query);
-//! console.log(docs)
-
 export async function getCollection(
   _collection: string,
   id: string,

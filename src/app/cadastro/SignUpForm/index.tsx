@@ -53,7 +53,13 @@ const SignUpForm: React.FC = () => {
         userId: result?.user.uid,
       };
 
+      const processCollection = {
+        isRegistered: false,
+      };
+
       await addData('users', result?.user.uid!, { auth: userAuthCollection });
+
+      await addData('users', result?.user.uid!, { process: processCollection });
 
       authContext.updateLoadingAuthProcess(false);
 
@@ -97,7 +103,13 @@ const SignUpForm: React.FC = () => {
         userId: result?.user.uid,
       };
 
+      const processCollection = {
+        isRegistered: false,
+      };
+
       await addData('users', result?.user.uid!, { auth: userAuthCollection });
+
+      await addData('users', result?.user.uid!, { process: processCollection });
 
       loginUserHandler(email, password);
     }

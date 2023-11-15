@@ -21,6 +21,7 @@ import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
 import { loginUserFormSchema } from '@/schemas/authentication/signin-schema';
+import type { Process } from '@/types/process';
 import type { UserAuth } from '@/types/user-auth';
 
 const LoginForm = () => {
@@ -41,6 +42,8 @@ const LoginForm = () => {
 
     let userAuthCollection: UserAuth;
 
+    let processCollection: Process;
+
     if (error) {
       toast.error(firebaseMessages[error.code]);
 
@@ -56,8 +59,16 @@ const LoginForm = () => {
           userId: result?.user.uid!,
         };
 
+        processCollection = {
+          isRegistered: false,
+        };
+
         await addDocumentData('users', result?.user.uid!, {
           auth: userAuthCollection,
+        });
+
+        await addDocumentData('users', result?.user.uid!, {
+          process: processCollection,
         });
 
         toast.success('Bem vindo a IPR!');

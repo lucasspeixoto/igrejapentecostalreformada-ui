@@ -3,7 +3,7 @@ import Breadcrumb from '../Breadcrumbs/Breadcrumb';
 const Calendar = () => {
   return (
     <>
-      <Breadcrumb pageName="Calendar" />
+      <Breadcrumb pageName="Calendário" />
 
       {/* <!-- ====== Calendar Section Start ====== --> */}
       <div className="w-full max-w-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -11,32 +11,32 @@ const Calendar = () => {
           <thead>
             <tr className="grid grid-cols-9 rounded-t-sm bg-primary text-white">
               <th className="flex h-15 items-center justify-center rounded-tl-sm p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Sunday </span>
-                <span className="block lg:hidden"> Sun </span>
+                <span className="hidden lg:block"> Domingo </span>
+                <span className="block lg:hidden"> Dom </span>
               </th>
               <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Monday </span>
-                <span className="block lg:hidden"> Mon </span>
+                <span className="hidden lg:block"> Segunda </span>
+                <span className="block lg:hidden"> Seg </span>
               </th>
               <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Tuesday </span>
-                <span className="block lg:hidden"> Tue </span>
+                <span className="hidden lg:block"> Terça </span>
+                <span className="block lg:hidden"> Ter </span>
               </th>
               <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Wednesday </span>
-                <span className="block lg:hidden"> Wed </span>
+                <span className="hidden lg:block"> Quarta </span>
+                <span className="block lg:hidden"> Qua </span>
               </th>
               <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Thursday </span>
-                <span className="block lg:hidden"> Thur </span>
+                <span className="hidden lg:block"> Quinta </span>
+                <span className="block lg:hidden"> Qui </span>
               </th>
               <th className="flex h-15 items-center justify-center p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Friday </span>
-                <span className="block lg:hidden"> Fri </span>
+                <span className="hidden lg:block"> Sexta </span>
+                <span className="block lg:hidden"> Sex </span>
               </th>
               <th className="flex h-15 items-center justify-center rounded-tr-sm p-1 text-xs font-semibold sm:text-base xl:p-5">
-                <span className="hidden lg:block"> Saturday </span>
-                <span className="block lg:hidden"> Sat </span>
+                <span className="hidden lg:block"> Sabádo </span>
+                <span className="block lg:hidden"> Sab </span>
               </th>
             </tr>
           </thead>
@@ -265,7 +265,6 @@ const Calendar = () => {
           </tbody>
         </table>
       </div>
-      {/* <!-- ====== Calendar Section End ====== --> */}
     </>
   );
 };
