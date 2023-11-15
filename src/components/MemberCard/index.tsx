@@ -1,16 +1,24 @@
 'use client';
 
-import { fibebaseDateConvert } from '@/utils/transform-date';
+import { fibebaseDateConvert, shortDateConvert } from '@/utils/transform-date';
 
 type MemberCardProps = {
   name: string;
   role: string;
   birthday: string;
+  cardMemberDate: string;
+  cardMemberEmission: string;
 };
 
-const MemberCard: React.FC<MemberCardProps> = ({ name, role, birthday }) => {
+const MemberCard: React.FC<MemberCardProps> = ({
+  name,
+  role,
+  birthday,
+  cardMemberDate,
+  cardMemberEmission,
+}) => {
   return (
-    <div className="flex-column mt-5 flex h-auto items-center justify-center gap-1 sm:gap-5 md:mt-0">
+    <div className="flex-column mx-0 mt-5 flex h-auto w-full items-center justify-center gap-1 sm:gap-5 md:mt-0">
       <div className="hover:shadow-red relative float-left flex h-56 justify-start rounded-xl text-white shadow-2xl transition-transform md:h-64">
         <img
           className="relative h-full w-full rounded-xl object-cover"
@@ -48,11 +56,19 @@ const MemberCard: React.FC<MemberCardProps> = ({ name, role, birthday }) => {
               <div className="flex justify-start gap-10">
                 <div className="flex flex-col items-start">
                   <p className="text-xs font-light">Membro desde</p>
-                  <p className="text-sm font-medium tracking-wider">01/20</p>
+                  <p className="text-sm font-medium tracking-wider">
+                    {cardMemberDate
+                      ? shortDateConvert(cardMemberDate)
+                      : '-/-/-'}
+                  </p>
                 </div>
                 <div className="flex flex-col items-start">
                   <p className="text-xs font-light">Emissão</p>
-                  <p className="text-sm font-medium tracking-wider">11/23</p>
+                  <p className="text-sm font-medium tracking-wider">
+                    {cardMemberEmission
+                      ? shortDateConvert(cardMemberEmission)
+                      : '-/-/-'}
+                  </p>
                 </div>
               </div>
             </div>

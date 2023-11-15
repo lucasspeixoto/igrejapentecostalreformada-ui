@@ -23,6 +23,10 @@ type UserBaseDataProps = {
   role: string;
   isAdmin: boolean;
   isRegistered: boolean;
+  engagement: 1 | 2 | 3 | 4 | 5;
+  cardMemberDate: string;
+  cardMemberEmission: string;
+  onUpdateHasMemberDataUpdated: () => void;
 };
 
 const UserBaseData: React.FC<UserBaseDataProps> = ({
@@ -35,8 +39,12 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
   role,
   isAdmin,
   isRegistered,
+  engagement,
+  cardMemberDate,
+  cardMemberEmission,
+  onUpdateHasMemberDataUpdated,
 }) => {
-  const { craftOption: crafts } = parameters;
+  const { engagements, craftOption: crafts } = parameters;
 
   const hasPhotoUploaded = !!photoUrl;
 
@@ -47,6 +55,13 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
   const [isAdminOption, setIsAdminOption] = React.useState(false);
 
   const [craftOption, setCraftOption] = React.useState('');
+
+  const [cardMemberDateOption, setCardMemberDateOption] = React.useState('');
+
+  const [cardMemberEmissionOption, setCardMemberEmissionOption] =
+    React.useState('');
+
+  const [engagementOption, setEngagementOption] = React.useState(0);
 
   const [isRegisteredOption, setIsRegisteredOption] = React.useState(false);
 
@@ -116,6 +131,50 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
     };
   }, [role]);
 
+  /* The above code is using the `useEffect` hook in a React component. It sets up
+  an asynchronous function that runs when the component mounts. */
+  React.useEffect(() => {
+    let mounted = true;
+
+    (async () => {
+      if (engagement && mounted) {
+        setEngagementOption(engagement);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [engagement]);
+
+  React.useEffect(() => {
+    let mounted = true;
+
+    (async () => {
+      if (cardMemberDate && mounted) {
+        setCardMemberDateOption(cardMemberDate);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [cardMemberDate]);
+
+  React.useEffect(() => {
+    let mounted = true;
+
+    (async () => {
+      if (cardMemberEmission && mounted) {
+        setCardMemberEmissionOption(cardMemberEmission);
+      }
+    })();
+
+    return () => {
+      mounted = false;
+    };
+  }, [cardMemberEmission]);
+
   /**
    * The function `updateUserDataHandler` updates user data by adding new comments,
    * setting admin status, and registration status, and displays success or error
@@ -125,7 +184,12 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
     setIsLoading(true);
 
     const { error } = await addData('users', userId, {
-      personal: { comments: newComments },
+      personal: {
+        comments: newComments,
+        engagement: engagementOption,
+        cardMemberDate: cardMemberDateOption,
+        cardMemberEmission: cardMemberEmissionOption,
+      },
       auth: { isAdmin: isAdminOption, role: craftOption },
       process: { isRegistered: isRegisteredOption },
     });
@@ -136,6 +200,8 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
       );
     } else {
       personalContext.updateIsDataUpdatedInfo();
+
+      onUpdateHasMemberDataUpdated();
 
       toast.success('Dados de membro salvos com sucesso!');
     }
@@ -180,6 +246,8 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
             </span>
           </div>
         </div>
+
+        {/* Ofício e Celular */}
         <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
           <div className="w-full xl:w-1/2">
             <label className="mb-2.5 block text-black dark:text-white">
@@ -219,6 +287,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
           </div>
         </div>
 
+        {/* E-mail */}
         <div className="mb-5.5 flex w-full flex-col">
           <div className="flex w-full flex-col items-start">
             <label
@@ -239,6 +308,70 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
               placeholder="E-mail"
               disabled
               defaultValue={email}
+            />
+          </div>
+        </div>
+
+        {/* Engajamento */}
+        <div className="mb-5.5 flex w-full flex-col">
+          <div className="w-full xl:w-1/2">
+            <label className="mb-2.5 block text-black dark:text-white">
+              Engajamento
+            </label>
+            <div className="relative z-20 bg-transparent dark:bg-form-input">
+              <select
+                value={engagementOption}
+                onChange={event => setEngagementOption(+event.target.value)}
+                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                <option value="">Selecione nível de engajamento</option>
+                {React.Children.toArray(
+                  engagements.map(_engagement => (
+                    <option value={_engagement}>{_engagement}</option>
+                  ))
+                )}
+              </select>
+              <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+                <SelectChevroletLogo size={24} />
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Carteirinha */}
+        <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
+          <div className="w-full xl:w-1/2">
+            <label
+              className="mb-3 block text-sm font-medium text-black dark:text-white"
+              htmlFor="cardMemberDate">
+              Membro desde
+            </label>
+            <input
+              onChange={event => setCardMemberDateOption(event.target.value)}
+              className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+              type="date"
+              name="cardMemberDate"
+              id="cardMemberDate"
+              placeholder="Membro desde"
+              defaultValue={cardMemberDateOption}
+            />
+          </div>
+
+          <div className="w-full xl:w-1/2">
+            <label
+              className="mb-3 block text-sm font-medium text-black dark:text-white"
+              htmlFor="cardMemberEmission">
+              Emissão
+            </label>
+            <input
+              onChange={event =>
+                setCardMemberEmissionOption(event.target.value)
+              }
+              className="w-full rounded border border-stroke bg-gray px-4.5 py-3 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+              type="date"
+              name="cardMemberEmission"
+              id="cardMemberEmission"
+              placeholder="Emissão"
+              defaultValue={cardMemberEmissionOption}
             />
           </div>
         </div>

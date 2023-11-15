@@ -16,7 +16,7 @@ type UserUploadPhotoProps = {
   userId: string;
   name: string;
   photoUrl: string | null;
-  onUpdateHasMemberDataUpdated: (isLoading: boolean) => void;
+  onUpdateHasMemberDataUpdated: () => void;
 };
 
 const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
@@ -50,7 +50,7 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
       toast.success('Foto de membro atualizada com sucesso!');
     }
 
-    onUpdateHasMemberDataUpdated(true);
+    onUpdateHasMemberDataUpdated();
   };
 
   const uploadPhotoHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

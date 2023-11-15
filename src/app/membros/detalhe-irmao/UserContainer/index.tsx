@@ -33,8 +33,6 @@ const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
 
   const router = useRouter();
 
-  /* Check if the user is an admin and
-  redirect them to the profile page if they are not. */
   React.useEffect(() => {
     const isAdmin = userContext.authData?.isAdmin!;
 
@@ -45,9 +43,6 @@ const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
     }
   }, [userContext]);
 
-  /* The `React.useEffect` hook is used to perform side effects in a functional
-  component. In this case, it is used to fetch data from the Firestore database
-  using the `getDocument` function. */
   React.useEffect(() => {
     let mounted = true;
 
@@ -70,8 +65,8 @@ const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
     };
   }, [userId, hasMemberDataUpdated]);
 
-  const updateHasMemberDataUpdated = (isLoading: boolean) => {
-    setHasMemberDataUpdated(isLoading);
+  const updateHasMemberDataUpdated = () => {
+    setHasMemberDataUpdated(state => !state);
   };
 
   return (
@@ -89,14 +84,22 @@ const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
               role={selectedAuthUserData?.role!}
               isAdmin={selectedAuthUserData?.isAdmin!}
               isRegistered={selectedProcessUserData?.isRegistered!}
+              engagement={selectedPersonalUserData?.engagement!}
+              cardMemberDate={selectedPersonalUserData?.cardMemberDate!}
+              cardMemberEmission={selectedPersonalUserData?.cardMemberEmission!}
+              onUpdateHasMemberDataUpdated={updateHasMemberDataUpdated}
             />
           </div>
           <div className="col-span-8 md:col-span-2">
-            <div className="flex w-full flex-col items-center justify-center md:items-start">
+            <div className="flex w-full flex-col items-center justify-center gap-8 md:items-start">
               <MemberCard
                 name={selectedAuthUserData?.name!}
                 role={selectedAuthUserData?.role!}
                 birthday={selectedPersonalUserData?.birthday!}
+                cardMemberDate={selectedPersonalUserData?.cardMemberDate!}
+                cardMemberEmission={
+                  selectedPersonalUserData?.cardMemberEmission!
+                }
               />
 
               <UserUploadPhoto
