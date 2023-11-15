@@ -184,7 +184,7 @@ const MembersList: React.FC = () => {
                                           alt="Foto membro"
                                           width={48}
                                           height={48}
-                                          className="rounded-full"
+                                          className="h-14 w-14 rounded-full"
                                         />
                                       ) : (
                                         <Image
@@ -192,7 +192,7 @@ const MembersList: React.FC = () => {
                                           alt="Brand"
                                           width={48}
                                           height={48}
-                                          className="rounded-full"
+                                          className="h-14 w-14 rounded-full"
                                         />
                                       )}
                                     </>

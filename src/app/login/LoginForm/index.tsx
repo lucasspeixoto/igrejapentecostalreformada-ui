@@ -72,9 +72,11 @@ const LoginForm = () => {
         });
 
         toast.success('Bem vindo a IPR!');
-      }
 
-      router.push('/membros/perfil');
+        router.push('/membros/cadastro/pessoal');
+      } else {
+        router.push('/membros/perfil');
+      }
 
       authContext.updateLoadingAuthProcess(false);
     }
