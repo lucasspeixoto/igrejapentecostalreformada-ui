@@ -19,7 +19,7 @@ export default function RootLayout({
       <body suppressHydrationWarning={true}>
         <div className="w-full dark:bg-boxdark-2 dark:text-bodydark">
           <main>
-            <div className="w-full overflow-auto">
+            <div className="z-20 w-full overflow-auto">
               <AuthContextProvider>
                 <ToastProvider>{children}</ToastProvider>
               </AuthContextProvider>

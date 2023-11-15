@@ -20,4 +20,10 @@ export interface Personal {
   bio: string;
 
   comments?: string;
+
+  engagement?: 1 | 2 | 3 | 4 | 5;
+
+  cardMemberDate?: string;
+
+  cardMemberEmission?: string;
 }
