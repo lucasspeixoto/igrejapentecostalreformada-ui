@@ -1,4 +1,4 @@
-export const fibebaseDateConvert = (date: string): string => {
+export const fibebaseDateConvert = (date: string | null): string => {
   if (date) {
     const year = date?.split('-')[0];
     const month = date?.split('-')[1];
@@ -7,10 +7,10 @@ export const fibebaseDateConvert = (date: string): string => {
     return `${day}/${month}/${year}`;
   }
 
-  return date;
+  return '--/--/--';
 };
 
-export const shortDateConvert = (date: string): string => {
+export const shortDateConvert = (date: string | null): string => {
   if (date) {
     const year = date?.split('-')[0];
     const month = date?.split('-')[1];
@@ -18,5 +18,5 @@ export const shortDateConvert = (date: string): string => {
     return `${month}/${year}`;
   }
 
-  return date;
+  return '--/--/--';
 };

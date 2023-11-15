@@ -47,7 +47,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
               <div className="flex flex-col items-start">
                 <p className="font-light">Aniversário</p>
                 <p className="font-medium tracking-widest">
-                  {birthday ? fibebaseDateConvert(birthday) : '-/-/-'}
+                  {fibebaseDateConvert(birthday)}
                 </p>
               </div>
             </div>
@@ -57,17 +57,13 @@ const MemberCard: React.FC<MemberCardProps> = ({
                 <div className="flex flex-col items-start">
                   <p className="text-xs font-light">Membro desde</p>
                   <p className="text-sm font-medium tracking-wider">
-                    {cardMemberDate
-                      ? shortDateConvert(cardMemberDate)
-                      : '-/-/-'}
+                    {shortDateConvert(cardMemberDate)}
                   </p>
                 </div>
                 <div className="flex flex-col items-start">
                   <p className="text-xs font-light">Emissão</p>
                   <p className="text-sm font-medium tracking-wider">
-                    {cardMemberEmission
-                      ? shortDateConvert(cardMemberEmission)
-                      : '-/-/-'}
+                    {shortDateConvert(cardMemberEmission)}
                   </p>
                 </div>
               </div>

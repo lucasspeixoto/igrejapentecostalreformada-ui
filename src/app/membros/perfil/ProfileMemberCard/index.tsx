@@ -14,6 +14,8 @@ const ProfileMemberCard: React.FC = () => {
       name={userProfileContext.authData?.name!}
       role={userProfileContext.authData?.role!}
       birthday={personalContext.personalData?.birthday!}
+      cardMemberDate={personalContext.personalData?.cardMemberDate!}
+      cardMemberEmission={personalContext.personalData?.cardMemberEmission!}
     />
   );
 };
