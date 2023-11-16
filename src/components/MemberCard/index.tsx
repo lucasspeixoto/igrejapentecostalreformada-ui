@@ -1,6 +1,6 @@
 'use client';
 
-import { fibebaseDateConvert, shortDateConvert } from '@/utils/transform-date';
+import { longDateConvert, shortDateConvert } from '@/utils/transform-date';
 
 type MemberCardProps = {
   name: string;
@@ -18,8 +18,8 @@ const MemberCard: React.FC<MemberCardProps> = ({
   cardMemberEmission,
 }) => {
   return (
-    <div className="flex-column mx-0 mt-5 flex h-auto w-full items-center justify-center gap-1 sm:gap-5 md:mt-0">
-      <div className="hover:shadow-red relative float-left flex h-56 justify-start rounded-xl text-white shadow-2xl transition-transform md:h-64">
+    <div className="flex-column mx-0 flex h-auto w-full items-center justify-center gap-1 sm:gap-5 md:mt-0">
+      <div className="hover:shadow-red py-auto relative float-left flex justify-start rounded-xl text-white shadow-2xl transition-transform md:h-64">
         <img
           className="relative h-full w-full rounded-xl object-cover"
           src={'/images/cards/member-card.png'}
@@ -27,11 +27,11 @@ const MemberCard: React.FC<MemberCardProps> = ({
         />
 
         <div className="absolute top-4 w-full px-2 md:top-6 md:px-8">
-          <div className="flex flex-col justify-between gap-0 md:gap-2">
+          <div className="flex h-auto flex-col justify-between gap-0 md:gap-2">
             <div className="flex justify-between">
               <div className="flex flex-col items-start">
                 <p className="font-light">Nome</p>
-                <p className="font-medium tracking-widest">{name}</p>
+                <p className="text-sm font-semibold tracking-widest">{name}</p>
               </div>
               <img
                 className="h-14 w-14"
@@ -42,34 +42,34 @@ const MemberCard: React.FC<MemberCardProps> = ({
             <div className="flex justify-between">
               <div className="flex flex-col items-start">
                 <p className="font-light">Cargo</p>
-                <p className="font-medium tracking-widest">{role}</p>
+                <p className="text-sm font-semibold tracking-widest">{role}</p>
               </div>
               <div className="flex flex-col items-start">
                 <p className="font-light">Aniversário</p>
-                <p className="font-medium tracking-widest">
-                  {fibebaseDateConvert(birthday)}
+                <p className="text-sm font-semibold tracking-widest">
+                  {longDateConvert(birthday)}
                 </p>
               </div>
             </div>
 
-            <div className="pr-6 pt-4">
+            <div className="pr-6 pt-2">
               <div className="flex justify-start gap-10">
                 <div className="flex flex-col items-start">
                   <p className="text-xs font-light">Membro desde</p>
-                  <p className="text-sm font-medium tracking-wider">
+                  <p className="text-sm font-semibold tracking-wider">
                     {shortDateConvert(cardMemberDate)}
                   </p>
                 </div>
                 <div className="flex flex-col items-start">
                   <p className="text-xs font-light">Emissão</p>
-                  <p className="text-sm font-medium tracking-wider">
+                  <p className="text-sm font-semibold tracking-wider">
                     {shortDateConvert(cardMemberEmission)}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mb-1 mt-3 flex w-full items-center justify-center">
+            <div className="mb-1 mt-2 flex w-full items-center justify-center">
               <p className="text-md text-xs font-semibold uppercase">
                 Fazer tudo para a glória de Deus, 1 Co 10.21
               </p>

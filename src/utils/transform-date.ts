@@ -1,4 +1,4 @@
-export const fibebaseDateConvert = (date: string | null): string => {
+export const longDateConvert = (date: string | null): string => {
   if (date) {
     const year = date?.split('-')[0];
     const month = date?.split('-')[1];
