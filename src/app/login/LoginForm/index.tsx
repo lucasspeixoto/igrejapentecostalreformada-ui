@@ -52,7 +52,7 @@ const LoginForm = () => {
       if (isTheUserNew) {
         userAuthCollection = {
           isAdmin: false,
-          role: 'Irmão',
+          role: 'Irmão(ã)',
           name: result?.user.displayName!,
           photoUrl: result?.user.photoURL!,
           email: result?.user.email!,
