@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
@@ -9,7 +10,6 @@ import DocsForm from './DocsForm';
 export const metadata: Metadata = {
   title: 'Dados Pessoais',
   description: 'Cadastro de dados pessoais',
-  // other metadata
 };
 
 const PersonalForm = () => {
@@ -58,6 +58,14 @@ const PersonalForm = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="mb-5 mt-10 flex w-full justify-center">
+        <Link
+          href="/membros/cadastro/complementar"
+          className="cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-secondary bg-secondary p-2 font-semibold text-black transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+          Continuar
+        </Link>
       </div>
     </>
   );

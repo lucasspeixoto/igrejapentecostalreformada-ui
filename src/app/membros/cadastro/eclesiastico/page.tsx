@@ -1,5 +1,6 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
@@ -9,7 +10,6 @@ import MemberForm from './MemberForm';
 export const metadata: Metadata = {
   title: 'Dados Eclesiásticos',
   description: 'Cadastro de dados eclesiásticos',
-  // other metadata
 };
 
 const EcclesiasticForm = () => {
@@ -47,6 +47,14 @@ const EcclesiasticForm = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="mb-5 mt-10 flex w-full justify-center">
+        <Link
+          href="/membros/cadastro/pessoal"
+          className="cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-secondary bg-secondary p-2 font-semibold text-black transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+          Voltar
+        </Link>
       </div>
     </>
   );
