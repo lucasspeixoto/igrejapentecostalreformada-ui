@@ -19,9 +19,9 @@ const MemberCard: React.FC<MemberCardProps> = ({
 }) => {
   return (
     <div className="flex-column mx-0 flex h-auto w-full items-center justify-center gap-1 sm:gap-5 md:mt-0">
-      <div className="hover:shadow-red py-auto relative float-left flex justify-start rounded-xl text-white shadow-2xl transition-transform md:h-64">
+      <div className="hover:shadow-red py-auto relative float-left flex h-48 justify-start rounded-xl text-white shadow-2xl transition-transform sm:h-64">
         <img
-          className="relative h-full w-full rounded-xl object-cover"
+          className="relative w-full rounded-xl object-cover"
           src={'/images/cards/member-card.png'}
           alt="Imagem carteiriha"
         />
@@ -34,7 +34,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
                 <p className="text-sm font-semibold tracking-widest">{name}</p>
               </div>
               <img
-                className="h-14 w-14"
+                className="h-8 w-8 sm:h-14 sm:w-14"
                 src={'/images/logo/logo-church-cross.svg'}
                 alt="Imagem logo cartão"
               />
@@ -70,7 +70,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
             </div>
 
             <div className="mb-1 mt-2 flex w-full items-center justify-center">
-              <p className="text-md text-xs font-semibold uppercase">
+              <p className="text-xs font-semibold uppercase">
                 Fazer tudo para a glória de Deus, 1 Co 10.21
               </p>
             </div>
