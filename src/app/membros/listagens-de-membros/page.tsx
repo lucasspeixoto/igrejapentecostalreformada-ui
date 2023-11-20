@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Página com a listagem de irmãos',
 };
 
-const TablesPage = () => {
+const MembersListPage = () => {
   return (
     <>
       <Breadcrumb pageName="Lista de irmãos" />
@@ -20,4 +20,4 @@ const TablesPage = () => {
   );
 };
 
-export default TablesPage;
+export default MembersListPage;
