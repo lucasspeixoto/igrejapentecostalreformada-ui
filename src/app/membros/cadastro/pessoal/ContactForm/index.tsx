@@ -15,9 +15,9 @@ import {
 } from '@/schemas/register/personal/personal-schema';
 
 const ContactForm = () => {
-  const authContext = useAuthContext()!;
+  const authContext = useAuthContext();
 
-  const personalContext = usePersonalContext()!;
+  const personalContext = usePersonalContext();
 
   const [isLoading, setIsLoading] = React.useState(false);
 
