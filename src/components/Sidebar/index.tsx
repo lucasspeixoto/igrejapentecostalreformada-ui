@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,19 +11,16 @@ import { BsCalendarDate, BsLink45Deg, BsPeople } from 'react-icons/bs';
 import { FaWpforms } from 'react-icons/fa';
 
 import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
+import useIsSidebarOpen from '@/store/useIsSidebarOpen';
 
 import { MenuChevroletIcon } from '../Icons';
 import SidebarLinkGroup from './SidebarLinkGroup';
 
-type SidebarProps = {
-  sidebarOpen: boolean;
-  setSidebarOpen: (arg: boolean) => void;
-};
-
-const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+const Sidebar = () => {
   const pathname = usePathname();
 
   const trigger = React.useRef<HTMLButtonElement | null>(null);
+
   const sidebar = React.useRef<HTMLElement | null>(null);
 
   const storedSidebarExpanded = 'true';
@@ -31,6 +30,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   );
 
   const { authData } = useAuthUserDataContext()!;
+
+  const setSidebarOpen = useIsSidebarOpen(state => state.setSidebarOpen);
+
+  const sidebarOpen = useIsSidebarOpen(state => state.sidebarOpen);
+
+  const setSidebarOpenHandle = React.useCallback(() => {
+    setSidebarOpen();
+  }, []);
 
   /* The click handler is responsible for closing the sidebar when
   a click event occurs outside of the sidebar or the trigger element. It adds an
@@ -53,7 +60,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       )
         return;
 
-      setSidebarOpen(false);
+      setSidebarOpenHandle();
     };
 
     document.addEventListener('click', clickHandler);
@@ -69,7 +76,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     const keyHandler = ({ key }: KeyboardEvent) => {
       if (!sidebarOpen || key !== 'Escape') return;
 
-      setSidebarOpen(false);
+      setSidebarOpenHandle();
     };
 
     document.addEventListener('keydown', keyHandler);
@@ -111,7 +118,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
         <button
           ref={trigger}
-          onClick={() => setSidebarOpen(!sidebarOpen)}
+          onClick={() => setSidebarOpen()}
           aria-controls="sidebar"
           aria-expanded={sidebarOpen}
           className="block lg:hidden">

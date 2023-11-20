@@ -1,5 +1,3 @@
-'use client';
-
 import './globals.css';
 import './data-tables-css.css';
 import './satoshi.css';
@@ -15,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body suppressHydrationWarning={true}>
+    <html suppressHydrationWarning lang="en">
+      <body>
         <div className="w-full dark:bg-boxdark-2 dark:text-bodydark">
           <main>
             <div className="z-20 w-full overflow-auto">

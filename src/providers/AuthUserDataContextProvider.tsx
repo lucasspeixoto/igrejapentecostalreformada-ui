@@ -13,6 +13,7 @@ const auth = getAuth(firebase_app);
 const initialState = {
   authData: null,
   isLoadingData: false,
+  isAuthenticated: false,
   updateIsLoadingData: () => {},
   setUpdatedAuthData: () => {},
 };
@@ -20,6 +21,7 @@ const initialState = {
 type AuthUserDataContextType = {
   authData: UserAuth | null;
   isLoadingData: boolean;
+  isAuthenticated: boolean;
   updateIsLoadingData: (isLoading: boolean) => void;
   setUpdatedAuthData: (authData: UserAuth | null) => void;
 };
@@ -37,6 +39,8 @@ export const AuthUserDataContextProvider: React.FC<{
 
   const [isLoadingData, setIsLoadingData] = React.useState(false);
 
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+
   const router = useRouter();
 
   const updateIsLoadingData = (isLoading: boolean) => {
@@ -52,6 +56,7 @@ export const AuthUserDataContextProvider: React.FC<{
 
     const authStateUnsubscribe = onAuthStateChanged(auth, _user => {
       if (_user) {
+        setIsAuthenticated(true);
         const authUserData = getCollection('users', _user.uid, 'auth');
         authUserData
           .then(data => {
@@ -61,6 +66,7 @@ export const AuthUserDataContextProvider: React.FC<{
             throw new Error(error.message);
           });
       } else {
+        setIsAuthenticated(false);
         router.push('/login');
         setAuthData(null);
       }
@@ -76,10 +82,11 @@ export const AuthUserDataContextProvider: React.FC<{
       value={{
         authData,
         isLoadingData,
+        isAuthenticated,
         updateIsLoadingData,
         setUpdatedAuthData,
       }}>
-      {children}
+      <>{isAuthenticated ? children : null}</>
     </AuthUserDataContext.Provider>
   );
 };

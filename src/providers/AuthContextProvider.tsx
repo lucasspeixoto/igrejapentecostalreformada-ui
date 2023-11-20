@@ -4,7 +4,7 @@ import firebase_app from '@fire/config';
 import type { User } from 'firebase/auth';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import React, { createContext, useContext, useState } from 'react';
+import React from 'react';
 
 const auth = getAuth(firebase_app);
 
@@ -22,24 +22,22 @@ type AuthContextType = {
   updateLoadingAuthProcess: (isLoading: boolean) => void;
 };
 
-export const AuthContext = createContext<AuthContextType>(initialValues);
-
-export const useAuthContext = () => useContext(AuthContext);
+export const AuthContext = React.createContext<AuthContextType>(initialValues);
 
 export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = React.useState<User | null>(null);
 
   const router = useRouter();
 
-  const [isLoadingAuthProcess, setIsLoadingAuthProcess] = useState(false);
+  const [isLoadingAuthProcess, setIsLoadingAuthProcess] = React.useState(false);
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
-  const updateLoadingAuthProcess = (isLoading: boolean) => {
+  const updateLoadingAuthProcess = React.useCallback((isLoading: boolean) => {
     setIsLoadingAuthProcess(isLoading);
-  };
+  }, []);
 
   React.useEffect(() => {
     updateLoadingAuthProcess(true);
@@ -67,7 +65,9 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
         isAuthenticated,
         updateLoadingAuthProcess,
       }}>
-      {children}
+      <>{children}</>
     </AuthContext.Provider>
   );
 };
+
+export const useAuthContext = () => React.useContext(AuthContext);

@@ -50,7 +50,7 @@ const UserBio: React.FC = () => {
   };
 
   React.useEffect(() => {
-    toast.warn(`Graça e paz 🙏 Mantenha o seu cadastro atualizado.`);
+    toast.warn(`Graça e paz 🙏 Mantenha sempre o seu cadastro atualizado.`);
   }, []);
 
   return (
