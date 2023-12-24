@@ -1,32 +1,28 @@
+/* eslint-disable tailwindcss/migration-from-tailwind-2 */
+
 'use client';
 
-/* eslint-disable no-console */
-/* eslint-disable tailwindcss/migration-from-tailwind-2 */
-/* import signIn from '@fire/auth/signin'; */
-
-import signInUserHandler from '@fire/auth/signin';
-import signInWithGoogle from '@fire/auth/signin-with-google';
-import addDocumentData from '@fire/firestore/addData';
-import firebaseMessages from '@fire/messages';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BsPersonLock } from 'react-icons/bs';
 import { MdOutlineMarkEmailUnread } from 'react-icons/md';
-import { toast } from 'react-toastify';
 
 import RedirectLink from '@/app/components/RedirectLink';
 import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
 import { loginUserFormSchema } from '@/schemas/authentication/signin-schema';
-import type { Process } from '@/types/process';
-import type { UserAuth } from '@/types/user-auth';
 
-const LoginForm: React.FC = () => {
-  const router = useRouter();
+type LoginFormProps = {
+  singInWithEmailAndPasswordHandler: (data: LoginUserFormData) => void;
+  singInWithGoogleHandler: () => Promise<void>;
+};
 
+const LoginForm: React.FC<LoginFormProps> = ({
+  singInWithEmailAndPasswordHandler,
+  singInWithGoogleHandler,
+}) => {
   const authContext = useAuthContext()!;
 
   const {
@@ -37,78 +33,8 @@ const LoginForm: React.FC = () => {
     resolver: zodResolver(loginUserFormSchema),
   });
 
-  const singInWithGoogleHandler = async (): Promise<void> => {
-    const { result, error, isTheUserNew } = await signInWithGoogle();
-
-    let userAuthCollection: UserAuth;
-
-    let processCollection: Process;
-
-    if (error) {
-      toast.error(firebaseMessages[error.code]);
-
-      authContext.updateLoadingAuthProcess(false);
-    } else {
-      if (isTheUserNew) {
-        userAuthCollection = {
-          isAdmin: false,
-          role: 'Irmão(ã)',
-          name: result?.user.displayName!,
-          photoUrl: result?.user.photoURL!,
-          email: result?.user.email!,
-          userId: result?.user.uid!,
-        };
-
-        processCollection = {
-          isRegistered: false,
-        };
-
-        await addDocumentData('users', result?.user.uid!, {
-          auth: userAuthCollection,
-        });
-
-        await addDocumentData('users', result?.user.uid!, {
-          process: processCollection,
-        });
-
-        toast.success('Bem vindo a IPR!');
-
-        router.push('/membros/cadastro/pessoal');
-      } else {
-        router.push('/membros/perfil');
-      }
-
-      authContext.updateLoadingAuthProcess(false);
-    }
-  };
-
-  const loginUserHandler = async (
-    email: string,
-    password: string
-  ): Promise<void> => {
-    const { error } = await signInUserHandler(email, password);
-
-    if (error) {
-      toast.error(firebaseMessages[error.code]);
-
-      authContext.updateLoadingAuthProcess(false);
-    } else {
-      authContext.updateLoadingAuthProcess(false);
-
-      router.push('/membros/perfil');
-    }
-  };
-
-  const getLoginUserFormDataHandler = (data: LoginUserFormData) => {
-    authContext.updateLoadingAuthProcess(true);
-
-    const { email, password } = data;
-
-    loginUserHandler(email, password);
-  };
-
   return (
-    <form onSubmit={handleSubmit(getLoginUserFormDataHandler)}>
+    <form onSubmit={handleSubmit(singInWithEmailAndPasswordHandler)}>
       {/* ---------------------------- E-mail ---------------------------- */}
       <div className="mb-3 gap-2">
         <div className="relative">

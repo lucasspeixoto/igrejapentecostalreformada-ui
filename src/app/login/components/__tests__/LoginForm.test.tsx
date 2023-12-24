@@ -11,15 +11,21 @@ jest.mock('next/navigation', () => ({
   },
 }));
 
-const mockGetLoginUserFormDataHandler = jest.fn((email, password) => {
-  return Promise.resolve({ email, password });
-});
-
 describe('LoginForm', () => {
+  const singInWithEmailAndPasswordHandler = jest.fn();
+  const singInWithGoogleHandler = jest.fn();
+
+  beforeEach(() => {
+    render(
+      <LoginForm
+        singInWithGoogleHandler={singInWithGoogleHandler}
+        singInWithEmailAndPasswordHandler={singInWithEmailAndPasswordHandler}
+      />
+    );
+  });
+
   describe('Render', () => {
     it('should render E-mail input label', () => {
-      render(<LoginForm />);
-
       const myEmailLabelElement = screen.getByTestId('email');
 
       expect(myEmailLabelElement).toBeInTheDocument();
@@ -27,26 +33,20 @@ describe('LoginForm', () => {
     });
 
     it('should render Password input label', () => {
-      render(<LoginForm />);
-
       const myPasswordLabelElement = screen.getByTestId('password');
       expect(myPasswordLabelElement).toBeInTheDocument();
       expect(myPasswordLabelElement).toHaveTextContent('Senha');
     });
 
     it('should have a submit button', () => {
-      render(<LoginForm />);
-
       const loginButton = screen.getByTestId('login-button');
 
       expect(loginButton).toBeInTheDocument();
     });
   });
 
-  fdescribe('Behaviour', () => {
+  describe('Behaviour', () => {
     it('should display required error when value is invalid', async () => {
-      render(<LoginForm />);
-
       const loginButton = screen.getByTestId('login-button');
 
       fireEvent.submit(loginButton);
@@ -57,8 +57,6 @@ describe('LoginForm', () => {
     });
 
     it('should display matching error when email is invalid', async () => {
-      render(<LoginForm />);
-
       const emailInput = screen.getByRole('textbox', { name: /email/i });
       fireEvent.input(emailInput, { target: { value: 'test' } });
 
@@ -77,11 +75,13 @@ describe('LoginForm', () => {
       //! Textos inseridos nos elementos de input
       expect(emailInput).toHaveValue('test');
       expect(passwordInput).toHaveValue('password');
+
+      await waitFor(() =>
+        expect(singInWithEmailAndPasswordHandler).not.toHaveBeenCalledTimes(1)
+      );
     });
 
     it('should display matching error when password is invalid', async () => {
-      render(<LoginForm />);
-
       const emailInput = screen.getByRole('textbox', { name: /email/i });
       fireEvent.input(emailInput, { target: { value: 'lucas@gmail.com' } });
 
@@ -101,11 +101,13 @@ describe('LoginForm', () => {
       //! Textos inseridos nos elementos de input
       expect(emailInput).toHaveValue('lucas@gmail.com');
       expect(passwordInput).toHaveValue('123');
+
+      await waitFor(() =>
+        expect(singInWithEmailAndPasswordHandler).not.toHaveBeenCalledTimes(1)
+      );
     });
 
-    fit('should not display error when value is valid', async () => {
-      render(<LoginForm />);
-
+    it('should not display error when value is valid', async () => {
       const emailInput = screen.getByRole('textbox', { name: /email/i });
       fireEvent.input(emailInput, { target: { value: 'lucas@gmail.com' } });
 
@@ -122,11 +124,11 @@ describe('LoginForm', () => {
       );
 
       await waitFor(() =>
-        expect(mockGetLoginUserFormDataHandler).toHaveBeenCalledTimes(1)
+        expect(singInWithEmailAndPasswordHandler).toHaveBeenCalledTimes(1)
       );
 
       // const data = { email: 'lucas@gmail.com', senha: 'minhasenhacorreta' };
-      // expect(mockGetLoginUserFormDataHandler).toHaveBeenCalledWith(data);
+      // expect(mocksingInWithEmailAndPasswordHandler).toHaveBeenCalledWith(data);
       // expect(screen.getByRole('textbox', { name: /email/i })).toHaveValue('');
       // expect(screen.getByLabelText('password')).toHaveValue('');
     });
