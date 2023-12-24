@@ -25,28 +25,39 @@ describe('LoginForm', () => {
   });
 
   describe('Render', () => {
-    it('should render E-mail input label', () => {
+    it('should render E-mail input and label', () => {
       const myEmailLabelElement = screen.getByTestId('email');
+      const emailInput = screen.getByLabelText('email'); // ? screen.getByRole('textbox', { name: /email/i });
 
+      expect(emailInput).toBeVisible();
       expect(myEmailLabelElement).toBeInTheDocument();
       expect(myEmailLabelElement).toHaveTextContent('E-mail');
     });
 
-    it('should render Password input label', () => {
+    it('should render Password input and label', () => {
       const myPasswordLabelElement = screen.getByTestId('password');
+      const passwordInput = screen.getByLabelText('password');
+
+      expect(passwordInput).toBeVisible();
       expect(myPasswordLabelElement).toBeInTheDocument();
       expect(myPasswordLabelElement).toHaveTextContent('Senha');
     });
 
-    it('should have a submit button', () => {
-      const loginButton = screen.getByTestId('login-button');
+    it('should have login buttons (with email and password and with google)', () => {
+      const button = screen.getByTestId('login-button');
 
-      expect(loginButton).toBeInTheDocument();
+      expect(button).toBeInTheDocument();
+    });
+
+    it('should have a login with google button', () => {
+      const button = screen.getByTestId('login-with-google-button');
+
+      expect(button).toBeInTheDocument();
     });
   });
 
   describe('Behaviour', () => {
-    it('should display required error when value is invalid', async () => {
+    it('should display two alerts error when email and password are invalid', async () => {
       const loginButton = screen.getByTestId('login-button');
 
       fireEvent.submit(loginButton);
@@ -57,7 +68,7 @@ describe('LoginForm', () => {
     });
 
     it('should display matching error when email is invalid', async () => {
-      const emailInput = screen.getByRole('textbox', { name: /email/i });
+      const emailInput = screen.getByLabelText('email'); // ? screen.getByRole('textbox', { name: /email/i });
       fireEvent.input(emailInput, { target: { value: 'test' } });
 
       const passwordInput = screen.getByLabelText('password');
@@ -82,7 +93,7 @@ describe('LoginForm', () => {
     });
 
     it('should display matching error when password is invalid', async () => {
-      const emailInput = screen.getByRole('textbox', { name: /email/i });
+      const emailInput = screen.getByLabelText('email'); // ? screen.getByRole('textbox', { name: /email/i });
       fireEvent.input(emailInput, { target: { value: 'lucas@gmail.com' } });
 
       const passwordInput = screen.getByLabelText('password');
@@ -107,8 +118,8 @@ describe('LoginForm', () => {
       );
     });
 
-    it('should not display error when value is valid', async () => {
-      const emailInput = screen.getByRole('textbox', { name: /email/i });
+    it('should not display error when email and password are valid', async () => {
+      const emailInput = screen.getByLabelText('email'); // ? screen.getByRole('textbox', { name: /email/i });
       fireEvent.input(emailInput, { target: { value: 'lucas@gmail.com' } });
 
       const passwordInput = screen.getByLabelText('password');
@@ -126,11 +137,6 @@ describe('LoginForm', () => {
       await waitFor(() =>
         expect(singInWithEmailAndPasswordHandler).toHaveBeenCalledTimes(1)
       );
-
-      // const data = { email: 'lucas@gmail.com', senha: 'minhasenhacorreta' };
-      // expect(mocksingInWithEmailAndPasswordHandler).toHaveBeenCalledWith(data);
-      // expect(screen.getByRole('textbox', { name: /email/i })).toHaveValue('');
-      // expect(screen.getByLabelText('password')).toHaveValue('');
     });
   });
 });

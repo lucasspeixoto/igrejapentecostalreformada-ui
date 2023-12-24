@@ -1,9 +1,5 @@
 'use client';
 
-/* eslint-disable no-console */
-/* eslint-disable tailwindcss/migration-from-tailwind-2 */
-/* import signIn from '@fire/auth/signin'; */
-
 import signInUserHandler from '@fire/auth/signin';
 import signInWithGoogle from '@fire/auth/signin-with-google';
 import addDocumentData from '@fire/firestore/addData';
@@ -68,23 +64,6 @@ const LoginWrapper: React.FC = () => {
       authContext.updateLoadingAuthProcess(false);
     }
   };
-
-  /* const loginUserHandler = async (
-    email: string,
-    password: string
-  ): Promise<void> => {
-    const { error } = await signInUserHandler(email, password);
-
-    if (error) {
-      toast.error(firebaseMessages[error.code]);
-
-      authContext.updateLoadingAuthProcess(false);
-    } else {
-      authContext.updateLoadingAuthProcess(false);
-
-      router.push('/membros/perfil');
-    }
-  }; */
 
   const singInWithEmailAndPasswordHandler = async (data: LoginUserFormData) => {
     authContext.updateLoadingAuthProcess(true);
