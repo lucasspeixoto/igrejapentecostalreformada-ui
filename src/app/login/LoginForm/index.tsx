@@ -24,7 +24,7 @@ import { loginUserFormSchema } from '@/schemas/authentication/signin-schema';
 import type { Process } from '@/types/process';
 import type { UserAuth } from '@/types/user-auth';
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   const router = useRouter();
 
   const authContext = useAuthContext()!;
@@ -99,7 +99,7 @@ const LoginForm = () => {
     }
   };
 
-  const getLoginUserFormDataHandler = async (data: LoginUserFormData) => {
+  const getLoginUserFormDataHandler = (data: LoginUserFormData) => {
     authContext.updateLoadingAuthProcess(true);
 
     const { email, password } = data;
@@ -114,11 +114,14 @@ const LoginForm = () => {
         <div className="relative">
           <label
             htmlFor="email"
+            data-testid="email"
             className="mb-1 block font-medium text-black dark:text-white">
             E-mail
           </label>
           <input
+            id="email"
             type="email"
+            aria-label="email"
             {...register('email')}
             className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
@@ -129,7 +132,10 @@ const LoginForm = () => {
 
         <>
           {errors.email && (
-            <span className="text-sm text-meta-1 dark:text-meta-7">
+            <span
+              role="alert"
+              data-testid="email-error"
+              className="text-sm text-meta-1 dark:text-meta-7">
               {errors.email.message}
             </span>
           )}
@@ -141,11 +147,14 @@ const LoginForm = () => {
         <div className="relative">
           <label
             htmlFor="password"
+            data-testid="password"
             className="mb-1 block font-medium text-black dark:text-white">
             Senha
           </label>
           <input
+            id="password"
             type="password"
+            aria-label="password"
             {...register('password')}
             className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
@@ -156,7 +165,10 @@ const LoginForm = () => {
 
         <>
           {errors.password && (
-            <span className="text-sm text-meta-1 dark:text-meta-7">
+            <span
+              role="alert"
+              data-testid="password-error"
+              className="text-sm text-meta-1 dark:text-meta-7">
               {errors.password.message}
             </span>
           )}
@@ -184,6 +196,7 @@ const LoginForm = () => {
       {/* Botões de ações */}
       <div className="mb-4 mt-5">
         <button
+          data-testid="login-button"
           disabled={authContext.isLoadingAuthProcess}
           type="submit"
           className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
@@ -193,6 +206,7 @@ const LoginForm = () => {
       </div>
 
       <button
+        data-testid="login-with-google-button"
         disabled={authContext.isLoadingAuthProcess}
         onClick={singInWithGoogleHandler}
         type="button"

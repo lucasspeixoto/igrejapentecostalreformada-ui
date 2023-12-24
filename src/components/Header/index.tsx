@@ -1,10 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { CiSearch } from 'react-icons/ci';
 
+import Image from '@/components/Image';
 import useIsSidebarOpen from '@/store/useIsSidebarOpen';
 
 import DarkModeSwitcher from './DarkModeSwitcher';
@@ -12,7 +12,7 @@ import DropdownMessage from './DropdownMessage';
 import DropdownNotification from './DropdownNotification';
 import DropdownUser from './DropdownUser';
 
-const Header = () => {
+const Header: React.FC = () => {
   const setSidebarOpen = useIsSidebarOpen(state => state.setSidebarOpen);
 
   const sidebarOpen = useIsSidebarOpen(state => state.sidebarOpen);
