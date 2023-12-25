@@ -14,7 +14,7 @@ const RedirectLink: React.FC<RedirectLinkProps> = ({
   target,
 }) => {
   return (
-    <p>
+    <p data-testid="redirect-link">
       {text}{' '}
       <Link
         href={route}

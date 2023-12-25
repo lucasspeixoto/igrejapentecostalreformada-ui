@@ -1,13 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 const DropdownDefault = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
-  const trigger = useRef<any>(null);
-  const dropdown = useRef<any>(null);
+  const trigger = React.useRef<any>(null);
+
+  const dropdown = React.useRef<any>(null);
 
   // close on click outside
-  useEffect(() => {
+  React.useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdown.current) return;
       if (
@@ -23,7 +24,7 @@ const DropdownDefault = () => {
   });
 
   // close if the esc key is pressed
-  useEffect(() => {
+  React.useEffect(() => {
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
       if (!dropdownOpen || keyCode !== 27) return;
       setDropdownOpen(false);

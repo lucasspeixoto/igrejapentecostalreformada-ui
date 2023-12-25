@@ -3,7 +3,7 @@ import AuthPagePresentation from '@appC/AuthPagePresentation';
 import type { Metadata } from 'next';
 import React from 'react';
 
-import LoginForm from './LoginForm';
+import LoginWrapper from './components/LoginWrapper';
 
 export const metadata: Metadata = {
   title: 'Login | Igreja Pentecostal reformada',
@@ -24,7 +24,7 @@ const SignIn: React.FC = () => {
                   Login
                 </h2>
 
-                <LoginForm />
+                <LoginWrapper />
               </div>
             </div>
           </div>
