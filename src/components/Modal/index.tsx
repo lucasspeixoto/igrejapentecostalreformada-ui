@@ -37,11 +37,11 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <div className="fixed left-0 top-0 z-999999 flex h-full min-h-screen w-full items-center justify-center bg-black/90 px-4 py-5">
-      <div className="w-full max-w-142.5 rounded-lg bg-white px-8 py-12 text-center dark:bg-boxdark md:px-17.5 md:py-15">
+      <div className="w-full max-w-142.5 rounded-lg bg-white px-8 py-12 text-center md:px-17.5 md:py-15 dark:bg-boxdark">
         <span className="mx-auto inline-block">
           <IoWarningOutline size={48} className="font-bold text-meta-8" />
         </span>
-        <h3 className="mt-5.5 pb-2 text-xl font-bold text-black dark:text-white sm:text-2xl">
+        <h3 className="mt-5.5 pb-2 text-xl font-bold text-black sm:text-2xl dark:text-white">
           {title}
         </h3>
         <p className="mb-10">{subtitle}</p>

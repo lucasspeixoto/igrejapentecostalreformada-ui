@@ -145,7 +145,7 @@ const DropdownUser = () => {
         </ul>
         <button
           onClick={signOutUser}
-          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium text-meta-4 opacity-80 duration-300 ease-in-out hover:opacity-100 dark:text-gray  lg:text-base">
+          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium text-meta-4 opacity-80 duration-300 ease-in-out hover:opacity-100 lg:text-base  dark:text-gray">
           <SlLogout size={20} />
           Sair
         </button>

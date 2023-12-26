@@ -1,3 +1,6 @@
+/* eslint-disable tailwindcss/classnames-order */
+/* eslint-disable prettier/prettier */
+
 'use client';
 
 import Image from 'next/image';
@@ -134,7 +137,7 @@ const MembersList: React.FC = () => {
         ) : null}
       </>
       {isAdminOption ? (
-        <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+        <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default sm:px-7.5 xl:pb-1 dark:border-strokedark dark:bg-boxdark">
           <div className="mb-2 flex flex-col justify-start gap-1">
             <p className="text-xl font-semibold text-black dark:text-white">
               Membros Cadastrados IPR{' '}
@@ -177,7 +180,7 @@ const MembersList: React.FC = () => {
                             ?.sort(orderMembersListByName)
                             .map(member => (
                               <tr>
-                                <td className="border-b border-[#eee] px-1 py-5 pl-9 dark:border-strokedark xl:pl-5">
+                                <td className="border-b border-[#eee] px-1 py-5 pl-9 xl:pl-5 dark:border-strokedark">
                                   <div className="flex flex-row items-center gap-4 font-medium text-black dark:text-white">
                                     <div className="shrink-0">
                                       <>
@@ -200,7 +203,7 @@ const MembersList: React.FC = () => {
                                         )}
                                       </>
                                     </div>
-                                    <p className="hidden text-black dark:text-white sm:block">
+                                    <p className="hidden text-black sm:block dark:text-white">
                                       {member.auth?.name.split(' ')[0]}{' '}
                                     </p>
                                   </div>
