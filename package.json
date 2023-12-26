@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --fix",
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
@@ -14,7 +14,6 @@
     "@hookform/resolvers": "^3.3.1",
     "@react-jvectormap/core": "^1.0.4",
     "@react-jvectormap/unitedstates": "^1.0.1",
-    "@types/node": "20.5.7",
     "apexcharts": "^3.41.1",
     "autoprefixer": "10.4.14",
     "axios": "^1.6.0",
@@ -22,7 +21,7 @@
     "eslint-config-next": "^14.0.3",
     "firebase": "^10.4.0",
     "jsvectormap": "^1.5.3",
-    "next": "^14.0.3",
+    "next": "^14.0.4",
     "postcss": "8.4.27",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
@@ -36,7 +35,7 @@
     "tailwind-merge": "^2.2.0",
     "typescript": "5.1.6",
     "zod": "^3.22.4",
-    "zustand": "^4.4.6"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.5",
@@ -44,7 +43,8 @@
     "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^29.5.11",
     "@types/mocha": "^10.0.6",
-    "@types/react": "^18.2.28",
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.13",
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
@@ -68,8 +68,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "lint-staged": "^14.0.1",
     "postcss": "^8.4.30",
-    "prettier": "^3.0.3",
-    "prisma": "^5.3.1",
+    "prettier": "^3.1.1",
     "tailwind-variants": "^0.1.19",
     "tailwindcss": "^3.4.0",
     "ts-jest": "^29.1.1"

@@ -87,7 +87,7 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
   };
 
   return (
-    <div className="mt-5 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark md:w-full">
+    <div className="mt-5 rounded-sm border border-stroke bg-white shadow-default md:w-full dark:border-strokedark dark:bg-boxdark">
       <div className="flex items-start border-b border-stroke px-7 py-4 dark:border-strokedark">
         <h3 className="font-medium text-black dark:text-white">
           Alterar Foto de membro
@@ -136,7 +136,7 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
 
         <label
           htmlFor="profile"
-          className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-primary bg-gray p-4 dark:bg-meta-4 sm:py-7.5">
+          className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-primary bg-gray p-4 sm:py-7.5 dark:bg-meta-4">
           <input
             type="file"
             name="profile"
