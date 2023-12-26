@@ -1,5 +1,5 @@
 <h1 align="center">
-   Cadastro IPR
+   Cadastro Igreja Pentecostal Reformada
 </h1>
 
 <br>
