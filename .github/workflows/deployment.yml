@@ -36,6 +36,9 @@ jobs:
   build: 
     name: 🏭 Building
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
     needs: install
     steps:
       - uses: actions/cache@v3
