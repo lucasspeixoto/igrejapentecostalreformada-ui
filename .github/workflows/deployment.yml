@@ -34,10 +34,11 @@ jobs:
       - run: npm ci
       - run: npm run test
   build: 
-    name: 🏗️ Building
+    name: 🏭 Building
     runs-on: ubuntu-latest
     needs: install
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/cache@v3
         with:
           path: |
@@ -46,7 +47,6 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-s
-      - uses: actions/checkout@v3
       - run: npm ci
       - run: npm run build
       - name: Archive production artifacts
@@ -55,7 +55,7 @@ jobs:
           name: nextjs-build
           path: .next/
   deploy-production:
-    name: Deploy (Production)
+    name: 🚀 Deploy (Production)
     needs: [install, lint, test, build]
     runs-on: ubuntu-latest
     steps:
