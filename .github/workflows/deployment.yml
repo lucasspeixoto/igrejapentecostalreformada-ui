@@ -27,7 +27,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3ss
+      - uses: actions/checkout@v3
       - run: npm run build
   deploy-production:
     name: Deploy (Production)
