@@ -47,8 +47,17 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-s
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
       - run: npm ci
       - run: npm run build
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: nextjs-build
+          path: .next/
   deploy-production:
     name: Deploy (Production)
     needs: [install, lint, test, build]
