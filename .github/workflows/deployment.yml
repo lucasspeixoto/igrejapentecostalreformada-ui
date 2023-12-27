@@ -9,19 +9,29 @@ on:
     branches: ["master", "main"]
 
 jobs:
-  lint:
-    name: Lint
+  install:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+      - run: npm ci
       - run: npm install
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - uses: actions/checkout@v3
       - run: npm run lint
   test:
     name: Test
     runs-on: ubuntu-latest
+    needs: install
     steps:
       - uses: actions/checkout@v3
-      - run: npm install
       - run: npm run test
   build: 
     name: Build
@@ -37,12 +47,10 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-s
-      - run: npm ci
-      - run: npm install
       - run: npm run build
   deploy-production:
     name: Deploy (Production)
-    needs: [lint, test, build]
+    needs: [install, lint, test, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
