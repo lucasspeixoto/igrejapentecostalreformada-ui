@@ -23,10 +23,6 @@ jobs:
     needs: install
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-          cache: "npm"
       - run: npm ci
       - run: npm run lint
   test:
@@ -35,10 +31,6 @@ jobs:
     needs: install
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-          cache: "npm"
       - run: npm ci
       - run: npm run test
   build: 
@@ -55,10 +47,6 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-s
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-          cache: "npm"
       - run: npm ci
       - run: npm run build
       - name: Archive production artifacts
