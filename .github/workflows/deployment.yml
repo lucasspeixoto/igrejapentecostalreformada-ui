@@ -11,14 +11,14 @@ on:
 
 jobs:
   install:
-    name: Install Dependencies
+    name: 📥 Instaling Dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: npm ci
       - run: npm install
   lint:
-    name: Lint
+    name: 🧹 Linting
     runs-on: ubuntu-latest
     needs: install
     steps:
@@ -26,7 +26,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
   test:
-    name: Test
+    name: 🧪 Testing
     runs-on: ubuntu-latest
     needs: install
     steps:
@@ -34,7 +34,7 @@ jobs:
       - run: npm ci
       - run: npm run test
   build: 
-    name: Build
+    name: 🏗️ Building
     runs-on: ubuntu-latest
     needs: install
     steps:
