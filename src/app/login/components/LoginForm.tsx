@@ -1,6 +1,6 @@
-/* eslint-disable tailwindcss/migration-from-tailwind-2 */
-
 'use client';
+
+/* eslint-disable tailwindcss/migration-from-tailwind-2 */
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';

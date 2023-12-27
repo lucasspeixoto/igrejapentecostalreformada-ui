@@ -11,6 +11,13 @@ jest.mock('next/navigation', () => ({
   },
 }));
 
+// Mock useAuthContext:
+jest.mock('../../../../providers/AuthContextProvider', () => ({
+  useAuthContext() {
+    return { prefetch: () => null };
+  },
+}));
+
 describe('LoginForm', () => {
   const singInWithEmailAndPasswordHandler = jest.fn();
   const singInWithGoogleHandler = jest.fn();
