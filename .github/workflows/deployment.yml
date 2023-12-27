@@ -27,14 +27,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/cache@v3
-        with:
-          path: ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.[jt]sx?') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-      - uses: actions/checkout@v3s
-      - run: npm install
+      - uses: actions/checkout@v3ss
       - run: npm run build
   deploy-production:
     name: Deploy (Production)
