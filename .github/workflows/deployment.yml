@@ -4,9 +4,9 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
-    branches: ['master', 'main']
+    branches: ["master", "main"]
   pull_request:
-    branches: ['master', 'main']
+    branches: ["master", "main"]
 
 jobs:
   lint:
@@ -23,9 +23,8 @@ jobs:
       - uses: actions/checkout@v3
       - run: npm install
       - run: npm run test
-  build:
-    name: Build
-    runs-on: ubuntu-latest
+  cache:
+    name: Cache config
     steps:
       uses: actions/cache@v3
       with:
@@ -38,10 +37,14 @@ jobs:
         # If source files changed but packages didn't, rebuild from a prior cache.
         restore-keys: |
           ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-      uses: actions/checkout@v3
-      run: npm ci
-      run: npm install
-      run: npm run build
+  build: 
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm install
+      - run: npm run build
   deploy-production:
     name: Deploy (Production)
     needs: [lint, test, build]
