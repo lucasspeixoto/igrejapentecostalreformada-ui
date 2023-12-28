@@ -98,9 +98,8 @@ jobs:
       - name: Test the Docker image
         run: docker-compose up -d 
   push_to_registry:
-    name: 🧪 Testing Docker Image
+    name: 🚀 Push Docker image to Docker Hub
     needs: [build_image, test_image]
-    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
