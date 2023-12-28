@@ -81,45 +81,31 @@ jobs:
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} 
-  docker-build-push:
+  push_to_registry:
     needs: build
-    name: 📝 Build Docker Image
+    name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-      - name: Login to docker hub
-        uses: docker/login-action@v2
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
-        name: Build and push
-        uses: docker/build-push-action@v3
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: thetips4you/testjodejsapp
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
-          file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/next-portfolio:0.1
-
-  deploy-dockerhub:
-    needs: docker-build-push
-    name: ⚒️ Deploy in Docker Hub
-    runs-on: ubuntu-latest
-    steps:
-      - name: checking out Code
-        uses: actions/checkout@v2
-      - name: Execute SSH commmands on remote server
-        uses: JimCronqvist/action-ssh@master
-        with:
-          hosts: ${{secrets.HOST_IP}}
-          privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
-          command: |
-              echo "inside vm"
-              docker compose down
-              docker compose pull
-              docker compose up -d
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
               
