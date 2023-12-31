@@ -6,7 +6,7 @@
 
 ## 💻 Repositório
 
-[Ipr Master](https://github.com/lucasspeixoto/igrejapentecostalreformada) é um aplicativo para cadastro de membros e acompanhamento de estatiscas desses cadastros da [Igreja Pentecostal Reformada](https://igrejapentecostalreformada.vercel.app/)
+[Ipr Master](https://github.com/lucasspeixoto/igrejapentecostalreformada-ui) é um aplicativo para cadastro de membros e acompanhamento de estatiscas desses cadastros da [Igreja Pentecostal Reformada](https://igrejapentecostalreformada.vercel.app/)
 
 ## ✨ Tecnologias
 
