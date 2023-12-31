@@ -41,7 +41,6 @@ jobs:
         run: npm run test
 
       - name: 🏭 Building
-        uses: actions/cache@v3
         with:
           path: |
             ~/.npm
@@ -49,8 +48,6 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
-        uses: actions/checkout@v3
-        run: npm ci
         run: npm run build
 
       - name: 🐋 Docker Compose Build
@@ -62,9 +59,6 @@ jobs:
           name: nextjs-build
           path: .next/
 
-      - name: Check out the repo
-        uses: actions/checkout@v3
-      
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
