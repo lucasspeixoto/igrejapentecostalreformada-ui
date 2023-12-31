@@ -59,7 +59,7 @@ jobs:
           name: nextjs-build
           path: .next/
 
-      - name: 🐋 Log in to Docker Hub
+      - name: 🐋 Login no Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
