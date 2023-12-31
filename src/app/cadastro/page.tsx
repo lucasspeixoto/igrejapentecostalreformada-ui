@@ -7,7 +7,7 @@ import RedirectLink from '../components/RedirectLink';
 import SignUpForm from './SignUpForm';
 
 export const metadata: Metadata = {
-  title: 'Cadastro | Igreja Pentecostal reformada',
+  title: 'Cadastro',
   description: 'Plataforma de membros da igreja pentecostal reformada (IPR)',
 };
 

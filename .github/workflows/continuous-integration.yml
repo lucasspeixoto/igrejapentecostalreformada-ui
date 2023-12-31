@@ -28,7 +28,7 @@ jobs:
     name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
-      - name: 📑 Checkout code
+      - name: 📑 Checkout Code
         uses: actions/checkout@v3
 
       - name: 📥 Installing Dependencies
@@ -81,7 +81,7 @@ jobs:
           echo NEXT_PUBLIC_VIA_CEP_API_URL=${{ secrets.NEXT_PUBLIC_VIA_CEP_API_URL }} >> .env
           docker build -t ${{ secrets.DOCKER_USERNAME }}/igrejapentecostalreformada:${{ github.run_id }} .
 
-      - name: 🐳 Push Docker image
+      - name: 🐳 Push da Imagem
         run: docker push ${{ secrets.DOCKER_USERNAME }}/igrejapentecostalreformada:${{ github.run_id }}
 
       - name: 📂 Instalação CLI da Vercel

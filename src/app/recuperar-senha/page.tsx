@@ -7,11 +7,11 @@ import RedirectLink from '../components/RedirectLink';
 import RecoveryPasswordForm from './RecoveryPasswordForm';
 
 export const metadata: Metadata = {
-  title: 'Login | Igreja Pentecostal reformada',
+  title: 'Recuperar Senha',
   description: 'Plataforma de membros da igreja pentecostal reformada (IPR)',
 };
 
-const SignIn: React.FC = () => {
+const RecoveryPasswors: React.FC = () => {
   return (
     <React.Fragment>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -43,4 +43,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default RecoveryPasswors;
