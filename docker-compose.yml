@@ -1,12 +1,13 @@
 version: '3.5'
 
 services:
-  app:
-    # image: lspeixotodev/igrejapentecostalreformada:latest
+  igrejapentecostalreformada-ui:
+    # image: lspeixotodev/igrejapentecostalreformada-ui:latest
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: igrejapentecostalreformada
+    image: lspeixotodev/igrejapentecostalreformada-ui
+    container_name: igrejapentecostalreformada-ui
     ports:
       - '3000:3000'
     volumes:

@@ -79,10 +79,10 @@ jobs:
           echo NEXT_PUBLIC_FIREBASE_APP_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }} >> .env
           echo NEXT_PUBLIC_FIREBASE_DATABASE_URL=${{ secrets.NEXT_PUBLIC_FIREBASE_DATABASE_URL }} >> .env
           echo NEXT_PUBLIC_VIA_CEP_API_URL=${{ secrets.NEXT_PUBLIC_VIA_CEP_API_URL }} >> .env
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/igrejapentecostalreformada:${{ github.run_id }} .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/igrejapentecostalreformada-ui:${{ github.run_id }} .
 
       - name: 🐳 Push da Imagem
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/igrejapentecostalreformada:${{ github.run_id }}
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/igrejapentecostalreformada-ui:${{ github.run_id }}
 
       - name: 📂 Instalação CLI da Vercel
         run: npm install --global vercel@latest
