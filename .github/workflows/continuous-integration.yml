@@ -66,7 +66,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: 🗃️ Criação .env file
-        run: echo ${{ secrets.ENV }} | base64 -d > .env
+        run: echo '${{ secrets.ENV }}' | base64 -d > .env
       
       - name: 🏗️ Build e tag da Imagem
         run: |
