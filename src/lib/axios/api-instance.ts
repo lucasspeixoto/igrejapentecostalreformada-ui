@@ -4,8 +4,13 @@ import axios from 'axios';
 
 /* The code `const axiosInstance = axios.create({ ... })` creates an instance of
 the Axios library with custom configuration options. */
-const viaCepAxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_VIA_CEP_API_URL,
+const apiAxiosInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization:
+      'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3MDQ3MTYzMDcsImV4cCI6MTcwNDcxOTkwN30.l7_dFa7mHGKjMEFTPgKd9xmYU5eFcFGqC1NJwO7zavUDMe9UGtzQXhwtWnA8I0jN',
+  },
 });
 
 /**
@@ -20,7 +25,7 @@ const viaCepAxiosInstance = axios.create({
  * instance (`_axios`). The methods return a Promise that resolves to the response
  * data.
  */
-const viaCepApi = (_axios: AxiosInstance) => {
+const apiAxios = (_axios: AxiosInstance) => {
   return {
     get<T>(url: string, config: AxiosRequestConfig = {}) {
       return _axios.get<T>(url, config);
@@ -37,4 +42,4 @@ const viaCepApi = (_axios: AxiosInstance) => {
   };
 };
 
-export default viaCepApi(viaCepAxiosInstance);
+export default apiAxios(apiAxiosInstance);
