@@ -9,19 +9,19 @@ import { BsPersonLock } from 'react-icons/bs';
 import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 
 import RedirectLink from '@/app/components/RedirectLink';
-import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
+import { SpinnerLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
 import { loginUserFormSchema } from '@/schemas/authentication/signin-schema';
 
 type LoginFormProps = {
-  singInWithEmailAndPasswordHandler: (data: LoginUserFormData) => void;
-  singInWithGoogleHandler: () => Promise<void>;
+  singInWithUsernameOrEmailAndPasswordHandler: (
+    data: LoginUserFormData
+  ) => void;
 };
 
 const LoginForm: React.FC<LoginFormProps> = ({
-  singInWithEmailAndPasswordHandler,
-  singInWithGoogleHandler,
+  singInWithUsernameOrEmailAndPasswordHandler,
 }) => {
   const authContext = useAuthContext()!;
 
@@ -34,21 +34,21 @@ const LoginForm: React.FC<LoginFormProps> = ({
   });
 
   return (
-    <form onSubmit={handleSubmit(singInWithEmailAndPasswordHandler)}>
+    <form onSubmit={handleSubmit(singInWithUsernameOrEmailAndPasswordHandler)}>
       {/* ---------------------------- E-mail ---------------------------- */}
       <div className="mb-3 gap-2">
         <div className="relative">
           <label
-            htmlFor="email"
-            data-testid="email"
+            htmlFor="usernameOrEmail"
+            data-testid="usernameOrEmail"
             className="mb-1 block font-medium text-black dark:text-white">
-            E-mail
+            E-mail ou usuário
           </label>
           <input
-            id="email"
-            type="email"
-            aria-label="email"
-            {...register('email')}
+            id="usernameOrEmail"
+            type="text"
+            aria-label="usernameOrEmail"
+            {...register('usernameOrEmail')}
             className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
           <span className="absolute bottom-2.5 right-4">
@@ -57,12 +57,12 @@ const LoginForm: React.FC<LoginFormProps> = ({
         </div>
 
         <>
-          {errors.email && (
+          {errors.usernameOrEmail && (
             <span
               role="alert"
-              data-testid="email-error"
+              data-testid="usernameOrEmail-error"
               className="text-sm text-meta-1 dark:text-meta-7">
-              {errors.email.message}
+              {errors.usernameOrEmail.message}
             </span>
           )}
         </>
@@ -130,16 +130,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
           Entrar
         </button>
       </div>
-
-      <button
-        data-testid="login-with-google-button"
-        disabled={authContext.isLoadingAuthProcess}
-        onClick={singInWithGoogleHandler}
-        type="button"
-        className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
-        <GoogleLogo size={22} />
-        Entrar com o Google
-      </button>
     </form>
   );
 };

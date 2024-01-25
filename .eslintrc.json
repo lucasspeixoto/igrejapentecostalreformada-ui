@@ -43,7 +43,7 @@
             "endOfLine": "auto"
           }
         ],
-        
+       
         "testing-library/no-render-in-lifecycle": "off",
         "react/destructuring-assignment": "off", // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
         "react/require-default-props": "off", // Allow non-defined react props as undefined
@@ -60,6 +60,7 @@
           "LabeledStatement",
           "WithStatement"
         ], // Overrides Airbnb configuration and enable no-restricted-syntax
+        "import/no-extraneous-dependencies": "off",
         "import/prefer-default-export": "off", // Named export is easier to refactor automatically
         "tailwindcss/no-custom-classname": "off", // Disabled otherwise nightmare to allow each custom tailwind classes
         "simple-import-sort/imports": "error", // Import configuration for `eslint-plugin-simple-import-sort`

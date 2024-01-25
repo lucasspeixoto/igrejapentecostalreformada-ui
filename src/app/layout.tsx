@@ -13,9 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body>
-        <div className="w-full dark:bg-boxdark-2 dark:text-bodydark">
+        <div className="w-full bg-white dark:bg-boxdark-2 dark:text-bodydark">
           <main>
             <div className="z-20 w-full overflow-auto">
               <AuthContextProvider>

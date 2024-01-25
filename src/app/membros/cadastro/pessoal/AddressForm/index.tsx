@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import { parameters } from '@/constants/form-parameters';
-import api from '@/lib/axios/via-cep-instance';
+import viaCepApi from '@/lib/axios/via-cep-instance';
 import addData from '@/lib/firebase/firestore/addData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
@@ -57,7 +57,9 @@ const AddressForm = () => {
     const selectedCep = targetEvent.value;
 
     if (selectedCep) {
-      const { data } = await api.get<ViaCepResponse>(`/${selectedCep}/json`);
+      const { data } = await viaCepApi.get<ViaCepResponse>(
+        `/${selectedCep}/json`
+      );
 
       if (data) {
         reset({

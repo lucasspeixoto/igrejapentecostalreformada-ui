@@ -1,8 +1,6 @@
 'use client';
 
 import signInUserHandler from '@fire/auth/signin';
-import signInWithGoogle from '@fire/auth/signin-with-google';
-import addDocumentData from '@fire/firestore/addData';
 import firebaseMessages from '@fire/messages';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -10,8 +8,6 @@ import { toast } from 'react-toastify';
 
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
-import type { Process } from '@/types/process';
-import type { UserAuth } from '@/types/user-auth';
 
 import LoginForm from './LoginForm';
 
@@ -20,57 +16,14 @@ const LoginWrapper: React.FC = () => {
 
   const authContext = useAuthContext()!;
 
-  const singInWithGoogleHandler = async (): Promise<void> => {
-    const { result, error, isTheUserNew } = await signInWithGoogle();
-
-    let userAuthCollection: UserAuth;
-
-    let processCollection: Process;
-
-    if (error) {
-      toast.error(firebaseMessages[error.code]);
-
-      authContext.updateLoadingAuthProcess(false);
-    } else {
-      if (isTheUserNew) {
-        userAuthCollection = {
-          isAdmin: false,
-          role: 'Irmão(ã)',
-          name: result?.user.displayName!,
-          photoUrl: result?.user.photoURL!,
-          email: result?.user.email!,
-          userId: result?.user.uid!,
-        };
-
-        processCollection = {
-          isRegistered: false,
-        };
-
-        await addDocumentData('users', result?.user.uid!, {
-          auth: userAuthCollection,
-        });
-
-        await addDocumentData('users', result?.user.uid!, {
-          process: processCollection,
-        });
-
-        toast.success('Bem vindo a IPR!');
-
-        router.push('/membros/cadastro/pessoal');
-      } else {
-        router.push('/membros/perfil');
-      }
-
-      authContext.updateLoadingAuthProcess(false);
-    }
-  };
-
-  const singInWithEmailAndPasswordHandler = async (data: LoginUserFormData) => {
+  const singInWithUsernameOrEmailAndPasswordHandler = async (
+    data: LoginUserFormData
+  ) => {
     authContext.updateLoadingAuthProcess(true);
 
-    const { email, password } = data;
+    const { usernameOrEmail, password } = data;
 
-    const { error } = await signInUserHandler(email, password);
+    const { error } = await signInUserHandler(usernameOrEmail, password);
 
     if (error) {
       toast.error(firebaseMessages[error.code]);
@@ -85,8 +38,9 @@ const LoginWrapper: React.FC = () => {
 
   return (
     <LoginForm
-      singInWithGoogleHandler={singInWithGoogleHandler}
-      singInWithEmailAndPasswordHandler={singInWithEmailAndPasswordHandler}
+      singInWithUsernameOrEmailAndPasswordHandler={
+        singInWithUsernameOrEmailAndPasswordHandler
+      }
     />
   );
 };

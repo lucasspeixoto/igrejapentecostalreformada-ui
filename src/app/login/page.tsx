@@ -1,8 +1,10 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
-import AuthPagePresentation from '@appC/AuthPagePresentation';
 import type { Metadata } from 'next';
 import React from 'react';
 
+import { AppInfo } from './components/AppInfo';
+import { AppLogo } from './components/AppLogo';
+import { AppWelcomePresentation } from './components/AppWelcomePresentation';
 import LoginWrapper from './components/LoginWrapper';
 
 export const metadata: Metadata = {
@@ -12,25 +14,33 @@ export const metadata: Metadata = {
 
 const SignIn: React.FC = () => {
   return (
-    <React.Fragment>
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="md-p-8 lg:md-p-8 flex flex-wrap items-center justify-center p-0">
-          <AuthPagePresentation />
+    <div className="m-[1rem] flex h-[calc(100vh-2rem)] flex-col justify-between bg-white">
+      {/* Top Side */}
+      <div className="hidden lg:block">
+        <AppLogo />
+      </div>
 
-          <div className="w-full border-stroke md:w-1/2 md:border-l-2 dark:border-strokedark">
-            <div className="flex h-screen w-full flex-col items-center justify-center px-4 md:px-0">
-              <div className="w-full md:w-9/12 lg:w-8/12">
-                <h2 className="mb-3 text-2xl font-bold text-black sm:text-title-xl2 dark:text-white">
-                  Login
-                </h2>
+      {/* Bottom Side */}
+      <div className="flex h-[100%] items-center justify-center gap-5 lg:min-h-[90%]">
+        {/* Presentation */}
+        <AppWelcomePresentation />
 
-                <LoginWrapper />
-              </div>
-            </div>
+        {/* Login */}
+        <div className="w-[500px] max-w-[98%] lg:max-w-[50%]">
+          <div className="block lg:hidden">
+            <AppLogo />
           </div>
+
+          <h2 className="my-4 flex w-full items-center justify-center text-xl font-bold leading-10 tracking-tight text-black md:mb-10 2xl:text-2xl dark:text-white">
+            Login
+          </h2>
+
+          <LoginWrapper />
+
+          <AppInfo />
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

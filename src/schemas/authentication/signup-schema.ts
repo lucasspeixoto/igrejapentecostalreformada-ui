@@ -2,15 +2,16 @@ import { z } from 'zod';
 
 export const createUserFormSchema = z
   .object({
-    name: z
+    name: z.string().min(3, 'O Nome precisa conter no mínimo 3 caracteres!'),
+    username: z
       .string()
-      .min(3, 'O Nome precisa conter no mínimo 3 caracteres!')
+      .min(3, 'O Nome de usuário precisa conter no mínimo 3 caracteres!')
       .transform(name => {
         return name
           .trim()
           .split(' ')
           .map(word => {
-            return word[0].toLocaleUpperCase().concat(word.substring(1));
+            return word[0].toLocaleLowerCase().concat(word.substring(1));
           })
           .join(' ');
       }),
@@ -21,10 +22,10 @@ export const createUserFormSchema = z
       .toLowerCase(),
     password: z
       .string()
-      .min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
+      .min(3, 'A senha precisa conter no mínimo 3 caracteres!'),
     confirmedPassword: z
       .string()
-      .min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
+      .min(3, 'A senha precisa conter no mínimo 3 caracteres!'),
   })
   .refine(data => data.password === data.confirmedPassword, {
     message: 'As senhas precisam ser iguais',

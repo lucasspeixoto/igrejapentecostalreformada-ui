@@ -6,11 +6,20 @@ import axios from 'axios';
 the Axios library with custom configuration options. */
 const apiAxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3MDQ3MTYzMDcsImV4cCI6MTcwNDcxOTkwN30.l7_dFa7mHGKjMEFTPgKd9xmYU5eFcFGqC1NJwO7zavUDMe9UGtzQXhwtWnA8I0jN',
-  },
+});
+
+apiAxiosInstance.interceptors.request.use(request => {
+  const headers = request.headers ?? {};
+
+  const token = localStorage.getItem('IPR_ACCESS_TOKEN');
+
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
+  request.headers = headers;
+
+  return request;
 });
 
 /**
