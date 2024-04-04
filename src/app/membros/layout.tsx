@@ -3,13 +3,14 @@ import React from 'react';
 
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
-import { AuthUserDataContextProvider } from '@/providers/AuthUserDataContextProvider';
-import UserFormDataContextProviders from '@/providers/register';
+import { AuthContextProvider } from '@/providers/AuthContextProvider';
+
+import UserFormDataContextProviders from './cadastro/providers/UserFormDataContextProviders';
 
 const MembrosLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="dark:bg-boxdark-2 dark:text-bodydark">
-      <AuthUserDataContextProvider>
+      <AuthContextProvider>
         <div className="flex h-screen overflow-hidden">
           <Sidebar />
 
@@ -25,7 +26,7 @@ const MembrosLayout = ({ children }: { children: React.ReactNode }) => {
             </main>
           </div>
         </div>
-      </AuthUserDataContextProvider>
+      </AuthContextProvider>
     </div>
   );
 };

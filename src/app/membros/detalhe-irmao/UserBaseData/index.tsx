@@ -11,7 +11,8 @@ import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import Image from '@/components/Image';
 import { parameters } from '@/constants/form-parameters';
 import addData from '@/lib/firebase/firestore/addData';
-import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
+
+import { usePersonalContext } from '../../cadastro/pessoal/providers/PersonalContextProvider';
 
 type UserBaseDataProps = {
   userId: string;

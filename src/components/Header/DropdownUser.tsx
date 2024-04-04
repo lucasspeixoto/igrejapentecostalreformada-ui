@@ -10,13 +10,10 @@ import { SlLogout } from 'react-icons/sl';
 import { toast } from 'react-toastify';
 
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const router = useRouter();
-
-  const userProfileContext = useAuthUserDataContext();
 
   const authContext = useAuthContext();
 
@@ -31,9 +28,9 @@ const DropdownUser = () => {
     if (error) {
       toast.error(firebaseMessages[error.code]);
 
-      authContext.updateLoadingAuthProcess(false);
+      authContext.updateIsLoadingData(false);
     } else {
-      authContext.updateLoadingAuthProcess(false);
+      authContext.updateIsLoadingData(false);
     }
   };
 
@@ -72,18 +69,18 @@ const DropdownUser = () => {
         href="#">
         <span className="hidden text-left lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {userProfileContext.authData?.name}
+            {authContext.authData?.name}
           </span>
           <span className="block text-xs">Graça e paz 🙏</span>
         </span>
 
         <span className="h-12 w-12">
-          {userProfileContext.authData?.photoUrl ? (
+          {authContext.authData?.photoUrl ? (
             <Image
               width={112}
               height={112}
               className="h-12 w-12 rounded-full"
-              src={userProfileContext.authData?.photoUrl}
+              src={authContext.authData?.photoUrl}
               alt="User"
             />
           ) : (

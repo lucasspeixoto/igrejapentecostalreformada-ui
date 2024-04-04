@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { getUsersDocuments } from '@/lib/firebase/firestore/getData';
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
+import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { UserData } from '@/types/user-data';
 
 import CityDistribuitionChart from '../CityDistribuitionChart';
@@ -12,7 +12,7 @@ import ManAndWomanChart from '../ManAndWomanChart';
 import StatisticTotals from '../Totals';
 
 const StatisticsContainer: React.FC = () => {
-  const userContext = useAuthUserDataContext();
+  const userAuthContext = useAuthContext();
 
   const [userLoadedData, setUserLoadedData] = React.useState<UserData[]>([]);
 
@@ -26,7 +26,7 @@ const StatisticsContainer: React.FC = () => {
   React.useEffect(() => {
     let mounted = true;
 
-    const isAdmin = userContext.authData?.isAdmin!;
+    const isAdmin = userAuthContext.authData?.isAdmin!;
 
     setIsAdminOption(isAdmin);
 
@@ -46,7 +46,7 @@ const StatisticsContainer: React.FC = () => {
     return () => {
       mounted = false;
     };
-  }, [userContext]);
+  }, [userAuthContext]);
 
   return (
     <>

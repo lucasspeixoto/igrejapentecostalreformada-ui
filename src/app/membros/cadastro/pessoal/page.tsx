@@ -3,9 +3,9 @@ import Link from 'next/link';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
-import AddressForm from './AddressForm';
-import ContactForm from './ContactForm';
-import DocsForm from './DocsForm';
+import AddressForm from './components/AddressForm';
+import ContactForm from './components/ContactForm';
+import DocsForm from './components/DocsForm';
 
 export const metadata: Metadata = {
   title: 'Dados Pessoais',

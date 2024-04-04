@@ -16,7 +16,7 @@ import {
 } from 'react-icons/fa';
 import { SiStorybook } from 'react-icons/si';
 
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
+import { useAuthContext } from '@/providers/AuthContextProvider';
 import useIsSidebarOpen from '@/store/useIsSidebarOpen';
 
 import { MenuChevroletIcon } from '../Icons';
@@ -35,7 +35,7 @@ const Sidebar = () => {
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
 
-  const { authData } = useAuthUserDataContext()!;
+  const { authData } = useAuthContext()!;
 
   const setSidebarOpen = useIsSidebarOpen(state => state.setSidebarOpen);
 

@@ -10,7 +10,7 @@ import Image from '@/components/Image';
 import { storage } from '@/lib/firebase/config';
 import addData from '@/lib/firebase/firestore/addData';
 import firebaseMessages from '@/lib/firebase/messages';
-import type { UserAuth } from '@/types/user-auth';
+import type { Auth } from '@/types/auth';
 
 type UserUploadPhotoProps = {
   userId: string;
@@ -34,7 +34,7 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
   const setPhotoUrlInAuthUserData = async (downloadURL: string) => {
     const userAuthCollection = {
       photoUrl: downloadURL,
-    } as UserAuth;
+    } as Auth;
 
     const { error } = await addData('users', userId, {
       auth: userAuthCollection,
@@ -42,7 +42,7 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
 
     if (error) {
       toast.error(
-        'Error ao salvar foto de membro. Tente novamente mais tarde ou contate admim.'
+        'Error ao salvar foto de membro. Tente novamente mais tarde ou contate admin.'
       );
     } else {
       setIsLoadingUploadPhoto(false);

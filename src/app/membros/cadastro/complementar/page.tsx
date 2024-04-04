@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
-import EducationForm from './EducationForm';
-import FamilyForm from './FamilyForm';
+import EducationForm from './components/EducationForm';
+import FamilyForm from './components/FamilyForm';
 
 export const metadata: Metadata = {
   title: 'Dados Complementares',

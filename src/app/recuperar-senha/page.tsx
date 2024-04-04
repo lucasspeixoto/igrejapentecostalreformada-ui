@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'Plataforma de membros da igreja pentecostal reformada (IPR)',
 };
 
-const RecoveryPasswors: React.FC = () => {
+const RecoveryPassword: React.FC = () => {
   return (
     <React.Fragment>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -43,4 +43,4 @@ const RecoveryPasswors: React.FC = () => {
   );
 };
 
-export default RecoveryPasswors;
+export default RecoveryPassword;

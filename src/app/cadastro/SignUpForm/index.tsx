@@ -17,14 +17,14 @@ import { toast } from 'react-toastify';
 
 import { GoogleLogo } from '@/components/common/Icons';
 import signInUserHandler from '@/lib/firebase/auth/signin';
-import { useAuthContext } from '@/providers/AuthContextProvider';
+import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
 import type { CreateUserFormData } from '@/schemas/authentication/signup-schema';
 import { createUserFormSchema } from '@/schemas/authentication/signup-schema';
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();
 
-  const authContext = useAuthContext()!;
+  const authContext = useFirebaseAuthContext()!;
 
   const {
     register,

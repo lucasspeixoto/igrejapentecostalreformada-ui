@@ -8,22 +8,22 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { toast } from 'react-toastify';
 
-import { useAuthContext } from '@/providers/AuthContextProvider';
+import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
+import type { Auth } from '@/types/auth';
 import type { Process } from '@/types/process';
-import type { UserAuth } from '@/types/user-auth';
 
 import LoginForm from './LoginForm';
 
 const LoginWrapper: React.FC = () => {
   const router = useRouter();
 
-  const authContext = useAuthContext()!;
+  const authContext = useFirebaseAuthContext()!;
 
   const singInWithGoogleHandler = async (): Promise<void> => {
     const { result, error, isTheUserNew } = await signInWithGoogle();
 
-    let userAuthCollection: UserAuth;
+    let userAuthCollection: Auth;
 
     let processCollection: Process;
 

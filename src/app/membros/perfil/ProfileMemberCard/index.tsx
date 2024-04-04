@@ -1,13 +1,14 @@
 'use client';
 
 import MemberCard from '@/components/MemberCard';
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
-import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
+import { useAuthContext } from '@/providers/AuthContextProvider';
+
+import { usePersonalContext } from '../../cadastro/pessoal/providers/PersonalContextProvider';
 
 const ProfileMemberCard: React.FC = () => {
   const personalContext = usePersonalContext();
 
-  const userProfileContext = useAuthUserDataContext();
+  const userProfileContext = useAuthContext();
 
   return (
     <MemberCard

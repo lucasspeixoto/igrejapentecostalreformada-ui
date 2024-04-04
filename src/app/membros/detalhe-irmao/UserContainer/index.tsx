@@ -5,23 +5,23 @@ import React from 'react';
 
 import MemberCard from '@/components/MemberCard';
 import { getDocument } from '@/lib/firebase/firestore/getData';
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
+import { useAuthContext } from '@/providers/AuthContextProvider';
+import type { Auth } from '@/types/auth';
 import type { Process } from '@/types/process';
 import type { Personal } from '@/types/register/personal';
-import type { UserAuth } from '@/types/user-auth';
 import type { UserData } from '@/types/user-data';
 
 import UserBaseData from '../UserBaseData';
 import UserUploadPhoto from '../UserUploadPhoto';
 
 const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
-  const userContext = useAuthUserDataContext()!;
+  const userContext = useAuthContext()!;
 
   const [selectedPersonalUserData, setSelectedPersonalUserData] =
     React.useState<Personal | null>(null);
 
   const [selectedAuthUserData, setSelectedAuthUserData] =
-    React.useState<UserAuth | null>(null);
+    React.useState<Auth | null>(null);
 
   const [selectedProcessUserData, setSelectedProcessUserData] = React.useState<
     Process | undefined

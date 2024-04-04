@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
-import BaptismForm from './BaptismForm';
-import MemberForm from './MemberForm';
+import BaptismForm from './components/BaptismForm';
+import MemberForm from './components/MemberForm';
 
 export const metadata: Metadata = {
   title: 'Dados Eclesiásticos',

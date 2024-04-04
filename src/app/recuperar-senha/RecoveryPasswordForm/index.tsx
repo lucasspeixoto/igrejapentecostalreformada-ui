@@ -13,14 +13,14 @@ import { toast } from 'react-toastify';
 
 import { SpinnerLogo } from '@/components/common/Icons';
 import recoveryPasswordHandler from '@/lib/firebase/auth/recovery-password';
-import { useAuthContext } from '@/providers/AuthContextProvider';
+import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
 import {
   type RecoveryPasswordFormData,
   recoveryPasswordFormSchema,
 } from '@/schemas/authentication/recovery-password-schema';
 
 const RecoveryPasswordForm = () => {
-  const authContext = useAuthContext()!;
+  const authContext = useFirebaseAuthContext()!;
 
   const {
     register,

@@ -10,7 +10,7 @@ import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 
 import RedirectLink from '@/app/components/RedirectLink';
 import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
-import { useAuthContext } from '@/providers/AuthContextProvider';
+import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
 import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
 import { loginUserFormSchema } from '@/schemas/authentication/signin-schema';
 
@@ -23,7 +23,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   singInWithEmailAndPasswordHandler,
   singInWithGoogleHandler,
 }) => {
-  const authContext = useAuthContext()!;
+  const authContext = useFirebaseAuthContext()!;
 
   const {
     register,

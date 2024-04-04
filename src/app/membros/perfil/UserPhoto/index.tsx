@@ -11,35 +11,32 @@ import { storage } from '@/lib/firebase/config';
 import addData from '@/lib/firebase/firestore/addData';
 import firebaseMessages from '@/lib/firebase/messages';
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
-import type { UserAuth } from '@/types/user-auth';
+import type { Auth } from '@/types/auth';
 
 const UserPhoto: React.FC = () => {
-  const userProfileContext = useAuthUserDataContext()!;
-
   const authContext = useAuthContext()!;
 
   const [loadPhotoProgress, setLoadPhotoProgress] = React.useState(0);
 
   const [isLoadingUploadPhoto, setIsLoadingUploadPhoto] = React.useState(false);
 
-  const hasPhotoUploaded = !!userProfileContext.authData?.photoUrl;
+  const hasPhotoUploaded = !!authContext.authData?.photoUrl;
 
   const setPhotoUrlInAuthUserData = async (downloadURL: string) => {
-    const { authData } = userProfileContext;
+    const { authData } = authContext;
 
     const userAuthCollection = {
       ...authData,
       photoUrl: downloadURL,
-    } as UserAuth;
+    } as Auth;
 
-    const { error } = await addData('users', authContext.user?.uid!, {
+    const { error } = await addData('users', authContext.authData?.userId!, {
       auth: userAuthCollection,
     });
 
     if (error) {
       toast.error(
-        'Error ao salvar foto. Tente novamente mais tarde ou contate admim.'
+        'Error ao salvar foto. Tente novamente mais tarde ou contate admin.'
       );
     } else {
       setIsLoadingUploadPhoto(false);
@@ -47,7 +44,7 @@ const UserPhoto: React.FC = () => {
       toast.success('Foto atualizada com sucesso!');
     }
 
-    userProfileContext.setUpdatedAuthData(userAuthCollection);
+    authContext.setUpdatedAuthData(userAuthCollection);
   };
 
   const uploadPhotoHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +60,7 @@ const UserPhoto: React.FC = () => {
 
     const storageRef = ref(
       storage,
-      `photos/${userProfileContext.authData?.userId}.jpg`
+      `photos/${authContext.authData?.userId}.jpg`
     );
 
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -102,7 +99,7 @@ const UserPhoto: React.FC = () => {
                 width={55}
                 height={55}
                 className="h-14 w-14 rounded-full"
-                src={userProfileContext.authData?.photoUrl!}
+                src={authContext.authData?.photoUrl!}
                 alt="Foto pessoal"
               />
             ) : (

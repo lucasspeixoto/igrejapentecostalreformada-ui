@@ -4,7 +4,7 @@ import './satoshi.css';
 
 import React from 'react';
 
-import { AuthContextProvider } from '@/providers/AuthContextProvider';
+import { FirebaseAuthContextProvider } from '@/providers/FirebaseAuthContextProvider';
 import { ToastProvider } from '@/providers/ToastProvider';
 
 export default function RootLayout({
@@ -18,9 +18,9 @@ export default function RootLayout({
         <div className="w-full dark:bg-boxdark-2 dark:text-bodydark">
           <main>
             <div className="z-20 w-full overflow-auto">
-              <AuthContextProvider>
+              <FirebaseAuthContextProvider>
                 <ToastProvider>{children}</ToastProvider>
-              </AuthContextProvider>
+              </FirebaseAuthContextProvider>
             </div>
           </main>
         </div>

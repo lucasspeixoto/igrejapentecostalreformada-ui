@@ -11,15 +11,13 @@ import { toast } from 'react-toastify';
 import { SpinnerLogo } from '@/components/common/Icons';
 import addData from '@/lib/firebase/firestore/addData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
-import { usePersonalContext } from '@/providers/register/PersonalContextProvider';
+
+import { usePersonalContext } from '../../cadastro/pessoal/providers/PersonalContextProvider';
 
 const UserBio: React.FC = () => {
   const authContext = useAuthContext();
 
   const personalContext = usePersonalContext();
-
-  const userProfileContext = useAuthUserDataContext();
 
   const [bio, setBio] = React.useState('');
 
@@ -32,13 +30,13 @@ const UserBio: React.FC = () => {
       bio,
     };
 
-    const { error } = await addData('users', authContext.user?.uid!, {
+    const { error } = await addData('users', authContext.authData?.userId!, {
       personal: userPersonalContactCollection,
     });
 
     if (error) {
       toast.error(
-        'Error ao salvar biografia. Tente novamente mais tarde ou contate admim.'
+        'Error ao salvar biografia. Tente novamente mais tarde ou contate admin.'
       );
     } else {
       personalContext.updateIsDataUpdatedInfo();
@@ -78,7 +76,7 @@ const UserBio: React.FC = () => {
                 name="name"
                 id="name"
                 placeholder="Nome"
-                defaultValue={userProfileContext?.authData?.name!}
+                defaultValue={authContext?.authData?.name!}
                 disabled
               />
             </div>
@@ -125,7 +123,7 @@ const UserBio: React.FC = () => {
               name="email"
               id="email"
               placeholder="E-mail"
-              defaultValue={authContext?.user?.email!}
+              defaultValue={authContext?.authData?.email!}
               disabled
             />
           </div>

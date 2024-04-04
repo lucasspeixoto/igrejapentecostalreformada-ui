@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 import deleteData from '@/lib/firebase/firestore/deleteData';
 import deletePhoto from '@/lib/firebase/firestore/deletePhoto';
 import { getUsersDocuments } from '@/lib/firebase/firestore/getData';
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
+import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { UserData } from '@/types/user-data';
 import { orderMembersListByName } from '@/utils/array-operations';
 
@@ -28,7 +28,7 @@ const DELETE_MODAL_CANCEL_TITLE = 'Cancelar';
 const DELETE_MODAL_CONFIRM_TITLE = 'Confirmar';
 
 const MembersList: React.FC = () => {
-  const userContext = useAuthUserDataContext();
+  const userContext = useAuthContext();
 
   const [userLoadedData, setUserLoadedData] = React.useState<UserData[]>([]);
 
