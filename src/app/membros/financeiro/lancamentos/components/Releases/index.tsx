@@ -10,6 +10,8 @@ import { AiOutlineCheckCircle, AiOutlineEye } from 'react-icons/ai';
 import { BiBlock, BiTrash } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 
+import Loader from '@/components/common/Loader';
+import Modal from '@/components/Modal';
 import deleteData from '@/lib/firebase/firestore/deleteData';
 import deletePhoto from '@/lib/firebase/firestore/deletePhoto';
 import { getUsersDocuments } from '@/lib/firebase/firestore/getData';
@@ -17,8 +19,7 @@ import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider'
 import type { UserData } from '@/types/user-data';
 import { orderMembersListByName } from '@/utils/array-operations';
 
-import Loader from '../common/Loader';
-import Modal from '../Modal';
+
 
 const DELETE_MODAL_TITLE = 'Deletar membro';
 
@@ -27,7 +28,7 @@ const DELETE_MODAL_SUBTITLE =
 const DELETE_MODAL_CANCEL_TITLE = 'Cancelar';
 const DELETE_MODAL_CONFIRM_TITLE = 'Confirmar';
 
-const MembersList: React.FC = () => {
+const Releases: React.FC = () => {
   const userContext = useAuthUserDataContext();
 
   const [userLoadedData, setUserLoadedData] = React.useState<UserData[]>([]);
@@ -140,9 +141,9 @@ const MembersList: React.FC = () => {
         <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default sm:px-7.5 xl:pb-1 dark:border-strokedark dark:bg-boxdark">
           <div className="mb-2 flex flex-col justify-start gap-1">
             <p className="text-xl font-semibold text-black dark:text-white">
-              Membros Cadastrados IPR{' '}
-              <span className="font-bold text-meta-6">
-                ({userLoadedData.length})
+              Notas Lançadas{' '}
+              <span className="font-bold text-meta-6 text-lg mt-1 ml-2">
+                04/2024
               </span>
             </p>
           </div>
@@ -158,7 +159,7 @@ const MembersList: React.FC = () => {
                       <thead>
                         <tr className="bg-gray-2 text-left dark:bg-meta-4">
                           <th className="min-w-[220px] p-4 font-medium text-black dark:text-white xl:pl-11">
-                            Nome
+                            Responsável
                           </th>
                           <th className="min-w-[150px] p-4 font-medium text-black dark:text-white">
                             Atuação
@@ -270,4 +271,4 @@ const MembersList: React.FC = () => {
   );
 };
 
-export default MembersList;
+export default Releases;

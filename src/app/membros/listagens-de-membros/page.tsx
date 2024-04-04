@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
-import MembersList from '@/components/Tables/MembersList';
+
+import MembersList from './components/MembersList';
 
 export const metadata: Metadata = {
   title: 'Lista de irmãos',

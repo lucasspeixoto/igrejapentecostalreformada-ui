@@ -8,7 +8,12 @@ import React from 'react';
 import { AiOutlinePieChart } from 'react-icons/ai';
 import { BiUser } from 'react-icons/bi';
 import { BsCalendarDate, BsLink45Deg, BsPeople } from 'react-icons/bs';
-import { FaWpforms } from 'react-icons/fa';
+import {
+  FaChartLine,
+  FaRegMoneyBillAlt,
+  FaTable,
+  FaWpforms,
+} from 'react-icons/fa';
 import { SiStorybook } from 'react-icons/si';
 
 import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
@@ -297,6 +302,70 @@ const Sidebar = () => {
                                   'text-white'
                                 } `}>
                                 Econômicos
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      </React.Fragment>
+                    );
+                  }}
+                </SidebarLinkGroup>
+              ) : null}
+
+              {/* <!-- Financeiro --> */}
+              {authData?.isAdmin ? (
+                <SidebarLinkGroup
+                  activeCondition={
+                    pathname === '/' || pathname.includes('financeiro')
+                  }>
+                  {(handleClick, open) => {
+                    return (
+                      <React.Fragment>
+                        <Link
+                          href="#"
+                          className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
+                            (pathname === '/membros/financeiro' ||
+                              pathname.includes('financeiro')) &&
+                            'bg-graydark dark:bg-meta-4'
+                          }`}
+                          onClick={e => {
+                            e.preventDefault();
+                            sidebarExpanded
+                              ? handleClick()
+                              : setSidebarExpanded(true);
+                          }}>
+                          <FaRegMoneyBillAlt size={20} className="text-gray" />
+                          Financeiro
+                          <MenuChevroletIcon open={open} />
+                        </Link>
+                        {/* <!-- Dropdown Menu Start --> */}
+                        <div
+                          className={`translate overflow-hidden${
+                            !open && ' hidden'
+                          }`}>
+                          <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
+                            <li>
+                              <Link
+                                href="/membros/financeiro/lancamentos"
+                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                  pathname ===
+                                    '/membros/financeiro/lancamentos' &&
+                                  'text-white'
+                                } `}>
+                                <FaTable size={16} className="text-white" />
+                                Lançamentos
+                              </Link>
+                            </li>
+                            <li>
+                              <Link
+                                href="/membros/financeiro/relatorios"
+                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                  pathname ===
+                                    '/membros/financeiro/relatorios' &&
+                                  'text-white'
+                                } `}>
+                                <FaChartLine size={16} className="text-white" />
+                                Relatórios
                               </Link>
                             </li>
                           </ul>
