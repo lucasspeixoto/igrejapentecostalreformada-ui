@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
-import ProfileMemberCard from './ProfileMemberCard';
-import UserBio from './UserBio';
-import UserPhoto from './UserPhoto';
+import ProfileMemberCard from './components/ProfileMemberCard';
+import UserBio from './components/UserBio';
+import UserPhoto from './components/UserPhoto';
 
 export const metadata: Metadata = {
   title: 'Perfil',

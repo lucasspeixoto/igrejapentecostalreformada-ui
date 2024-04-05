@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 import RedirectLink from '../components/RedirectLink';
-import SignUpForm from './SignUpForm';
+import SignUpForm from './components/SignUpForm';
 
 export const metadata: Metadata = {
   title: 'Cadastrar',

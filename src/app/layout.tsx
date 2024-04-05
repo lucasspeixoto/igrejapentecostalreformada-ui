@@ -1,6 +1,6 @@
-import './globals.css';
-import './data-tables-css.css';
-import './satoshi.css';
+import './css/globals.css';
+import './css/data-tables-css.css';
+import './css/satoshi.css';
 
 import React from 'react';
 

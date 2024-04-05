@@ -1,8 +1,6 @@
 'use client';
 
-/* eslint-disable no-console */
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
-/* import signIn from '@fire/auth/signin'; */
 
 import firebaseMessages from '@fire/messages';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,10 +12,9 @@ import { toast } from 'react-toastify';
 import { SpinnerLogo } from '@/components/common/Icons';
 import recoveryPasswordHandler from '@/lib/firebase/auth/recovery-password';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import {
-  type RecoveryPasswordFormData,
-  recoveryPasswordFormSchema,
-} from '@/schemas/authentication/recovery-password-schema';
+
+import type { RecoveryPasswordFormData } from '../../schemas/recovery-password-schema';
+import { recoveryPasswordFormSchema } from '../../schemas/recovery-password-schema';
 
 const RecoveryPasswordForm = () => {
   const authContext = useFirebaseAuthContext()!;

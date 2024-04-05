@@ -9,10 +9,10 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
 import type { Auth } from '@/types/auth';
 import type { Process } from '@/types/process';
 
+import type { LoginUserFormData } from '../schemas/signin-schema';
 import LoginForm from './LoginForm';
 
 const LoginWrapper: React.FC = () => {

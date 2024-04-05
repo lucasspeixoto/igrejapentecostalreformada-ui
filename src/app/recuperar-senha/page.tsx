@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 import RedirectLink from '../components/RedirectLink';
-import RecoveryPasswordForm from './RecoveryPasswordForm';
+import RecoveryPasswordForm from './components/RecoveryPasswordForm';
 
 export const metadata: Metadata = {
   title: 'Recuperar Senha',

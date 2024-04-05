@@ -11,8 +11,9 @@ import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 import RedirectLink from '@/app/components/RedirectLink';
 import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
-import { loginUserFormSchema } from '@/schemas/authentication/signin-schema';
+
+import type { LoginUserFormData } from '../schemas/signin-schema';
+import { loginUserFormSchema } from '../schemas/signin-schema';
 
 type LoginFormProps = {
   singInWithEmailAndPasswordHandler: (data: LoginUserFormData) => void;

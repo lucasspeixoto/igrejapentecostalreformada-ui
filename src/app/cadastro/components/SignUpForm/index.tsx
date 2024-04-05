@@ -18,8 +18,9 @@ import { toast } from 'react-toastify';
 import { GoogleLogo } from '@/components/common/Icons';
 import signInUserHandler from '@/lib/firebase/auth/signin';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import type { CreateUserFormData } from '@/schemas/authentication/signup-schema';
-import { createUserFormSchema } from '@/schemas/authentication/signup-schema';
+
+import type { CreateUserFormData } from '../../schemas/signup-schema';
+import { createUserFormSchema } from '../../schemas/signup-schema';
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();

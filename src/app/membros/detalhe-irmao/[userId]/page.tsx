@@ -3,7 +3,7 @@ import React from 'react';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
-import UserContainer from '../UserContainer';
+import UserContainer from '../components/UserContainer';
 
 export const metadata: Metadata = {
   title: 'Detalhe Irmão',

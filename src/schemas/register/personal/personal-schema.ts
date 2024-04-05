@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { phoneRegex } from '@/constants/regex';
+import { phoneRegex } from '@/app/membros/cadastro/constants/regex';
 
 export const createPersonalContactFormSchema = z.object({
   name: z
