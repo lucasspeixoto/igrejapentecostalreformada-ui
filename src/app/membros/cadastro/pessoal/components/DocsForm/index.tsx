@@ -8,12 +8,10 @@ import { toast } from 'react-toastify';
 import { SpinnerLogo } from '@/components/common/Icons';
 import addData from '@/lib/firebase/firestore/addData';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import {
-  type CreatePersonalDocsFormData,
-  createPersonalDocsFormSchema,
-} from '@/schemas/register/personal/docs-schema';
 
 import { usePersonalContext } from '../../providers/PersonalContextProvider';
+import type { CreatePersonalDocsFormData } from '../../schemas/docs-schema';
+import { createPersonalDocsFormSchema } from '../../schemas/docs-schema';
 
 const DocsForm = () => {
   const firebaseAuthContext = useFirebaseAuthContext()!;

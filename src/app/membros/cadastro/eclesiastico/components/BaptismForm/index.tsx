@@ -9,10 +9,10 @@ import { parameters } from '@/app/membros/cadastro/constants/form-parameters';
 import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import addData from '@/lib/firebase/firestore/addData';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import type { CreateEcclesiasticalBaptismFormData } from '@/schemas/register/ecclesiastical/baptism-schema';
-import { createEcclesiasticalBaptismFormSchema } from '@/schemas/register/ecclesiastical/baptism-schema';
 
 import { useEcclesiasticalContext } from '../../providers/EcclesiasticalContextProvider';
+import type { CreateEcclesiasticalBaptismFormData } from '../../schemas/baptism-schema';
+import { createEcclesiasticalBaptismFormSchema } from '../../schemas/baptism-schema';
 
 const BaptismForm = () => {
   const firebaseAuthContext = useFirebaseAuthContext()!;

@@ -9,10 +9,10 @@ import { parameters } from '@/app/membros/cadastro/constants/form-parameters';
 import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import addData from '@/lib/firebase/firestore/addData';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import type { CreateSupplementaryEducationFormData } from '@/schemas/register/supplementary/education-schema';
-import { createSupplementaryEducationFormSchema } from '@/schemas/register/supplementary/education-schema';
 
 import { useSupplementaryContext } from '../../providers/SupplementaryContextProvider';
+import type { CreateSupplementaryEducationFormData } from '../../schemas/education-schema';
+import { createSupplementaryEducationFormSchema } from '../../schemas/education-schema';
 
 const EducationForm = () => {
   const firebaseAuthContext = useFirebaseAuthContext()!;

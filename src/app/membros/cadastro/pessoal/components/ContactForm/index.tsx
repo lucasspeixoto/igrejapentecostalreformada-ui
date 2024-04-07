@@ -8,12 +8,10 @@ import { toast } from 'react-toastify';
 import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import addData from '@/lib/firebase/firestore/addData';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import {
-  type CreatePersonalContactFormData,
-  createPersonalContactFormSchema,
-} from '@/schemas/register/personal/personal-schema';
 
 import { usePersonalContext } from '../../providers/PersonalContextProvider';
+import type { CreatePersonalContactFormData } from '../../schemas/personal-schema';
+import { createPersonalContactFormSchema } from '../../schemas/personal-schema';
 
 const ContactForm = () => {
   const firebaseAuthContext = useFirebaseAuthContext()!;

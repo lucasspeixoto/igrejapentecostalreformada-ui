@@ -9,10 +9,10 @@ import { parameters } from '@/app/membros/cadastro/constants/form-parameters';
 import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import addData from '@/lib/firebase/firestore/addData';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import type { CreateSupplementaryFamilyFormData } from '@/schemas/register/supplementary/family-schema';
-import { createSupplementaryFamilyFormSchema } from '@/schemas/register/supplementary/family-schema';
 
 import { useSupplementaryContext } from '../../providers/SupplementaryContextProvider';
+import type { CreateSupplementaryFamilyFormData } from '../../schemas/family-schema';
+import { createSupplementaryFamilyFormSchema } from '../../schemas/family-schema';
 
 const FamilyForm = () => {
   const firebaseAuthContext = useFirebaseAuthContext()!;

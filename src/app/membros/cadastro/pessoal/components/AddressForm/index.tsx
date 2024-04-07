@@ -10,11 +10,11 @@ import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import api from '@/lib/axios/via-cep-instance';
 import addData from '@/lib/firebase/firestore/addData';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import type { CreatePersonalAddressFormData } from '@/schemas/register/personal/address-schema';
-import { createPersonalAddressFormSchema } from '@/schemas/register/personal/address-schema';
 import type { ViaCepResponse } from '@/types/via-cep-response';
 
 import { usePersonalContext } from '../../providers/PersonalContextProvider';
+import type { CreatePersonalAddressFormData } from '../../schemas/address-schema';
+import { createPersonalAddressFormSchema } from '../../schemas/address-schema';
 
 const AddressForm = () => {
   const firebaseAuthContext = useFirebaseAuthContext()!;
