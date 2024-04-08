@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 'use client';
 
 import Link from 'next/link';
@@ -62,7 +64,9 @@ const Header: React.FC = () => {
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          <Link className="block shrink-0 lg:hidden" href="/membros/perfil">
+          <Link
+            className="block shrink-0 lg:hidden"
+            href="/plataforma-ipr/perfil">
             <Image
               width={32}
               height={32}

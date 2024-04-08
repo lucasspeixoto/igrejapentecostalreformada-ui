@@ -64,7 +64,7 @@ const SignUpForm: React.FC = () => {
 
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros/cadastro/pessoal');
+      router.push('/plataforma-ipr/cadastro/pessoal');
     }
   };
 
@@ -77,7 +77,7 @@ const SignUpForm: React.FC = () => {
     if (error) {
       toast.error(firebaseMessages[error.code]);
     } else {
-      router.push('/membros/cadastro/pessoal');
+      router.push('/plataforma-ipr/cadastro/pessoal');
 
       authContext.updateLoadingAuthProcess(false);
     }

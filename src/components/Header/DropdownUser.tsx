@@ -122,7 +122,7 @@ const DropdownUser = () => {
           <li>
             <span className="leading-loose text-meta-4 opacity-80 hover:opacity-100 dark:text-gray">
               <Link
-                href="/membros/perfil"
+                href="/plataforma-ipr/perfil"
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out lg:text-base">
                 <BiUser size={20} />
                 Meu Perfil
@@ -132,7 +132,7 @@ const DropdownUser = () => {
           <li>
             <span className="leading-loose text-meta-4 opacity-80 hover:opacity-100 dark:text-gray">
               <Link
-                href="/membros/cadastro/pessoal"
+                href="/plataforma-ipr/cadastro/pessoal"
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out lg:text-base">
                 <FaWpforms size={20} />
                 Cadastro

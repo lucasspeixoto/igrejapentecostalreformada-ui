@@ -1,6 +1,8 @@
 'use client';
 
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -113,7 +115,7 @@ const Sidebar = () => {
       }`}>
       {/* <!-- Header --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        <Link href="/membros/perfil">
+        <Link href="/plataforma-ipr/perfil">
           <Image
             width={176}
             height={32}
@@ -157,7 +159,7 @@ const Sidebar = () => {
               {/* <!-- Perfil --> */}
               <li>
                 <Link
-                  href="/membros/perfil"
+                  href="/plataforma-ipr/perfil"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
                   }`}>
@@ -169,7 +171,7 @@ const Sidebar = () => {
               {/* <!-- Cadastro --> */}
               <SidebarLinkGroup
                 activeCondition={
-                  pathname === '/membros/cadastro' ||
+                  pathname === '/plataforma-ipr/cadastro' ||
                   pathname.includes('cadastro')
                 }>
                 {(handleClick, open) => {
@@ -178,7 +180,7 @@ const Sidebar = () => {
                       <Link
                         href="#"
                         className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                          (pathname === '/membros/cadastro' ||
+                          (pathname === '/plataforma-ipr/cadastro' ||
                             pathname.includes('cadastro')) &&
                           'bg-graydark dark:bg-meta-4'
                         }`}
@@ -200,9 +202,10 @@ const Sidebar = () => {
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
                             <Link
-                              href="/membros/cadastro/pessoal"
+                              href="/plataforma-ipr/cadastro/pessoal"
                               className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                pathname === '/membros/cadastro/pessoal' &&
+                                pathname ===
+                                  '/plataforma-ipr/cadastro/pessoal' &&
                                 'text-white'
                               }`}>
                               Pessoal
@@ -210,9 +213,10 @@ const Sidebar = () => {
                           </li>
                           <li>
                             <Link
-                              href="/membros/cadastro/complementar"
+                              href="/plataforma-ipr/cadastro/complementar"
                               className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                pathname === '/membros/cadastro/complementar' &&
+                                pathname ===
+                                  '/plataforma-ipr/cadastro/complementar' &&
                                 'text-white'
                               }`}>
                               Complementar
@@ -220,9 +224,10 @@ const Sidebar = () => {
                           </li>
                           <li>
                             <Link
-                              href="/membros/cadastro/eclesiastico"
+                              href="/plataforma-ipr/cadastro/eclesiastico"
                               className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                pathname === '/membros/cadastro/eclesiastico' &&
+                                pathname ===
+                                  '/plataforma-ipr/cadastro/eclesiastico' &&
                                 'text-white'
                               }`}>
                               Eclesiástico
@@ -239,7 +244,7 @@ const Sidebar = () => {
               {authData?.isAdmin ? (
                 <li>
                   <Link
-                    href="/membros/listagens-de-membros"
+                    href="/plataforma-ipr/membros"
                     className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                       pathname.includes('listagens-de-membros') &&
                       'bg-graydark dark:bg-meta-4'
@@ -262,7 +267,7 @@ const Sidebar = () => {
                         <Link
                           href="#"
                           className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                            (pathname === '/membros/indicadores' ||
+                            (pathname === '/plataforma-ipr/indicadores' ||
                               pathname.includes('indicadores')) &&
                             'bg-graydark dark:bg-meta-4'
                           }`}
@@ -284,10 +289,10 @@ const Sidebar = () => {
                           <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                             <li>
                               <Link
-                                href="/membros/indicadores/estatisticos"
+                                href="/plataforma-ipr/indicadores/estatisticos"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
                                   pathname ===
-                                    '/membros/indicadores/estatisticos' &&
+                                    '/plataforma-ipr/indicadores/estatisticos' &&
                                   'text-white'
                                 } `}>
                                 Estatísticos
@@ -295,10 +300,10 @@ const Sidebar = () => {
                             </li>
                             <li>
                               <Link
-                                href="/membros/indicadores/economicos"
+                                href="/plataforma-ipr/indicadores/economicos"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
                                   pathname ===
-                                    '/membros/indicadores/economicos' &&
+                                    '/plataforma-ipr/indicadores/economicos' &&
                                   'text-white'
                                 } `}>
                                 Econômicos
@@ -324,7 +329,7 @@ const Sidebar = () => {
                         <Link
                           href="#"
                           className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                            (pathname === '/membros/financeiro' ||
+                            (pathname === '/plataforma-ipr/financeiro' ||
                               pathname.includes('financeiro')) &&
                             'bg-graydark dark:bg-meta-4'
                           }`}
@@ -346,10 +351,10 @@ const Sidebar = () => {
                           <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                             <li>
                               <Link
-                                href="/membros/financeiro/lancamentos"
+                                href="/plataforma-ipr/financeiro/lancamentos"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
                                   pathname ===
-                                    '/membros/financeiro/lancamentos' &&
+                                    '/plataforma-ipr/financeiro/lancamentos' &&
                                   'text-white'
                                 } `}>
                                 <FaTable size={16} className="text-white" />
@@ -358,10 +363,10 @@ const Sidebar = () => {
                             </li>
                             <li>
                               <Link
-                                href="/membros/financeiro/relatorios"
+                                href="/plataforma-ipr/financeiro/relatorios"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
                                   pathname ===
-                                    '/membros/financeiro/relatorios' &&
+                                    '/plataforma-ipr/financeiro/relatorios' &&
                                   'text-white'
                                 } `}>
                                 <FaChartLine size={16} className="text-white" />
@@ -379,7 +384,7 @@ const Sidebar = () => {
               {/* <!-- Calendário --> */}
               <li>
                 <Link
-                  href="/membros/calendar"
+                  href="/plataforma-ipr/calendar"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('calendar') &&
                     'bg-graydark dark:bg-meta-4'
@@ -461,7 +466,7 @@ const Sidebar = () => {
                         <Link
                           href="#"
                           className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                            (pathname === '/membros/ui' ||
+                            (pathname === '/plataforma-ipr/ui' ||
                               pathname.includes('ui')) &&
                             'bg-graydark dark:bg-meta-4'
                           }`}
@@ -483,9 +488,9 @@ const Sidebar = () => {
                           <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                             <li>
                               <Link
-                                href="/membros/ui/botoes"
+                                href="/plataforma-ipr/ui/botoes"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname === '/membros/ui/botoes' &&
+                                  pathname === '/plataforma-ipr/ui/botoes' &&
                                   'text-white'
                                 } `}>
                                 Botões
@@ -493,9 +498,9 @@ const Sidebar = () => {
                             </li>
                             <li>
                               <Link
-                                href="/membros/ui/alertas"
+                                href="/plataforma-ipr/ui/alertas"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname === '/membros/ui/alertas' &&
+                                  pathname === '/plataforma-ipr/ui/alertas' &&
                                   'text-white'
                                 } `}>
                                 Alertas

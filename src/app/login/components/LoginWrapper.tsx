@@ -56,9 +56,9 @@ const LoginWrapper: React.FC = () => {
 
         toast.success('Bem vindo a IPR!');
 
-        router.push('/membros/cadastro/pessoal');
+        router.push('/plataforma-ipr/cadastro/pessoal');
       } else {
-        router.push('/membros/perfil');
+        router.push('/plataforma-ipr/perfil');
       }
 
       authContext.updateLoadingAuthProcess(false);
@@ -79,7 +79,7 @@ const LoginWrapper: React.FC = () => {
     } else {
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros/perfil');
+      router.push('/plataforma-ipr/perfil');
     }
   };
 
