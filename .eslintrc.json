@@ -61,12 +61,13 @@
         "simple-import-sort/exports": "error", // Export configuration for `eslint-plugin-simple-import-sort`
         "@typescript-eslint/no-unused-vars": "warn",
         "unused-imports/no-unused-imports": "warn",
-        "max-len": [
+        "max-len": "off",
+        /* "max-len": [
           "warn",
           {
             "code": 80
           }
-        ],
+        ], */
         "unused-imports/no-unused-vars": [
           "warn",
           {

@@ -5,7 +5,8 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import React, { createContext, useContext, useState } from 'react';
 
 import { getCollection } from '@/lib/firebase/firestore/getData';
-import type { Personal } from '@/types/register/personal';
+
+import type { Personal } from '../types/personal';
 
 const auth = getAuth(firebase_app);
 

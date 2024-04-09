@@ -1,5 +1,8 @@
+/* eslint-disable max-len */
+
 'use client';
 
+import type { Personal } from '@cadastro/pessoal/types/personal';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -8,7 +11,6 @@ import { getDocument } from '@/lib/firebase/firestore/getData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { Auth } from '@/types/auth';
 import type { Process } from '@/types/process';
-import type { Personal } from '@/types/register/personal';
 import type { UserData } from '@/types/user-data';
 
 import UserBaseData from '../UserBaseData';

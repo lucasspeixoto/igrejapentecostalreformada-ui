@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
