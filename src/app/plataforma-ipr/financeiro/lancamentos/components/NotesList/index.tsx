@@ -29,6 +29,7 @@ import {
 } from '../../constants/messages';
 import useFinanceDetailDate from '../../store/useFinanceDetailDate';
 import { getBalance } from '../../utils/get-balance';
+import FinanceNoteDetail from '../FinanceNoteDetail';
 
 const NotesList: React.FC = () => {
   const userContext = useAuthContext();
@@ -42,6 +43,8 @@ const NotesList: React.FC = () => {
   const [noteId, setNoteId] = React.useState<string | null>(null);
 
   const [showDeleteNoteModal, setShowDeleteNoteModal] = React.useState(false);
+
+  const [showDetailNoteModal, setShowDetailNoteModal] = React.useState(false);
 
   const router = useRouter();
 
@@ -69,11 +72,6 @@ const NotesList: React.FC = () => {
       mounted = false;
     };
   }, [userContext]);
-
-  const seeNoteDetailHandler = (_noteId: string) => {
-    setNoteId(_noteId);
-    // router.push(`detalhe-nota/${_noteId}`);
-  };
 
   const deleteNoteHandler = (_noteId: string) => {
     setNoteId(_noteId);
@@ -104,6 +102,11 @@ const NotesList: React.FC = () => {
     userContext.updateIsLoadingData(false);
   };
 
+  const seeNoteDetailHandler = (_noteId: string) => {
+    setNoteId(_noteId);
+    setShowDetailNoteModal(true);
+  };
+
   //! New
   const selectedFinanceDetailDate = useFinanceDetailDate(
     state => state.selectedFinanceDetailDate
@@ -111,6 +114,13 @@ const NotesList: React.FC = () => {
 
   //! New
   const financeNotes = MOCKED_FINANCE_NOTES;
+
+  //! New
+  const onCancelDetailNote = () => {
+    setShowDetailNoteModal(false);
+  };
+
+  const onConfirmDetailNote = async () => {};
 
   return (
     <>
@@ -123,6 +133,14 @@ const NotesList: React.FC = () => {
             confirmTitle={DELETE_NOTE_CONFIRM_TITLE}
             onCancel={onCancelDeleteNote}
             onConfirm={onConfirmDeleteNote}
+          />
+        ) : null}
+      </>
+      <>
+        {showDetailNoteModal ? (
+          <FinanceNoteDetail
+            onCancel={onCancelDetailNote}
+            onConfirm={onConfirmDetailNote}
           />
         ) : null}
       </>
