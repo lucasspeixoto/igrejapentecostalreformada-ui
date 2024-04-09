@@ -14,12 +14,12 @@ describe('getActualDate', () => {
     // Mock the Date constructor to return a fixed date
     // Use a fixed date for consistent testing
     const mockDate = new Date('2024-04-07T00:00:00');
-    (global.Date as any) = jest.fn(() => mockDate);
+    (global.Date as unknown) = jest.fn(() => mockDate);
   });
 
   afterAll(() => {
     // Restore the original Date constructor
-    (global.Date as any) = realDateConstructor;
+    (global.Date as unknown) = realDateConstructor;
   });
 
   it('should return the current month and year in the format MM/YYYY in getActualDate', () => {

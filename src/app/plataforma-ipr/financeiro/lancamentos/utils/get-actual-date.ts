@@ -1,3 +1,8 @@
+/**
+ * Returns the current date in the format "MM/YYYY".
+ *
+ * @returns The current date in the format "MM/YYYY".
+ */
 export function getActualDate(): string {
   const currentDate = new Date();
 

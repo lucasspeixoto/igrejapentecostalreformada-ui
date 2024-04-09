@@ -18,7 +18,8 @@ const Filters: React.FC = () => {
   );
 
   const optionalDates = React.useMemo(() => {
-    return generateDatesArray(2020, 12);
+    const dates = generateDatesArray(2020, 12);
+    return dates;
   }, []);
 
   const onChangeSelectedDate = (
@@ -28,7 +29,7 @@ const Filters: React.FC = () => {
   };
 
   return (
-    <div className="relative z-20 w-auto bg-transparent dark:bg-form-input">
+    <div className="relative z-20 w-auto max-w-[120px] bg-transparent dark:bg-form-input">
       <select
         value={selectedFinanceDetailDate}
         onChange={onChangeSelectedDate}

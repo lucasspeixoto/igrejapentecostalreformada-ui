@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -100,11 +102,11 @@ const FamilyForm = () => {
 
         <div className="w-full xl:w-1/2">
           <label className="mb-2.5 block text-black dark:text-white">
-            Nome do Conjuge
+            Nome do Cônjuge
           </label>
           <input
             type="text"
-            placeholder="Digite o nome do Conjuge"
+            placeholder="Digite o nome do Cônjuge"
             {...register('spouseName')}
             className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />
