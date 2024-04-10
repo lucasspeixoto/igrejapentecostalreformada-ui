@@ -8,7 +8,7 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
       'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FU6tkvy5k7dfmGNlIYvKWv79Ssen1.jpg?alt=media&token=13114439-e212-4819-a510-a379c820ef9e',
     description: 'Compra de Microfones Sem Fio',
     owner: 'Lucas',
-    date: new Date('2024-04-01T00:00:00'),
+    date: new Date('2024-03-29T00:00:00'),
     type: 'D',
     value: 150.0,
   },
@@ -19,7 +19,7 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
     description: 'Dízimo Pessoa A',
     owner: 'Rodrigo',
     date: new Date('2024-04-02T00:00:00'),
-    type: 'D',
+    type: 'C',
     value: 146.81,
   },
   {
@@ -56,10 +56,20 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
     id: 'cfa7fa7D7ahdU876',
     photoUrl:
       'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FbqUVwBSlNsPM1emXF8VUsK1kytl2.jpg?alt=media&token=82b4802c-5ca7-4b98-ac33-fe4dac6042e7',
-    description: 'Dízimo Pessoa A',
+    description: 'Dízimo Pessoa C',
     owner: 'Rodrigo',
     date: new Date('2024-04-07T00:00:00'),
     type: 'C',
-    value: 100.0,
+    value: 200.0,
+  },
+  {
+    id: 'cfa7fa7D7ahdU876',
+    photoUrl:
+      'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FbqUVwBSlNsPM1emXF8VUsK1kytl2.jpg?alt=media&token=82b4802c-5ca7-4b98-ac33-fe4dac6042e7',
+    description: 'Dízimo Pessoa D',
+    owner: 'Rodrigo',
+    date: new Date('2024-04-07T00:00:00'),
+    type: 'C',
+    value: 1000.0,
   },
 ];

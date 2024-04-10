@@ -4,12 +4,12 @@
 import React from 'react';
 import { MdOutlineEventNote } from 'react-icons/md';
 
-type FinanceNoteDetailProps = {
+type FinanceNoteInsertProps = {
   onCancel: () => void;
   onConfirm: () => void;
 };
 
-const FinanceNoteDetail: React.FC<FinanceNoteDetailProps> = ({
+const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
   onCancel,
   onConfirm,
 }) => {
@@ -61,4 +61,4 @@ const FinanceNoteDetail: React.FC<FinanceNoteDetailProps> = ({
   );
 };
 
-export default FinanceNoteDetail;
+export default FinanceNoteInsert;

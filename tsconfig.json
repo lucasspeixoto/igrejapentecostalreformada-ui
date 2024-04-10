@@ -38,6 +38,9 @@
       ],
       "@cadastro/*": [
         "./src/app/plataforma-ipr/cadastro/*"
+      ],
+      "@financeiro/*": [
+        "./src/app/plataforma-ipr/financeiro/*"
       ]
     }
   },

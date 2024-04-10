@@ -27,9 +27,8 @@ import {
   DELETE_NOTE_SUBTITLE,
   DELETE_NOTE_TITLE,
 } from '../../constants/messages';
-import useFinanceDetailDate from '../../store/useFinanceDetailDate';
-import { getBalance } from '../../utils/get-balance';
-import FinanceNoteDetail from '../FinanceNoteDetail';
+import FinanceNoteUpdate from '../FinanceNoteUpdate';
+import TableHeaderInfo from './TableHeaderInfo';
 
 const NotesList: React.FC = () => {
   const userContext = useAuthContext();
@@ -108,11 +107,6 @@ const NotesList: React.FC = () => {
   };
 
   //! New
-  const selectedFinanceDetailDate = useFinanceDetailDate(
-    state => state.selectedFinanceDetailDate
-  );
-
-  //! New
   const financeNotes = MOCKED_FINANCE_NOTES;
 
   //! New
@@ -120,6 +114,7 @@ const NotesList: React.FC = () => {
     setShowDetailNoteModal(false);
   };
 
+  //! New
   const onConfirmDetailNote = async () => {};
 
   return (
@@ -138,7 +133,7 @@ const NotesList: React.FC = () => {
       </>
       <>
         {showDetailNoteModal ? (
-          <FinanceNoteDetail
+          <FinanceNoteUpdate
             onCancel={onCancelDetailNote}
             onConfirm={onConfirmDetailNote}
           />
@@ -146,24 +141,7 @@ const NotesList: React.FC = () => {
       </>
       {isAdminOption ? (
         <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default sm:px-7.5 xl:pb-1 dark:border-strokedark dark:bg-boxdark">
-          <div className="w-full flex justify-between">
-            <div className="mb-2 flex flex-col justify-start gap-1">
-              <p className="text-xl font-semibold text-black dark:text-white">
-                Notas Lançadas{' '}
-                <span className="font-bold text-meta-3 text-lg mt-1 ml-2">
-                  {selectedFinanceDetailDate}
-                </span>
-              </p>
-            </div>
-            <div className="mb-2 flex flex-col justify-start gap-1">
-              <p className="text-xl font-semibold text-black dark:text-white">
-                Saldo Mês:{' '}
-                <span className="font-bold text-meta-7 text-lg mt-1 ml-2">
-                  R$ {getBalance(financeNotes).toFixed(2)}
-                </span>
-              </p>
-            </div>
-          </div>
+          <TableHeaderInfo />
 
           <div className="pb-10">
             {isLoadingUsers || !userLoadedData.length ? (
@@ -171,7 +149,7 @@ const NotesList: React.FC = () => {
             ) : (
               <>
                 <div className="rounded-sm border border-stroke bg-white  shadow-default dark:border-strokedark dark:bg-boxdark ">
-                  <div className="max-w-full overflow-x-auto ">
+                  <div className="max-w-full overflow-x-auto">
                     <table className="w-full table-auto">
                       <thead>
                         <tr className="bg-gray-2 text-left dark:bg-meta-4">
@@ -212,17 +190,17 @@ const NotesList: React.FC = () => {
                                         <Image
                                           src={note.photoUrl!}
                                           alt="Foto membro"
-                                          width={48}
-                                          height={48}
-                                          className="h-14 w-14 rounded-full"
+                                          width={36}
+                                          height={36}
+                                          className="h-8 w-8 rounded-full"
                                         />
                                       ) : (
                                         <Image
                                           src={'/images/user/dummy-user.png'}
-                                          alt="Brand"
-                                          width={48}
-                                          height={48}
-                                          className="h-14 w-14 rounded-full"
+                                          alt="Dummy User"
+                                          width={36}
+                                          height={36}
+                                          className="h-8 w-8 rounded-full"
                                         />
                                       )}
                                     </>

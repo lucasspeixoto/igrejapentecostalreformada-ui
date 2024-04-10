@@ -5,16 +5,14 @@ import React from 'react';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
 
-import useFinanceDetailDate from '../../store/useFinanceDetailDate';
+import useFinanceNotes from '../../store/useFinanceNotes';
 import { generateDatesArray } from '../../utils/generate-dates-array';
 
 const Filters: React.FC = () => {
-  const setSelectedFinanceDetailDate = useFinanceDetailDate(
-    state => state.setSelectedFinanceDetailDate
-  );
+  const setReferenceMonth = useFinanceNotes(state => state.setReferenceMonth);
 
-  const selectedFinanceDetailDate = useFinanceDetailDate(
-    state => state.selectedFinanceDetailDate
+  const selectedFinanceDetailDate = useFinanceNotes(
+    state => state.referenceMonth
   );
 
   const optionalDates = React.useMemo(() => {
@@ -25,7 +23,7 @@ const Filters: React.FC = () => {
   const onChangeSelectedDate = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSelectedFinanceDetailDate(event.target.value);
+    setReferenceMonth(event.target.value);
   };
 
   return (
