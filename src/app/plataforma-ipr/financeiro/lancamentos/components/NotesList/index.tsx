@@ -176,7 +176,9 @@ const NotesList: React.FC = () => {
                       <tbody>
                         {React.Children.toArray(
                           financeNotes.map(note => (
-                            <tr>
+                            <tr onClick={() =>
+                              seeNoteDetailHandler(note.id)
+                            } className='hover:bg-gray-2 hover:dark:bg-meta-4 hover:cursor-pointer'>
                               <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                                 <p className="text-black dark:text-white">
                                   {note.description}
@@ -192,7 +194,7 @@ const NotesList: React.FC = () => {
                                           alt="Foto membro"
                                           width={36}
                                           height={36}
-                                          className="h-8 w-8 rounded-full"
+                                          className="size-8 rounded-full"
                                         />
                                       ) : (
                                         <Image
@@ -200,7 +202,7 @@ const NotesList: React.FC = () => {
                                           alt="Dummy User"
                                           width={36}
                                           height={36}
-                                          className="h-8 w-8 rounded-full"
+                                          className="size-8 rounded-full"
                                         />
                                       )}
                                     </>
