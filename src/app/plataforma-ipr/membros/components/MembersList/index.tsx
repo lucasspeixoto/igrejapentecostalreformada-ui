@@ -179,7 +179,11 @@ const MembersList: React.FC = () => {
                           userLoadedData
                             ?.sort(orderMembersListByName)
                             .map(member => (
-                              <tr>
+                              <tr
+                                onClick={() =>
+                                  seeUserDetailHandler(member?.auth.userId)
+                                }
+                                className="hover:bg-gray-2 hover:dark:bg-meta-4 hover:cursor-pointer">
                                 <td className="border-b border-[#eee] px-1 py-5 pl-9 xl:pl-5 dark:border-strokedark">
                                   <div className="flex flex-row items-center gap-4 font-medium text-black dark:text-white">
                                     <div className="shrink-0">
@@ -190,7 +194,7 @@ const MembersList: React.FC = () => {
                                             alt="Foto membro"
                                             width={48}
                                             height={48}
-                                            className="h-14 w-14 rounded-full"
+                                            className="size-14 rounded-full"
                                           />
                                         ) : (
                                           <Image
@@ -198,7 +202,7 @@ const MembersList: React.FC = () => {
                                             alt="Brand"
                                             width={48}
                                             height={48}
-                                            className="h-14 w-14 rounded-full"
+                                            className="size-14 rounded-full"
                                           />
                                         )}
                                       </>
