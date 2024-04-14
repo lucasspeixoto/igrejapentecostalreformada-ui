@@ -84,7 +84,7 @@ const UserPhoto: React.FC = () => {
   };
 
   return (
-    <div className="mt-5 rounded-sm border border-stroke bg-white shadow-default md:w-full dark:border-strokedark dark:bg-boxdark">
+    <div className="mt-5 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark md:w-full">
       <div className="flex items-start border-b border-stroke px-7 py-4 dark:border-strokedark">
         <h3 className="font-medium text-black dark:text-white">Sua Foto</h3>
       </div>
@@ -93,12 +93,12 @@ const UserPhoto: React.FC = () => {
           isLoadingUploadPhoto ? 'opacity-40' : 'opacity-100'
         }`}>
         <div className="mb-4 flex items-center justify-start gap-3">
-          <div className="relative h-14 w-14 rounded-full">
+          <div className="relative size-14 rounded-full">
             {hasPhotoUploaded ? (
               <Image
                 width={55}
                 height={55}
-                className="h-14 w-14 rounded-full"
+                className="size-14 rounded-full"
                 src={authContext.authData?.photoUrl!}
                 alt="Foto pessoal"
               />
@@ -127,16 +127,16 @@ const UserPhoto: React.FC = () => {
 
         <label
           htmlFor="profile"
-          className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-primary bg-gray p-4 sm:py-7.5 dark:bg-meta-4">
+          className="relative mb-5.5 block w-full cursor-pointer appearance-none rounded border-2 border-dashed border-primary bg-gray p-4 dark:bg-meta-4 sm:py-7.5">
           <input
             type="file"
             name="profile"
             id="profile"
             onChange={uploadPhotoHandler}
-            className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
+            className="absolute inset-0 z-50 m-0 size-full cursor-pointer p-0 opacity-0 outline-none"
           />
           <div className="flex flex-col items-center justify-center space-y-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full border border-stroke bg-white dark:border-strokedark dark:bg-boxdark">
+            <span className="flex size-10 items-center justify-center rounded-full border border-stroke bg-white dark:border-strokedark dark:bg-boxdark">
               <LuUpload className="text-primary" />
             </span>
             <p>

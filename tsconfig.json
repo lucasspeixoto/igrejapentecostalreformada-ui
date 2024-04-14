@@ -39,6 +39,12 @@
       "@cadastro/*": [
         "./src/app/plataforma-ipr/cadastro/*"
       ],
+      "@signup/*": [
+        "./src/app/cadastro/*"
+      ],
+      "@signin/*": [
+        "./src/app/login/*"
+      ],
       "@financeiro/*": [
         "./src/app/plataforma-ipr/financeiro/*"
       ]

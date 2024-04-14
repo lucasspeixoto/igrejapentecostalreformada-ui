@@ -10,9 +10,9 @@ import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import { SpinnerLogo } from '@/components/common/Icons';
-import recoveryPasswordHandler from '@/lib/firebase/auth/recovery-password';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
 
+import recoveryPasswordHandler from '../../lib/firebase/recovery-password';
 import type { RecoveryPasswordFormData } from '../../schemas/recovery-password-schema';
 import { recoveryPasswordFormSchema } from '../../schemas/recovery-password-schema';
 

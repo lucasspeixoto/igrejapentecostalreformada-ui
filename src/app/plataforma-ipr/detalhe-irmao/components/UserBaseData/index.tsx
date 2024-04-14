@@ -224,7 +224,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
               <Image
                 width={55}
                 height={55}
-                className="h-14 w-14 rounded-full"
+                className="size-14 rounded-full"
                 src={photoUrl}
                 alt="Foto pessoal"
               />
@@ -398,7 +398,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
                   />
                   <div className="block h-8 w-14 rounded-full bg-gray dark:bg-meta-4"></div>
                   <div
-                    className={`absolute left-1 top-1 h-6 w-6 rounded-full bg-meta-7 transition ${
+                    className={`absolute left-1 top-1 size-6 rounded-full bg-meta-7 transition ${
                       isAdminOption && '!right-1 !translate-x-full !bg-meta-3'
                     }`}></div>
                 </div>
@@ -427,7 +427,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
                   />
                   <div className="block h-8 w-14 rounded-full bg-gray dark:bg-meta-4"></div>
                   <div
-                    className={`absolute left-1 top-1 h-6 w-6 rounded-full bg-meta-7 transition ${
+                    className={`absolute left-1 top-1 size-6 rounded-full bg-meta-7 transition ${
                       isRegisteredOption &&
                       '!right-1 !translate-x-full !bg-meta-3'
                     }`}></div>

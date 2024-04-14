@@ -1,5 +1,5 @@
-import signOutUserHandler from '@fire/auth/signout';
 import firebaseMessages from '@fire/messages';
+import signOutUserHandler from '@signin/lib/firebase/signout';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -74,12 +74,12 @@ const DropdownUser = () => {
           <span className="block text-xs">Graça e paz 🙏</span>
         </span>
 
-        <span className="h-12 w-12">
+        <span className="size-12">
           {authContext.authData?.photoUrl ? (
             <Image
               width={112}
               height={112}
-              className="h-12 w-12 rounded-full"
+              className="size-12 rounded-full"
               src={authContext.authData?.photoUrl}
               alt="User"
             />
@@ -87,7 +87,7 @@ const DropdownUser = () => {
             <Image
               width={112}
               height={112}
-              className="h-12 w-12 rounded-full"
+              className="size-12 rounded-full"
               src={'/images/user/dummy-user.png'}
               alt="User"
             />
@@ -142,7 +142,7 @@ const DropdownUser = () => {
         </ul>
         <button
           onClick={signOutUser}
-          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium text-meta-4 opacity-80 duration-300 ease-in-out hover:opacity-100 lg:text-base  dark:text-gray">
+          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium text-meta-4 opacity-80 duration-300 ease-in-out hover:opacity-100 dark:text-gray  lg:text-base">
           <SlLogout size={20} />
           Sair
         </button>

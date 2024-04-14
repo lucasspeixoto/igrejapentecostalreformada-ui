@@ -3,11 +3,14 @@
 
 'use client';
 
-import signInWithGoogle from '@fire/auth/signin-with-google';
-import signUp from '@fire/auth/signup';
 import addData from '@fire/firestore/addData';
 import firebaseMessages from '@fire/messages';
 import { zodResolver } from '@hookform/resolvers/zod';
+import signInUserHandler from '@signin/lib/firebase/signin';
+import signInWithGoogle from '@signin/lib/firebase/signin-with-google';
+import signUp from '@signup/lib/firebase/signup';
+import type { CreateUserFormData } from '@signup/schemas/signup-schema';
+import { createUserFormSchema } from '@signup/schemas/signup-schema';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -16,11 +19,7 @@ import { MdLockOutline, MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import { GoogleLogo } from '@/components/common/Icons';
-import signInUserHandler from '@/lib/firebase/auth/signin';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-
-import type { CreateUserFormData } from '../../schemas/signup-schema';
-import { createUserFormSchema } from '../../schemas/signup-schema';
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();

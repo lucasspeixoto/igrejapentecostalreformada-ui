@@ -44,13 +44,13 @@ const DropdownMessage = () => {
           setNotifying(false);
           setDropdownOpen(!dropdownOpen);
         }}
-        className="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
+        className="relative flex size-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
         href="#">
         <span
-          className={`absolute -right-0.5 -top-0.5 z-1 h-2 w-2 rounded-full bg-meta-1 ${
+          className={`absolute -right-0.5 -top-0.5 z-1 size-2 rounded-full bg-meta-1 ${
             notifying === false ? 'hidden' : 'inline'
           }`}>
-          <span className="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-meta-1 opacity-75"></span>
+          <span className="absolute -z-1 inline-flex size-full animate-ping rounded-full bg-meta-1 opacity-75"></span>
         </span>
 
         <BiMessageRoundedDetail size={20} className="opacity-80" />
@@ -61,7 +61,7 @@ const DropdownMessage = () => {
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
         onBlur={() => setDropdownOpen(false)}
-        className={`absolute -right-16 mt-2.5 flex h-auto w-75 flex-col rounded-sm border border-stroke bg-white shadow-default sm:right-0 sm:w-80 dark:border-strokedark dark:bg-boxdark ${
+        className={`absolute -right-16 mt-2.5 flex h-auto w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
           dropdownOpen === true ? 'block' : 'hidden'
         }`}>
         <div className="px-4.5 py-3">
@@ -73,7 +73,7 @@ const DropdownMessage = () => {
             <Link
               className="flex gap-4.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
               href="/plataforma-ipr/perfil">
-              <div className="h-12.5 w-12.5 rounded-full">
+              <div className="size-12.5 rounded-full">
                 <Image
                   width={112}
                   height={112}
@@ -96,7 +96,7 @@ const DropdownMessage = () => {
             <Link
               className="flex gap-4.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
               href="/plataforma-ipr/perfil">
-              <div className="h-12.5 w-12.5 rounded-full">
+              <div className="size-12.5 rounded-full">
                 <Image
                   width={112}
                   height={112}

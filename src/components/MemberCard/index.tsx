@@ -34,7 +34,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
                 <p className="text-sm font-semibold tracking-widest">{name}</p>
               </div>
               <img
-                className="h-8 w-8 sm:h-14 sm:w-14"
+                className="size-8 sm:size-14"
                 src={'/images/logo/logo-church-cross.svg'}
                 alt="Imagem logo cartão"
               />
