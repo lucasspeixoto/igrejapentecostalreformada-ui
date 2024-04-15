@@ -121,7 +121,7 @@ const FamilyForm = () => {
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-3 block text-black dark:text-white">
+        <label className="mb-2.5 block text-black dark:text-white">
           Data de casamento
         </label>
         <div className="relative">
@@ -134,7 +134,7 @@ const FamilyForm = () => {
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-3 block text-black dark:text-white">
+        <label className="mb-2.5 block text-black dark:text-white">
           Nome do pai
         </label>
         <div className="relative">
@@ -154,12 +154,13 @@ const FamilyForm = () => {
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-3 block text-black dark:text-white">
+        <label className="mb-2.5 block text-black dark:text-white">
           Nome da mãe
         </label>
         <div className="relative">
           <input
             type="text"
+            placeholder="Digite nome da sua mãe"
             {...register('motherName')}
             className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
           />

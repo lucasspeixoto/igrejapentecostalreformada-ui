@@ -26,8 +26,6 @@ const EcclesiasticForm = () => {
                 Membresia
               </h3>
             </div>
-            {/* */}
-
             <div className="p-6.5">
               <MemberForm />
             </div>

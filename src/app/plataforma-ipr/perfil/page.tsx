@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const Profile = () => {
   return (
-    <>
+    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
       <Breadcrumb pageName="Perfil" />
 
       <div className="mt-5 grid grid-cols-5 gap-8">
@@ -29,7 +29,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

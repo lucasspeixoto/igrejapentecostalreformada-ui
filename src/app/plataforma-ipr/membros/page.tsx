@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 
 const MembersListPage = () => {
   return (
-    <>
+    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
       <Breadcrumb pageName="Lista de irmãos" />
 
       <div className="flex flex-col gap-10">
         <MembersList />
       </div>
-    </>
+    </div>
   );
 };
 

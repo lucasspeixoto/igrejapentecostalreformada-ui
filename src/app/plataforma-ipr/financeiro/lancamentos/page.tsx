@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 const ReleasesPage = () => {
   return (
-    <>
+    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
       <Breadcrumb pageName="Lançamentos" />
 
       <div className="flex flex-col gap-5 ">
@@ -23,7 +23,7 @@ const ReleasesPage = () => {
         </div>
         <NotesList />
       </div>
-    </>
+    </div>
   );
 };
 
