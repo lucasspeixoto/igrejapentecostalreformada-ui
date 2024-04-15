@@ -15,25 +15,24 @@ import Loader from '@/components/common/Loader';
 import Modal from '@/components/Modal';
 import deleteData from '@/lib/firebase/firestore/deleteData';
 import deletePhoto from '@/lib/firebase/firestore/deletePhoto';
-import { getUsersDocuments } from '@/lib/firebase/firestore/getData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import type { UserData } from '@/types/user-data';
-import { formatDate } from '@/utils/transform-date';
+import { formatFirebaseTimestampDate } from '@/utils/transform-date';
 
-import { MOCKED_FINANCE_NOTES } from '../../__mocks__/finance-notes';
 import {
   DELETE_NOTE_CANCEL_TITLE,
   DELETE_NOTE_CONFIRM_TITLE,
   DELETE_NOTE_SUBTITLE,
   DELETE_NOTE_TITLE,
 } from '../../constants/messages';
+import { getFinanceNotesDocuments } from '../../lib/firebase/get-finance-notes';
+import type { FinanceNote } from '../../types/finance-note';
 import FinanceNoteUpdate from '../FinanceNoteUpdate';
 import TableHeaderInfo from './TableHeaderInfo';
 
 const NotesList: React.FC = () => {
   const userContext = useAuthContext();
 
-  const [userLoadedData, setUserLoadedData] = React.useState<UserData[]>([]);
+  const [financeNotesLoadedData, setFinanceNotesLoadedData] = React.useState<FinanceNote[]>([]);
 
   const [isLoadingUsers, setIsLoadingUsers] = React.useState(true);
 
@@ -51,7 +50,7 @@ const NotesList: React.FC = () => {
     let mounted = true;
 
     (async () => {
-      const { userData } = await getUsersDocuments();
+      const { financeNotesData } = await getFinanceNotesDocuments();
 
       const isAdmin = userContext.authData?.isAdmin!;
 
@@ -61,8 +60,8 @@ const NotesList: React.FC = () => {
         router.push('/plataforma-ipr/perfil');
       }
 
-      if (userData && mounted) {
-        setUserLoadedData(userData);
+      if (financeNotesData && mounted) {
+        setFinanceNotesLoadedData(financeNotesData);
         setIsLoadingUsers(false);
       }
     })();
@@ -107,9 +106,6 @@ const NotesList: React.FC = () => {
   };
 
   //! New
-  const financeNotes = MOCKED_FINANCE_NOTES;
-
-  //! New
   const onCancelDetailNote = () => {
     setShowDetailNoteModal(false);
   };
@@ -144,7 +140,7 @@ const NotesList: React.FC = () => {
           <TableHeaderInfo />
 
           <div className="pb-10">
-            {isLoadingUsers || !userLoadedData.length ? (
+            {isLoadingUsers || !financeNotesLoadedData.length ? (
               <Loader />
             ) : (
               <>
@@ -175,7 +171,7 @@ const NotesList: React.FC = () => {
                       </thead>
                       <tbody>
                         {React.Children.toArray(
-                          financeNotes.map(note => (
+                          financeNotesLoadedData.map(note => (
                             <tr onClick={() =>
                               seeNoteDetailHandler(note.id)
                             } className='hover:bg-gray-2 hover:dark:bg-meta-4 hover:cursor-pointer'>
@@ -214,7 +210,7 @@ const NotesList: React.FC = () => {
                               </td>
                               <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                                 <p className="text-black dark:text-white">
-                                  {formatDate(note.date)}
+                                  {formatFirebaseTimestampDate(note.date)}
                                 </p>
                               </td>
                               <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">

@@ -2,8 +2,11 @@
 
 'use client';
 
+import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 
+import addFinanceNote from '../../lib/firebase/add-finance-note';
+import type { FinanceNote } from '../../types/finance-note';
 import FinanceNoteInsert from '../FinanceNoteInsert';
 
 const FinanceActions: React.FC = () => {
@@ -19,7 +22,21 @@ const FinanceActions: React.FC = () => {
   };
 
   //! New
-  const onConfirmInsertNote = async () => {};
+  const onConfirmInsertNote = async () => {
+    const newFinanceNote: Partial<FinanceNote> = {
+      photoUrl:
+        'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FU6tkvy5k7dfmGNlIYvKWv79Ssen1.jpg?alt=media&token=13114439-e212-4819-a510-a379c820ef9e',
+      description: 'Compra de Microfones Sem Fio',
+      owner: 'Lucas',
+      date: Timestamp.fromDate(new Date()),
+      type: 'D',
+      value: 150.0,
+    };
+
+    await addFinanceNote(newFinanceNote);
+
+    setShowInsertNoteModal(false);
+  };
 
   return (
     <>
