@@ -5,6 +5,6 @@ export const metadata: Metadata = {
   description: 'Cadastro',
 };
 
-export default function Membros() {
+export default function PlataformaIpr() {
   return <></>;
 }

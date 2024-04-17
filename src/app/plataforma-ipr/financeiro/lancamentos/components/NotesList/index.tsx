@@ -18,23 +18,20 @@ import deletePhoto from '@/lib/firebase/firestore/deletePhoto';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import { formatFirebaseTimestampDate } from '@/utils/transform-date';
 
+import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
 import {
   DELETE_NOTE_CANCEL_TITLE,
   DELETE_NOTE_CONFIRM_TITLE,
   DELETE_NOTE_SUBTITLE,
   DELETE_NOTE_TITLE,
 } from '../../constants/messages';
-import { getFinanceNotesDocuments } from '../../lib/firebase/get-finance-notes';
-import type { FinanceNote } from '../../types/finance-note';
 import FinanceNoteUpdate from '../FinanceNoteUpdate';
 import TableHeaderInfo from './TableHeaderInfo';
 
 const NotesList: React.FC = () => {
   const userContext = useAuthContext();
 
-  const [financeNotesLoadedData, setFinanceNotesLoadedData] = React.useState<FinanceNote[]>([]);
-
-  const [isLoadingUsers, setIsLoadingUsers] = React.useState(true);
+  const financeNotesContext = useFinanceNotesContext();
 
   const [isAdminOption, setIsAdminOption] = React.useState(false);
 
@@ -47,28 +44,13 @@ const NotesList: React.FC = () => {
   const router = useRouter();
 
   React.useEffect(() => {
-    let mounted = true;
+    const isAdmin = userContext.authData?.isAdmin!;
 
-    (async () => {
-      const { financeNotesData } = await getFinanceNotesDocuments();
+    setIsAdminOption(isAdmin);
 
-      const isAdmin = userContext.authData?.isAdmin!;
-
-      setIsAdminOption(isAdmin);
-
-      if (isAdmin === false) {
-        router.push('/plataforma-ipr/perfil');
-      }
-
-      if (financeNotesData && mounted) {
-        setFinanceNotesLoadedData(financeNotesData);
-        setIsLoadingUsers(false);
-      }
-    })();
-
-    return () => {
-      mounted = false;
-    };
+    if (isAdmin === false) {
+      router.push('/plataforma-ipr/perfil');
+    }
   }, [userContext]);
 
   const deleteNoteHandler = (_noteId: string) => {
@@ -140,7 +122,7 @@ const NotesList: React.FC = () => {
           <TableHeaderInfo />
 
           <div className="pb-10">
-            {isLoadingUsers || !financeNotesLoadedData.length ? (
+            {financeNotesContext.isLoadingFinanceNotes || !financeNotesContext.financeNotes.length ? (
               <Loader />
             ) : (
               <>
@@ -171,10 +153,10 @@ const NotesList: React.FC = () => {
                       </thead>
                       <tbody>
                         {React.Children.toArray(
-                          financeNotesLoadedData.map(note => (
-                            <tr onClick={() =>
-                              seeNoteDetailHandler(note.id)
-                            } className='hover:bg-gray-2 hover:dark:bg-meta-4 hover:cursor-pointer'>
+                          financeNotesContext.financeNotes.map(note => (
+                            <tr
+                              onClick={() => seeNoteDetailHandler(note.id)}
+                              className="hover:bg-gray-2 hover:dark:bg-meta-4 hover:cursor-pointer">
                               <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                                 <p className="text-black dark:text-white">
                                   {note.description}
