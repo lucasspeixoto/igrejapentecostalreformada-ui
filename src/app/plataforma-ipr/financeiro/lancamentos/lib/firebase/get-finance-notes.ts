@@ -41,6 +41,24 @@ export async function getFinanceNotesDocuments() {
   return { financeNotesData, error };
 }
 
+export async function getFinanceNote(id: string) {
+  const docRef = doc(db, 'finance-notes', id);
+
+  let financeNote!: FinanceNote;
+
+  let result = null;
+  let error = null;
+
+  try {
+    result = await getDoc(docRef);
+    financeNote = result.data() as FinanceNote;
+  } catch (_error) {
+    error = _error;
+  }
+
+  return { financeNote, error };
+}
+
 export async function getDocument(_collection: string, id: string) {
   const docRef = doc(db, _collection, id);
 
