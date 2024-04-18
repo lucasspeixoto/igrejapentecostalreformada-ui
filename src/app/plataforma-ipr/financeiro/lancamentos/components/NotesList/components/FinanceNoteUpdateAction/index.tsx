@@ -20,11 +20,6 @@ const FinanceNoteUpdateAction: React.FC<FinanceNoteUpdateActionProps> = ({
     setShowDetailNoteModal(false);
   };
 
-  const onConfirmDetailNote = async () => {
-    // eslint-disable-next-line no-console
-    // console.log(selectedFinanceNote);
-  };
-
   return (
     <>
       <>
@@ -32,7 +27,6 @@ const FinanceNoteUpdateAction: React.FC<FinanceNoteUpdateActionProps> = ({
           <FinanceNoteUpdateModal
             noteId={noteId}
             onCancelDetailNoteUpdate={onCancelDetailNote}
-            onConfirmDetailNoteUpdate={onConfirmDetailNote}
           />
         ) : null}
       </>

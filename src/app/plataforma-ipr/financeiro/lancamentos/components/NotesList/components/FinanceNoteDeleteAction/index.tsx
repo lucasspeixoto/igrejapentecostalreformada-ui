@@ -34,10 +34,7 @@ const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({
   const onConfirmDeleteNote = async () => {
     updateLoadingFinanceNotes(true);
 
-    const { error: deleteNoteError } = await deleteFinanceNote(
-      'finance-notes',
-      noteId
-    );
+    const { error: deleteNoteError } = await deleteFinanceNote(noteId);
 
     if (deleteNoteError) {
       toast.error(

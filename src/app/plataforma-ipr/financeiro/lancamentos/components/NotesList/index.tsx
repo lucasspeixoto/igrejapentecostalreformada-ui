@@ -43,7 +43,7 @@ const NotesList: React.FC = () => {
           <TableHeaderInfo />
 
           <div className="pb-10">
-            {isLoadingFinanceNotes || !financeNotes.length ? (
+            {isLoadingFinanceNotes ? (
               <Loader />
             ) : (
               <>

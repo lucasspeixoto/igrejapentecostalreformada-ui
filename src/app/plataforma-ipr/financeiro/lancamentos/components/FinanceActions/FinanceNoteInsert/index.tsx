@@ -10,8 +10,8 @@ import { MdOutlineEventNote } from 'react-icons/md';
 import { SelectChevroletLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 
-import type { FinanceNoteFormData } from '../../../schemas/finance-note-schema';
-import { financeNoteFormSchema } from '../../../schemas/finance-note-schema';
+import type { InsertFinanceNoteFormData } from '../../../schemas/insert-finance-note-schema';
+import { insertFinanceNoteFormSchema } from '../../../schemas/insert-finance-note-schema';
 import type { FinanceNote } from '../../../types/finance-note';
 
 type FinanceNoteInsertProps = {
@@ -30,8 +30,8 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FinanceNoteFormData>({
-    resolver: zodResolver(financeNoteFormSchema),
+  } = useForm<InsertFinanceNoteFormData>({
+    resolver: zodResolver(insertFinanceNoteFormSchema),
   });
 
   React.useEffect(() => {
@@ -46,7 +46,7 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  const insertNewNoteHandler = async (formData: FinanceNoteFormData) => {
+  const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
     const { description, type, value } = formData;
 
     const newFinanceNote: Partial<FinanceNote> = {
@@ -110,7 +110,7 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
           </div>
 
           {/* Value */}
-          <div className="mb-4.5 flex w-full flex-col">
+          <div className="mb-4.5 flex w-full flex-col items-start">
             <label className="mb-2.5 block self-start text-black dark:text-white">
               Valor <span className="text-meta-1">*</span>
             </label>
@@ -130,7 +130,7 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
           </div>
 
           {/* Description */}
-          <div className="mb-4.5 flex w-full flex-col">
+          <div className="mb-4.5 flex w-full flex-col items-start">
             <label className="mb-2.5 block self-start text-black dark:text-white">
               Descrição <span className="text-meta-1">*</span>
             </label>
