@@ -12,7 +12,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 import Loader from '@/components/common/Loader';
-import Modal from '@/components/Modal';
+import ConfirmModal from '@/components/ConfirmModal';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import { formatFirebaseTimestampDate } from '@/utils/transform-date';
 
@@ -100,7 +100,7 @@ const NotesList: React.FC = () => {
     <>
       <>
         {showDeleteNoteModal ? (
-          <Modal
+          <ConfirmModal
             title={DELETE_NOTE_TITLE}
             subtitle={DELETE_NOTE_SUBTITLE}
             cancelTitle={DELETE_NOTE_CANCEL_TITLE}

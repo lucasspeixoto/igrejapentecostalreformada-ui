@@ -18,7 +18,7 @@ import type { UserData } from '@/types/user-data';
 import { orderMembersListByName } from '@/utils/array-operations';
 
 import Loader from '../../../../../components/common/Loader';
-import Modal from '../../../../../components/Modal';
+import Modal from '../../../../../components/ConfirmModal';
 
 const DELETE_MODAL_TITLE = 'Deletar membro';
 
@@ -179,11 +179,7 @@ const MembersList: React.FC = () => {
                           userLoadedData
                             ?.sort(orderMembersListByName)
                             .map(member => (
-                              <tr
-                                onClick={() =>
-                                  seeUserDetailHandler(member?.auth.userId)
-                                }
-                                className="hover:bg-gray-2 hover:dark:bg-meta-4 hover:cursor-pointer">
+                              <tr className="hover:bg-gray-2 hover:dark:bg-meta-4 hover:cursor-pointer">
                                 <td className="border-b border-[#eee] px-1 py-5 pl-9 xl:pl-5 dark:border-strokedark">
                                   <div className="flex flex-row items-center gap-4 font-medium text-black dark:text-white">
                                     <div className="shrink-0">
