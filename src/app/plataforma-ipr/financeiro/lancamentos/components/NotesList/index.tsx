@@ -13,8 +13,6 @@ import { toast } from 'react-toastify';
 
 import Loader from '@/components/common/Loader';
 import Modal from '@/components/Modal';
-import deleteData from '@/lib/firebase/firestore/deleteData';
-import deletePhoto from '@/lib/firebase/firestore/deletePhoto';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import { formatFirebaseTimestampDate } from '@/utils/transform-date';
 
@@ -25,13 +23,19 @@ import {
   DELETE_NOTE_SUBTITLE,
   DELETE_NOTE_TITLE,
 } from '../../constants/messages';
+import deleteFinanceNote from '../../lib/firebase/delete-finance-note';
 import FinanceNoteUpdate from '../FinanceNoteUpdate';
 import TableHeaderInfo from './TableHeaderInfo';
 
 const NotesList: React.FC = () => {
   const userContext = useAuthContext();
 
-  const { financeNotes, isLoadingFinanceNotes } = useFinanceNotesContext();
+  const {
+    financeNotes,
+    isLoadingFinanceNotes,
+    updateLoadingFinanceNotes,
+    updateIsDataUpdatedInfo,
+  } = useFinanceNotesContext();
 
   const [isAdminOption, setIsAdminOption] = React.useState(false);
 
@@ -55,31 +59,30 @@ const NotesList: React.FC = () => {
 
   const deleteNoteHandler = (_noteId: string) => {
     setNoteId(_noteId);
+
     setShowDeleteNoteModal(true);
   };
 
-  const onCancelDeleteNote = () => {
-    setShowDeleteNoteModal(false);
-  };
-
   const onConfirmDeleteNote = async () => {
-    userContext.updateIsLoadingData(true);
+    updateLoadingFinanceNotes(true);
 
-    setShowDeleteNoteModal(false);
+    const { error: deleteNoteError } = await deleteFinanceNote(
+      'finance-notes',
+      noteId!
+    );
 
-    const { error: deleteUserDataError } = await deleteData('users', noteId!);
-
-    const { error: deletePhotoError } = await deletePhoto('photos', noteId!);
-
-    if (deleteUserDataError || deletePhotoError) {
+    if (deleteNoteError) {
       toast.error(
-        'Error ao excluir dados de membro. Tente novamente mais tarde ou contate admin.'
+        'Error ao excluir nota Tente novamente mais tarde ou contate admin.'
       );
     } else {
-      toast.success('Dados de membros excluídos com sucesso!');
+      updateIsDataUpdatedInfo();
+      toast.success('Nota excluída com sucesso!');
     }
 
-    userContext.updateIsLoadingData(false);
+    updateLoadingFinanceNotes(false);
+
+    setShowDeleteNoteModal(false);
   };
 
   const seeNoteDetailHandler = (_noteId: string) => {
@@ -102,7 +105,7 @@ const NotesList: React.FC = () => {
             subtitle={DELETE_NOTE_SUBTITLE}
             cancelTitle={DELETE_NOTE_CANCEL_TITLE}
             confirmTitle={DELETE_NOTE_CONFIRM_TITLE}
-            onCancel={onCancelDeleteNote}
+            onCancel={() => setShowDeleteNoteModal(false)}
             onConfirm={onConfirmDeleteNote}
           />
         ) : null}

@@ -27,7 +27,10 @@ export async function getFinanceNotesDocuments() {
     const docsSnap = await getDocs(financeNotesQuery);
 
     docsSnap.forEach(document => {
-      const data = document.data() as FinanceNote;
+      const data = {
+        ...(document.data() as FinanceNote),
+        id: document.ref.id,
+      };
 
       financeNotesData.push(data);
     });
