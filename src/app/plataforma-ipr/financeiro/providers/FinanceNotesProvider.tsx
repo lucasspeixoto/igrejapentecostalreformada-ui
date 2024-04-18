@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
+import React from 'react';
 
 import { getFinanceNotesDocuments } from '../lancamentos/lib/firebase/get-finance-notes';
 import type { FinanceNote } from '../lancamentos/types/finance-note';
@@ -20,25 +20,27 @@ type FinanceNotesContextType = {
 };
 
 export const FinanceNotesContext =
-  createContext<FinanceNotesContextType>(initialValues);
+  React.createContext<FinanceNotesContextType>(initialValues);
 
-export const useFinanceNotesContext = () => useContext(FinanceNotesContext);
+export const useFinanceNotesContext = () =>
+  React.useContext(FinanceNotesContext);
 
 export const FinanceNotesContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [financeNotes, setFinanceNotes] = useState<FinanceNote[]>([]);
+  const [financeNotes, setFinanceNotes] = React.useState<FinanceNote[]>([]);
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = useState(false);
+  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] =
+    React.useState(false);
 
   const updateLoadingFinanceNotes = (isLoading: boolean) => {
     setIsLoadingFinanceNotes(isLoading);
   };
 
   const updateIsDataUpdatedInfo = () => {
-    setIsDataUpdated(true);
+    setIsDataUpdated(state => !state);
   };
 
   React.useEffect(() => {
@@ -47,9 +49,7 @@ export const FinanceNotesContextProvider: React.FC<{
     financeNotesData
       .then(data => {
         if (data) {
-          setFinanceNotes(data?.financeNotesData);
-        } else {
-          setFinanceNotes([]);
+          setFinanceNotes(data.financeNotesData);
         }
       })
       .catch(error => {

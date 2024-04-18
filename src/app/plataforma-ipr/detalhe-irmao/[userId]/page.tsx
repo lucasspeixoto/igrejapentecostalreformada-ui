@@ -14,11 +14,11 @@ const MemberDetailPage = ({ params }: { params: { userId: string } }) => {
   const { userId } = params;
 
   return (
-    <>
+    <div className='className="mx-auto 2xl:p-10" max-w-screen-2xl p-4 md:p-6'>
       <Breadcrumb pageName="Perfil Irmão" />
 
       <UserContainer userId={userId} />
-    </>
+    </div>
   );
 };
 

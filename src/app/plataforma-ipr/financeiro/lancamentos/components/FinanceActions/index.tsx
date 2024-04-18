@@ -2,38 +2,31 @@
 
 'use client';
 
-import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 
+import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
 import addFinanceNote from '../../lib/firebase/add-finance-note';
 import type { FinanceNote } from '../../types/finance-note';
 import FinanceNoteInsert from '../FinanceNoteInsert';
 
 const FinanceActions: React.FC = () => {
+  const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
+    useFinanceNotesContext();
+
   const [showInsertNoteModal, setShowInsertNoteModal] = React.useState(false);
 
-  const insertNoteHandler = () => {
-    setShowInsertNoteModal(true);
-  };
-
-  //! New
   const onCancelInsertNote = () => {
     setShowInsertNoteModal(false);
   };
 
-  //! New
-  const onConfirmInsertNote = async () => {
-    const newFinanceNote: Partial<FinanceNote> = {
-      photoUrl:
-        'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FU6tkvy5k7dfmGNlIYvKWv79Ssen1.jpg?alt=media&token=13114439-e212-4819-a510-a379c820ef9e',
-      description: 'Compra de Microfones Sem Fio',
-      owner: 'Lucas',
-      date: Timestamp.fromDate(new Date()),
-      type: 'D',
-      value: 150.0,
-    };
+  const insertNoteHandler = async (newFinanceNote: Partial<FinanceNote>) => {
+    updateLoadingFinanceNotes(true);
 
     await addFinanceNote(newFinanceNote);
+
+    updateIsDataUpdatedInfo();
+
+    updateLoadingFinanceNotes(false);
 
     setShowInsertNoteModal(false);
   };
@@ -44,13 +37,13 @@ const FinanceActions: React.FC = () => {
         {showInsertNoteModal ? (
           <FinanceNoteInsert
             onCancel={onCancelInsertNote}
-            onConfirm={onConfirmInsertNote}
+            insertNoteHandler={insertNoteHandler}
           />
         ) : null}
       </>
       <div className="flex gap-2">
         <button
-          onClick={insertNoteHandler}
+          onClick={() => setShowInsertNoteModal(true)}
           type="button"
           className="max-w-[80px] cursor-pointer rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
           Novo

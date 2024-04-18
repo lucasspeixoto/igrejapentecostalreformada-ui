@@ -41,14 +41,14 @@ const FinanceNoteUpdate: React.FC<FinanceNoteUpdateProps> = ({
           <div className="w-full px-3 2xsm:w-1/2">
             <button
               onClick={onCancel}
-              className="block w-full rounded border border-stroke bg-gray p-3 text-center font-medium text-black transition hover:border-secondary hover:bg-secondary hover:text-white dark:border-strokedark dark:bg-meta-4 dark:text-white">
+              className="block w-full rounded border border-meta-7 bg-meta-7 p-3 text-center font-medium text-white transition hover:bg-opacity-90">
               Cancelar
             </button>
           </div>
           <div className="w-full px-3 2xsm:w-1/2">
             <button
               onClick={onConfirm}
-              className="block w-full rounded border border-meta-1 bg-meta-1 p-3 text-center font-medium text-white transition hover:bg-opacity-90">
+              className="block w-full rounded border border-meta-3 bg-meta-3 p-3 text-center font-medium text-white transition hover:bg-opacity-90">
               Adicionar
             </button>
           </div>

@@ -31,7 +31,7 @@ import TableHeaderInfo from './TableHeaderInfo';
 const NotesList: React.FC = () => {
   const userContext = useAuthContext();
 
-  const financeNotesContext = useFinanceNotesContext();
+  const { financeNotes, isLoadingFinanceNotes } = useFinanceNotesContext();
 
   const [isAdminOption, setIsAdminOption] = React.useState(false);
 
@@ -87,12 +87,10 @@ const NotesList: React.FC = () => {
     setShowDetailNoteModal(true);
   };
 
-  //! New
   const onCancelDetailNote = () => {
     setShowDetailNoteModal(false);
   };
 
-  //! New
   const onConfirmDetailNote = async () => {};
 
   return (
@@ -122,7 +120,7 @@ const NotesList: React.FC = () => {
           <TableHeaderInfo />
 
           <div className="pb-10">
-            {financeNotesContext.isLoadingFinanceNotes || !financeNotesContext.financeNotes.length ? (
+            {isLoadingFinanceNotes || !financeNotes.length ? (
               <Loader />
             ) : (
               <>
@@ -153,10 +151,8 @@ const NotesList: React.FC = () => {
                       </thead>
                       <tbody>
                         {React.Children.toArray(
-                          financeNotesContext.financeNotes.map(note => (
-                            <tr
-                              onClick={() => seeNoteDetailHandler(note.id)}
-                              className="hover:bg-gray-2 hover:dark:bg-meta-4 hover:cursor-pointer">
+                          financeNotes.map(note => (
+                            <tr className="hover:bg-gray-2 hover:dark:bg-meta-4 hover:cursor-pointer">
                               <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                                 <p className="text-black dark:text-white">
                                   {note.description}
@@ -186,7 +182,7 @@ const NotesList: React.FC = () => {
                                     </>
                                   </div>
                                   <p className="hidden text-black sm:block dark:text-white">
-                                    {note.owner?.split(' ')[0]}{' '}
+                                    {note.owner}
                                   </p>
                                 </div>
                               </td>
