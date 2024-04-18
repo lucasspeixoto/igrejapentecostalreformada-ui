@@ -10,9 +10,9 @@ import { MdOutlineEventNote } from 'react-icons/md';
 import { SelectChevroletLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 
-import type { FinanceNoteFormData } from '../../schemas/finance-note-schema';
-import { financeNoteFormSchema } from '../../schemas/finance-note-schema';
-import type { FinanceNote } from '../../types/finance-note';
+import type { FinanceNoteFormData } from '../../../schemas/finance-note-schema';
+import { financeNoteFormSchema } from '../../../schemas/finance-note-schema';
+import type { FinanceNote } from '../../../types/finance-note';
 
 type FinanceNoteInsertProps = {
   onCancel: () => void;
@@ -64,8 +64,8 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
   };
 
   return (
-    <div className="fixed left-0 top-0 z-999999 flex size-full min-h-screen items-center justify-center bg-black/90 p-2">
-      <div className="w-full max-w-100 rounded-lg bg-white px-2 py-4 text-center dark:bg-boxdark md:px-5 md:py-7">
+    <div className="fixed left-0 top-0 z-999999 flex size-full max-h-full min-h-screen items-center justify-center bg-black/90 p-2">
+      <div className="max-h-[90%] w-full max-w-100 overflow-y-auto rounded-lg bg-white px-2 py-4 text-center dark:bg-boxdark md:px-5 md:py-7">
         <div className="mb-5 flex flex-col gap-2">
           <span className="mx-auto inline-block">
             <MdOutlineEventNote size={48} className="font-bold text-meta-5" />

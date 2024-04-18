@@ -7,7 +7,7 @@ import React from 'react';
 import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
 import addFinanceNote from '../../lib/firebase/add-finance-note';
 import type { FinanceNote } from '../../types/finance-note';
-import FinanceNoteInsert from '../FinanceNoteInsert';
+import FinanceNoteInsert from './FinanceNoteInsert';
 
 const FinanceActions: React.FC = () => {
   const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
