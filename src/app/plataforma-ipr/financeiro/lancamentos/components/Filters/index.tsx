@@ -5,6 +5,7 @@ import React from 'react';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
 
+import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
 import useFinanceNotes from '../../store/useFinanceNotes';
 import { generateDatesArray } from '../../utils/generate-dates-array';
 
@@ -15,6 +16,8 @@ const Filters: React.FC = () => {
     state => state.referenceMonth
   );
 
+  const { updateIsDataUpdatedInfo } = useFinanceNotesContext();
+
   const optionalDates = React.useMemo(() => {
     const dates = generateDatesArray(2020, 12);
     return dates;
@@ -24,6 +27,8 @@ const Filters: React.FC = () => {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setReferenceMonth(event.target.value);
+
+    updateIsDataUpdatedInfo();
   };
 
   return (

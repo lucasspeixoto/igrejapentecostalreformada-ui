@@ -3,6 +3,7 @@
 import React from 'react';
 
 import { getFinanceNotesDocuments } from '../lancamentos/lib/firebase/get-finance-notes';
+import useFinanceNotes from '../lancamentos/store/useFinanceNotes';
 import type { FinanceNote } from '../lancamentos/types/finance-note';
 
 const initialValues = {
@@ -35,6 +36,10 @@ export const FinanceNotesContextProvider: React.FC<{
   const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] =
     React.useState(false);
 
+  const selectedFinanceDetailDate = useFinanceNotes(
+    state => state.referenceMonth
+  );
+
   const updateLoadingFinanceNotes = (isLoading: boolean) => {
     setIsLoadingFinanceNotes(isLoading);
   };
@@ -44,7 +49,10 @@ export const FinanceNotesContextProvider: React.FC<{
   };
 
   React.useEffect(() => {
-    const financeNotesData = getFinanceNotesDocuments();
+    const month = +selectedFinanceDetailDate.split('/')[0];
+    const year = +selectedFinanceDetailDate.split('/')[1];
+
+    const financeNotesData = getFinanceNotesDocuments(month, year);
 
     financeNotesData
       .then(data => {

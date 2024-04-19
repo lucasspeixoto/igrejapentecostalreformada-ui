@@ -27,6 +27,8 @@ const NotesList: React.FC = () => {
   const router = useRouter();
 
   React.useEffect(() => {
+    
+    
     const isAdmin = userContext.authData?.isAdmin!;
 
     setIsAdminOption(isAdmin);

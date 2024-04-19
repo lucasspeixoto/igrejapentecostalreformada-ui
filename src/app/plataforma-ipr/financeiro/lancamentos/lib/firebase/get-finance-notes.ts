@@ -11,6 +11,10 @@ import {
 import firebase_app from '@/lib/firebase/config';
 
 import type { FinanceNote } from '../../types/finance-note';
+import {
+  getMonthFromTimestampDate,
+  getYearFromTimestampDate,
+} from '../../utils/timestamp-to-date';
 
 export const db = getFirestore(firebase_app);
 
@@ -18,7 +22,7 @@ export const financeNotesRef = collection(db, 'finance-notes');
 
 export const financeNotesQuery = query(financeNotesRef);
 
-export async function getFinanceNotesDocuments() {
+export async function getFinanceNotesDocuments(month: number, year: number) {
   const financeNotesData: FinanceNote[] = [];
 
   let error = null;
@@ -27,12 +31,20 @@ export async function getFinanceNotesDocuments() {
     const docsSnap = await getDocs(financeNotesQuery);
 
     docsSnap.forEach(document => {
-      const data = {
-        ...(document.data() as FinanceNote),
-        id: document.ref.id,
-      };
+      const financeNote = document.data() as FinanceNote;
 
-      financeNotesData.push(data);
+      const financeNoteMonth = getMonthFromTimestampDate(financeNote.date);
+
+      const financeNoteYear = getYearFromTimestampDate(financeNote.date);
+
+      if (financeNoteMonth === month && financeNoteYear === year) {
+        const data = {
+          ...financeNote,
+          id: document.ref.id,
+        };
+
+        financeNotesData.push(data);
+      }
     });
   } catch (_error) {
     error = _error;
