@@ -1,4 +1,4 @@
-export const parameters = {
+export const registerParameters = {
   engagements: [1, 2, 3, 4, 5],
   baptismOption: ['Sim', 'Não'],
   communitiesOption: [

@@ -1,13 +1,12 @@
 'use client';
 
 /* eslint-disable max-len */
+import useFinanceNotes from '@financeiro/lancamentos/store/useFinanceNotes';
+import { generateDatesArray } from '@financeiro/lancamentos/utils/generate-dates-array';
+import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import React from 'react';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
-
-import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
-import useFinanceNotes from '../../store/useFinanceNotes';
-import { generateDatesArray } from '../../utils/generate-dates-array';
 
 const Filters: React.FC = () => {
   const setReferenceMonth = useFinanceNotes(state => state.setReferenceMonth);

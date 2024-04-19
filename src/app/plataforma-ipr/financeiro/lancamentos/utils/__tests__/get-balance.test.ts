@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 import type { FinanceNote } from '../../types/finance-note';
 import { getBalance } from '../get-balance';
 
@@ -9,7 +11,7 @@ describe('getBalance', () => {
         photoUrl: 'http://',
         description: 'Internet',
         owner: 'Lucas',
-        date: new Date('2024-04-02T00:00:00'),
+        date: Timestamp.fromDate(new Date('2024-04-18T00:00:00')),
         type: 'D',
         value: 100.0,
       },
@@ -18,7 +20,7 @@ describe('getBalance', () => {
         photoUrl: 'http://',
         description: 'Dízimo Pessoa B',
         owner: 'Lucas',
-        date: new Date('2024-04-02T00:00:00'),
+        date: Timestamp.fromDate(new Date('2024-04-18T00:00:00')),
         type: 'C',
         value: 150.0,
       },

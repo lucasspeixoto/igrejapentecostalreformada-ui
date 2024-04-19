@@ -5,7 +5,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-import { parameters } from '@/app/plataforma-ipr/cadastro/constants/form-parameters';
+import { registerParameters } from '@/app/plataforma-ipr/cadastro/constants/form-parameters';
 import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import api from '@/lib/axios/via-cep-instance';
 import addData from '@/lib/firebase/firestore/addData';
@@ -25,7 +25,7 @@ const AddressForm = () => {
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const states = parameters.stateOptions;
+  const states = registerParameters.stateOptions;
 
   const {
     register,

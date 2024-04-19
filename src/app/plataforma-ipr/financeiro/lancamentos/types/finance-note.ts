@@ -8,4 +8,5 @@ export type FinanceNote = {
   date: Timestamp;
   type: 'D' | 'C';
   value: number;
+  category: string;
 };

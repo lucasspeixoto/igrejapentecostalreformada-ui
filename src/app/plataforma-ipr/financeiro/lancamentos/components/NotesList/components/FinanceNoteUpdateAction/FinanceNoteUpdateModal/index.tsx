@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 
+import { financeParameters } from '@financeiro/lancamentos/constants/form-parameters';
 import { getFinanceNote } from '@financeiro/lancamentos/lib/firebase/get-finance-notes';
 import updateFinanceNote from '@financeiro/lancamentos/lib/firebase/update-finance-note';
 import type { UpdateFinanceNoteFormData } from '@financeiro/lancamentos/schemas/update-finance-note-schema';
@@ -25,6 +26,8 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
   noteId,
   onCancelDetailNoteUpdate,
 }) => {
+  const { financeNoteCategories } = financeParameters;
+
   const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
     useFinanceNotesContext();
 
@@ -63,9 +66,9 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
       .then(data => {
         if (data) {
           setSelectedFinanceNote(data.financeNote);
-          const { type, value, description } = data.financeNote;
+          const { type, value, description, category } = data.financeNote;
 
-          reset({ type, value, description });
+          reset({ type, value, description, category });
         }
       })
       .catch(error => {
@@ -130,13 +133,30 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                     <SelectChevroletLogo size={24} />
                   </span>
                 </div>
-                <>
-                  {errors.type && (
-                    <span className="text-xs text-meta-1 dark:text-meta-7">
-                      {errors.type.message}
-                    </span>
-                  )}
-                </>
+              </div>
+
+              {/* Category */}
+              <div className="mb-4.5 flex w-full flex-col">
+                <label className="mb-2.5 block self-start text-black dark:text-white">
+                  Categoria <span className="text-meta-1">*</span>
+                </label>
+                <div className="relative z-20 bg-transparent dark:bg-form-input">
+                  <select
+                    {...register('category')}
+                    className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                    <option value="" disabled>
+                      Selecione a categoria
+                    </option>
+                    {React.Children.toArray(
+                      financeNoteCategories.map(note => (
+                        <option value={note}>{note}</option>
+                      ))
+                    )}
+                  </select>
+                  <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+                    <SelectChevroletLogo size={24} />
+                  </span>
+                </div>
               </div>
 
               {/* Value */}
