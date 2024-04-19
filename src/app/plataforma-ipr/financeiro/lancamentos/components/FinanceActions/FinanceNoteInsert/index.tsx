@@ -69,7 +69,7 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
 
   return (
     <div className="fixed left-0 top-0 z-999999 flex size-full max-h-full min-h-screen items-center justify-center bg-black/90 p-2">
-      <div className="max-h-[90%] w-full max-w-100 overflow-y-auto rounded-lg bg-white px-2 py-4 text-center dark:bg-boxdark md:px-5 md:py-7">
+      <div className="max-h-full w-full max-w-142.5 overflow-y-auto rounded-lg bg-white p-4 text-center dark:bg-boxdark">
         <div className="mb-5 flex flex-col gap-2">
           <span className="mx-auto inline-block">
             <MdOutlineEventNote size={48} className="font-bold text-meta-5" />

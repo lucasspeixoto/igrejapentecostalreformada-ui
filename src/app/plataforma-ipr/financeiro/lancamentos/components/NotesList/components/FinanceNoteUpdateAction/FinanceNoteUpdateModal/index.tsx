@@ -103,7 +103,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
   return mounted && selectedFinanceNote
     ? createPortal(
         <div className="fixed left-0 top-0 z-999999 flex size-full min-h-screen items-center justify-center bg-black/90 p-2">
-          <div className="w-full max-w-142.5 rounded-lg bg-white px-2 py-4 text-center dark:bg-boxdark md:px-5 md:py-7">
+          <div className="max-h-full w-full max-w-142.5 overflow-y-auto rounded-lg bg-white p-4 text-center dark:bg-boxdark">
             <span className="mx-auto inline-block">
               <MdOutlineEventNote size={48} className="font-bold text-meta-5" />
             </span>

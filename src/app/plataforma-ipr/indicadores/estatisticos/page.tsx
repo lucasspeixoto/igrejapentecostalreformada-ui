@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 
 const Indicators: React.FC = () => {
   return (
-    <>
+    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
       <Breadcrumb pageName="Indicadores Estatísticos" />
 
       <StatisticsContainer />
-    </>
+    </div>
   );
 };
 

@@ -7,7 +7,7 @@ import { HiOutlinePencilSquare } from 'react-icons/hi2';
 import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
-import { parameters } from '@/app/plataforma-ipr/cadastro/constants/form-parameters';
+import { registerParameters } from '@/app/plataforma-ipr/cadastro/constants/form-parameters';
 import { SelectChevroletLogo, SpinnerLogo } from '@/components/common/Icons';
 import Image from '@/components/Image';
 import addData from '@/lib/firebase/firestore/addData';
@@ -45,7 +45,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
   cardMemberEmission,
   onUpdateHasMemberDataUpdated,
 }) => {
-  const { engagements, craftOption: crafts } = parameters;
+  const { engagements, craftOption: crafts } = registerParameters;
 
   const hasPhotoUploaded = !!photoUrl;
 
@@ -197,7 +197,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
 
     if (error) {
       toast.error(
-        'Error ao salvar dados do membro. Tente novamente mais tarde ou contate admim.'
+        'Error ao salvar dados do membro. Tente novamente mais tarde ou contate admin.'
       );
     } else {
       personalContext.updateIsDataUpdatedInfo();

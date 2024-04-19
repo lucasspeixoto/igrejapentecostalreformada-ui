@@ -22,19 +22,23 @@ const TableHeaderInfo: React.FC = () => {
           </span>
         </p>
       </div>
-      <div className="mb-2 flex flex-col justify-start gap-1">
-        <p className="text-xl font-semibold text-black dark:text-white">
-          Saldo Mês:
-          {isLoadingFinanceNotes ? null : (
-            <span
-              className={`ml-2 mt-1 text-lg font-bold ${
-                totalBalance >= 0 ? 'text-meta-5' : 'text-meta-7'
-              }`}>
-              R$ {totalBalance}
-            </span>
-          )}
-        </p>
-      </div>
+      {financeNotes.length > 0 ? (
+        <>
+          <div className="mb-2 flex flex-col justify-start gap-1">
+            <p className="text-xl font-semibold text-black dark:text-white">
+              Saldo Mês:
+              {isLoadingFinanceNotes ? null : (
+                <span
+                  className={`ml-2 mt-1 text-lg font-bold ${
+                    totalBalance >= 0 ? 'text-meta-5' : 'text-meta-7'
+                  }`}>
+                  R$ {totalBalance}
+                </span>
+              )}
+            </p>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 };
