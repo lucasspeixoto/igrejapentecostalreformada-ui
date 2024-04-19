@@ -93,7 +93,7 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
             <div className="relative z-20 bg-transparent dark:bg-form-input">
               <select
                 {...register('type')}
-                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 font-medium text-black outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary">
                 <option value="" disabled>
                   Selecione o tipo
                 </option>
@@ -114,7 +114,7 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
             <div className="relative z-20 bg-transparent dark:bg-form-input">
               <select
                 {...register('category')}
-                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+                className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 font-medium text-black outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary">
                 <option value="" disabled>
                   Selecione a categoria
                 </option>
@@ -139,7 +139,7 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
               type="number"
               placeholder="Digite o valor"
               {...register('value')}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
             <>
               {errors.value && (
@@ -159,7 +159,7 @@ const FinanceNoteInsert: React.FC<FinanceNoteInsertProps> = ({
               rows={4}
               placeholder="Digite a descrição"
               {...register('description')}
-              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
             <>
               {errors.description && (
