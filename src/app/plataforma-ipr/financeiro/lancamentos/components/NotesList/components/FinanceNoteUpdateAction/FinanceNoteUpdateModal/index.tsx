@@ -105,14 +105,17 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
     ? createPortal(
         <div className="fixed left-0 top-0 z-999999 flex size-full min-h-screen items-center justify-center bg-black/90 p-2">
           <div className="max-h-full w-full max-w-142.5 overflow-y-auto rounded-lg bg-white p-4 text-center dark:bg-boxdark">
-            <span className="mx-auto inline-block">
-              <MdOutlineEventNote size={48} className="font-bold text-meta-5" />
-            </span>
-            <h3
-              data-testid="heading-title"
-              className="mb-10 text-xl font-bold text-black dark:text-white sm:text-2xl">
-              Editar nota
-            </h3>
+            <div className="mb-4 flex flex-row items-start justify-start gap-2">
+              <span className="inline-block">
+                <MdOutlineEventNote
+                  size={32}
+                  className="font-bold text-meta-5"
+                />
+              </span>
+              <h3 className="text-lg font-bold text-black dark:text-white">
+                Editar nota
+              </h3>
+            </div>
             {/* Form */}
             <form
               onSubmit={handleSubmit(updateFinanceNoteHandler)}

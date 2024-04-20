@@ -16,9 +16,9 @@ const FinanceTable = () => {
         <table className="w-full table-auto">
           <thead>
             <tr className="bg-gray-2 text-left dark:bg-meta-4">
-              <th className="w-[200px] p-4 font-medium text-black dark:text-white xl:pl-11">
+              {/* <th className="w-[200px] p-4 font-medium text-black dark:text-white xl:pl-11">
                 Nota
-              </th>
+              </th> */}
               <th className="min-w-[150px] p-4 font-medium text-black dark:text-white">
                 Autor
               </th>
@@ -43,11 +43,11 @@ const FinanceTable = () => {
             {React.Children.toArray(
               financeNotes.map(note => (
                 <tr className="hover:cursor-pointer hover:bg-gray-2 hover:dark:bg-meta-4">
-                  <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                  {/* <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <p className="break-all text-black dark:text-white">
                       {note.description}
                     </p>
-                  </td>
+                  </td> */}
                   <td className="border-b border-[#eee] px-1 py-5 pl-9 dark:border-strokedark xl:pl-5">
                     <div className="flex flex-row items-center gap-4 font-medium text-black dark:text-white">
                       <div className="shrink-0">

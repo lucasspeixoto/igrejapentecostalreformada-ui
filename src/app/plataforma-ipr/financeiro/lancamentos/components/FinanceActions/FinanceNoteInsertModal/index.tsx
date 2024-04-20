@@ -77,18 +77,22 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
         <div className="fixed left-0 top-0 z-999999 flex size-full max-h-full min-h-screen items-center justify-center bg-black/90 p-2">
           <div className="max-h-full w-full max-w-142.5 overflow-y-auto rounded-lg bg-white p-4 text-center dark:bg-boxdark">
             <div className="mb-5 flex flex-col gap-2">
-              <span className="mx-auto inline-block">
-                <MdOutlineEventNote
-                  size={48}
-                  className="font-bold text-meta-5"
-                />
-              </span>
-              <h3 className="text-xl font-bold text-black dark:text-white sm:text-2xl">
-                Nova nota
-              </h3>
-              <p className="self-start text-start">
-                Preencha todos os campos para adicionar nova nota financeira.
-              </p>
+              <div className="mb-2 flex flex-row items-end justify-start gap-2 text-center">
+                <span className="inline-block">
+                  <MdOutlineEventNote
+                    size={48}
+                    className="font-bold text-meta-5"
+                  />
+                </span>
+                <div className="flex flex-col items-start justify-start">
+                  <h3 className="text-lg font-bold text-black dark:text-white">
+                    Nova nota
+                  </h3>
+                  <p className="text-md word-break self-start text-start">
+                    Adicione aqui uma nova nota financeira.
+                  </p>
+                </div>
+              </div>
             </div>
             {/* Form */}
             <form
