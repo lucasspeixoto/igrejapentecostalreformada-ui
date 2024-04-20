@@ -32,11 +32,17 @@ jest.mock('next/navigation', () => ({
   },
 })); */
 
-jest.mock('../../FinanceNoteUpdateModal', () => ({
-  setSelectedFinanceNote() {
-    return { prefetch: () => MOCKED_FINANCE_NOTE };
-  },
+// Mock the useState hook
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useState: jest.fn(),
 }));
+
+// Provide a mocked initial state for useState
+const mockState = {
+  selectedFinanceNote: MOCKED_FINANCE_NOTE,
+  setSelectedFinanceNote: jest.fn(),
+};
 
 jest.mock('../../../../../../providers/FinanceNotesProvider', () => ({
   useFinanceNotesContext() {
@@ -48,7 +54,14 @@ describe('LoginForm', () => {
   const updateFinanceNoteHandler = jest.fn();
   const onCancelDetailNoteUpdate = jest.fn();
 
-  beforeEach(() => {});
+  beforeEach(() => {
+    // Reset mock state before each test
+    // mockState.setSelectedFinanceNote.mockClear();
+    (React.useState as jest.Mock).mockReturnValue([
+      mockState.selectedFinanceNote,
+      mockState.setSelectedFinanceNote,
+    ]);
+  });
 
   describe('Render', () => {
     render(
