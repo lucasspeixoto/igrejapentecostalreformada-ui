@@ -107,7 +107,9 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
             <span className="mx-auto inline-block">
               <MdOutlineEventNote size={48} className="font-bold text-meta-5" />
             </span>
-            <h3 className="mb-10 text-xl font-bold text-black dark:text-white sm:text-2xl">
+            <h3
+              data-testid="heading-title"
+              className="mb-10 text-xl font-bold text-black dark:text-white sm:text-2xl">
               Editar nota
             </h3>
             {/* Form */}
