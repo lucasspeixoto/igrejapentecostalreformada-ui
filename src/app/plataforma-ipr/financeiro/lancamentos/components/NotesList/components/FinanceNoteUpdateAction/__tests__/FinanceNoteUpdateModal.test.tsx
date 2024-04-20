@@ -60,7 +60,7 @@ describe('FinanceNoteUpdateModal', () => {
     });
   });
 
-  describe('Behaviour', () => {
+  describe('Behavior', () => {
     it('should display two alerts error when value and description are invalid', async () => {
       const buttonElement = screen.getByRole('button');
 

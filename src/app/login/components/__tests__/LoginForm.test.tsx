@@ -63,7 +63,7 @@ describe('LoginForm', () => {
     });
   });
 
-  describe('Behaviour', () => {
+  describe('Behavior', () => {
     it('should display two alerts error when email and password are invalid', async () => {
       const loginButton = screen.getByTestId('login-button');
 
