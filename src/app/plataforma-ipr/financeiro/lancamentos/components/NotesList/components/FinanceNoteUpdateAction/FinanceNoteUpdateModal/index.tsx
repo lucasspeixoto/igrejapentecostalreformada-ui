@@ -6,7 +6,6 @@ import { getFinanceNote } from '@financeiro/lancamentos/lib/firebase/get-finance
 import updateFinanceNote from '@financeiro/lancamentos/lib/firebase/update-finance-note';
 import type { UpdateFinanceNoteFormData } from '@financeiro/lancamentos/schemas/update-finance-note-schema';
 import { updateFinanceNoteFormSchema } from '@financeiro/lancamentos/schemas/update-finance-note-schema';
-import type { FinanceNote } from '@financeiro/lancamentos/types/finance-note';
 import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
@@ -31,7 +30,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
   const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
     useFinanceNotesContext();
 
-  const [mounted, setMounted] = React.useState(false);
+  const [isMounted, setIsMounted] = React.useState(false);
 
   const {
     register,
@@ -42,7 +41,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
     resolver: zodResolver(updateFinanceNoteFormSchema),
   });
 
-  React.useEffect(() => setMounted(true), []);
+  React.useEffect(() => setIsMounted(true), []);
 
   React.useEffect(() => {
     const keyHandler = ({ key }: KeyboardEvent) => {
@@ -56,24 +55,26 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  const [selectedFinanceNote, setSelectedFinanceNote] =
-    React.useState<FinanceNote | null>(null);
-
   React.useEffect(() => {
-    const financeNoteData = getFinanceNote(noteId);
+    let mounted = true;
 
-    financeNoteData
-      .then(data => {
-        if (data) {
-          setSelectedFinanceNote(data.financeNote);
-          const { type, value, description, category } = data.financeNote;
+    const fetchFinanceNotes = async () => {
+      const result = await getFinanceNote(noteId);
 
-          reset({ type, value, description, category });
-        }
-      })
-      .catch(error => {
-        throw new Error(error.message);
-      });
+      const { financeNote } = result;
+
+      if (mounted && financeNote) {
+        const { type, value, description, category } = financeNote;
+
+        reset({ type, value, description, category });
+      }
+    };
+
+    fetchFinanceNotes();
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const updateFinanceNoteHandler = async (
@@ -100,7 +101,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
     onCancelDetailNoteUpdate();
   };
 
-  return mounted && selectedFinanceNote
+  return isMounted
     ? createPortal(
         <div className="fixed left-0 top-0 z-999999 flex size-full min-h-screen items-center justify-center bg-black/90 p-2">
           <div className="max-h-full w-full max-w-142.5 overflow-y-auto rounded-lg bg-white p-4 text-center dark:bg-boxdark">
@@ -176,7 +177,10 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                 />
                 <>
                   {errors.value && (
-                    <span className="text-xs text-meta-1 dark:text-meta-7">
+                    <span
+                      role="alert"
+                      data-testid="value-error"
+                      className="text-xs text-meta-1 dark:text-meta-7">
                       {errors.value.message}
                     </span>
                   )}
@@ -196,7 +200,10 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                 />
                 <>
                   {errors.description && (
-                    <span className="text-xs text-meta-1 dark:text-meta-7">
+                    <span
+                      role="alert"
+                      data-testid="description-error"
+                      className="text-xs text-meta-1 dark:text-meta-7">
                       {errors.description.message}
                     </span>
                   )}
