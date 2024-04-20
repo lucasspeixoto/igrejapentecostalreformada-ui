@@ -2,13 +2,13 @@
 
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 
+import RedirectLink from '@appC/RedirectLink';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { BsPersonLock } from 'react-icons/bs';
 import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 
-import RedirectLink from '@/app/components/RedirectLink';
 import { GoogleLogo, SpinnerLogo } from '@/components/common/Icons';
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
 

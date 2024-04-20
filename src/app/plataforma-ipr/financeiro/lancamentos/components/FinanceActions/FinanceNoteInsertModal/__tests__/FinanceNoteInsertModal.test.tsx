@@ -1,24 +1,11 @@
 import '@testing-library/jest-dom';
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 
 import { financeParameters } from '@/app/plataforma-ipr/financeiro/lancamentos/constants/form-parameters';
 
-import FinanceNoteUpdateModal from '../FinanceNoteUpdateModal';
-
-const MOCKED_FINANCE_NOTE = {
-  id: 'cfa7fa7D7ahdU876',
-  photoUrl:
-    'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FU6tkvy5k7dfmGNlIYvKWv79Ssen1.jpg?alt=media&token=13114439-e212-4819-a510-a379c820ef9e',
-  description: 'Dízimo Pessoa B',
-  owner: 'Lucas',
-  category: 'Dízimo',
-  date: Timestamp.fromDate(new Date('2023-12-05T00:00:00')),
-  type: 'C',
-  value: 150.0,
-};
+import FinanceNoteInsertModal from '..';
 
 // Mock useRouter:
 jest.mock('next/navigation', () => ({
@@ -27,23 +14,23 @@ jest.mock('next/navigation', () => ({
   },
 }));
 
-jest.mock('../../../../../../providers/FinanceNotesProvider', () => ({
+/* jest.mock('../../../../../../providers/FinanceNotesProvider', () => ({
   useFinanceNotesContext() {
     return { prefetch: () => null };
   },
-}));
+})); */
 
-describe('FinanceNoteUpdateModal', () => {
-  // const updateFinanceNoteHandler = jest.fn();
-  const onCancelDetailNoteUpdate = jest.fn();
+describe('FinanceNoteInsertModal', () => {
+  const onCancelInsertNote = jest.fn();
+  const insertNoteHandler = jest.fn();
 
   const { financeNoteCategories } = financeParameters;
 
   beforeEach(() => {
     render(
-      <FinanceNoteUpdateModal
-        noteId={MOCKED_FINANCE_NOTE.id}
-        onCancelDetailNoteUpdate={onCancelDetailNoteUpdate}
+      <FinanceNoteInsertModal
+        onCancelInsertNote={onCancelInsertNote}
+        insertNoteHandler={insertNoteHandler}
       />
     );
   });
@@ -53,7 +40,7 @@ describe('FinanceNoteUpdateModal', () => {
       const headingElement = screen.getByRole('heading', { level: 3 });
 
       expect(headingElement).toBeInTheDocument();
-      expect(headingElement).toHaveTextContent('Editar nota');
+      expect(headingElement).toHaveTextContent('Nova nota');
     });
 
     it('should render Cancel button with correct text', () => {
@@ -67,7 +54,7 @@ describe('FinanceNoteUpdateModal', () => {
       const buttonElement = screen.getByTestId('update-button');
 
       expect(buttonElement).toBeInTheDocument();
-      expect(buttonElement).toHaveTextContent('Editar');
+      expect(buttonElement).toHaveTextContent('Adicionar');
     });
 
     it('should render Type select and label', () => {

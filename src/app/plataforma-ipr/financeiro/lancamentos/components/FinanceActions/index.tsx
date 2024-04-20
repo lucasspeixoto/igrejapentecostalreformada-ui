@@ -7,7 +7,7 @@ import React from 'react';
 import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
 import addFinanceNote from '../../lib/firebase/add-finance-note';
 import type { FinanceNote } from '../../types/finance-note';
-import FinanceNoteInsert from './FinanceNoteInsert';
+import FinanceNoteInsert from './FinanceNoteInsertModal';
 
 const FinanceActions: React.FC = () => {
   const { financeNotes, updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
@@ -38,7 +38,7 @@ const FinanceActions: React.FC = () => {
           <>
             {showInsertNoteModal ? (
               <FinanceNoteInsert
-                onCancel={onCancelInsertNote}
+                onCancelInsertNote={onCancelInsertNote}
                 insertNoteHandler={insertNoteHandler}
               />
             ) : null}

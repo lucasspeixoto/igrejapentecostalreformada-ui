@@ -1,44 +1,43 @@
 /* eslint-disable max-len */
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 
-import { financeParameters } from '@financeiro/lancamentos/constants/form-parameters';
-import { getFinanceNote } from '@financeiro/lancamentos/lib/firebase/get-finance-notes';
-import updateFinanceNote from '@financeiro/lancamentos/lib/firebase/update-finance-note';
-import type { UpdateFinanceNoteFormData } from '@financeiro/lancamentos/schemas/update-finance-note-schema';
-import { updateFinanceNoteFormSchema } from '@financeiro/lancamentos/schemas/update-finance-note-schema';
-import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { MdOutlineEventNote } from 'react-icons/md';
-import { toast } from 'react-toastify';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
+import { useAuthContext } from '@/providers/AuthContextProvider';
 
-type FinanceNoteUpdateModalProps = {
-  noteId: string;
-  onCancelDetailNoteUpdate: () => void;
+import { financeParameters } from '../../../constants/form-parameters';
+import type { InsertFinanceNoteFormData } from '../../../schemas/insert-finance-note-schema';
+import { insertFinanceNoteFormSchema } from '../../../schemas/insert-finance-note-schema';
+import type { FinanceNote } from '../../../types/finance-note';
+
+type FinanceNoteInsertModalProps = {
+  onCancelInsertNote: () => void;
+  insertNoteHandler: (financeNote: Partial<FinanceNote>) => void;
 };
 
-const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
-  noteId,
-  onCancelDetailNoteUpdate,
+const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
+  onCancelInsertNote,
+  insertNoteHandler,
 }) => {
+  const [isMounted, setIsMounted] = React.useState(false);
+
   const { financeNoteCategories } = financeParameters;
 
-  const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
-    useFinanceNotesContext();
-
-  const [isMounted, setIsMounted] = React.useState(false);
+  const { authData } = useAuthContext();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<UpdateFinanceNoteFormData>({
-    resolver: zodResolver(updateFinanceNoteFormSchema),
+  } = useForm<InsertFinanceNoteFormData>({
+    resolver: zodResolver(insertFinanceNoteFormSchema),
   });
 
   React.useEffect(() => setIsMounted(true), []);
@@ -47,7 +46,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
     const keyHandler = ({ key }: KeyboardEvent) => {
       if (key !== 'Escape') return;
 
-      onCancelDetailNoteUpdate();
+      onCancelInsertNote();
     };
 
     document.addEventListener('keydown', keyHandler);
@@ -55,67 +54,45 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  React.useEffect(() => {
-    let mounted = true;
+  const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
+    const { description, type, value, category } = formData;
 
-    const fetchFinanceNotes = async () => {
-      const result = await getFinanceNote(noteId);
-
-      const { financeNote } = result;
-
-      if (mounted && financeNote) {
-        const { type, value, description, category } = financeNote;
-
-        reset({ type, value, description, category });
-      }
+    const newFinanceNote: Partial<FinanceNote> = {
+      photoUrl: authData?.photoUrl,
+      owner: authData?.name,
+      date: Timestamp.fromDate(new Date()),
+      description,
+      type,
+      value,
+      category,
     };
 
-    fetchFinanceNotes();
+    insertNoteHandler(newFinanceNote);
 
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
-  const updateFinanceNoteHandler = async (
-    formData: UpdateFinanceNoteFormData
-  ) => {
-    updateLoadingFinanceNotes(true);
-
-    const { error: updateNoteError } = await updateFinanceNote(
-      noteId,
-      formData
-    );
-
-    if (updateNoteError) {
-      toast.error(
-        'Error ao alterar nota Tente novamente mais tarde ou contate admin.'
-      );
-    } else {
-      updateIsDataUpdatedInfo();
-      toast.success('Nota editada com sucesso!');
-    }
-
-    updateLoadingFinanceNotes(false);
-
-    onCancelDetailNoteUpdate();
+    reset();
   };
 
   return isMounted
     ? createPortal(
-        <div className="fixed left-0 top-0 z-999999 flex size-full min-h-screen items-center justify-center bg-black/90 p-2">
+        <div className="fixed left-0 top-0 z-999999 flex size-full max-h-full min-h-screen items-center justify-center bg-black/90 p-2">
           <div className="max-h-full w-full max-w-142.5 overflow-y-auto rounded-lg bg-white p-4 text-center dark:bg-boxdark">
-            <span className="mx-auto inline-block">
-              <MdOutlineEventNote size={48} className="font-bold text-meta-5" />
-            </span>
-            <h3
-              data-testid="heading-title"
-              className="mb-10 text-xl font-bold text-black dark:text-white sm:text-2xl">
-              Editar nota
-            </h3>
+            <div className="mb-5 flex flex-col gap-2">
+              <span className="mx-auto inline-block">
+                <MdOutlineEventNote
+                  size={48}
+                  className="font-bold text-meta-5"
+                />
+              </span>
+              <h3 className="text-xl font-bold text-black dark:text-white sm:text-2xl">
+                Nova nota
+              </h3>
+              <p className="self-start text-start">
+                Preencha todos os campos para adicionar nova nota financeira.
+              </p>
+            </div>
             {/* Form */}
             <form
-              onSubmit={handleSubmit(updateFinanceNoteHandler)}
+              onSubmit={handleSubmit(insertNewNoteHandler)}
               className="flex flex-col">
               {/* Type */}
               <div className="mb-4.5 flex w-full flex-col">
@@ -237,7 +214,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                 <button
                   data-testid="cancel-button"
                   type="button"
-                  onClick={() => onCancelDetailNoteUpdate()}
+                  onClick={() => onCancelInsertNote()}
                   className="block w-auto min-w-[100px] rounded border border-meta-7 bg-meta-7 p-3 text-center font-medium text-white transition hover:bg-opacity-90">
                   Cancelar
                 </button>
@@ -245,7 +222,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                   data-testid="update-button"
                   type="submit"
                   className="block w-auto min-w-[100px] rounded border border-meta-3 bg-meta-3 p-3 text-center font-medium text-white transition hover:bg-opacity-90">
-                  Editar
+                  Adicionar
                 </button>
               </div>
             </form>
@@ -256,4 +233,4 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
     : null;
 };
 
-export default FinanceNoteUpdateModal;
+export default FinanceNoteInsertModal;
