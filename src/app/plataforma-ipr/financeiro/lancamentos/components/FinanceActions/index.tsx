@@ -51,6 +51,7 @@ const FinanceActions: React.FC = () => {
               Novo
             </button>
             <button
+              disabled
               type="button"
               className="max-w-[80px] cursor-pointer rounded-lg border border-meta-8 bg-meta-8 p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
               Auditoria
