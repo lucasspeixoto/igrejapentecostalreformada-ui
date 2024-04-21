@@ -1,7 +1,9 @@
 import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import React from 'react';
+import { FaEye } from 'react-icons/fa';
 
 import Image from '@/components/Image';
+import Tooltip from '@/components/Tooltip';
 import { formatFirebaseTimestampDate } from '@/utils/transform-date';
 
 import FinanceNoteDeleteAction from '../FinanceNoteDeleteAction';
@@ -100,6 +102,9 @@ const FinanceTable = () => {
                   </td>
                   <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <div className="flex items-center space-x-3.5">
+                      <Tooltip text={note.description}>
+                        <FaEye size={18} />
+                      </Tooltip>
                       <FinanceNoteUpdateAction noteId={note.id} />
                       <FinanceNoteDeleteAction noteId={note.id} />
                     </div>
