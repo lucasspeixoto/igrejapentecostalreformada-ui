@@ -21,6 +21,7 @@ const ReleasesPage = () => {
           <Filters />
           <FinanceActions />
         </div>
+
         <NotesList />
       </div>
     </div>

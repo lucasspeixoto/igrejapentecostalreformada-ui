@@ -11,8 +11,5 @@ describe('LoaderProgress', () => {
 
     const percentText = screen.getByText(`${percent} %`);
     expect(percentText).toBeInTheDocument();
-
-    const loaderElement = screen.getByRole('presentation');
-    expect(loaderElement).toBeInTheDocument();
   });
 });

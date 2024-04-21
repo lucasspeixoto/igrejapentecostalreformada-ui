@@ -105,16 +105,23 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
     ? createPortal(
         <div className="fixed left-0 top-0 z-999999 flex size-full min-h-screen items-center justify-center bg-black/90 p-2">
           <div className="max-h-full w-full max-w-142.5 overflow-y-auto rounded-lg bg-white p-4 text-center dark:bg-boxdark">
-            <div className="mb-4 flex flex-row items-start justify-start gap-2">
-              <span className="inline-block">
-                <MdOutlineEventNote
-                  size={32}
-                  className="font-bold text-meta-5"
-                />
-              </span>
-              <h3 className="text-lg font-bold text-black dark:text-white">
-                Editar nota
-              </h3>
+            <div className="mb-5 flex flex-col gap-2">
+              <div className="mb-2 flex flex-row items-end justify-start gap-2 text-center">
+                <span className="inline-block">
+                  <MdOutlineEventNote
+                    size={48}
+                    className="font-bold text-meta-5"
+                  />
+                </span>
+                <div className="flex flex-col items-start justify-start">
+                  <h3 className="text-lg font-bold text-black dark:text-white">
+                    Editar nota
+                  </h3>
+                  <p className="text-md word-break self-start text-start">
+                    Altere aqui a nota financeira.
+                  </p>
+                </div>
+              </div>
             </div>
             {/* Form */}
             <form
@@ -138,9 +145,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                     <option value="" disabled>
                       Selecione o tipo
                     </option>
-                    <option className="text-white" value="D">
-                      Débito
-                    </option>
+                    <option value="D">Débito</option>
                     <option value="C">Crédito</option>
                   </select>
                   <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">

@@ -41,7 +41,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   return mounted
     ? createPortal(
         <div className="fixed left-0 top-0 z-999999 flex size-full min-h-screen items-center justify-center bg-black/90">
-          <div className="w-full max-w-142.5 rounded-lg bg-white px-2 py-12 text-center dark:bg-boxdark">
+          <div className="w-full max-w-142.5 rounded-lg bg-white px-2 py-4 text-center dark:bg-boxdark">
             <span className="mx-auto inline-block">
               <IoWarningOutline size={48} className="font-bold text-meta-8" />
             </span>

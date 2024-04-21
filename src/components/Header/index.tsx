@@ -63,9 +63,8 @@ const Header: React.FC = () => {
             </span>
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
-
           <Link
-            className="block shrink-0 lg:hidden"
+            className="hidden shrink-0 sm:block lg:hidden"
             href="/plataforma-ipr/perfil">
             <Image
               width={32}

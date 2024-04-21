@@ -4,7 +4,6 @@ export interface Supplementary {
   weddingDate: string;
   fatherName: string;
   motherName: string;
-
   schooling: string;
   profession: string;
 }

@@ -9,10 +9,12 @@ import React from 'react';
 
 import EmptyDataPage from '@/app/components/EmptyDataPage';
 import Loader from '@/components/common/Loader';
+import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 
 import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
-import FinanceTable from './components/FinanceTable';
+import FinanceDesktopView from './components/FinanceDesktopView';
+import FinanceMobileView from './components/FinanceMobileView';
 import TableHeaderInfo from './components/TableHeaderInfo';
 
 const NotesList: React.FC = () => {
@@ -23,6 +25,8 @@ const NotesList: React.FC = () => {
   const [isAdminOption, setIsAdminOption] = React.useState(false);
 
   const router = useRouter();
+
+  const { width } = useWindowDimensions();
 
   React.useEffect(() => {
     const isAdmin = userContext.authData?.isAdmin!;
@@ -37,7 +41,7 @@ const NotesList: React.FC = () => {
   return (
     <>
       {isAdminOption ? (
-        <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default sm:px-7.5 xl:pb-1 dark:border-strokedark dark:bg-boxdark">
+        <div className="">
           <TableHeaderInfo />
 
           <div className="pb-10">
@@ -46,7 +50,13 @@ const NotesList: React.FC = () => {
             ) : (
               <>
                 {financeNotes.length > 0 ? (
-                  <FinanceTable />
+                  <>
+                    {width >= 768 ? (
+                      <FinanceDesktopView />
+                    ) : (
+                      <FinanceMobileView />
+                    )}
+                  </>
                 ) : (
                   <EmptyDataPage description="Não há nenhuma nota lançada para o período selecionado!" />
                 )}

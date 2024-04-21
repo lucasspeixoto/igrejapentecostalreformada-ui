@@ -6,7 +6,7 @@ import type { Personal } from '@cadastro/pessoal/types/personal';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import MemberCard from '@/components/MemberCard';
+import MemberCard from '@/app/components/MemberCard';
 import { getDocument } from '@/lib/firebase/firestore/getData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { Auth } from '@/types/auth';

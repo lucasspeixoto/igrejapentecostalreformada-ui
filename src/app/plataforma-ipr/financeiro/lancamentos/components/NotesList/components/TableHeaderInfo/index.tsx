@@ -13,11 +13,11 @@ const TableHeaderInfo: React.FC = () => {
   }, [financeNotes]);
 
   return (
-    <div className="flex w-full justify-between">
+    <div className="flex w-full flex-col items-start justify-between sm:flex-row sm:items-center">
       <div className="mb-2 flex flex-col justify-start gap-1">
         <p className="text-xl font-semibold text-black dark:text-white">
           Notas Lançadas{' '}
-          <span className="ml-2 mt-1 text-lg font-bold text-meta-3">
+          <span className="ml-2 mt-1 text-lg font-bold text-primary">
             {referenceMonth}
           </span>
         </p>
@@ -30,7 +30,7 @@ const TableHeaderInfo: React.FC = () => {
               {isLoadingFinanceNotes ? null : (
                 <span
                   className={`ml-2 mt-1 text-lg font-bold ${
-                    totalBalance >= 0 ? 'text-meta-5' : 'text-meta-7'
+                    totalBalance >= 0 ? 'text-meta-3' : 'text-meta-7'
                   }`}>
                   R$ {totalBalance}
                 </span>

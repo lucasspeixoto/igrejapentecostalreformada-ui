@@ -116,9 +116,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                     <option value="" disabled>
                       Selecione o tipo
                     </option>
-                    <option className="text-white" value="D">
-                      Débito
-                    </option>
+                    <option value="D">Débito</option>
                     <option value="C">Crédito</option>
                   </select>
                   <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
