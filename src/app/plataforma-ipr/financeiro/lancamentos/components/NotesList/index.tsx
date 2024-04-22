@@ -17,6 +17,8 @@ import FinanceDesktopView from './components/FinanceDesktopView';
 import FinanceMobileView from './components/FinanceMobileView';
 import TableHeaderInfo from './components/TableHeaderInfo';
 
+const MAX_MOBILE_WIDTH = 768;
+
 const NotesList: React.FC = () => {
   const userContext = useAuthContext();
 
@@ -26,7 +28,7 @@ const NotesList: React.FC = () => {
 
   const router = useRouter();
 
-  const { width } = useWindowDimensions();
+  const isMobileSize = useWindowDimensions(MAX_MOBILE_WIDTH);
 
   React.useEffect(() => {
     const isAdmin = userContext.authData?.isAdmin!;
@@ -51,10 +53,11 @@ const NotesList: React.FC = () => {
               <>
                 {financeNotes.length > 0 ? (
                   <>
-                    {width >= 768 ? (
-                      <FinanceDesktopView />
-                    ) : (
+                    {isMobileSize ? (
                       <FinanceMobileView />
+                      
+                    ) : (
+                      <FinanceDesktopView />
                     )}
                   </>
                 ) : (

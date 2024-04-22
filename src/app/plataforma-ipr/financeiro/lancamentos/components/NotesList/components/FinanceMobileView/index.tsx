@@ -15,7 +15,7 @@ const FinanceMobileView = () => {
       <div className="flex max-w-full flex-wrap items-center justify-center gap-4">
         {React.Children.toArray(
           financeNotes.map(note => (
-            <div className="w-[250px] rounded-lg border border-[#ccc] bg-white px-1 py-2 drop-shadow-1 hover:cursor-pointer hover:shadow-default dark:bg-boxdark dark:drop-shadow-none">
+            <div className="w-[250px] rounded-lg bg-white px-1 py-2 drop-shadow-1 hover:cursor-pointer hover:shadow-default dark:border-none dark:bg-boxdark dark:drop-shadow-none">
               <div className="flex flex-row items-center justify-start gap-2">
                 <>
                   {note.photoUrl ? (
@@ -54,6 +54,7 @@ const FinanceMobileView = () => {
               <p className="text-gray-500 dark:text-gray-400 mb-3 w-full truncate font-normal hover:text-clip">
                 {note.description}
               </p>
+
               <div className="flex items-center justify-between">
                 <div className="text-black dark:text-white">
                   {note.type === 'C' ? (
