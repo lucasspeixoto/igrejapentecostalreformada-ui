@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import { AuthContextProvider } from '@/providers/AuthContextProvider';
 
-const MembrosLayout = ({ children }: { children: React.ReactNode }) => {
+const PlataformaIprLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="dark:bg-boxdark-2 dark:text-bodydark">
       <AuthContextProvider>
@@ -23,4 +23,4 @@ const MembrosLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default MembrosLayout;
+export default PlataformaIprLayout;

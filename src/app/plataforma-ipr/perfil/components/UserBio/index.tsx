@@ -98,7 +98,7 @@ const UserBio: React.FC = () => {
                 name="cellphone"
                 id="cellphone"
                 placeholder="Celular"
-                defaultValue={personalContext?.personalData?.cellphone}
+                defaultValue={personalContext?.personalData?.cellphone!}
                 disabled
               />
             </div>
