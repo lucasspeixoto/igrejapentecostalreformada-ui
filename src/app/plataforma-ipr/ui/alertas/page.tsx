@@ -4,14 +4,14 @@ import type { Metadata } from 'next';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
 export const metadata: Metadata = {
-  title: 'Alerts Page | Next.js E-commerce Dashboard Template',
-  description: 'This is Alerts page for TailAdmin Next.js',
+  title: 'Opções de Alertas',
+  description: 'Página com a exibição dos Alertas disponíveis',
   // other metadata
 };
 
 const Alerts = () => {
   return (
-    <>
+    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
       <Breadcrumb pageName="Alerts" />
 
       <div className="rounded-sm border border-stroke bg-white p-4 shadow-default dark:border-strokedark dark:bg-boxdark md:p-6 xl:p-9">
@@ -94,7 +94,7 @@ const Alerts = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

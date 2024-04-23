@@ -255,68 +255,6 @@ const Sidebar = () => {
                 </li>
               ) : null}
 
-              {/* <!-- Indicadores --> */}
-              {authData?.isAdmin ? (
-                <SidebarLinkGroup
-                  activeCondition={
-                    pathname === '/' || pathname.includes('indicadores')
-                  }>
-                  {(handleClick, open) => {
-                    return (
-                      <React.Fragment>
-                        <Link
-                          href="#"
-                          className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                            (pathname === '/plataforma-ipr/indicadores' ||
-                              pathname.includes('indicadores')) &&
-                            'bg-graydark dark:bg-meta-4'
-                          }`}
-                          onClick={e => {
-                            e.preventDefault();
-                            sidebarExpanded
-                              ? handleClick()
-                              : setSidebarExpanded(true);
-                          }}>
-                          <AiOutlinePieChart size={20} className="text-gray" />
-                          Indicadores
-                          <MenuChevroletIcon open={open} />
-                        </Link>
-                        {/* <!-- Dropdown Menu Start --> */}
-                        <div
-                          className={`translate overflow-hidden${
-                            !open && ' hidden'
-                          }`}>
-                          <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
-                            <li>
-                              <Link
-                                href="/plataforma-ipr/indicadores/estatisticos"
-                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname ===
-                                    '/plataforma-ipr/indicadores/estatisticos' &&
-                                  'text-white'
-                                } `}>
-                                Estatísticos
-                              </Link>
-                            </li>
-                            <li>
-                              <Link
-                                href="/plataforma-ipr/indicadores/economicos"
-                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname ===
-                                    '/plataforma-ipr/indicadores/economicos' &&
-                                  'text-white'
-                                } `}>
-                                Econômicos
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </React.Fragment>
-                    );
-                  }}
-                </SidebarLinkGroup>
-              ) : null}
-
               {/* <!-- Financeiro --> */}
               {authData?.isAdmin ? (
                 <SidebarLinkGroup
@@ -381,12 +319,74 @@ const Sidebar = () => {
                 </SidebarLinkGroup>
               ) : null}
 
+              {/* <!-- Indicadores --> */}
+              {authData?.isAdmin ? (
+                <SidebarLinkGroup
+                  activeCondition={
+                    pathname === '/' || pathname.includes('indicadores')
+                  }>
+                  {(handleClick, open) => {
+                    return (
+                      <React.Fragment>
+                        <Link
+                          href="#"
+                          className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
+                            (pathname === '/plataforma-ipr/indicadores' ||
+                              pathname.includes('indicadores')) &&
+                            'bg-graydark dark:bg-meta-4'
+                          }`}
+                          onClick={e => {
+                            e.preventDefault();
+                            sidebarExpanded
+                              ? handleClick()
+                              : setSidebarExpanded(true);
+                          }}>
+                          <AiOutlinePieChart size={20} className="text-gray" />
+                          Indicadores
+                          <MenuChevroletIcon open={open} />
+                        </Link>
+                        {/* <!-- Dropdown Menu Start --> */}
+                        <div
+                          className={`translate overflow-hidden${
+                            !open && ' hidden'
+                          }`}>
+                          <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
+                            <li>
+                              <Link
+                                href="/plataforma-ipr/indicadores/estatisticos"
+                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                  pathname ===
+                                    '/plataforma-ipr/indicadores/estatisticos' &&
+                                  'text-white'
+                                } `}>
+                                Estatísticos
+                              </Link>
+                            </li>
+                            {/* <li>
+                              <Link
+                                href="/plataforma-ipr/indicadores/economicos"
+                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
+                                  pathname ===
+                                    '/plataforma-ipr/indicadores/economicos' &&
+                                  'text-white'
+                                } `}>
+                                Econômicos
+                              </Link>
+                            </li> */}
+                          </ul>
+                        </div>
+                      </React.Fragment>
+                    );
+                  }}
+                </SidebarLinkGroup>
+              ) : null}
+
               {/* <!-- Calendário --> */}
               <li>
                 <Link
-                  href="/plataforma-ipr/calendar"
+                  href="/plataforma-ipr/calendario"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('calendar') &&
+                    pathname.includes('calendario') &&
                     'bg-graydark dark:bg-meta-4'
                   }`}>
                   <BsCalendarDate size={20} className="text-gray" />
@@ -442,7 +442,7 @@ const Sidebar = () => {
                               target="_blanck"
                               href="https://ipr-biblia.vercel.app/"
                               className="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white">
-                              Bíblia IPR
+                              Bíblia Online
                             </Link>
                           </li>
                         </ul>
@@ -458,7 +458,7 @@ const Sidebar = () => {
               {authData?.isAdmin ? (
                 <SidebarLinkGroup
                   activeCondition={
-                    pathname === '/' || pathname.includes('buttons')
+                    pathname === '/plataforma-ipr/ui' || pathname.includes('ui')
                   }>
                   {(handleClick, open) => {
                     return (

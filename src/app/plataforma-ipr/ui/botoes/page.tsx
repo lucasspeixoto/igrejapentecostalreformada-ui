@@ -5,14 +5,14 @@ import Link from 'next/link';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
 export const metadata: Metadata = {
-  title: 'Buttons Page | Next.js E-commerce Dashboard Template',
-  description: 'This is Buttons page for TailAdmin Next.js',
+  title: 'Opções de Botões',
+  description: 'Página com a exibição dos botões disponíveis',
   // other metadata
 };
 
 const Buttons = () => {
   return (
-    <>
+    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
       <Breadcrumb pageName="Buttons" />
 
       {/* <!-- Normal Button Items --> */}
@@ -436,7 +436,7 @@ const Buttons = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
