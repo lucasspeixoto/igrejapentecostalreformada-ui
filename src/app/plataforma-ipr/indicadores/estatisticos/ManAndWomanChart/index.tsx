@@ -10,10 +10,6 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
 
-interface ManAndWomanChartState {
-  series: number[];
-}
-
 const options: ApexOptions = {
   chart: {
     type: 'donut',
@@ -21,8 +17,7 @@ const options: ApexOptions = {
   colors: ['#259AE6', '#FF6766', '#10B981'],
   labels: ['Homens', 'Mulheres', 'Sem Cadastro'],
   legend: {
-    show: true,
-    position: 'bottom',
+    show: false,
   },
   plotOptions: {
     pie: {
@@ -79,14 +74,13 @@ const ManAndWomanChart: React.FC<{ userData: UserData[] }> = ({ userData }) => {
     );
   }, [userData]);
 
-  // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
-  const [sex, setSex] = React.useState<ManAndWomanChartState>({
+  const sex = {
     series: [
       isManTotal,
       isWomanTotal,
       totalOfMembers - (isManTotal + isWomanTotal),
     ],
-  });
+  };
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
@@ -99,7 +93,7 @@ const ManAndWomanChart: React.FC<{ userData: UserData[] }> = ({ userData }) => {
       </div>
 
       <div className="mb-2">
-        <div id="mandAndWomanChart" className="mx-auto flex justify-center">
+        <div id="manAndWomanChart" className="mx-auto flex justify-center">
           <ReactApexChart
             options={options}
             series={sex.series}

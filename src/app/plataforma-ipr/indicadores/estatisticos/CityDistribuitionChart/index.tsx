@@ -10,10 +10,6 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
 
-interface CityDistribuitionChartState {
-  series: number[];
-}
-
 const options: ApexOptions = {
   chart: {
     type: 'donut',
@@ -21,8 +17,7 @@ const options: ApexOptions = {
   colors: ['#DC3545', '#FFBA00'],
   labels: ['Campinas', 'Outras Cidades'],
   legend: {
-    show: true,
-    position: 'bottom',
+    show: false,
   },
   plotOptions: {
     pie: {
@@ -79,10 +74,9 @@ const CityDistribuitionChart: React.FC<{ userData: UserData[] }> = ({
     );
   }, [userData]);
 
-  // eslint-disable-next-line unused-imports/no-unused-vars, @typescript-eslint/no-unused-vars
-  const [cityData, setCityData] = React.useState<CityDistribuitionChartState>({
+  const cityData = {
     series: [isFromCampinasTotal, isNotFromCampinasTotal],
-  });
+  };
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">

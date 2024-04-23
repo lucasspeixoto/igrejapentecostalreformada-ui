@@ -69,7 +69,7 @@ const StatisticTotals: React.FC<{ userData: UserData[] }> = ({ userData }) => {
       </CardDataStats>
 
       <CardDataStats
-        title="Adminstradores"
+        title="Administradores"
         total={isAdminTotal.toString()}
         rate={`${((isAdminTotal / totalOfMembers) * 100).toFixed(2)}%`}
         levelUp={isAdminTotal === totalOfMembers}

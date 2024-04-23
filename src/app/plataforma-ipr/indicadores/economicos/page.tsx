@@ -4,7 +4,6 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
-import ChartOne from '@/components/Charts/ChartOne';
 
 export const metadata: Metadata = {
   title: 'Indicadores',
@@ -19,7 +18,7 @@ const Indicators: React.FC = () => {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5"></div>
 
       <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartOne />
+        {/* <BarChart /> */}
       </div>
     </div>
   );

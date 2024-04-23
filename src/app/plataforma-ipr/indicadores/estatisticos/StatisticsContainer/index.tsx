@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
+import type { Personal } from '@/app/plataforma-ipr/cadastro/pessoal/types/personal';
 import { getUsersDocuments } from '@/lib/firebase/firestore/getData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { UserData } from '@/types/user-data';
@@ -15,6 +16,8 @@ const StatisticsContainer: React.FC = () => {
   const userAuthContext = useAuthContext();
 
   const [userLoadedData, setUserLoadedData] = React.useState<UserData[]>([]);
+
+  const [personalData, setPersonalData] = React.useState<Personal[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-vars
   const [isLoadingUsers, setIsLoadingUsers] = React.useState(true);
