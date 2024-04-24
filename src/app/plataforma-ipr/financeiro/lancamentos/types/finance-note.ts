@@ -9,4 +9,5 @@ export type FinanceNote = {
   type: 'D' | 'C';
   value: number;
   category: string;
+  member: string;
 };

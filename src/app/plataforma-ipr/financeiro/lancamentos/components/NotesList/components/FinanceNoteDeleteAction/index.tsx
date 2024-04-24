@@ -1,10 +1,10 @@
+import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import React from 'react';
 import { BiTrash } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 
 import ConfirmModal from '@/components/ConfirmModal';
 
-import { useFinanceNotesContext } from '../../../../../providers/FinanceNotesProvider';
 import {
   DELETE_NOTE_CANCEL_TITLE,
   DELETE_NOTE_CONFIRM_TITLE,

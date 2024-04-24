@@ -12,6 +12,7 @@ import { SelectChevroletLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 
 import { financeParameters } from '../../../constants/form-parameters';
+import { MEMBERS } from '../../../constants/members-list';
 import type { InsertFinanceNoteFormData } from '../../../schemas/insert-finance-note-schema';
 import { insertFinanceNoteFormSchema } from '../../../schemas/insert-finance-note-schema';
 import type { FinanceNote } from '../../../types/finance-note';
@@ -25,11 +26,11 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
   onCancelInsertNote,
   insertNoteHandler,
 }) => {
-  const [isMounted, setIsMounted] = React.useState(false);
-
   const { financeNoteCategories } = financeParameters;
 
   const { authData } = useAuthContext();
+
+  const [isMounted, setIsMounted] = React.useState(false);
 
   const {
     register,
@@ -55,7 +56,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
   });
 
   const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
-    const { description, type, value, category } = formData;
+    const { description, type, value, category, member } = formData;
 
     const newFinanceNote: Partial<FinanceNote> = {
       photoUrl: authData?.photoUrl,
@@ -64,6 +65,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
       description,
       type,
       value,
+      member,
       category,
     };
 
@@ -181,6 +183,37 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                     </span>
                   )}
                 </>
+              </div>
+
+              {/* Membro associado */}
+              <div className="mb-4.5 flex w-full flex-col">
+                <label
+                  htmlFor="member"
+                  data-testid="member"
+                  className="mb-2.5 block self-start text-black dark:text-white">
+                  Membro associado
+                </label>
+                <div className="relative z-20 bg-transparent dark:bg-form-input">
+                  <select
+                    id="member"
+                    aria-label="member"
+                    role="member-select"
+                    {...register('member')}
+                    className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 font-medium text-black outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary">
+                    <option value="" disabled>
+                      Selecione o membro
+                    </option>
+                    <option value="">Nenhum</option>
+                    {React.Children.toArray(
+                      MEMBERS.map(member => (
+                        <option value={member}>{member}</option>
+                      ))
+                    )}
+                  </select>
+                  <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+                    <SelectChevroletLogo size={24} />
+                  </span>
+                </div>
               </div>
 
               {/* Description */}

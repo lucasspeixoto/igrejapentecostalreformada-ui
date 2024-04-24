@@ -1,5 +1,5 @@
-import useFinanceNotes from '@financeiro/lancamentos/store/useFinanceNotes';
-import { getBalance } from '@financeiro/lancamentos/utils/get-balance';
+import useFinanceNotes from '@lancamentos/store/useFinanceNotes';
+import { getBalance } from '@lancamentos/utils/get-balance';
 import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import React from 'react';
 

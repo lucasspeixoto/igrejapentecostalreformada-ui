@@ -14,12 +14,6 @@ jest.mock('next/navigation', () => ({
   },
 }));
 
-/* jest.mock('../../../../../../providers/FinanceNotesProvider', () => ({
-  useFinanceNotesContext() {
-    return { prefetch: () => null };
-  },
-})); */
-
 describe('FinanceNoteInsertModal', () => {
   const onCancelInsertNote = jest.fn();
   const insertNoteHandler = jest.fn();
@@ -69,6 +63,19 @@ describe('FinanceNoteInsertModal', () => {
     });
 
     it('should render Category select and label', () => {
+      const labelElement = screen.getByTestId('category');
+      const selectElement = screen.getByLabelText('category');
+      const options = selectElement.getElementsByTagName('option');
+
+      // Options + Disabled info value
+      expect(options.length).toEqual(financeNoteCategories.length + 1);
+
+      expect(selectElement).toBeVisible();
+      expect(labelElement).toBeInTheDocument();
+      expect(labelElement).toHaveTextContent('Categoria *');
+    });
+
+    it('should render Member select and label', () => {
       const labelElement = screen.getByTestId('category');
       const selectElement = screen.getByLabelText('category');
       const options = selectElement.getElementsByTagName('option');

@@ -47,6 +47,9 @@
       ],
       "@financeiro/*": [
         "./src/app/plataforma-ipr/financeiro/*"
+      ],
+      "@lancamentos/*": [
+        "./src/app/plataforma-ipr/financeiro/lancamentos/*"
       ]
     }
   },

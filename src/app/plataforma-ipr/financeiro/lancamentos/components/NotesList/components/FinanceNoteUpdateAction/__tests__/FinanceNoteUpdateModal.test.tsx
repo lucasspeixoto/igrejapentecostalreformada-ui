@@ -5,6 +5,7 @@ import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 
 import { financeParameters } from '@/app/plataforma-ipr/financeiro/lancamentos/constants/form-parameters';
+import { MEMBERS } from '@/app/plataforma-ipr/financeiro/lancamentos/constants/members-list';
 
 import FinanceNoteUpdateModal from '../FinanceNoteUpdateModal';
 
@@ -17,6 +18,7 @@ const MOCKED_FINANCE_NOTE = {
   category: 'Dízimo',
   date: Timestamp.fromDate(new Date('2023-12-05T00:00:00')),
   type: 'C',
+  member: 'LUCAS',
   value: 150.0,
 };
 
@@ -82,6 +84,19 @@ describe('FinanceNoteUpdateModal', () => {
     });
 
     it('should render Category select and label', () => {
+      const labelElement = screen.getByTestId('member');
+      const selectElement = screen.getByLabelText('member');
+      const options = selectElement.getElementsByTagName('option');
+
+      // Options + Disabled info value
+      expect(options.length).toEqual(MEMBERS.length + 2);
+
+      expect(selectElement).toBeVisible();
+      expect(labelElement).toBeInTheDocument();
+      expect(labelElement).toHaveTextContent('Membro associado');
+    });
+
+    it('should render Member select and label', () => {
       const labelElement = screen.getByTestId('category');
       const selectElement = screen.getByLabelText('category');
       const options = selectElement.getElementsByTagName('option');

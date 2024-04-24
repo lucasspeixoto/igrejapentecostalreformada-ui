@@ -1,8 +1,8 @@
 'use client';
 
 /* eslint-disable max-len */
-import useFinanceNotes from '@financeiro/lancamentos/store/useFinanceNotes';
-import { generateDatesArray } from '@financeiro/lancamentos/utils/generate-dates-array';
+import useFinanceNotes from '@lancamentos/store/useFinanceNotes';
+import { generateDatesArray } from '@lancamentos/utils/generate-dates-array';
 import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import React from 'react';
 

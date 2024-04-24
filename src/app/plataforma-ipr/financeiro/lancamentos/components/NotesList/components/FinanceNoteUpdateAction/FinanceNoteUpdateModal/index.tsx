@@ -1,13 +1,14 @@
 /* eslint-disable max-len */
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 
-import { financeParameters } from '@financeiro/lancamentos/constants/form-parameters';
-import { getFinanceNote } from '@financeiro/lancamentos/lib/firebase/get-finance-notes';
-import updateFinanceNote from '@financeiro/lancamentos/lib/firebase/update-finance-note';
-import type { UpdateFinanceNoteFormData } from '@financeiro/lancamentos/schemas/update-finance-note-schema';
-import { updateFinanceNoteFormSchema } from '@financeiro/lancamentos/schemas/update-finance-note-schema';
 import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { financeParameters } from '@lancamentos/constants/form-parameters';
+import { MEMBERS } from '@lancamentos/constants/members-list';
+import { getFinanceNote } from '@lancamentos/lib/firebase/get-finance-notes';
+import updateFinanceNote from '@lancamentos/lib/firebase/update-finance-note';
+import type { UpdateFinanceNoteFormData } from '@lancamentos/schemas/update-finance-note-schema';
+import { updateFinanceNoteFormSchema } from '@lancamentos/schemas/update-finance-note-schema';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
@@ -64,9 +65,9 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
       const { financeNote } = result;
 
       if (mounted && financeNote) {
-        const { type, value, description, category } = financeNote;
+        const { type, value, description, category, member } = financeNote;
 
-        reset({ type, value, description, category });
+        reset({ type, value, description, category, member });
       }
     };
 
@@ -210,6 +211,37 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                     </span>
                   )}
                 </>
+              </div>
+
+              {/* Membro associado */}
+              <div className="mb-4.5 flex w-full flex-col">
+                <label
+                  htmlFor="member"
+                  data-testid="member"
+                  className="mb-2.5 block self-start text-black dark:text-white">
+                  Membro associado
+                </label>
+                <div className="relative z-20 bg-transparent dark:bg-form-input">
+                  <select
+                    id="member"
+                    aria-label="member"
+                    role="member-select"
+                    {...register('member')}
+                    className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 font-medium text-black outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary">
+                    <option value="" disabled>
+                      Selecione o membro
+                    </option>
+                    <option value="">Nenhum</option>
+                    {React.Children.toArray(
+                      MEMBERS.map(member => (
+                        <option value={member}>{member}</option>
+                      ))
+                    )}
+                  </select>
+                  <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+                    <SelectChevroletLogo size={24} />
+                  </span>
+                </div>
               </div>
 
               {/* Description */}

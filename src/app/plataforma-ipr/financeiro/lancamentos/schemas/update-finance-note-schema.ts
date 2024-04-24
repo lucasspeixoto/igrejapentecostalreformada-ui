@@ -8,6 +8,7 @@ export const updateFinanceNoteFormSchema = z.object({
   description: z
     .string()
     .min(3, 'A descrição precisa conter no mínimo 3 caracteres!'),
+  member: z.string().optional(),
   category: z.string(),
 });
 
