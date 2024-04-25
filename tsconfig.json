@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,12 +24,42 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@app/*": ["./src/app/*"],
-      "@fire/*": ["./src/lib/firebase/*"],
-      "@appC/*": ["./src/app/components/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@fire/*": [
+        "./src/lib/firebase/*"
+      ],
+      "@appC/*": [
+        "./src/app/components/*"
+      ],
+      "@cadastro/*": [
+        "./src/app/plataforma-ipr/cadastro/*"
+      ],
+      "@signup/*": [
+        "./src/app/cadastro/*"
+      ],
+      "@signin/*": [
+        "./src/app/login/*"
+      ],
+      "@financeiro/*": [
+        "./src/app/plataforma-ipr/financeiro/*"
+      ],
+      "@lancamentos/*": [
+        "./src/app/plataforma-ipr/financeiro/lancamentos/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

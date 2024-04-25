@@ -1,29 +1,29 @@
 'use client';
 
-import signInUserHandler from '@fire/auth/signin';
-import signInWithGoogle from '@fire/auth/signin-with-google';
 import addDocumentData from '@fire/firestore/addData';
 import firebaseMessages from '@fire/messages';
+import signInUserHandler from '@signin/lib/firebase/signin';
+import signInWithGoogle from '@signin/lib/firebase/signin-with-google';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { toast } from 'react-toastify';
 
-import { useAuthContext } from '@/providers/AuthContextProvider';
-import type { LoginUserFormData } from '@/schemas/authentication/signin-schema';
+import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
+import type { Auth } from '@/types/auth';
 import type { Process } from '@/types/process';
-import type { UserAuth } from '@/types/user-auth';
 
+import type { LoginUserFormData } from '../schemas/signin-schema';
 import LoginForm from './LoginForm';
 
 const LoginWrapper: React.FC = () => {
   const router = useRouter();
 
-  const authContext = useAuthContext()!;
+  const authContext = useFirebaseAuthContext()!;
 
   const singInWithGoogleHandler = async (): Promise<void> => {
     const { result, error, isTheUserNew } = await signInWithGoogle();
 
-    let userAuthCollection: UserAuth;
+    let userAuthCollection: Auth;
 
     let processCollection: Process;
 
@@ -56,9 +56,9 @@ const LoginWrapper: React.FC = () => {
 
         toast.success('Bem vindo a IPR!');
 
-        router.push('/membros/cadastro/pessoal');
+        router.push('/plataforma-ipr/cadastro/pessoal');
       } else {
-        router.push('/membros/perfil');
+        router.push('/plataforma-ipr/perfil');
       }
 
       authContext.updateLoadingAuthProcess(false);
@@ -79,7 +79,7 @@ const LoginWrapper: React.FC = () => {
     } else {
       authContext.updateLoadingAuthProcess(false);
 
-      router.push('/membros/perfil');
+      router.push('/plataforma-ipr/perfil');
     }
   };
 

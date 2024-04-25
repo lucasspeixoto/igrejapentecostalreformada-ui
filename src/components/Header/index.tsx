@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 'use client';
 
 import Link from 'next/link';
@@ -32,9 +34,9 @@ const Header: React.FC = () => {
               e.stopPropagation();
               setSidebarOpenHandle();
             }}
-            className="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm lg:hidden dark:border-strokedark dark:bg-boxdark">
-            <span className="relative block h-5.5 w-5.5 cursor-pointer">
-              <span className="du-block absolute right-0 h-full w-full">
+            className="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden">
+            <span className="relative block size-5.5 cursor-pointer">
+              <span className="du-block absolute right-0 size-full">
                 <span
                   className={`relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white ${
                     !sidebarOpen && '!w-full delay-300'
@@ -48,7 +50,7 @@ const Header: React.FC = () => {
                     !sidebarOpen && '!w-full delay-500'
                   }`}></span>
               </span>
-              <span className="absolute right-0 h-full w-full rotate-45">
+              <span className="absolute right-0 size-full rotate-45">
                 <span
                   className={`absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white ${
                     !sidebarOpen && '!h-0 !delay-[0]'
@@ -61,8 +63,9 @@ const Header: React.FC = () => {
             </span>
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
-
-          <Link className="block shrink-0 lg:hidden" href="/membros/perfil">
+          <Link
+            className="hidden shrink-0 sm:block lg:hidden"
+            href="/plataforma-ipr/perfil">
             <Image
               width={32}
               height={32}

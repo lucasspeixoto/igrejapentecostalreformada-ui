@@ -25,8 +25,8 @@ export async function getUsersDocuments() {
   try {
     const docsSnap = await getDocs(usersQuery);
 
-    docsSnap.forEach(documment => {
-      const data = documment.data() as UserData;
+    docsSnap.forEach(document => {
+      const data = document.data() as UserData;
 
       userData.push(data);
     });

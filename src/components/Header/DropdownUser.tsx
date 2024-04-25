@@ -1,5 +1,5 @@
-import signOutUserHandler from '@fire/auth/signout';
 import firebaseMessages from '@fire/messages';
+import signOutUserHandler from '@signin/lib/firebase/signout';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -10,13 +10,10 @@ import { SlLogout } from 'react-icons/sl';
 import { toast } from 'react-toastify';
 
 import { useAuthContext } from '@/providers/AuthContextProvider';
-import { useAuthUserDataContext } from '@/providers/AuthUserDataContextProvider';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
   const router = useRouter();
-
-  const userProfileContext = useAuthUserDataContext();
 
   const authContext = useAuthContext();
 
@@ -31,9 +28,9 @@ const DropdownUser = () => {
     if (error) {
       toast.error(firebaseMessages[error.code]);
 
-      authContext.updateLoadingAuthProcess(false);
+      authContext.updateIsLoadingData(false);
     } else {
-      authContext.updateLoadingAuthProcess(false);
+      authContext.updateIsLoadingData(false);
     }
   };
 
@@ -72,25 +69,25 @@ const DropdownUser = () => {
         href="#">
         <span className="hidden text-left lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {userProfileContext.authData?.name}
+            {authContext.authData?.name}
           </span>
           <span className="block text-xs">Graça e paz 🙏</span>
         </span>
 
-        <span className="h-12 w-12">
-          {userProfileContext.authData?.photoUrl ? (
+        <span className="size-12">
+          {authContext.authData?.photoUrl ? (
             <Image
               width={112}
               height={112}
-              className="h-12 w-12 rounded-full"
-              src={userProfileContext.authData?.photoUrl}
+              className="size-12 rounded-full"
+              src={authContext.authData?.photoUrl}
               alt="User"
             />
           ) : (
             <Image
               width={112}
               height={112}
-              className="h-12 w-12 rounded-full"
+              className="size-12 rounded-full"
               src={'/images/user/dummy-user.png'}
               alt="User"
             />
@@ -125,7 +122,7 @@ const DropdownUser = () => {
           <li>
             <span className="leading-loose text-meta-4 opacity-80 hover:opacity-100 dark:text-gray">
               <Link
-                href="/membros/perfil"
+                href="/plataforma-ipr/perfil"
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out lg:text-base">
                 <BiUser size={20} />
                 Meu Perfil
@@ -135,7 +132,7 @@ const DropdownUser = () => {
           <li>
             <span className="leading-loose text-meta-4 opacity-80 hover:opacity-100 dark:text-gray">
               <Link
-                href="/membros/cadastro/pessoal"
+                href="/plataforma-ipr/cadastro/pessoal"
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out lg:text-base">
                 <FaWpforms size={20} />
                 Cadastro
@@ -145,7 +142,7 @@ const DropdownUser = () => {
         </ul>
         <button
           onClick={signOutUser}
-          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium text-meta-4 opacity-80 duration-300 ease-in-out hover:opacity-100 lg:text-base  dark:text-gray">
+          className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium text-meta-4 opacity-80 duration-300 ease-in-out hover:opacity-100 dark:text-gray  lg:text-base">
           <SlLogout size={20} />
           Sair
         </button>
