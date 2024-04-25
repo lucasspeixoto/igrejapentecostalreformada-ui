@@ -79,7 +79,7 @@ const EducationForm = () => {
         <div className="relative z-20 bg-transparent dark:bg-form-input">
           <select
             {...register('schooling')}
-            className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
             <option value="">Selecione a escolaridade</option>
             {React.Children.toArray(
               schoolingOptions.map(schooling => (
@@ -108,7 +108,7 @@ const EducationForm = () => {
           <input
             type="text"
             {...register('profession')}
-            className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
           />
           <>
             {errors.profession && (

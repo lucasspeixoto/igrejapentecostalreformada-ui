@@ -64,9 +64,9 @@ const RecoveryPasswordForm = () => {
           <input
             type="email"
             {...register('email')}
-            className="w-full rounded-lg border border-stroke bg-transparent py-2 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+            className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
           />
-          <span className="absolute bottom-2.5 right-4">
+          <span className="absolute bottom-3.5 right-4">
             <MdOutlineMarkEmailUnread size={22} opacity=".5" />
           </span>
         </div>

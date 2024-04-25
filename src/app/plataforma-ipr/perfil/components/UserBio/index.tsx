@@ -71,7 +71,7 @@ const UserBio: React.FC = () => {
                 <FiUser size={20} />
               </span>
               <input
-                className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent py-3 pl-11.5 pr-4.5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
                 type="text"
                 name="name"
                 id="name"
@@ -93,12 +93,12 @@ const UserBio: React.FC = () => {
                 <FiUser size={20} />
               </span>
               <input
-                className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+                className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent py-3 pl-11.5 pr-4.5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
                 type="text"
                 name="cellphone"
                 id="cellphone"
                 placeholder="Celular"
-                defaultValue={personalContext?.personalData?.cellphone!}
+                defaultValue={personalContext?.personalData?.cellphone}
                 disabled
               />
             </div>
@@ -118,7 +118,7 @@ const UserBio: React.FC = () => {
               <MdOutlineMarkEmailUnread size={20} />
             </span>
             <input
-              className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+              className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent py-3 pl-11.5 pr-4.5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
               type="email"
               name="email"
               id="email"
@@ -143,7 +143,7 @@ const UserBio: React.FC = () => {
             </span>
 
             <textarea
-              className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
+              className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent py-3 pl-11.5 pr-4.5 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
               name="bio"
               id="bio"
               rows={10}

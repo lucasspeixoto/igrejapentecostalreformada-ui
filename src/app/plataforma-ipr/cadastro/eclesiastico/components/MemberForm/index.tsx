@@ -82,7 +82,7 @@ const MemberForm = () => {
           <div className="relative z-20 bg-transparent dark:bg-form-input">
             <select
               {...register('membership')}
-              className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+              className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
               <option value="">Selecione o tipo de membro</option>
               {React.Children.toArray(
                 membershipOption.map(member => (
@@ -110,7 +110,7 @@ const MemberForm = () => {
           <div className="relative z-20 bg-transparent dark:bg-form-input">
             <select
               {...register('craft')}
-              className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+              className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
               <option value="">Selecione o ofício</option>
               {React.Children.toArray(
                 craftOption.map(craft => <option value={craft}>{craft}</option>)
@@ -137,7 +137,7 @@ const MemberForm = () => {
         <div className="relative z-20 bg-transparent dark:bg-form-input">
           <select
             {...register('communities')}
-            className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
             <option value="">Selecione a igreja</option>
             {React.Children.toArray(
               communitiesOption.map(community => (
@@ -165,7 +165,7 @@ const MemberForm = () => {
         <div className="relative z-20 bg-transparent dark:bg-form-input">
           <select
             {...register('interests')}
-            className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+            className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
             <option value="">Selecione o interesse</option>
             {React.Children.toArray(
               interestsOption.map(interest => (
