@@ -1,9 +1,9 @@
 'use client';
 
 /* eslint-disable max-len */
+import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import useFinanceNotes from '@lancamentos/store/useFinanceNotes';
 import { generateDatesArray } from '@lancamentos/utils/generate-dates-array';
-import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import React from 'react';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';

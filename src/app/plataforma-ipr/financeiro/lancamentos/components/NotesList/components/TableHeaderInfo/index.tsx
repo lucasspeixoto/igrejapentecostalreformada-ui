@@ -1,6 +1,6 @@
+import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import useFinanceNotes from '@lancamentos/store/useFinanceNotes';
 import { getBalance } from '@lancamentos/utils/get-balance';
-import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import React from 'react';
 
 const TableHeaderInfo: React.FC = () => {
