@@ -16,6 +16,7 @@ describe('getMonthBalance', () => {
         category: 'Conta',
         member: '',
         value: 100.0,
+        paymentVoucher: 'Pendente',
       },
       {
         id: 'ju73jfYt71Fe1Ss',
@@ -27,6 +28,7 @@ describe('getMonthBalance', () => {
         category: 'Dízimo',
         member: '',
         value: 150.0,
+        paymentVoucher: 'Pendente',
       },
     ];
 

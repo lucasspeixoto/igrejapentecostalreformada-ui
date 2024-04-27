@@ -10,9 +10,7 @@ export const insertFinanceNoteFormSchema = z.object({
     .min(3, 'A descrição precisa conter no mínimo 3 caracteres!'),
   member: z.string().optional(),
   category: z.string(),
-  isFileSaved: z.literal<boolean>(true, {
-    errorMap: () => ({ message: 'Custom message here' }),
-  }),
+  paymentVoucher: z.string(),
 });
 
 export type InsertFinanceNoteFormData = z.infer<

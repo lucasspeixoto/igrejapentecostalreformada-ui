@@ -51,7 +51,6 @@ export const FinanceReportsContextProvider: React.FC<{
         if (data) {
           const financeReportData = data.financeReportData as FinanceReport;
           setFinanceReport(financeReportData);
-          updateIsDataUpdatedInfo();
         }
       })
       .catch(error => {

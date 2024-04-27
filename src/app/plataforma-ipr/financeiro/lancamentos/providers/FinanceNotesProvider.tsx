@@ -5,6 +5,8 @@ import useFinanceNotes from '@lancamentos/store/useFinanceNotes';
 import type { FinanceNote } from '@lancamentos/types/finance-note';
 import React from 'react';
 
+import { orderNotesByDate } from '../utils/order-notes-by-date';
+
 const initialValues = {
   financeNotes: [],
   isLoadingFinanceNotes: false,
@@ -56,7 +58,9 @@ export const FinanceNotesContextProvider: React.FC<{
     financeNotesData
       .then(data => {
         if (data) {
-          setFinanceNotes(data.financeNotesData);
+          const sortedNotes = orderNotesByDate(data.financeNotesData);
+
+          setFinanceNotes(sortedNotes);
         }
       })
       .catch(error => {

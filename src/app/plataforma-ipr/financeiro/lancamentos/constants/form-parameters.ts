@@ -26,4 +26,5 @@ export const financeParameters = {
     'Campanhas',
     'Seminário',
   ],
+  financePaymentVoucherOptions: ['Não se aplica', 'Pendente', 'Salvo'],
 };

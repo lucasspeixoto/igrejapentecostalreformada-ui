@@ -27,7 +27,8 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
   onCancelInsertNote,
   insertNoteHandler,
 }) => {
-  const { financeNoteCategories } = financeParameters;
+  const { financeNoteCategories, financePaymentVoucherOptions } =
+    financeParameters;
 
   const { authData } = useAuthContext();
 
@@ -65,13 +66,12 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
 
     await updateFinanceReportsTotalBalance(valueToUpdateBalance);
 
-    financeReportsContext.updateLoadingFinanceReports(false);
-
     financeReportsContext.updateIsDataUpdatedInfo();
   };
 
   const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
-    const { description, type, value, category, member } = formData;
+    const { description, type, value, category, member, paymentVoucher } =
+      formData;
 
     const newFinanceNote: Partial<FinanceNote> = {
       photoUrl: authData?.photoUrl,
@@ -82,6 +82,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
       value,
       member,
       category,
+      paymentVoucher,
     };
 
     insertNoteHandler(newFinanceNote);
@@ -91,13 +92,11 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
     await computeNewTotalBalance(type, value);
   };
 
-  const [isFileSaved, setIsFileSaved] = React.useState(false);
-
   return isMounted
     ? createPortal(
         <div className="fixed left-0 top-0 z-999999 flex size-full max-h-full min-h-screen items-center justify-center bg-black/90 p-2">
           <div className="max-h-full w-full max-w-142.5 overflow-y-auto rounded-lg bg-white p-4 text-center dark:bg-boxdark">
-            <div className="mb-5 flex flex-col gap-2">
+            <div className="mb-2 flex flex-col gap-2">
               <div className="mb-2 flex flex-row items-end justify-start gap-2 text-center">
                 <span className="inline-block">
                   <MdOutlineEventNote
@@ -110,7 +109,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                     Nova nota
                   </h3>
                   <p className="text-md word-break self-start text-start">
-                    Adicione aqui uma nova nota financeira.
+                    Adicione aqui uma nova nota.
                   </p>
                 </div>
               </div>
@@ -119,14 +118,14 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
             <form
               onSubmit={handleSubmit(insertNewNoteHandler)}
               className="flex flex-col">
-              <div className="mb-4.5 flex flex-col gap-2 md:flex-row">
+              <div className="mb-4 flex flex-col gap-2 md:flex-row">
                 {/* Type */}
                 <div className="flex w-full flex-col self-start md:w-1/2">
                   <label
                     htmlFor="type"
                     data-testid="type"
                     className="mb-2.5 block self-start text-black dark:text-white">
-                    Tipo <span className="text-meta-1">*</span>
+                    Tipo <span className="font-semibold text-meta-1">*</span>
                   </label>
                   <div className="relative z-20 bg-transparent dark:bg-form-input">
                     <select
@@ -153,7 +152,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                     htmlFor="value"
                     data-testid="value"
                     className="mb-2.5 block self-start text-black dark:text-white">
-                    Valor <span className="text-meta-1">*</span>
+                    Valor <span className="font-semibold text-meta-1">*</span>
                   </label>
                   <input
                     type="number"
@@ -168,7 +167,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                       <span
                         role="alert"
                         data-testid="value-error"
-                        className="text-xs text-meta-1 dark:text-meta-7">
+                        className="text-xs font-semibold text-meta-1 dark:text-meta-7">
                         {errors.value.message}
                       </span>
                     )}
@@ -176,53 +175,72 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                 </div>
               </div>
 
-              {/* Category */}
-              <div className="mb-4.5 flex w-full flex-col">
-                <label
-                  htmlFor="category"
-                  data-testid="category"
-                  className="mb-2.5 block self-start text-black dark:text-white">
-                  Categoria <span className="text-meta-1">*</span>
-                </label>
-                <div className="relative z-20 bg-transparent dark:bg-form-input">
-                  <select
-                    id="category"
-                    aria-label="category"
-                    role="category-select"
-                    {...register('category')}
-                    className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
-                    <option value="" disabled>
-                      Selecione a categoria
-                    </option>
-                    {React.Children.toArray(
-                      financeNoteCategories.map(note => (
-                        <option value={note}>{note}</option>
-                      ))
-                    )}
-                  </select>
-                  <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
-                    <SelectChevroletLogo size={24} />
-                  </span>
+              <div className="mb-4 flex flex-col gap-2 md:flex-row">
+                {/* Category */}
+                <div className="flex w-full flex-col self-start md:w-1/2">
+                  <label
+                    htmlFor="category"
+                    data-testid="category"
+                    className="mb-2.5 block self-start text-black dark:text-white">
+                    Categoria{' '}
+                    <span className="font-semibold text-meta-1">*</span>
+                  </label>
+                  <div className="relative z-20 bg-transparent dark:bg-form-input">
+                    <select
+                      id="category"
+                      aria-label="category"
+                      role="category-select"
+                      {...register('category')}
+                      className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
+                      <option value="" disabled>
+                        Selecione a categoria
+                      </option>
+                      {React.Children.toArray(
+                        financeNoteCategories.map(note => (
+                          <option value={note}>{note}</option>
+                        ))
+                      )}
+                    </select>
+                    <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+                      <SelectChevroletLogo size={24} />
+                    </span>
+                  </div>
+                </div>
+
+                {/* Comprovante */}
+                <div className="flex w-full flex-col self-start md:w-1/2">
+                  <label
+                    htmlFor="paymentVoucher"
+                    data-testid="paymentVoucher"
+                    className="mb-2.5 block self-start text-black dark:text-white">
+                    Comprovante{' '}
+                    <span className="font-semibold text-meta-1">*</span>
+                  </label>
+                  <div className="relative z-20 bg-transparent dark:bg-form-input">
+                    <select
+                      id="paymentVoucher"
+                      aria-label="paymentVoucher"
+                      role="paymentVoucher-select"
+                      {...register('paymentVoucher')}
+                      className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
+                      <option value="" disabled>
+                        Selecione o status
+                      </option>
+                      {React.Children.toArray(
+                        financePaymentVoucherOptions.map(note => (
+                          <option value={note}>{note}</option>
+                        ))
+                      )}
+                    </select>
+                    <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+                      <SelectChevroletLogo size={24} />
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* Comprovante salvo */}
-
-              <label className="inline-flex cursor-pointer items-center">
-                <input
-                  type="checkbox"
-                  value=""
-                  className="peer sr-only"
-                  checked
-                />
-                <div className="bg-gray-200 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 after:border-gray-300 dark:border-gray-600 peer-checked:bg-blue-600 peer relative h-6 w-11 rounded-full after:absolute after:start-[2px] after:top-0.5 after:size-5 after:rounded-full after:border after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full"></div>
-                <span className="text-gray-900 dark:text-gray-300 ms-3 text-sm font-medium">
-                  Checked toggle
-                </span>
-              </label>
-
               {/* Membro associado */}
-              <div className="mb-4.5 flex w-full flex-col">
+              <div className="mb-4 flex w-full flex-col">
                 <label
                   htmlFor="member"
                   data-testid="member"
@@ -253,17 +271,17 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
               </div>
 
               {/* Description */}
-              <div className="mb-4.5 flex w-full flex-col">
+              <div className="mb-4 flex w-full flex-col">
                 <label
                   htmlFor="description"
                   data-testid="description"
                   className="mb-2.5 block self-start text-black dark:text-white">
-                  Descrição <span className="text-meta-1">*</span>
+                  Descrição <span className="font-semibold text-meta-1">*</span>
                 </label>
                 <textarea
                   id="description"
                   aria-label="description"
-                  rows={4}
+                  rows={2}
                   placeholder="Digite a descrição"
                   {...register('description')}
                   className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
@@ -273,7 +291,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                     <span
                       role="alert"
                       data-testid="description-error"
-                      className="text-xs text-meta-1 dark:text-meta-7">
+                      className="text-xs font-semibold text-meta-1 dark:text-meta-7">
                       {errors.description.message}
                     </span>
                   )}
@@ -281,7 +299,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
               </div>
 
               {/* Actions */}
-              <div className="mt-5 flex w-full flex-wrap justify-evenly gap-4">
+              <div className="flex w-full flex-wrap justify-evenly gap-4">
                 <button
                   data-testid="cancel-button"
                   type="button"
