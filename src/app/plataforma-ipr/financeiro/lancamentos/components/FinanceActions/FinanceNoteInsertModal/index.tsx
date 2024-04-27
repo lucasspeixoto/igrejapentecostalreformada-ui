@@ -33,8 +33,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
 
   const [isMounted, setIsMounted] = React.useState(false);
 
-  const { updateIsDataUpdatedInfo, updateLoadingFinanceReports } =
-    useFinanceReportsContext();
+  const financeReportsContext = useFinanceReportsContext();
 
   const {
     register,
@@ -60,15 +59,15 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
   });
 
   const computeNewTotalBalance = async (type: 'C' | 'D', value: number) => {
-    updateLoadingFinanceReports(true);
+    financeReportsContext.updateLoadingFinanceReports(true);
 
     const valueToUpdateBalance = type === 'C' ? value : -value;
 
     await updateFinanceReportsTotalBalance(valueToUpdateBalance);
 
-    updateLoadingFinanceReports(false);
+    financeReportsContext.updateLoadingFinanceReports(false);
 
-    updateIsDataUpdatedInfo();
+    financeReportsContext.updateIsDataUpdatedInfo();
   };
 
   const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
@@ -91,6 +90,8 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
 
     await computeNewTotalBalance(type, value);
   };
+
+  const [isFileSaved, setIsFileSaved] = React.useState(false);
 
   return isMounted
     ? createPortal(
@@ -118,30 +119,60 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
             <form
               onSubmit={handleSubmit(insertNewNoteHandler)}
               className="flex flex-col">
-              {/* Type */}
-              <div className="mb-4.5 flex w-full flex-col">
-                <label
-                  htmlFor="type"
-                  data-testid="type"
-                  className="mb-2.5 block self-start text-black dark:text-white">
-                  Tipo <span className="text-meta-1">*</span>
-                </label>
-                <div className="relative z-20 bg-transparent dark:bg-form-input">
-                  <select
-                    id="type"
-                    aria-label="type"
-                    role="type-select"
-                    {...register('type')}
-                    className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
-                    <option value="" disabled>
-                      Selecione o tipo
-                    </option>
-                    <option value="D">Débito</option>
-                    <option value="C">Crédito</option>
-                  </select>
-                  <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
-                    <SelectChevroletLogo size={24} />
-                  </span>
+              <div className="mb-4.5 flex flex-col gap-2 md:flex-row">
+                {/* Type */}
+                <div className="flex w-full flex-col self-start md:w-1/2">
+                  <label
+                    htmlFor="type"
+                    data-testid="type"
+                    className="mb-2.5 block self-start text-black dark:text-white">
+                    Tipo <span className="text-meta-1">*</span>
+                  </label>
+                  <div className="relative z-20 bg-transparent dark:bg-form-input">
+                    <select
+                      id="type"
+                      aria-label="type"
+                      role="type-select"
+                      {...register('type')}
+                      className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
+                      <option value="" disabled>
+                        Selecione o tipo
+                      </option>
+                      <option value="D">Débito</option>
+                      <option value="C">Crédito</option>
+                    </select>
+                    <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
+                      <SelectChevroletLogo size={24} />
+                    </span>
+                  </div>
+                </div>
+
+                {/* Value */}
+                <div className="flex w-full flex-col self-start md:w-1/2">
+                  <label
+                    htmlFor="value"
+                    data-testid="value"
+                    className="mb-2.5 block self-start text-black dark:text-white">
+                    Valor <span className="text-meta-1">*</span>
+                  </label>
+                  <input
+                    type="number"
+                    id="value"
+                    aria-label="value"
+                    placeholder="Digite o valor"
+                    {...register('value')}
+                    className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
+                  />
+                  <>
+                    {errors.value && (
+                      <span
+                        role="alert"
+                        data-testid="value-error"
+                        className="text-xs text-meta-1 dark:text-meta-7">
+                        {errors.value.message}
+                      </span>
+                    )}
+                  </>
                 </div>
               </div>
 
@@ -175,33 +206,20 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                 </div>
               </div>
 
-              {/* Value */}
-              <div className="mb-4.5 flex w-full flex-col">
-                <label
-                  htmlFor="value"
-                  data-testid="value"
-                  className="mb-2.5 block self-start text-black dark:text-white">
-                  Valor <span className="text-meta-1">*</span>
-                </label>
+              {/* Comprovante salvo */}
+
+              <label className="inline-flex cursor-pointer items-center">
                 <input
-                  type="number"
-                  id="value"
-                  aria-label="value"
-                  placeholder="Digite o valor"
-                  {...register('value')}
-                  className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
+                  type="checkbox"
+                  value=""
+                  className="peer sr-only"
+                  checked
                 />
-                <>
-                  {errors.value && (
-                    <span
-                      role="alert"
-                      data-testid="value-error"
-                      className="text-xs text-meta-1 dark:text-meta-7">
-                      {errors.value.message}
-                    </span>
-                  )}
-                </>
-              </div>
+                <div className="bg-gray-200 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 after:border-gray-300 dark:border-gray-600 peer-checked:bg-blue-600 peer relative h-6 w-11 rounded-full after:absolute after:start-[2px] after:top-0.5 after:size-5 after:rounded-full after:border after:bg-white after:transition-all after:content-[''] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full"></div>
+                <span className="text-gray-900 dark:text-gray-300 ms-3 text-sm font-medium">
+                  Checked toggle
+                </span>
+              </label>
 
               {/* Membro associado */}
               <div className="mb-4.5 flex w-full flex-col">

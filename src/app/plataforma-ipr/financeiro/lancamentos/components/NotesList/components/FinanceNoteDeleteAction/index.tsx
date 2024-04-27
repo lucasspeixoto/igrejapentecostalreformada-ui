@@ -6,12 +6,12 @@ import {
 } from '@lancamentos/constants/messages';
 import deleteFinanceNote from '@lancamentos/lib/firebase/delete-finance-note';
 import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
+import updateFinanceReportsTotalBalance from '@relatorios/lib/firebase/update-finance-reports';
+import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import React from 'react';
 import { BiTrash } from 'react-icons/bi';
 import { toast } from 'react-toastify';
 
-import updateFinanceReportsTotalBalance from '@/app/plataforma-ipr/financeiro/relatorios/lib/firebase/update-finance-reports';
-import { useFinanceReportsContext } from '@/app/plataforma-ipr/financeiro/relatorios/providers/FinanceReportsProvider';
 import ConfirmModal from '@/components/ConfirmModal';
 
 type FinanceNoteDeleteActionProps = {
