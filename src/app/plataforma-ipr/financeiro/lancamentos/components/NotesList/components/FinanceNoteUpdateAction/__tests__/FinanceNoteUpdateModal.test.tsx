@@ -1,11 +1,10 @@
 import '@testing-library/jest-dom';
 
+import { financeParameters } from '@lancamentos/constants/form-parameters';
+import { MEMBERS } from '@lancamentos/constants/members-list';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Timestamp } from 'firebase/firestore';
 import React from 'react';
-
-import { financeParameters } from '@/app/plataforma-ipr/financeiro/lancamentos/constants/form-parameters';
-import { MEMBERS } from '@/app/plataforma-ipr/financeiro/lancamentos/constants/members-list';
 
 import FinanceNoteUpdateModal from '../FinanceNoteUpdateModal';
 
@@ -29,7 +28,7 @@ jest.mock('next/navigation', () => ({
   },
 }));
 
-jest.mock('../../../../../../providers/FinanceNotesProvider', () => ({
+jest.mock('../../../../../providers/FinanceNotesProvider', () => ({
   useFinanceNotesContext() {
     return { prefetch: () => null };
   },

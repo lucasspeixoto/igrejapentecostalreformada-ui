@@ -1,9 +1,13 @@
+import { FinanceNotesContextProvider } from '@lancamentos/providers/FinanceNotesProvider';
+import { FinanceReportsContextProvider } from '@relatorios/providers/FinanceReportsProvider';
 import React from 'react';
 
-import { FinanceNotesContextProvider } from './providers/FinanceNotesProvider';
-
 const FinanceiroLayout = ({ children }: { children: React.ReactNode }) => {
-  return <FinanceNotesContextProvider>{children}</FinanceNotesContextProvider>;
+  return (
+    <FinanceReportsContextProvider>
+      <FinanceNotesContextProvider>{children}</FinanceNotesContextProvider>
+    </FinanceReportsContextProvider>
+  );
 };
 
 export default FinanceiroLayout;

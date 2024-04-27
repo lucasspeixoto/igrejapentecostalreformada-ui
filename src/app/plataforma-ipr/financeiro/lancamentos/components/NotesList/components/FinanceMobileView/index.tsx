@@ -1,4 +1,4 @@
-import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
+import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
 import React from 'react';
 
 import Image from '@/components/Image';
@@ -65,7 +65,11 @@ const FinanceMobileView = () => {
                 </div>
                 <div className="flex gap-2">
                   <FinanceNoteUpdateAction noteId={note.id} />
-                  <FinanceNoteDeleteAction noteId={note.id} />
+                  <FinanceNoteDeleteAction
+                    noteId={note.id}
+                    type={note.type}
+                    value={note.value}
+                  />
                 </div>
               </div>
             </div>

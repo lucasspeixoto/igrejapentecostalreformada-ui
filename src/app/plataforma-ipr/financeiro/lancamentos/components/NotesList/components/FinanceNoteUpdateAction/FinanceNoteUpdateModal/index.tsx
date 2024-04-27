@@ -1,14 +1,17 @@
 /* eslint-disable max-len */
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 
-import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { financeParameters } from '@lancamentos/constants/form-parameters';
 import { MEMBERS } from '@lancamentos/constants/members-list';
 import { getFinanceNote } from '@lancamentos/lib/firebase/get-finance-notes';
 import updateFinanceNote from '@lancamentos/lib/firebase/update-finance-note';
+import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
 import type { UpdateFinanceNoteFormData } from '@lancamentos/schemas/update-finance-note-schema';
 import { updateFinanceNoteFormSchema } from '@lancamentos/schemas/update-finance-note-schema';
+import type { FinanceNote } from '@lancamentos/types/finance-note';
+import updateFinanceReportsTotalBalance from '@relatorios/lib/firebase/update-finance-reports';
+import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { useForm } from 'react-hook-form';
@@ -31,7 +34,12 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
   const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
     useFinanceNotesContext();
 
+  const financeReportsContext = useFinanceReportsContext();
+
   const [isMounted, setIsMounted] = React.useState(false);
+
+  const [actualFinanceNote, setActualFinanceNote] =
+    React.useState<FinanceNote | null>(null);
 
   const {
     register,
@@ -64,6 +72,8 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
 
       const { financeNote } = result;
 
+      setActualFinanceNote(financeNote);
+
       if (mounted && financeNote) {
         const { type, value, description, category, member } = financeNote;
 
@@ -77,6 +87,29 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
       mounted = false;
     };
   }, []);
+
+  const updateActualNoteFromTotalBalance = async () => {
+    const { type: actualType, value: actualValue } = actualFinanceNote!;
+
+    const valueToUpdateBalance =
+      actualType === 'C' ? -actualValue : actualValue;
+
+    await updateFinanceReportsTotalBalance(valueToUpdateBalance);
+  };
+
+  const computeNewTotalBalance = async (type: 'C' | 'D', value: number) => {
+    financeReportsContext.updateLoadingFinanceReports(true);
+
+    await updateActualNoteFromTotalBalance();
+
+    const valueToUpdateBalance = type === 'C' ? value : -value;
+
+    await updateFinanceReportsTotalBalance(valueToUpdateBalance);
+
+    financeReportsContext.updateLoadingFinanceReports(false);
+
+    financeReportsContext.updateIsDataUpdatedInfo();
+  };
 
   const updateFinanceNoteHandler = async (
     formData: UpdateFinanceNoteFormData
@@ -94,6 +127,11 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
       );
     } else {
       updateIsDataUpdatedInfo();
+
+      const { type, value } = formData;
+
+      await computeNewTotalBalance(type, value);
+
       toast.success('Nota editada com sucesso!');
     }
 

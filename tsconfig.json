@@ -50,6 +50,9 @@
       ],
       "@lancamentos/*": [
         "./src/app/plataforma-ipr/financeiro/lancamentos/*"
+      ],
+      "@relatorios/*": [
+        "./src/app/plataforma-ipr/financeiro/relatorios/*"
       ]
     }
   },

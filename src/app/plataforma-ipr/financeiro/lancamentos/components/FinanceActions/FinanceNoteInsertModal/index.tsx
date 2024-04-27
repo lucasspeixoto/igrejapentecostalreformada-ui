@@ -2,6 +2,13 @@
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { financeParameters } from '@lancamentos/constants/form-parameters';
+import { MEMBERS } from '@lancamentos/constants/members-list';
+import type { InsertFinanceNoteFormData } from '@lancamentos/schemas/insert-finance-note-schema';
+import { insertFinanceNoteFormSchema } from '@lancamentos/schemas/insert-finance-note-schema';
+import type { FinanceNote } from '@lancamentos/types/finance-note';
+import updateFinanceReportsTotalBalance from '@relatorios/lib/firebase/update-finance-reports';
+import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -10,12 +17,6 @@ import { MdOutlineEventNote } from 'react-icons/md';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
-
-import { financeParameters } from '../../../constants/form-parameters';
-import { MEMBERS } from '../../../constants/members-list';
-import type { InsertFinanceNoteFormData } from '../../../schemas/insert-finance-note-schema';
-import { insertFinanceNoteFormSchema } from '../../../schemas/insert-finance-note-schema';
-import type { FinanceNote } from '../../../types/finance-note';
 
 type FinanceNoteInsertModalProps = {
   onCancelInsertNote: () => void;
@@ -31,6 +32,9 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
   const { authData } = useAuthContext();
 
   const [isMounted, setIsMounted] = React.useState(false);
+
+  const { updateIsDataUpdatedInfo, updateLoadingFinanceReports } =
+    useFinanceReportsContext();
 
   const {
     register,
@@ -55,6 +59,18 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
+  const computeNewTotalBalance = async (type: 'C' | 'D', value: number) => {
+    updateLoadingFinanceReports(true);
+
+    const valueToUpdateBalance = type === 'C' ? value : -value;
+
+    await updateFinanceReportsTotalBalance(valueToUpdateBalance);
+
+    updateLoadingFinanceReports(false);
+
+    updateIsDataUpdatedInfo();
+  };
+
   const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
     const { description, type, value, category, member } = formData;
 
@@ -72,6 +88,8 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
     insertNoteHandler(newFinanceNote);
 
     reset();
+
+    await computeNewTotalBalance(type, value);
   };
 
   return isMounted

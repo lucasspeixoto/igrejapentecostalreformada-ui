@@ -4,8 +4,8 @@
 
 import React from 'react';
 
-import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
 import addFinanceNote from '../../lib/firebase/add-finance-note';
+import { useFinanceNotesContext } from '../../providers/FinanceNotesProvider';
 import type { FinanceNote } from '../../types/finance-note';
 import FinanceNoteInsert from './FinanceNoteInsertModal';
 

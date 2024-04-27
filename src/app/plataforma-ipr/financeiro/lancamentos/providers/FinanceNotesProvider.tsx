@@ -1,10 +1,9 @@
 'use client';
 
+import { getFinanceNotesDocuments } from '@lancamentos/lib/firebase/get-finance-notes';
+import useFinanceNotes from '@lancamentos/store/useFinanceNotes';
+import type { FinanceNote } from '@lancamentos/types/finance-note';
 import React from 'react';
-
-import { getFinanceNotesDocuments } from '../lancamentos/lib/firebase/get-finance-notes';
-import useFinanceNotes from '../lancamentos/store/useFinanceNotes';
-import type { FinanceNote } from '../lancamentos/types/finance-note';
 
 const initialValues = {
   financeNotes: [],

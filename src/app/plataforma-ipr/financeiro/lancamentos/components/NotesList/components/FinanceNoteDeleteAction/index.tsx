@@ -1,27 +1,33 @@
-import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
-import React from 'react';
-import { BiTrash } from 'react-icons/bi';
-import { toast } from 'react-toastify';
-
-import ConfirmModal from '@/components/ConfirmModal';
-
 import {
   DELETE_NOTE_CANCEL_TITLE,
   DELETE_NOTE_CONFIRM_TITLE,
   DELETE_NOTE_SUBTITLE,
   DELETE_NOTE_TITLE,
-} from '../../../../constants/messages';
-import deleteFinanceNote from '../../../../lib/firebase/delete-finance-note';
+} from '@lancamentos/constants/messages';
+import deleteFinanceNote from '@lancamentos/lib/firebase/delete-finance-note';
+import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
+import React from 'react';
+import { BiTrash } from 'react-icons/bi';
+import { toast } from 'react-toastify';
+
+import updateFinanceReportsTotalBalance from '@/app/plataforma-ipr/financeiro/relatorios/lib/firebase/update-finance-reports';
+import { useFinanceReportsContext } from '@/app/plataforma-ipr/financeiro/relatorios/providers/FinanceReportsProvider';
+import ConfirmModal from '@/components/ConfirmModal';
 
 type FinanceNoteDeleteActionProps = {
   noteId: string;
+  type: 'C' | 'D';
+  value: number;
 };
 
 const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({
   noteId,
+  type,
+  value,
 }) => {
-  const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
-    useFinanceNotesContext();
+  const financeNotesContext = useFinanceNotesContext();
+
+  const financeReportsContext = useFinanceReportsContext();
 
   const [showDeleteNoteModal, setShowDeleteNoteModal] = React.useState(false);
 
@@ -31,8 +37,20 @@ const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({
     }
   };
 
+  const computeNewTotalBalance = async () => {
+    financeReportsContext.updateLoadingFinanceReports(true);
+
+    const valueToUpdateBalance = type === 'C' ? -value : value;
+
+    await updateFinanceReportsTotalBalance(valueToUpdateBalance);
+
+    financeReportsContext.updateLoadingFinanceReports(false);
+
+    financeReportsContext.updateIsDataUpdatedInfo();
+  };
+
   const onConfirmDeleteNote = async () => {
-    updateLoadingFinanceNotes(true);
+    financeNotesContext.updateLoadingFinanceNotes(true);
 
     const { error: deleteNoteError } = await deleteFinanceNote(noteId);
 
@@ -41,11 +59,12 @@ const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({
         'Error ao excluir nota Tente novamente mais tarde ou contate admin.'
       );
     } else {
-      updateIsDataUpdatedInfo();
+      financeNotesContext.updateIsDataUpdatedInfo();
+      await computeNewTotalBalance();
       toast.success('Nota excluída com sucesso!');
     }
 
-    updateLoadingFinanceNotes(false);
+    financeNotesContext.updateLoadingFinanceNotes(false);
 
     setShowDeleteNoteModal(false);
   };

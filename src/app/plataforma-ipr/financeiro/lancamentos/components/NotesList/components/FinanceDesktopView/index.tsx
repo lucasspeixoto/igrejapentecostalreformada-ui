@@ -1,4 +1,4 @@
-import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
+import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
 import React from 'react';
 import { FaEye } from 'react-icons/fa';
 
@@ -100,7 +100,11 @@ const FinanceDesktopView = () => {
                         <FaEye size={18} />
                       </Tooltip>
                       <FinanceNoteUpdateAction noteId={note.id} />
-                      <FinanceNoteDeleteAction noteId={note.id} />
+                      <FinanceNoteDeleteAction
+                        noteId={note.id}
+                        value={note.value}
+                        type={note.type}
+                      />
                     </div>
                   </td>
                 </tr>
