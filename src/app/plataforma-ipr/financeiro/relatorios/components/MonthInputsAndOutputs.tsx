@@ -4,6 +4,9 @@ import type { ApexOptions } from 'apexcharts';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 
+import type { Period } from '../types/period';
+import { computePeriodDetail } from '../utils/compute-period-detail';
+
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
@@ -94,20 +97,7 @@ const options: ApexOptions = {
   },
   xaxis: {
     type: 'category',
-    categories: [
-      'Jan',
-      'Fev',
-      'Mar',
-      'Abr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Ago',
-      'Set',
-      'Out',
-      'Nov',
-      'Dez',
-    ],
+    categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
     axisBorder: {
       show: false,
     },
@@ -134,30 +124,24 @@ interface MonthInputsAndOutputsState {
 }
 
 const MonthInputsAndOutputs: React.FC = () => {
+  const [period, setPeriod] = React.useState('monthly');
+  const [dateRange, setDateRange] = React.useState(computePeriodDetail('monthly'));
   const [state, setState] = useState<MonthInputsAndOutputsState>({
     series: [
       {
         name: 'Entradas',
-        data: [
-          4850, 7850, 3500, 6580, 5500, 2700, 4700, 5900, 8450, 7850, 6020,
-          5890,
-        ],
+        data: [4850, 7850, 3500, 6580, 5500, 2700, 4700, 5900, 8450, 7850, 6020, 5890],
       },
 
       {
         name: 'Saídas',
-        data: [
-          3025, 5000, 4280, 3800, 5005, 4000, 2950, 5700, 5420, 4200, 4050,
-          4150,
-        ],
+        data: [3025, 5000, 4280, 3800, 5005, 4000, 2950, 5700, 5420, 4200, 4050, 4150],
       },
     ],
   });
 
   const handleReset = () => {
-    setState(prevState => ({
-      ...prevState,
-    }));
+    setState(prevState => ({ ...prevState }));
   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
@@ -167,6 +151,13 @@ const MonthInputsAndOutputs: React.FC = () => {
   const isWindowAvailable = () => typeof window !== 'undefined';
 
   if (!isWindowAvailable()) return <></>;
+
+  const changePeriodHandler = (selectedPeriod: Period): void => {
+    setPeriod(selectedPeriod);
+    const detail = computePeriodDetail(selectedPeriod);
+
+    setDateRange(detail);
+  };
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
@@ -178,7 +169,6 @@ const MonthInputsAndOutputs: React.FC = () => {
             </span>
             <div className="w-full">
               <p className="font-semibold text-primary">Entradas</p>
-              <p className="text-sm font-medium">04/2022 - 05/2022</p>
             </div>
           </div>
           <div className="flex min-w-47.5">
@@ -187,34 +177,34 @@ const MonthInputsAndOutputs: React.FC = () => {
             </span>
             <div className="w-full">
               <p className="font-semibold text-meta-7">Saídas</p>
-              <p className="text-sm font-medium">04/2022 - 05/2022</p>
             </div>
           </div>
         </div>
-        <div className="flex w-auto max-w-45 justify-end">
-          <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
-            <button className="rounded bg-white px-3 py-1 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:bg-boxdark dark:text-white dark:hover:bg-boxdark">
-              Dia
-            </button>
-            <button className="rounded px-3 py-1 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
+        <div className="flex w-auto max-w-45 flex-col justify-start gap-2">
+          <div className="inline-flex items-center rounded-md bg-whiter dark:bg-meta-4">
+            <button
+              onClick={() => changePeriodHandler('weekly')}
+              className={`rounded px-3 py-1 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card  dark:text-white dark:hover:bg-boxdark  ${period === 'weekly' && 'bg-white dark:bg-boxdark'}`}>
               Semana
             </button>
-            <button className="rounded px-3 py-1 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
+            <button
+              onClick={() => changePeriodHandler('monthly')}
+              className={`rounded px-3 py-1 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card  dark:text-white dark:hover:bg-boxdark  ${period === 'monthly' && 'bg-white dark:bg-boxdark'}`}>
               Mês
+            </button>
+            <button
+              onClick={() => changePeriodHandler('yearly')}
+              className={`rounded px-3 py-1 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card  dark:text-white dark:hover:bg-boxdark  ${period === 'yearly' && 'bg-white dark:bg-boxdark'}`}>
+              Ano
             </button>
           </div>
         </div>
       </div>
 
-      <div>
-        <div id="MonthInputsAndOutputs" className="-ml-5 h-[355px] w-[105%]">
-          <ReactApexChart
-            options={options}
-            series={state.series}
-            type="area"
-            width="100%"
-            height="100%"
-          />
+      <div className="flex w-full flex-col items-end justify-end">
+        <span className="text-md mr-5 mt-4 font-medium">{dateRange}</span>
+        <div id="MonthInputsAndOutputs" className="-ml-5 h-[355px] w-[105%] p-0">
+          <ReactApexChart options={options} series={state.series} type="area" width="100%" height="100%" />
         </div>
       </div>
     </div>
