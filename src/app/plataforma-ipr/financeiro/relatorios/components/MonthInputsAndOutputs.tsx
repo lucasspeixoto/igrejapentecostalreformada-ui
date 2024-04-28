@@ -14,7 +14,7 @@ const options: ApexOptions = {
     position: 'top',
     horizontalAlign: 'left',
   },
-  colors: ['#10B981', '#FF6766'],
+  colors: ['#3C50E0', '#FF6766'],
   chart: {
     // events: {
     //   beforeMount: (chart) => {
@@ -81,7 +81,7 @@ const options: ApexOptions = {
   markers: {
     size: 4,
     colors: '#fff',
-    strokeColors: ['#10B981', '#FF6766'],
+    strokeColors: ['#3C50E0', '#FF6766'],
     strokeWidth: 3,
     strokeOpacity: 0.9,
     strokeDashArray: 0,
@@ -173,11 +173,11 @@ const MonthInputsAndOutputs: React.FC = () => {
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">
         <div className="flex w-full flex-wrap gap-1">
           <div className="flex min-w-47.5">
-            <span className="mr-2 mt-1 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-meta-3">
-              <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-meta-3"></span>
+            <span className="mr-2 mt-1 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-primary">
+              <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
             </span>
             <div className="w-full">
-              <p className="font-semibold text-meta-3">Entradas</p>
+              <p className="font-semibold text-primary">Entradas</p>
               <p className="text-sm font-medium">04/2022 - 05/2022</p>
             </div>
           </div>
