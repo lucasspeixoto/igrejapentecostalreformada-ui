@@ -17,15 +17,9 @@ export const createPersonalContactFormSchema = z.object({
     }),
   sex: z.string(),
   cellphone: z.string().regex(phoneRegex, 'Número de celular inválido!'),
-  telephone: z
-    .string()
-    .regex(phoneRegex, 'Número de telefone inválido!')
-    .optional()
-    .or(z.literal('')),
+  telephone: z.string().regex(phoneRegex, 'Número de telefone inválido!').optional().or(z.literal('')),
 
   birthday: z.string(),
 });
 
-export type CreatePersonalContactFormData = z.infer<
-  typeof createPersonalContactFormSchema
->;
+export type CreatePersonalContactFormData = z.infer<typeof createPersonalContactFormSchema>;

@@ -67,10 +67,7 @@ const SignUpForm: React.FC = () => {
     }
   };
 
-  const loginUserHandler = async (
-    email: string,
-    password: string
-  ): Promise<void> => {
+  const loginUserHandler = async (email: string, password: string): Promise<void> => {
     const { error } = await signInUserHandler(email, password);
 
     if (error) {
@@ -82,11 +79,7 @@ const SignUpForm: React.FC = () => {
     }
   };
 
-  const signupUserHandler = async (
-    name: string,
-    email: string,
-    password: string
-  ): Promise<void> => {
+  const signupUserHandler = async (name: string, email: string, password: string): Promise<void> => {
     const { result, error } = await signUp(name, email, password);
 
     const userId = result?.user.uid!;
@@ -129,9 +122,7 @@ const SignUpForm: React.FC = () => {
     <form onSubmit={handleSubmit(getSignupUserFormDataHandler)}>
       {/* ---------------------------- Nome ---------------------------- */}
       <div className="mb-3">
-        <label
-          htmlFor="name"
-          className="mb-1 block font-medium text-black dark:text-white">
+        <label htmlFor="name" className="mb-1 block font-medium text-black dark:text-white">
           Nome
         </label>
         <div className="relative">
@@ -148,9 +139,7 @@ const SignUpForm: React.FC = () => {
 
           <>
             {errors.name && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.name.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.name.message}</span>
             )}
           </>
         </div>
@@ -158,9 +147,7 @@ const SignUpForm: React.FC = () => {
 
       {/* ---------------------------- E-mail ---------------------------- */}
       <div className="mb-3">
-        <label className="mb-1 block font-medium text-black dark:text-white">
-          Email
-        </label>
+        <label className="mb-1 block font-medium text-black dark:text-white">Email</label>
         <div className="relative">
           <input
             type="email"
@@ -175,9 +162,7 @@ const SignUpForm: React.FC = () => {
 
           <>
             {errors.email && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.email.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.email.message}</span>
             )}
           </>
         </div>
@@ -185,9 +170,7 @@ const SignUpForm: React.FC = () => {
 
       {/* ---------------------------- Senha ---------------------------- */}
       <div className="mb-3">
-        <label
-          htmlFor="password"
-          className="mb-1 block font-medium text-black dark:text-white">
+        <label htmlFor="password" className="mb-1 block font-medium text-black dark:text-white">
           Senha
         </label>
         <div className="relative">
@@ -204,9 +187,7 @@ const SignUpForm: React.FC = () => {
 
           <>
             {errors.password && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.password.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.password.message}</span>
             )}
           </>
         </div>
@@ -214,9 +195,7 @@ const SignUpForm: React.FC = () => {
 
       {/* ---------------------------- Confirmação Senha ---------------------------- */}
       <div className="mb-3">
-        <label className="mb-1 block font-medium text-black dark:text-white">
-          Confirmar a Senha
-        </label>
+        <label className="mb-1 block font-medium text-black dark:text-white">Confirmar a Senha</label>
         <div className="relative">
           <input
             type="password"
@@ -231,9 +210,7 @@ const SignUpForm: React.FC = () => {
 
           <>
             {errors.confirmedPassword && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.confirmedPassword.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.confirmedPassword.message}</span>
             )}
           </>
         </div>

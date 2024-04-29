@@ -7,9 +7,7 @@ type FinanceNoteUpdateActionProps = {
   noteId: string;
 };
 
-const FinanceNoteUpdateAction: React.FC<FinanceNoteUpdateActionProps> = ({
-  noteId,
-}) => {
+const FinanceNoteUpdateAction: React.FC<FinanceNoteUpdateActionProps> = ({ noteId }) => {
   const [showDetailNoteModal, setShowDetailNoteModal] = React.useState(false);
 
   const seeNoteDetailHandler = () => {
@@ -24,10 +22,7 @@ const FinanceNoteUpdateAction: React.FC<FinanceNoteUpdateActionProps> = ({
     <>
       <>
         {showDetailNoteModal ? (
-          <FinanceNoteUpdateModal
-            noteId={noteId}
-            onCancelDetailNoteUpdate={onCancelDetailNote}
-          />
+          <FinanceNoteUpdateModal noteId={noteId} onCancelDetailNoteUpdate={onCancelDetailNote} />
         ) : null}
       </>
       <button className="hover:text-meta-5">

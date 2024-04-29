@@ -19,13 +19,9 @@ export default async function updateFinanceReportsTotalBalance(note: number) {
   } as PartialWithFieldValue<FinanceReport>;
 
   try {
-    result = await setDoc(
-      doc(db, 'finance-reports', financeReportData!.id),
-      updatedData,
-      {
-        merge: true,
-      }
-    );
+    result = await setDoc(doc(db, 'finance-reports', financeReportData!.id), updatedData, {
+      merge: true,
+    });
   } catch (_error) {
     error = _error;
   }

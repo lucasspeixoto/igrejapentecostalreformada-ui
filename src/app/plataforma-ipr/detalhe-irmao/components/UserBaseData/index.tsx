@@ -59,8 +59,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
 
   const [cardMemberDateOption, setCardMemberDateOption] = React.useState('');
 
-  const [cardMemberEmissionOption, setCardMemberEmissionOption] =
-    React.useState('');
+  const [cardMemberEmissionOption, setCardMemberEmissionOption] = React.useState('');
 
   const [engagementOption, setEngagementOption] = React.useState(0);
 
@@ -196,9 +195,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar dados do membro. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar dados do membro. Tente novamente mais tarde ou contate admin.');
     } else {
       personalContext.updateIsDataUpdatedInfo();
 
@@ -213,9 +210,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
   return (
     <div className="h-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex justify-between border-b border-stroke px-7 py-4 dark:border-strokedark">
-        <h3 className="font-medium text-black dark:text-white">
-          Dados Pessoais
-        </h3>
+        <h3 className="font-medium text-black dark:text-white">Dados Pessoais</h3>
       </div>
       <div className="p-7">
         <div className="mb-5.5 flex gap-3">
@@ -239,30 +234,22 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
             )}
           </div>
           <div className="flex flex-col items-start gap-2">
-            <span className="text-md font-bold text-black dark:text-white">
-              {name}
-            </span>
-            <span className="text-sm text-black dark:text-white">
-              {craftOption}
-            </span>
+            <span className="text-md font-bold text-black dark:text-white">{name}</span>
+            <span className="text-sm text-black dark:text-white">{craftOption}</span>
           </div>
         </div>
 
         {/* Ofício e Celular */}
         <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
           <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Ofício
-            </label>
+            <label className="mb-2.5 block text-black dark:text-white">Ofício</label>
             <div className="relative z-20 bg-transparent dark:bg-form-input">
               <select
                 value={craftOption}
                 onChange={event => setCraftOption(event.target.value)}
                 className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
                 <option value="">Selecione um ofício</option>
-                {React.Children.toArray(
-                  crafts.map(craft => <option value={craft}>{craft}</option>)
-                )}
+                {React.Children.toArray(crafts.map(craft => <option value={craft}>{craft}</option>))}
               </select>
               <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
                 <SelectChevroletLogo size={24} />
@@ -271,9 +258,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
           </div>
 
           <div className="w-full xl:w-1/2">
-            <label
-              className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="cellphone">
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="cellphone">
               Celular
             </label>
             <input
@@ -291,9 +276,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
         {/* E-mail */}
         <div className="mb-5.5 flex w-full flex-col">
           <div className="flex w-full flex-col items-start">
-            <label
-              className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="email">
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="email">
               E-mail
             </label>
           </div>
@@ -316,9 +299,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
         {/* Engajamento */}
         <div className="mb-5.5 flex w-full flex-col">
           <div className="w-full xl:w-1/2">
-            <label className="mb-2.5 block text-black dark:text-white">
-              Engajamento
-            </label>
+            <label className="mb-2.5 block text-black dark:text-white">Engajamento</label>
             <div className="relative z-20 bg-transparent dark:bg-form-input">
               <select
                 value={engagementOption}
@@ -326,9 +307,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
                 className="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
                 <option value="">Selecione nível de engajamento</option>
                 {React.Children.toArray(
-                  engagements.map(_engagement => (
-                    <option value={_engagement}>{_engagement}</option>
-                  ))
+                  engagements.map(_engagement => <option value={_engagement}>{_engagement}</option>)
                 )}
               </select>
               <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -341,9 +320,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
         {/* Carteirinha */}
         <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
           <div className="w-full xl:w-1/2">
-            <label className="mb-3 block text-black dark:text-white">
-              Membro desde
-            </label>
+            <label className="mb-3 block text-black dark:text-white">Membro desde</label>
             <div className="relative">
               <input
                 onChange={event => setCardMemberDateOption(event.target.value)}
@@ -358,14 +335,10 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
           </div>
 
           <div className="w-full xl:w-1/2">
-            <label className="mb-3 block text-black dark:text-white">
-              Emissão
-            </label>
+            <label className="mb-3 block text-black dark:text-white">Emissão</label>
             <div className="relative">
               <input
-                onChange={event =>
-                  setCardMemberEmissionOption(event.target.value)
-                }
+                onChange={event => setCardMemberEmissionOption(event.target.value)}
                 type="date"
                 name="cardMemberEmission"
                 id="cardMemberEmission"
@@ -379,14 +352,10 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
 
         <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
           <div className="flex w-full flex-col items-start sm:w-1/2">
-            <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-              Administrador
-            </label>
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white">Administrador</label>
 
             <div>
-              <label
-                htmlFor="isAdmin"
-                className="flex cursor-pointer select-none items-center">
+              <label htmlFor="isAdmin" className="flex cursor-pointer select-none items-center">
                 <div className="relative">
                   <input
                     type="checkbox"
@@ -407,15 +376,11 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
           </div>
 
           <div className="flex w-full flex-col items-start sm:w-1/2">
-            <label
-              className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="cellphone">
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="cellphone">
               Cadastro Finalizado
             </label>
             <div>
-              <label
-                htmlFor="isRegistered"
-                className="flex cursor-pointer select-none items-center">
+              <label htmlFor="isRegistered" className="flex cursor-pointer select-none items-center">
                 <div className="relative">
                   <input
                     type="checkbox"
@@ -428,8 +393,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
                   <div className="block h-8 w-14 rounded-full bg-gray dark:bg-meta-4"></div>
                   <div
                     className={`absolute left-1 top-1 size-6 rounded-full bg-meta-7 transition ${
-                      isRegisteredOption &&
-                      '!right-1 !translate-x-full !bg-meta-3'
+                      isRegisteredOption && '!right-1 !translate-x-full !bg-meta-3'
                     }`}></div>
                 </div>
               </label>
@@ -439,9 +403,7 @@ const UserBaseData: React.FC<UserBaseDataProps> = ({
 
         <div className="mb-5.5">
           <div className="flex w-full flex-col items-start">
-            <label
-              className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="bio">
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="bio">
               Comentários
             </label>
           </div>

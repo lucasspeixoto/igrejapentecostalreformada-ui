@@ -38,8 +38,7 @@ const AddressForm = () => {
 
   React.useEffect(() => {
     if (personalContext.personalData) {
-      const { address, cep, city, complement, district, number, state } =
-        personalContext.personalData;
+      const { address, cep, city, complement, district, number, state } = personalContext.personalData;
       reset({
         address,
         cep,
@@ -71,9 +70,7 @@ const AddressForm = () => {
     }
   };
 
-  const getPersonalUserAddressDataHandler = async (
-    data: CreatePersonalAddressFormData
-  ) => {
+  const getPersonalUserAddressDataHandler = async (data: CreatePersonalAddressFormData) => {
     setIsLoading(true);
 
     const { address, cep, city, complement, district, number, state } = data;
@@ -93,9 +90,7 @@ const AddressForm = () => {
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar dados de endereço. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar dados de endereço. Tente novamente mais tarde ou contate admin.');
     } else {
       personalContext.updateIsDataUpdatedInfo();
 
@@ -122,11 +117,7 @@ const AddressForm = () => {
             className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
           />
           <>
-            {errors.cep && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.cep.message}
-              </span>
-            )}
+            {errors.cep && <span className="text-xs text-meta-1 dark:text-meta-7">{errors.cep.message}</span>}
           </>
         </div>
 
@@ -139,9 +130,7 @@ const AddressForm = () => {
               {...register('state')}
               className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
               <option value="">Selecione o Estado</option>
-              {React.Children.toArray(
-                states.map(state => <option value={state}>{state}</option>)
-              )}
+              {React.Children.toArray(states.map(state => <option value={state}>{state}</option>))}
             </select>
             <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
               <SelectChevroletLogo size={24} />
@@ -161,11 +150,7 @@ const AddressForm = () => {
           className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
         />
         <>
-          {errors.city && (
-            <span className="text-xs text-meta-1 dark:text-meta-7">
-              {errors.city.message}
-            </span>
-          )}
+          {errors.city && <span className="text-xs text-meta-1 dark:text-meta-7">{errors.city.message}</span>}
         </>
       </div>
 
@@ -181,9 +166,7 @@ const AddressForm = () => {
         />
         <>
           {errors.address && (
-            <span className="text-xs text-meta-1 dark:text-meta-7">
-              {errors.address.message}
-            </span>
+            <span className="text-xs text-meta-1 dark:text-meta-7">{errors.address.message}</span>
           )}
         </>
       </div>
@@ -201,9 +184,7 @@ const AddressForm = () => {
           />
           <>
             {errors.district && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.district.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.district.message}</span>
             )}
           </>
         </div>
@@ -220,18 +201,14 @@ const AddressForm = () => {
           />
           <>
             {errors.number && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.number.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.number.message}</span>
             )}
           </>
         </div>
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-2.5 block text-black dark:text-white">
-          Complemento
-        </label>
+        <label className="mb-2.5 block text-black dark:text-white">Complemento</label>
         <input
           type="text"
           placeholder="Digite o complemento"
@@ -240,9 +217,7 @@ const AddressForm = () => {
         />
         <>
           {errors.complement && (
-            <span className="text-xs text-meta-1 dark:text-meta-7">
-              {errors.complement.message}
-            </span>
+            <span className="text-xs text-meta-1 dark:text-meta-7">{errors.complement.message}</span>
           )}
         </>
       </div>

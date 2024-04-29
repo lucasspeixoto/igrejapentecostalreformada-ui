@@ -94,9 +94,7 @@ describe('LoginForm', () => {
       expect(emailInput).toHaveValue('test');
       expect(passwordInput).toHaveValue('password');
 
-      await waitFor(() =>
-        expect(singInWithEmailAndPasswordHandler).not.toHaveBeenCalledTimes(1)
-      );
+      await waitFor(() => expect(singInWithEmailAndPasswordHandler).not.toHaveBeenCalledTimes(1));
     });
 
     it('should display matching error when password is invalid', async () => {
@@ -110,8 +108,7 @@ describe('LoginForm', () => {
       fireEvent.submit(loginButton);
 
       //! Mensagem de erro
-      const passwordErrorMessage =
-        'A senha precisa conter no mínimo 6 caracteres!';
+      const passwordErrorMessage = 'A senha precisa conter no mínimo 6 caracteres!';
       const spanErrorElements = await screen.findAllByRole('alert');
       expect(spanErrorElements).toHaveLength(1);
       expect(spanErrorElements[0]).toHaveTextContent(passwordErrorMessage);
@@ -120,9 +117,7 @@ describe('LoginForm', () => {
       expect(emailInput).toHaveValue('lucas@gmail.com');
       expect(passwordInput).toHaveValue('123');
 
-      await waitFor(() =>
-        expect(singInWithEmailAndPasswordHandler).not.toHaveBeenCalledTimes(1)
-      );
+      await waitFor(() => expect(singInWithEmailAndPasswordHandler).not.toHaveBeenCalledTimes(1));
     });
 
     it('should not display error when email and password are valid', async () => {
@@ -137,13 +132,9 @@ describe('LoginForm', () => {
       const loginButton = screen.getByTestId('login-button');
       fireEvent.submit(loginButton);
 
-      await waitFor(() =>
-        expect(screen.queryAllByRole('alert')).toHaveLength(0)
-      );
+      await waitFor(() => expect(screen.queryAllByRole('alert')).toHaveLength(0));
 
-      await waitFor(() =>
-        expect(singInWithEmailAndPasswordHandler).toHaveBeenCalledTimes(1)
-      );
+      await waitFor(() => expect(singInWithEmailAndPasswordHandler).toHaveBeenCalledTimes(1));
     });
   });
 });

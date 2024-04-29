@@ -14,12 +14,7 @@ const DropdownMessage = () => {
   React.useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
     document.addEventListener('click', clickHandler);
@@ -84,9 +79,7 @@ const DropdownMessage = () => {
               </div>
 
               <div>
-                <h6 className="text-sm font-medium text-black dark:text-white">
-                  Pastor Sérgio
-                </h6>
+                <h6 className="text-sm font-medium text-black dark:text-white">Pastor Sérgio</h6>
                 <p className="text-sm">Domingo Tem culto!</p>
                 <p className="text-xs">15min ago</p>
               </div>
@@ -107,9 +100,7 @@ const DropdownMessage = () => {
               </div>
 
               <div>
-                <h6 className="text-sm font-medium text-black dark:text-white">
-                  Pastor Daniel
-                </h6>
+                <h6 className="text-sm font-medium text-black dark:text-white">Pastor Daniel</h6>
                 <p className="text-sm">Sexta Feira tem oração!</p>
                 <p className="text-xs">30min ago</p>
               </div>

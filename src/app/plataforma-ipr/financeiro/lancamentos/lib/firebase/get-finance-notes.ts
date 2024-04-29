@@ -1,20 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  query,
-} from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 
 import firebase_app from '@/lib/firebase/config';
 
 import type { FinanceNote } from '../../types/finance-note';
-import {
-  getMonthFromTimestampDate,
-  getYearFromTimestampDate,
-} from '../../utils/timestamp-to-date';
+import { getMonthFromTimestampDate, getYearFromTimestampDate } from '../../utils/timestamp-to-date';
 
 export const db = getFirestore(firebase_app);
 
@@ -86,11 +76,7 @@ export async function getDocument(_collection: string, id: string) {
   return { result, error };
 }
 
-export async function getCollection(
-  _collection: string,
-  id: string,
-  target: string
-) {
+export async function getCollection(_collection: string, id: string, target: string) {
   let result = null;
   let error = null;
 

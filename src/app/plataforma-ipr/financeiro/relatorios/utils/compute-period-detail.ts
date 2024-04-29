@@ -7,10 +7,7 @@ import {
 
 import type { Period } from '../types/period';
 
-export function computePeriodDetail(period: Period): string {
-  const date = new Date();
-  const year = date.getFullYear();
-
+export function computePeriodDetail(period: Period, selectedYear: number): string {
   if (period === 'weekly') {
     const { start, end } = getStartAndEndOfWeek();
     return `${getDayDescriptionFomDate(start)}/${getMonthDescriptionFromMonthIndex(start)} - ${getDayDescriptionFomDate(end)}/${getMonthDescriptionFromMonthIndex(end)}`;
@@ -19,5 +16,5 @@ export function computePeriodDetail(period: Period): string {
     const { start, end } = getStartAndEndOfMonth();
     return `${getDayDescriptionFomDate(start)}/${getMonthDescriptionFromMonthIndex(start)} - ${getDayDescriptionFomDate(end)}/${getMonthDescriptionFromMonthIndex(end)}`;
   }
-  return `${year}`;
+  return `${selectedYear}`;
 }

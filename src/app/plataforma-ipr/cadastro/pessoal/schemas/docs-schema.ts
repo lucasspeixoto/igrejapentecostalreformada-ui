@@ -5,6 +5,4 @@ export const createPersonalDocsFormSchema = z.object({
   cpf: z.coerce.number().gte(1, 'Número de CPF inválido'),
 });
 
-export type CreatePersonalDocsFormData = z.infer<
-  typeof createPersonalDocsFormSchema
->;
+export type CreatePersonalDocsFormData = z.infer<typeof createPersonalDocsFormSchema>;

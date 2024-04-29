@@ -59,10 +59,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
         <>
           {errors.email && (
-            <span
-              role="alert"
-              data-testid="email-error"
-              className="text-sm text-meta-1 dark:text-meta-7">
+            <span role="alert" data-testid="email-error" className="text-sm text-meta-1 dark:text-meta-7">
               {errors.email.message}
             </span>
           )}
@@ -92,10 +89,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
         <>
           {errors.password && (
-            <span
-              role="alert"
-              data-testid="password-error"
-              className="text-sm text-meta-1 dark:text-meta-7">
+            <span role="alert" data-testid="password-error" className="text-sm text-meta-1 dark:text-meta-7">
               {errors.password.message}
             </span>
           )}
@@ -104,19 +98,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
       <div className="mt-2 flex items-center justify-between gap-2">
         <div className="text-center">
-          <RedirectLink
-            text="Não possui conta ?"
-            textLink="Cadastrar"
-            route="/cadastro"
-          />
+          <RedirectLink text="Não possui conta ?" textLink="Cadastrar" route="/cadastro" />
         </div>
 
         <div className=" text-center">
-          <RedirectLink
-            text=""
-            textLink="Esqueceu a senha ?"
-            route="/recuperar-senha"
-          />
+          <RedirectLink text="" textLink="Esqueceu a senha ?" route="/recuperar-senha" />
         </div>
       </div>
 

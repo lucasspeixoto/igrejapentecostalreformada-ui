@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useWindowDimensions = (innerWidth: number) => {
-  const [isMobileSize, setIsMobileSize] = useState(
-    window.innerWidth <= innerWidth
-  );
+  const [isMobileSize, setIsMobileSize] = useState(window.innerWidth <= innerWidth);
 
   useEffect(() => {
     const windowResizeHandler = () => {

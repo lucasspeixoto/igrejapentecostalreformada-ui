@@ -20,11 +20,7 @@ type FinanceNoteDeleteActionProps = {
   value: number;
 };
 
-const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({
-  noteId,
-  type,
-  value,
-}) => {
+const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({ noteId, type, value }) => {
   const financeNotesContext = useFinanceNotesContext();
 
   const financeReportsContext = useFinanceReportsContext();
@@ -55,9 +51,7 @@ const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({
     const { error: deleteNoteError } = await deleteFinanceNote(noteId);
 
     if (deleteNoteError) {
-      toast.error(
-        'Error ao excluir nota Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao excluir nota Tente novamente mais tarde ou contate admin.');
     } else {
       financeNotesContext.updateIsDataUpdatedInfo();
       await computeNewTotalBalance();

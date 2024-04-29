@@ -1,12 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  query,
-} from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 
 import type { UserData } from '@/types/user-data';
 
@@ -52,11 +45,7 @@ export async function getDocument(_collection: string, id: string) {
   return { result, error };
 }
 
-export async function getCollection(
-  _collection: string,
-  id: string,
-  target: string
-) {
+export async function getCollection(_collection: string, id: string, target: string) {
   let result = null;
   let error = null;
 

@@ -24,8 +24,7 @@ type PersonalContextType = {
   updateIsDataUpdatedInfo: () => void;
 };
 
-export const PersonalContext =
-  createContext<PersonalContextType>(initialValues);
+export const PersonalContext = createContext<PersonalContextType>(initialValues);
 
 export const usePersonalContext = () => useContext(PersonalContext);
 
@@ -36,8 +35,7 @@ export const PersonalContextProvider: React.FC<{
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const [isLoadingPersonalProcess, setIsLoadingPersonalProcess] =
-    useState(false);
+  const [isLoadingPersonalProcess, setIsLoadingPersonalProcess] = useState(false);
 
   const updateLoadingPersonalProcess = (isLoading: boolean) => {
     setIsLoadingPersonalProcess(isLoading);

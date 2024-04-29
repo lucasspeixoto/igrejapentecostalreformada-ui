@@ -39,9 +39,7 @@ const DocsForm = () => {
     }
   }, [personalContext.personalData, isDataUpdated]);
 
-  const getPersonalUserDocsDataHandler = async (
-    data: CreatePersonalDocsFormData
-  ) => {
+  const getPersonalUserDocsDataHandler = async (data: CreatePersonalDocsFormData) => {
     setIsLoading(true);
 
     const { rg, cpf } = data;
@@ -56,9 +54,7 @@ const DocsForm = () => {
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar documentos. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar documentos. Tente novamente mais tarde ou contate admin.');
     } else {
       personalContext.updateIsDataUpdatedInfo();
 
@@ -83,11 +79,7 @@ const DocsForm = () => {
             className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
           />
           <>
-            {errors.rg && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.rg.message}
-              </span>
-            )}
+            {errors.rg && <span className="text-xs text-meta-1 dark:text-meta-7">{errors.rg.message}</span>}
           </>
         </div>
       </div>
@@ -103,11 +95,7 @@ const DocsForm = () => {
             className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
           />
           <>
-            {errors.cpf && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.cpf.message}
-              </span>
-            )}
+            {errors.cpf && <span className="text-xs text-meta-1 dark:text-meta-7">{errors.cpf.message}</span>}
           </>
         </div>
       </div>

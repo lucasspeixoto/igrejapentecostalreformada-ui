@@ -6,10 +6,7 @@ import firebase_app from '@/lib/firebase/config';
 import type { FinanceNote } from '../../types/finance-note';
 
 export const db = getFirestore(firebase_app);
-export default async function updateFinanceNote(
-  id: string,
-  data: PartialWithFieldValue<FinanceNote>
-) {
+export default async function updateFinanceNote(id: string, data: PartialWithFieldValue<FinanceNote>) {
   let result = null;
   let error = null;
 

@@ -45,9 +45,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
             <span className="mx-auto inline-block">
               <IoWarningOutline size={48} className="font-bold text-meta-8" />
             </span>
-            <h3 className="mt-5.5 pb-2 text-xl font-bold text-black dark:text-white sm:text-2xl">
-              {title}
-            </h3>
+            <h3 className="mt-5.5 pb-2 text-xl font-bold text-black dark:text-white sm:text-2xl">{title}</h3>
             <p className="mb-10">{subtitle}</p>
             <div className="flex w-full flex-wrap justify-center gap-4">
               <button

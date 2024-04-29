@@ -20,8 +20,6 @@ describe('MemberCard', () => {
     expect(screen.getByText('01/01/1980')).toBeInTheDocument();
     expect(screen.getByText('01/2020')).toBeInTheDocument();
     expect(screen.getByText('01/2021')).toBeInTheDocument();
-    expect(
-      screen.getByText('Fazer tudo para a glória de Deus, 1 Co 10.21')
-    ).toBeInTheDocument();
+    expect(screen.getByText('Fazer tudo para a glória de Deus, 1 Co 10.21')).toBeInTheDocument();
   });
 });

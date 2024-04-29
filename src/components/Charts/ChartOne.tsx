@@ -94,20 +94,7 @@ const options: ApexOptions = {
   },
   xaxis: {
     type: 'category',
-    categories: [
-      'Jan',
-      'Fev',
-      'Mar',
-      'Abr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Ago',
-      'Set',
-      'Out',
-      'Nov',
-      'Dez',
-    ],
+    categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
     axisBorder: {
       show: false,
     },
@@ -138,18 +125,12 @@ const ChartOne: React.FC = () => {
     series: [
       {
         name: 'Entradas',
-        data: [
-          4850, 7850, 3500, 6580, 5500, 2700, 4700, 5900, 8450, 7850, 6020,
-          5890,
-        ],
+        data: [4850, 7850, 3500, 6580, 5500, 2700, 4700, 5900, 8450, 7850, 6020, 5890],
       },
 
       {
         name: 'Saídas',
-        data: [
-          3025, 5000, 4280, 3800, 5005, 4000, 2950, 5700, 5420, 4200, 4050,
-          4150,
-        ],
+        data: [3025, 5000, 4280, 3800, 5005, 4000, 2950, 5700, 5420, 4200, 4050, 4150],
       },
     ],
   });
@@ -208,13 +189,7 @@ const ChartOne: React.FC = () => {
 
       <div>
         <div id="chartOne" className="-ml-5 h-[355px] w-[105%]">
-          <ReactApexChart
-            options={options}
-            series={state.series}
-            type="area"
-            width="100%"
-            height="100%"
-          />
+          <ReactApexChart options={options} series={state.series} type="area" width="100%" height="100%" />
         </div>
       </div>
     </div>

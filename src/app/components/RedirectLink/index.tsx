@@ -7,19 +7,11 @@ type RedirectLinkProps = {
   target?: string;
 };
 
-const RedirectLink: React.FC<RedirectLinkProps> = ({
-  text,
-  textLink,
-  route,
-  target,
-}) => {
+const RedirectLink: React.FC<RedirectLinkProps> = ({ text, textLink, route, target }) => {
   return (
     <p data-testid="redirect-link">
       {text}{' '}
-      <Link
-        href={route}
-        target={target || ''}
-        className="text-primary hover:underline">
+      <Link href={route} target={target || ''} className="text-primary hover:underline">
         {textLink}
       </Link>
     </p>

@@ -27,8 +27,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
   onCancelInsertNote,
   insertNoteHandler,
 }) => {
-  const { financeNoteCategories, financePaymentVoucherOptions } =
-    financeParameters;
+  const { financeNoteCategories, financePaymentVoucherOptions } = financeParameters;
 
   const { authData } = useAuthContext();
 
@@ -70,8 +69,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
   };
 
   const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
-    const { description, type, value, category, member, paymentVoucher } =
-      formData;
+    const { description, type, value, category, member, paymentVoucher } = formData;
 
     const newFinanceNote: Partial<FinanceNote> = {
       photoUrl: authData?.photoUrl,
@@ -99,25 +97,16 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
             <div className="mb-2 flex flex-col gap-2">
               <div className="mb-2 flex flex-row items-end justify-start gap-2 text-center">
                 <span className="inline-block">
-                  <MdOutlineEventNote
-                    size={48}
-                    className="font-bold text-meta-5"
-                  />
+                  <MdOutlineEventNote size={48} className="font-bold text-meta-5" />
                 </span>
                 <div className="flex flex-col items-start justify-start">
-                  <h3 className="text-lg font-bold text-black dark:text-white">
-                    Nova nota
-                  </h3>
-                  <p className="text-md word-break self-start text-start">
-                    Adicione aqui uma nova nota.
-                  </p>
+                  <h3 className="text-lg font-bold text-black dark:text-white">Nova nota</h3>
+                  <p className="text-md word-break self-start text-start">Adicione aqui uma nova nota.</p>
                 </div>
               </div>
             </div>
             {/* Form */}
-            <form
-              onSubmit={handleSubmit(insertNewNoteHandler)}
-              className="flex flex-col">
+            <form onSubmit={handleSubmit(insertNewNoteHandler)} className="flex flex-col">
               <div className="mb-4 flex flex-col gap-2 md:flex-row">
                 {/* Type */}
                 <div className="flex w-full flex-col self-start md:w-1/2">
@@ -182,8 +171,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                     htmlFor="category"
                     data-testid="category"
                     className="mb-2.5 block self-start text-black dark:text-white">
-                    Categoria{' '}
-                    <span className="font-semibold text-meta-1">*</span>
+                    Categoria <span className="font-semibold text-meta-1">*</span>
                   </label>
                   <div className="relative z-20 bg-transparent dark:bg-form-input">
                     <select
@@ -196,9 +184,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                         Selecione a categoria
                       </option>
                       {React.Children.toArray(
-                        financeNoteCategories.map(note => (
-                          <option value={note}>{note}</option>
-                        ))
+                        financeNoteCategories.map(note => <option value={note}>{note}</option>)
                       )}
                     </select>
                     <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -213,8 +199,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                     htmlFor="paymentVoucher"
                     data-testid="paymentVoucher"
                     className="mb-2.5 block self-start text-black dark:text-white">
-                    Comprovante{' '}
-                    <span className="font-semibold text-meta-1">*</span>
+                    Comprovante <span className="font-semibold text-meta-1">*</span>
                   </label>
                   <div className="relative z-20 bg-transparent dark:bg-form-input">
                     <select
@@ -227,9 +212,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                         Selecione o status
                       </option>
                       {React.Children.toArray(
-                        financePaymentVoucherOptions.map(note => (
-                          <option value={note}>{note}</option>
-                        ))
+                        financePaymentVoucherOptions.map(note => <option value={note}>{note}</option>)
                       )}
                     </select>
                     <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -258,11 +241,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                       Selecione o membro
                     </option>
                     <option value="">Nenhum</option>
-                    {React.Children.toArray(
-                      MEMBERS.map(member => (
-                        <option value={member}>{member}</option>
-                      ))
-                    )}
+                    {React.Children.toArray(MEMBERS.map(member => <option value={member}>{member}</option>))}
                   </select>
                   <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
                     <SelectChevroletLogo size={24} />

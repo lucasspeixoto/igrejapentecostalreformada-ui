@@ -35,9 +35,7 @@ const UserPhoto: React.FC = () => {
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar foto. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar foto. Tente novamente mais tarde ou contate admin.');
     } else {
       setIsLoadingUploadPhoto(false);
 
@@ -58,18 +56,14 @@ const UserPhoto: React.FC = () => {
 
     const file = event.target.files[0];
 
-    const storageRef = ref(
-      storage,
-      `photos/${authContext.authData?.userId}.jpg`
-    );
+    const storageRef = ref(storage, `photos/${authContext.authData?.userId}.jpg`);
 
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on(
       'state_changed',
       snapshot => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setLoadPhotoProgress(progress);
       },
       error => {
@@ -88,10 +82,7 @@ const UserPhoto: React.FC = () => {
       <div className="flex items-start border-b border-stroke px-7 py-4 dark:border-strokedark">
         <h3 className="font-medium text-black dark:text-white">Sua Foto</h3>
       </div>
-      <div
-        className={`p-7 ${
-          isLoadingUploadPhoto ? 'opacity-40' : 'opacity-100'
-        }`}>
+      <div className={`p-7 ${isLoadingUploadPhoto ? 'opacity-40' : 'opacity-100'}`}>
         <div className="mb-4 flex items-center justify-start gap-3">
           <div className="relative size-14 rounded-full">
             {hasPhotoUploaded ? (
@@ -113,9 +104,7 @@ const UserPhoto: React.FC = () => {
             )}
           </div>
           <div className="flex flex-col items-start">
-            <span className="mb-1.5 text-black dark:text-white">
-              Editar sua Foto
-            </span>
+            <span className="mb-1.5 text-black dark:text-white">Editar sua Foto</span>
             {isLoadingUploadPhoto ? (
               <div className="flex flex-row items-center gap-1">
                 <span>Carregando... </span>
@@ -140,8 +129,7 @@ const UserPhoto: React.FC = () => {
               <LuUpload className="text-primary" />
             </span>
             <p>
-              <span className="text-primary">Clique para upload</span> ou
-              arraste e solte
+              <span className="text-primary">Clique para upload</span> ou arraste e solte
             </p>
             <p className="mt-1.5">SVG, PNG, JPG or GIF</p>
             <p>(max, 800 X 800px)</p>

@@ -9,8 +9,13 @@ export function getActualDate(): string {
   const currentMonth = currentDate.getMonth() + 1;
   const currentYear = currentDate.getFullYear();
 
-  const monthString =
-    currentMonth < 10 ? `0${currentMonth}` : `${currentMonth}`;
+  const monthString = currentMonth < 10 ? `0${currentMonth}` : `${currentMonth}`;
 
   return `${monthString}/${currentYear}`;
+}
+
+export function getActualYear(): number {
+  const currentDate = new Date();
+
+  return currentDate.getFullYear();
 }

@@ -1,9 +1,10 @@
 'use client';
 
 import { getFinanceNotesDocuments } from '@lancamentos/lib/firebase/get-finance-notes';
-import useFinanceNotes from '@lancamentos/store/useFinanceNotes';
 import type { FinanceNote } from '@lancamentos/types/finance-note';
 import React from 'react';
+
+import useFinanceNotes from '@/app/plataforma-ipr/financeiro/store/useFinance';
 
 import { orderNotesByDate } from '../utils/order-notes-by-date';
 
@@ -21,11 +22,9 @@ type FinanceNotesContextType = {
   updateIsDataUpdatedInfo: () => void;
 };
 
-export const FinanceNotesContext =
-  React.createContext<FinanceNotesContextType>(initialValues);
+export const FinanceNotesContext = React.createContext<FinanceNotesContextType>(initialValues);
 
-export const useFinanceNotesContext = () =>
-  React.useContext(FinanceNotesContext);
+export const useFinanceNotesContext = () => React.useContext(FinanceNotesContext);
 
 export const FinanceNotesContextProvider: React.FC<{
   children: React.ReactNode;
@@ -34,12 +33,9 @@ export const FinanceNotesContextProvider: React.FC<{
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] =
-    React.useState(false);
+  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(false);
 
-  const selectedFinanceDetailDate = useFinanceNotes(
-    state => state.referenceMonth
-  );
+  const selectedFinanceDetailDate = useFinanceNotes(state => state.notesListReferenceMonth);
 
   const updateLoadingFinanceNotes = (isLoading: boolean) => {
     setIsLoadingFinanceNotes(isLoading);

@@ -28,11 +28,7 @@ const SignUp: React.FC = () => {
                 <SignUpForm />
 
                 <div className="mt-4 text-center">
-                  <RedirectLink
-                    text="Ja possui uma conta?"
-                    textLink="Logar"
-                    route="/login"
-                  />
+                  <RedirectLink text="Ja possui uma conta?" textLink="Logar" route="/login" />
                 </div>
               </div>
             </div>

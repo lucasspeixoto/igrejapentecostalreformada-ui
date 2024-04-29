@@ -1,13 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { FinanceReport } from '@relatorios/types/finance-report';
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  query,
-} from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 
 import firebase_app from '@/lib/firebase/config';
 
@@ -57,11 +50,7 @@ export async function getDocument(_collection: string, id: string) {
   return { result, error };
 }
 
-export async function getCollection(
-  _collection: string,
-  id: string,
-  target: string
-) {
+export async function getCollection(_collection: string, id: string, target: string) {
   let result = null;
   let error = null;
 

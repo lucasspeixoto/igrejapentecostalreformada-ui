@@ -18,22 +18,18 @@ type FinanceReportsContextType = {
   updateIsDataUpdatedInfo: () => void;
 };
 
-export const FinanceReportsContext =
-  React.createContext<FinanceReportsContextType>(initialValues);
+export const FinanceReportsContext = React.createContext<FinanceReportsContextType>(initialValues);
 
-export const useFinanceReportsContext = () =>
-  React.useContext(FinanceReportsContext);
+export const useFinanceReportsContext = () => React.useContext(FinanceReportsContext);
 
 export const FinanceReportsContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [financeReport, setFinanceReport] =
-    React.useState<FinanceReport | null>(null);
+  const [financeReport, setFinanceReport] = React.useState<FinanceReport | null>(null);
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const [isLoadingFinanceReports, setIsLoadingFinanceReports] =
-    React.useState(false);
+  const [isLoadingFinanceReports, setIsLoadingFinanceReports] = React.useState(false);
 
   const updateLoadingFinanceReports = (isLoading: boolean) => {
     setIsLoadingFinanceReports(isLoading);

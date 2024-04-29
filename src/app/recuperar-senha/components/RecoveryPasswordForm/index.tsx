@@ -41,9 +41,7 @@ const RecoveryPasswordForm = () => {
     }
   };
 
-  const getRecoveryPasswordFormDataHandler = async (
-    data: RecoveryPasswordFormData
-  ) => {
+  const getRecoveryPasswordFormDataHandler = async (data: RecoveryPasswordFormData) => {
     authContext.updateLoadingAuthProcess(true);
 
     const { email } = data;
@@ -56,9 +54,7 @@ const RecoveryPasswordForm = () => {
       {/* ---------------------------- E-mail ---------------------------- */}
       <div className="mb-3 gap-2">
         <div className="relative">
-          <label
-            htmlFor="email"
-            className="mb-1 block font-medium text-black dark:text-white">
+          <label htmlFor="email" className="mb-1 block font-medium text-black dark:text-white">
             E-mail
           </label>
           <input
@@ -73,9 +69,7 @@ const RecoveryPasswordForm = () => {
 
         <>
           {errors.email && (
-            <span className="text-sm text-meta-1 dark:text-meta-7">
-              {errors.email.message}
-            </span>
+            <span className="text-sm text-meta-1 dark:text-meta-7">{errors.email.message}</span>
           )}
         </>
       </div>

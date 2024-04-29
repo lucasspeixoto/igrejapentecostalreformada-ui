@@ -10,12 +10,7 @@ import React from 'react';
 import { AiOutlinePieChart } from 'react-icons/ai';
 import { BiUser } from 'react-icons/bi';
 import { BsCalendarDate, BsLink45Deg, BsPeople } from 'react-icons/bs';
-import {
-  FaChartLine,
-  FaRegMoneyBillAlt,
-  FaTable,
-  FaWpforms,
-} from 'react-icons/fa';
+import { FaChartLine, FaRegMoneyBillAlt, FaTable, FaWpforms } from 'react-icons/fa';
 import { SiStorybook } from 'react-icons/si';
 
 import { useAuthContext } from '@/providers/AuthContextProvider';
@@ -61,11 +56,7 @@ const Sidebar = () => {
 
       const targetNode = target as Node | null;
 
-      if (
-        !sidebarOpen ||
-        sidebar.current.contains(targetNode) ||
-        trigger.current.contains(targetNode)
-      )
+      if (!sidebarOpen || sidebar.current.contains(targetNode) || trigger.current.contains(targetNode))
         return;
 
       setSidebarOpenHandle();
@@ -116,12 +107,7 @@ const Sidebar = () => {
       {/* <!-- Header --> */}
       <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
         <Link href="/plataforma-ipr/perfil">
-          <Image
-            width={176}
-            height={32}
-            src={'/images/logo/logo.svg'}
-            alt="Logo"
-          />
+          <Image width={176} height={32} src={'/images/logo/logo.svg'} alt="Logo" />
         </Link>
 
         <button
@@ -150,9 +136,7 @@ const Sidebar = () => {
         <nav className="mt-5 p-4 lg:mt-9 lg:px-6">
           {/* <!-- Menu --> */}
           <>
-            <h3 className="text-md mb-4 ml-4 font-semibold text-bodydark2">
-              Menu
-            </h3>
+            <h3 className="text-md mb-4 ml-4 font-semibold text-bodydark2">Menu</h3>
 
             {/* Listagem de items do menu */}
             <ul className="mb-6 flex flex-col gap-1.5">
@@ -170,43 +154,32 @@ const Sidebar = () => {
 
               {/* <!-- Cadastro --> */}
               <SidebarLinkGroup
-                activeCondition={
-                  pathname === '/plataforma-ipr/cadastro' ||
-                  pathname.includes('cadastro')
-                }>
+                activeCondition={pathname === '/plataforma-ipr/cadastro' || pathname.includes('cadastro')}>
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
                       <Link
                         href="#"
                         className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                          (pathname === '/plataforma-ipr/cadastro' ||
-                            pathname.includes('cadastro')) &&
+                          (pathname === '/plataforma-ipr/cadastro' || pathname.includes('cadastro')) &&
                           'bg-graydark dark:bg-meta-4'
                         }`}
                         onClick={e => {
                           e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}>
                         <FaWpforms size={20} className="text-gray" />
                         Cadastro
                         <MenuChevroletIcon open={open} />
                       </Link>
                       {/* <!-- Dropdown Menu Start --> */}
-                      <div
-                        className={`translate overflow-hidden${
-                          !open && ' hidden'
-                        }`}>
+                      <div className={`translate overflow-hidden${!open && ' hidden'}`}>
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
                             <Link
                               href="/plataforma-ipr/cadastro/pessoal"
                               className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                pathname ===
-                                  '/plataforma-ipr/cadastro/pessoal' &&
-                                'text-white'
+                                pathname === '/plataforma-ipr/cadastro/pessoal' && 'text-white'
                               }`}>
                               Pessoal
                             </Link>
@@ -215,9 +188,7 @@ const Sidebar = () => {
                             <Link
                               href="/plataforma-ipr/cadastro/complementar"
                               className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                pathname ===
-                                  '/plataforma-ipr/cadastro/complementar' &&
-                                'text-white'
+                                pathname === '/plataforma-ipr/cadastro/complementar' && 'text-white'
                               }`}>
                               Complementar
                             </Link>
@@ -226,9 +197,7 @@ const Sidebar = () => {
                             <Link
                               href="/plataforma-ipr/cadastro/eclesiastico"
                               className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                pathname ===
-                                  '/plataforma-ipr/cadastro/eclesiastico' &&
-                                'text-white'
+                                pathname === '/plataforma-ipr/cadastro/eclesiastico' && 'text-white'
                               }`}>
                               Eclesiástico
                             </Link>
@@ -246,8 +215,7 @@ const Sidebar = () => {
                   <Link
                     href="/plataforma-ipr/membros"
                     className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                      pathname.includes('listagens-de-membros') &&
-                      'bg-graydark dark:bg-meta-4'
+                      pathname.includes('listagens-de-membros') && 'bg-graydark dark:bg-meta-4'
                     }`}>
                     <BsPeople size={20} className="text-gray" />
                     Membros IPR
@@ -257,43 +225,32 @@ const Sidebar = () => {
 
               {/* <!-- Financeiro --> */}
               {authData?.isAdmin ? (
-                <SidebarLinkGroup
-                  activeCondition={
-                    pathname === '/' || pathname.includes('financeiro')
-                  }>
+                <SidebarLinkGroup activeCondition={pathname === '/' || pathname.includes('financeiro')}>
                   {(handleClick, open) => {
                     return (
                       <React.Fragment>
                         <Link
                           href="#"
                           className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                            (pathname === '/plataforma-ipr/financeiro' ||
-                              pathname.includes('financeiro')) &&
+                            (pathname === '/plataforma-ipr/financeiro' || pathname.includes('financeiro')) &&
                             'bg-graydark dark:bg-meta-4'
                           }`}
                           onClick={e => {
                             e.preventDefault();
-                            sidebarExpanded
-                              ? handleClick()
-                              : setSidebarExpanded(true);
+                            sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                           }}>
                           <FaRegMoneyBillAlt size={20} className="text-gray" />
                           Financeiro
                           <MenuChevroletIcon open={open} />
                         </Link>
                         {/* <!-- Dropdown Menu Start --> */}
-                        <div
-                          className={`translate overflow-hidden${
-                            !open && ' hidden'
-                          }`}>
+                        <div className={`translate overflow-hidden${!open && ' hidden'}`}>
                           <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                             <li>
                               <Link
                                 href="/plataforma-ipr/financeiro/lancamentos"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname ===
-                                    '/plataforma-ipr/financeiro/lancamentos' &&
-                                  'text-white'
+                                  pathname === '/plataforma-ipr/financeiro/lancamentos' && 'text-white'
                                 } `}>
                                 <FaTable size={16} className="text-white" />
                                 Lançamentos
@@ -303,9 +260,7 @@ const Sidebar = () => {
                               <Link
                                 href="/plataforma-ipr/financeiro/relatorios"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname ===
-                                    '/plataforma-ipr/financeiro/relatorios' &&
-                                  'text-white'
+                                  pathname === '/plataforma-ipr/financeiro/relatorios' && 'text-white'
                                 } `}>
                                 <FaChartLine size={16} className="text-white" />
                                 Relatórios
@@ -321,10 +276,7 @@ const Sidebar = () => {
 
               {/* <!-- Indicadores --> */}
               {authData?.isAdmin ? (
-                <SidebarLinkGroup
-                  activeCondition={
-                    pathname === '/' || pathname.includes('indicadores')
-                  }>
+                <SidebarLinkGroup activeCondition={pathname === '/' || pathname.includes('indicadores')}>
                   {(handleClick, open) => {
                     return (
                       <React.Fragment>
@@ -337,27 +289,20 @@ const Sidebar = () => {
                           }`}
                           onClick={e => {
                             e.preventDefault();
-                            sidebarExpanded
-                              ? handleClick()
-                              : setSidebarExpanded(true);
+                            sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                           }}>
                           <AiOutlinePieChart size={20} className="text-gray" />
                           Indicadores
                           <MenuChevroletIcon open={open} />
                         </Link>
                         {/* <!-- Dropdown Menu Start --> */}
-                        <div
-                          className={`translate overflow-hidden${
-                            !open && ' hidden'
-                          }`}>
+                        <div className={`translate overflow-hidden${!open && ' hidden'}`}>
                           <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                             <li>
                               <Link
                                 href="/plataforma-ipr/indicadores/estatisticos"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname ===
-                                    '/plataforma-ipr/indicadores/estatisticos' &&
-                                  'text-white'
+                                  pathname === '/plataforma-ipr/indicadores/estatisticos' && 'text-white'
                                 } `}>
                                 Estatísticos
                               </Link>
@@ -386,8 +331,7 @@ const Sidebar = () => {
                 <Link
                   href="/plataforma-ipr/calendario"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('calendario') &&
-                    'bg-graydark dark:bg-meta-4'
+                    pathname.includes('calendario') && 'bg-graydark dark:bg-meta-4'
                   }`}>
                   <BsCalendarDate size={20} className="text-gray" />
                   Calendário
@@ -398,15 +342,12 @@ const Sidebar = () => {
 
           {/* <!-- Outros --> */}
           <>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
-              Outros
-            </h3>
+            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">Outros</h3>
 
             {/* Listagem de outros items */}
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Links importantes --> */}
-              <SidebarLinkGroup
-                activeCondition={pathname === '/' || pathname.includes('')}>
+              <SidebarLinkGroup activeCondition={pathname === '/' || pathname.includes('')}>
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
@@ -415,19 +356,14 @@ const Sidebar = () => {
                         className="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4"
                         onClick={e => {
                           e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
+                          sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}>
                         <BsLink45Deg size={20} className="text-gray" />
                         Links Importantes
                         <MenuChevroletIcon open={open} />
                       </Link>
                       {/* <!-- Dropdown Menu Start --> */}
-                      <div
-                        className={`translate overflow-hidden${
-                          !open && ' hidden'
-                        }`}>
+                      <div className={`translate overflow-hidden${!open && ' hidden'}`}>
                         <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                           <li>
                             <Link
@@ -457,41 +393,32 @@ const Sidebar = () => {
 
               {authData?.isAdmin ? (
                 <SidebarLinkGroup
-                  activeCondition={
-                    pathname === '/plataforma-ipr/ui' || pathname.includes('ui')
-                  }>
+                  activeCondition={pathname === '/plataforma-ipr/ui' || pathname.includes('ui')}>
                   {(handleClick, open) => {
                     return (
                       <React.Fragment>
                         <Link
                           href="#"
                           className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                            (pathname === '/plataforma-ipr/ui' ||
-                              pathname.includes('ui')) &&
+                            (pathname === '/plataforma-ipr/ui' || pathname.includes('ui')) &&
                             'bg-graydark dark:bg-meta-4'
                           }`}
                           onClick={e => {
                             e.preventDefault();
-                            sidebarExpanded
-                              ? handleClick()
-                              : setSidebarExpanded(true);
+                            sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                           }}>
                           <SiStorybook size={20} className="text-gray" />
                           Design System
                           <MenuChevroletIcon open={open} />
                         </Link>
                         {/* <!-- Dropdown Menu Start --> */}
-                        <div
-                          className={`translate overflow-hidden${
-                            !open && ' hidden'
-                          }`}>
+                        <div className={`translate overflow-hidden${!open && ' hidden'}`}>
                           <ul className="mb-5.5 mt-4 flex flex-col gap-2.5 pl-6">
                             <li>
                               <Link
                                 href="/plataforma-ipr/ui/botoes"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname === '/plataforma-ipr/ui/botoes' &&
-                                  'text-white'
+                                  pathname === '/plataforma-ipr/ui/botoes' && 'text-white'
                                 } `}>
                                 Botões
                               </Link>
@@ -500,8 +427,7 @@ const Sidebar = () => {
                               <Link
                                 href="/plataforma-ipr/ui/alertas"
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname === '/plataforma-ipr/ui/alertas' &&
-                                  'text-white'
+                                  pathname === '/plataforma-ipr/ui/alertas' && 'text-white'
                                 } `}>
                                 Alertas
                               </Link>

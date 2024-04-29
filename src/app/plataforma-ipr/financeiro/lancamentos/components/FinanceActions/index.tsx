@@ -10,8 +10,7 @@ import type { FinanceNote } from '../../types/finance-note';
 import FinanceNoteInsert from './FinanceNoteInsertModal';
 
 const FinanceActions: React.FC = () => {
-  const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
-    useFinanceNotesContext();
+  const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } = useFinanceNotesContext();
 
   const [showInsertNoteModal, setShowInsertNoteModal] = React.useState(false);
 
@@ -35,10 +34,7 @@ const FinanceActions: React.FC = () => {
     <>
       <>
         {showInsertNoteModal ? (
-          <FinanceNoteInsert
-            onCancelInsertNote={onCancelInsertNote}
-            insertNoteHandler={insertNoteHandler}
-          />
+          <FinanceNoteInsert onCancelInsertNote={onCancelInsertNote} insertNoteHandler={insertNoteHandler} />
         ) : null}
       </>
       <div className="flex gap-2">

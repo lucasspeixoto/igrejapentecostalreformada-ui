@@ -22,11 +22,9 @@ type FirebaseAuthContextType = {
   updateLoadingAuthProcess: (isLoading: boolean) => void;
 };
 
-export const FirebaseAuthContext =
-  React.createContext<FirebaseAuthContextType>(initialValues);
+export const FirebaseAuthContext = React.createContext<FirebaseAuthContextType>(initialValues);
 
-export const useFirebaseAuthContext = () =>
-  React.useContext(FirebaseAuthContext);
+export const useFirebaseAuthContext = () => React.useContext(FirebaseAuthContext);
 
 export const FirebaseAuthContextProvider: React.FC<{
   children: React.ReactNode;

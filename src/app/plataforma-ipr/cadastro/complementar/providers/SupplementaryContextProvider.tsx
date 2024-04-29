@@ -24,21 +24,18 @@ type SupplementaryContextType = {
   updateIsDataUpdatedInfo: () => void;
 };
 
-export const SupplementaryContext =
-  createContext<SupplementaryContextType>(initialValues);
+export const SupplementaryContext = createContext<SupplementaryContextType>(initialValues);
 
 export const useSupplementaryContext = () => useContext(SupplementaryContext);
 
 export const SupplementaryContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [supplementaryData, setSupplementaryData] =
-    useState<Supplementary | null>(null);
+  const [supplementaryData, setSupplementaryData] = useState<Supplementary | null>(null);
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const [isLoadingSupplementaryProcess, setIsLoadingSupplementaryProcess] =
-    useState(false);
+  const [isLoadingSupplementaryProcess, setIsLoadingSupplementaryProcess] = useState(false);
 
   const updateLoadingSupplementaryProcess = (isLoading: boolean) => {
     setIsLoadingSupplementaryProcess(isLoading);
@@ -51,11 +48,7 @@ export const SupplementaryContextProvider: React.FC<{
   React.useEffect(() => {
     const authStateUnsubscribe = onAuthStateChanged(auth, _user => {
       if (_user) {
-        const supplementaryUserData = getCollection(
-          'users',
-          _user.uid,
-          'supplementary'
-        );
+        const supplementaryUserData = getCollection('users', _user.uid, 'supplementary');
         supplementaryUserData
           .then(data => {
             setSupplementaryData(data?.result);

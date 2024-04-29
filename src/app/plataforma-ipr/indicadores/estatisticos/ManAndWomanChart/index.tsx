@@ -53,54 +53,37 @@ const options: ApexOptions = {
 const ManAndWomanChart: React.FC<{ userData: UserData[] }> = ({ userData }) => {
   const totalOfMembers = userData.length;
 
-  const personalData = React.useMemo(
-    () => userData.map(user => user.personal),
-    [userData]
-  );
+  const personalData = React.useMemo(() => userData.map(user => user.personal), [userData]);
 
   const isManTotal = React.useMemo(() => {
     return personalData.reduce(
-      (element, personal) =>
-        personal?.sex === 'Masculino' ? element + 1 : element,
+      (element, personal) => (personal?.sex === 'Masculino' ? element + 1 : element),
       0
     );
   }, [userData]);
 
   const isWomanTotal = React.useMemo(() => {
     return personalData.reduce(
-      (element, personal) =>
-        personal?.sex === 'Feminino' ? element + 1 : element,
+      (element, personal) => (personal?.sex === 'Feminino' ? element + 1 : element),
       0
     );
   }, [userData]);
 
   const sex = {
-    series: [
-      isManTotal,
-      isWomanTotal,
-      totalOfMembers - (isManTotal + isWomanTotal),
-    ],
+    series: [isManTotal, isWomanTotal, totalOfMembers - (isManTotal + isWomanTotal)],
   };
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-5">
       <div className="mb-3 justify-between gap-4 sm:flex">
         <div>
-          <h5 className="text-xl font-semibold text-black dark:text-white">
-            Sexo
-          </h5>
+          <h5 className="text-xl font-semibold text-black dark:text-white">Sexo</h5>
         </div>
       </div>
 
       <div className="mb-2">
         <div id="manAndWomanChart" className="mx-auto flex justify-center">
-          <ReactApexChart
-            options={options}
-            series={sex.series}
-            type="donut"
-            width={'100%'}
-            height={300}
-          />
+          <ReactApexChart options={options} series={sex.series} type="donut" width={'100%'} height={300} />
         </div>
       </div>
 

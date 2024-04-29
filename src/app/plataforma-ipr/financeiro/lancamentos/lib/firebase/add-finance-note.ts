@@ -5,9 +5,7 @@ import firebase_app from '@/lib/firebase/config';
 
 export const db = getFirestore(firebase_app);
 
-export default async function addFinanceNote(
-  data: PartialWithFieldValue<unknown>
-) {
+export default async function addFinanceNote(data: PartialWithFieldValue<unknown>) {
   let result = null;
   let error = null;
 

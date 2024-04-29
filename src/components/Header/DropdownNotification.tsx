@@ -12,12 +12,7 @@ const DropdownNotification = () => {
   React.useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
       if (!dropdown.current) return;
-      if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
-        trigger.current.contains(target)
-      )
-        return;
+      if (!dropdownOpen || dropdown.current.contains(target) || trigger.current.contains(target)) return;
       setDropdownOpen(false);
     };
     document.addEventListener('click', clickHandler);
@@ -71,11 +66,8 @@ const DropdownNotification = () => {
               className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
               href="#">
               <p className="text-sm">
-                <span className="text-black dark:text-white">
-                  Finalize seu cadastro
-                </span>{' '}
-                Mantenha o seu cadastro atualizado, verifique se preencheu todas
-                as informações
+                <span className="text-black dark:text-white">Finalize seu cadastro</span> Mantenha o seu
+                cadastro atualizado, verifique se preencheu todas as informações
               </p>
 
               <p className="text-xs">15 Nov, 2023</p>

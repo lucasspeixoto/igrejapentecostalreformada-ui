@@ -29,18 +29,15 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
   noteId,
   onCancelDetailNoteUpdate,
 }) => {
-  const { financeNoteCategories, financePaymentVoucherOptions } =
-    financeParameters;
+  const { financeNoteCategories, financePaymentVoucherOptions } = financeParameters;
 
-  const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } =
-    useFinanceNotesContext();
+  const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } = useFinanceNotesContext();
 
   const financeReportsContext = useFinanceReportsContext();
 
   const [isMounted, setIsMounted] = React.useState(false);
 
-  const [actualFinanceNote, setActualFinanceNote] =
-    React.useState<FinanceNote | null>(null);
+  const [actualFinanceNote, setActualFinanceNote] = React.useState<FinanceNote | null>(null);
 
   const {
     register,
@@ -76,8 +73,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
       setActualFinanceNote(financeNote);
 
       if (mounted && financeNote) {
-        const { type, value, description, category, member, paymentVoucher } =
-          financeNote;
+        const { type, value, description, category, member, paymentVoucher } = financeNote;
 
         reset({ type, value, description, category, member, paymentVoucher });
       }
@@ -93,8 +89,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
   const updateActualNoteFromTotalBalance = async () => {
     const { type: actualType, value: actualValue } = actualFinanceNote!;
 
-    const valueToUpdateBalance =
-      actualType === 'C' ? -actualValue : actualValue;
+    const valueToUpdateBalance = actualType === 'C' ? -actualValue : actualValue;
 
     await updateFinanceReportsTotalBalance(valueToUpdateBalance);
   };
@@ -111,20 +106,13 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
     financeReportsContext.updateIsDataUpdatedInfo();
   };
 
-  const updateFinanceNoteHandler = async (
-    formData: UpdateFinanceNoteFormData
-  ) => {
+  const updateFinanceNoteHandler = async (formData: UpdateFinanceNoteFormData) => {
     updateLoadingFinanceNotes(true);
 
-    const { error: updateNoteError } = await updateFinanceNote(
-      noteId,
-      formData
-    );
+    const { error: updateNoteError } = await updateFinanceNote(noteId, formData);
 
     if (updateNoteError) {
-      toast.error(
-        'Error ao alterar nota Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao alterar nota Tente novamente mais tarde ou contate admin.');
     } else {
       updateIsDataUpdatedInfo();
 
@@ -147,25 +135,16 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
             <div className="mb-2 flex flex-col gap-2">
               <div className="mb-2 flex flex-row items-end justify-start gap-2 text-center">
                 <span className="inline-block">
-                  <MdOutlineEventNote
-                    size={48}
-                    className="font-bold text-meta-5"
-                  />
+                  <MdOutlineEventNote size={48} className="font-bold text-meta-5" />
                 </span>
                 <div className="flex flex-col items-start justify-start">
-                  <h3 className="text-lg font-bold text-black dark:text-white">
-                    Editar nota
-                  </h3>
-                  <p className="text-md word-break self-start text-start">
-                    Altere aqui a nota selecionada.
-                  </p>
+                  <h3 className="text-lg font-bold text-black dark:text-white">Editar nota</h3>
+                  <p className="text-md word-break self-start text-start">Altere aqui a nota selecionada.</p>
                 </div>
               </div>
             </div>
             {/* Form */}
-            <form
-              onSubmit={handleSubmit(updateFinanceNoteHandler)}
-              className="flex flex-col">
+            <form onSubmit={handleSubmit(updateFinanceNoteHandler)} className="flex flex-col">
               <div className="mb-4 flex flex-col gap-2 md:flex-row">
                 {/* Type */}
                 <div className="flex w-full flex-col self-start md:w-1/2">
@@ -230,8 +209,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                     htmlFor="category"
                     data-testid="category"
                     className="mb-2.5 block self-start text-black dark:text-white">
-                    Categoria{' '}
-                    <span className="font-semibold text-meta-1">*</span>
+                    Categoria <span className="font-semibold text-meta-1">*</span>
                   </label>
                   <div className="relative z-20 bg-transparent dark:bg-form-input">
                     <select
@@ -244,9 +222,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                         Selecione a categoria
                       </option>
                       {React.Children.toArray(
-                        financeNoteCategories.map(note => (
-                          <option value={note}>{note}</option>
-                        ))
+                        financeNoteCategories.map(note => <option value={note}>{note}</option>)
                       )}
                     </select>
                     <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -261,8 +237,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                     htmlFor="paymentVoucher"
                     data-testid="paymentVoucher"
                     className="mb-2.5 block self-start text-black dark:text-white">
-                    Comprovante{' '}
-                    <span className="font-semibold text-meta-1">*</span>
+                    Comprovante <span className="font-semibold text-meta-1">*</span>
                   </label>
                   <div className="relative z-20 bg-transparent dark:bg-form-input">
                     <select
@@ -275,9 +250,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                         Selecione o status
                       </option>
                       {React.Children.toArray(
-                        financePaymentVoucherOptions.map(note => (
-                          <option value={note}>{note}</option>
-                        ))
+                        financePaymentVoucherOptions.map(note => <option value={note}>{note}</option>)
                       )}
                     </select>
                     <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -306,11 +279,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                       Selecione o membro
                     </option>
                     <option value="">Nenhum</option>
-                    {React.Children.toArray(
-                      MEMBERS.map(member => (
-                        <option value={member}>{member}</option>
-                      ))
-                    )}
+                    {React.Children.toArray(MEMBERS.map(member => <option value={member}>{member}</option>))}
                   </select>
                   <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
                     <SelectChevroletLogo size={24} />

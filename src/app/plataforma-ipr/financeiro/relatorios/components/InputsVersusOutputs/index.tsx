@@ -4,8 +4,7 @@ import type { ApexOptions } from 'apexcharts';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 
-import type { Period } from '../types/period';
-import { computePeriodDetail } from '../utils/compute-period-detail';
+import useFinance from '../../../store/useFinance';
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
@@ -111,22 +110,31 @@ const options: ApexOptions = {
         fontSize: '0px',
       },
     },
+    labels: {
+      style: {
+        colors: ['#333A48'],
+        fontSize: '12px',
+        fontFamily: 'Helvetica, Arial, sans-serif',
+        fontWeight: 400,
+        cssClass: 'apexcharts-yaxis-label',
+      },
+    },
     min: 0,
     max: 10000,
   },
 };
 
-interface MonthInputsAndOutputsState {
+interface InputsVersusOutputsState {
   series: {
     name: string;
     data: number[];
   }[];
 }
 
-const MonthInputsAndOutputs: React.FC = () => {
-  const [period, setPeriod] = React.useState('monthly');
-  const [dateRange, setDateRange] = React.useState(computePeriodDetail('monthly'));
-  const [state, setState] = useState<MonthInputsAndOutputsState>({
+const InputsVersusOutputs: React.FC = () => {
+  const reportsReferenceYear = useFinance(state => state.reportsReferenceYear);
+
+  const [state, setState] = useState<InputsVersusOutputsState>({
     series: [
       {
         name: 'Entradas',
@@ -140,24 +148,10 @@ const MonthInputsAndOutputs: React.FC = () => {
     ],
   });
 
-  const handleReset = () => {
-    setState(prevState => ({ ...prevState }));
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  handleReset;
-
   // NextJS Requirement
   const isWindowAvailable = () => typeof window !== 'undefined';
 
   if (!isWindowAvailable()) return <></>;
-
-  const changePeriodHandler = (selectedPeriod: Period): void => {
-    setPeriod(selectedPeriod);
-    const detail = computePeriodDetail(selectedPeriod);
-
-    setDateRange(detail);
-  };
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-5 pt-7.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
@@ -180,30 +174,10 @@ const MonthInputsAndOutputs: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="flex w-auto max-w-45 flex-col justify-start gap-2">
-          <div className="inline-flex items-center rounded-md bg-whiter dark:bg-meta-4">
-            <button
-              onClick={() => changePeriodHandler('weekly')}
-              className={`rounded px-3 py-1 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card  dark:text-white dark:hover:bg-boxdark  ${period === 'weekly' && 'bg-white dark:bg-boxdark'}`}>
-              Semana
-            </button>
-            <button
-              onClick={() => changePeriodHandler('monthly')}
-              className={`rounded px-3 py-1 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card  dark:text-white dark:hover:bg-boxdark  ${period === 'monthly' && 'bg-white dark:bg-boxdark'}`}>
-              Mês
-            </button>
-            <button
-              onClick={() => changePeriodHandler('yearly')}
-              className={`rounded px-3 py-1 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card  dark:text-white dark:hover:bg-boxdark  ${period === 'yearly' && 'bg-white dark:bg-boxdark'}`}>
-              Ano
-            </button>
-          </div>
-        </div>
       </div>
 
-      <div className="flex w-full flex-col items-end justify-end">
-        <span className="text-md mr-5 mt-4 font-medium">{dateRange}</span>
-        <div id="MonthInputsAndOutputs" className="-mx-5 h-[355px] w-[105%]">
+      <div className="flex w-full flex-col">
+        <div id="InputsVersusOutputs" className="-mx-5 h-[355px] w-[105%]">
           <ReactApexChart options={options} series={state.series} type="area" width="100%" height="100%" />
         </div>
       </div>
@@ -211,4 +185,4 @@ const MonthInputsAndOutputs: React.FC = () => {
   );
 };
 
-export default MonthInputsAndOutputs;
+export default InputsVersusOutputs;

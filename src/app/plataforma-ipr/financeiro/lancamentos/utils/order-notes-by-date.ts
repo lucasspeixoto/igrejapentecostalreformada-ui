@@ -18,7 +18,6 @@ function getDayFromDate(note: FinanceNote): number {
  */
 export function orderNotesByDate(financesNotes: FinanceNote[]): FinanceNote[] {
   return Object.values(financesNotes).sort(
-    (firstNote, secondNote) =>
-      getDayFromDate(secondNote) - getDayFromDate(firstNote)
+    (firstNote, secondNote) => getDayFromDate(secondNote) - getDayFromDate(firstNote)
   );
 }

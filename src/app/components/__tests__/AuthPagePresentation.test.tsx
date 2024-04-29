@@ -11,9 +11,7 @@ describe('AuthPagePresentation', () => {
     const text = '(Rm 1.16,17)';
     render(<AuthPagePresentation />);
 
-    const myTestElement = screen.getByText(
-      (_, element) => element!.textContent === text
-    );
+    const myTestElement = screen.getByText((_, element) => element!.textContent === text);
 
     expect(myTestElement).toBeInTheDocument();
   });

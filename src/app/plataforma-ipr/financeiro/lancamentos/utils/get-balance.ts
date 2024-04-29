@@ -8,8 +8,7 @@ import type { FinanceNote } from '../types/finance-note';
  */
 export function getMonthBalance(notes: FinanceNote[]): number {
   return notes.reduce((accumulator, currentValue) => {
-    const increment =
-      currentValue.type === 'C' ? currentValue.value : -currentValue.value;
+    const increment = currentValue.type === 'C' ? currentValue.value : -currentValue.value;
     return accumulator + increment;
   }, 0);
 }

@@ -9,6 +9,4 @@ export const createSupplementaryEducationFormSchema = z.object({
     .or(z.literal('')),
 });
 
-export type CreateSupplementaryEducationFormData = z.infer<
-  typeof createSupplementaryEducationFormSchema
->;
+export type CreateSupplementaryEducationFormData = z.infer<typeof createSupplementaryEducationFormSchema>;
