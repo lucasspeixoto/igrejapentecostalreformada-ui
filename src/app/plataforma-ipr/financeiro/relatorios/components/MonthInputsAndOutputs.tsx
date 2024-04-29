@@ -203,7 +203,7 @@ const MonthInputsAndOutputs: React.FC = () => {
 
       <div className="flex w-full flex-col items-end justify-end">
         <span className="text-md mr-5 mt-4 font-medium">{dateRange}</span>
-        <div id="MonthInputsAndOutputs" className="-ml-5 h-[355px] w-[105%] p-0">
+        <div id="MonthInputsAndOutputs" className="-mx-5 h-[355px] w-[105%]">
           <ReactApexChart options={options} series={state.series} type="area" width="100%" height="100%" />
         </div>
       </div>

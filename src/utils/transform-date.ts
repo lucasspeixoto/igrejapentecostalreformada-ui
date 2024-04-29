@@ -1,6 +1,5 @@
+import { Months } from '@relatorios/constants/months';
 import type { Timestamp } from 'firebase/firestore';
-
-import { Months } from '@/app/plataforma-ipr/financeiro/relatorios/constants/months';
 
 /**
  * @status: Tested
@@ -37,8 +36,11 @@ export const shortDateConvert = (date: string | null): string => {
   return '--/--';
 };
 
-/*
- ** @status: Tested
+/**
+ * Returns a human-friendly representation of a Firebase Firestore timestamp.
+ *
+ * @param timestamp - A Firebase Firestore timestamp.
+ * @returns A string representation of the timestamp in the format "MM/DD/YYYY".
  */
 export function formatFirebaseTimestampDate(timestamp: Timestamp) {
   const date = new Date(timestamp.seconds * 1000);
@@ -49,6 +51,12 @@ export function formatFirebaseTimestampDate(timestamp: Timestamp) {
   return `${day}/${month}/${year}`;
 }
 
+/**
+ * Returns an object containing the start and end dates of the current week.
+ *
+ * @returns An object with `start` and `end` properties, each of which is a
+ * Date object representing the start and end of the current week, respectively.
+ */
 export function getStartAndEndOfWeek(): { start: Date; end: Date } {
   const currentDate = new Date();
 
@@ -61,6 +69,12 @@ export function getStartAndEndOfWeek(): { start: Date; end: Date } {
   return { start: startDate, end: endDate };
 }
 
+/**
+ * Returns the start and end dates of the current month.
+ *
+ * @returns An object with `start` and `end` properties, each of which is a
+ * Date object representing the start and end of the current month, respectively.
+ */
 export function getStartAndEndOfMonth() {
   const currentDate = new Date();
 
@@ -73,6 +87,22 @@ export function getStartAndEndOfMonth() {
   return { start: startDate, end: endDate };
 }
 
+/**
+ * Returns the month description from the month index.
+ *
+ * @param date - The date object.
+ * @returns The month description.
+ */
 export function getMonthDescriptionFromMonthIndex(date: Date): string {
   return Months[(date.getMonth() + 1).toString().padStart(2, '0')];
+}
+
+/**
+ * Returns the day description from the date.
+ *
+ * @param date - The date object.
+ * @returns The day description.
+ */
+export function getDayDescriptionFomDate(date: Date): string {
+  return date.getDate().toString().padStart(2, '0');
 }
