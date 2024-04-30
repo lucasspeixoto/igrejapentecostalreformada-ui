@@ -1,152 +1,17 @@
 'use client';
 
-import type { ApexOptions } from 'apexcharts';
+import { INPUTS_VERSUS_OUTPUTS_CHART_OPTIONS } from '@relatorios/constants/inputs-vs-outputs-chart-options';
 import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
+import React from 'react';
 
-import useFinance from '../../../store/useFinance';
+import { useFinanceReportsContext } from '../../providers/FinanceReportsProvider';
 
 const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
 
-const options: ApexOptions = {
-  legend: {
-    show: false,
-    position: 'top',
-    horizontalAlign: 'left',
-  },
-  colors: ['#3C50E0', '#FF6766'],
-  chart: {
-    // events: {
-    //   beforeMount: (chart) => {
-    //     chart.windowResizeHandler();
-    //   },
-    // },
-    fontFamily: 'Satoshi, sans-serif',
-    height: 335,
-    type: 'area',
-    dropShadow: {
-      enabled: true,
-      color: '#623CEA14',
-      top: 10,
-      blur: 4,
-      left: 0,
-      opacity: 0.1,
-    },
-
-    toolbar: {
-      show: false,
-    },
-  },
-  responsive: [
-    {
-      breakpoint: 1024,
-      options: {
-        chart: {
-          height: 300,
-        },
-      },
-    },
-    {
-      breakpoint: 1366,
-      options: {
-        chart: {
-          height: 350,
-        },
-      },
-    },
-  ],
-  stroke: {
-    width: [2, 2],
-    curve: 'straight',
-  },
-  // labels: {
-  //   show: false,
-  //   position: "top",
-  // },
-  grid: {
-    xaxis: {
-      lines: {
-        show: true,
-      },
-    },
-    yaxis: {
-      lines: {
-        show: true,
-      },
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  markers: {
-    size: 4,
-    colors: '#fff',
-    strokeColors: ['#3C50E0', '#FF6766'],
-    strokeWidth: 3,
-    strokeOpacity: 0.9,
-    strokeDashArray: 0,
-    fillOpacity: 1,
-    discrete: [],
-    hover: {
-      size: undefined,
-      sizeOffset: 5,
-    },
-  },
-  xaxis: {
-    type: 'category',
-    categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-  },
-  yaxis: {
-    title: {
-      style: {
-        fontSize: '0px',
-      },
-    },
-    labels: {
-      style: {
-        colors: ['#333A48'],
-        fontSize: '12px',
-        fontFamily: 'Helvetica, Arial, sans-serif',
-        fontWeight: 400,
-        cssClass: 'apexcharts-yaxis-label',
-      },
-    },
-    min: 0,
-    max: 10000,
-  },
-};
-
-interface InputsVersusOutputsState {
-  series: {
-    name: string;
-    data: number[];
-  }[];
-}
-
 const InputsVersusOutputs: React.FC = () => {
-  const reportsReferenceYear = useFinance(state => state.reportsReferenceYear);
-
-  const [state, setState] = useState<InputsVersusOutputsState>({
-    series: [
-      {
-        name: 'Entradas',
-        data: [4850, 7850, 3500, 6580, 5500, 2700, 4700, 5900, 8450, 7850, 6020, 5890],
-      },
-
-      {
-        name: 'Saídas',
-        data: [3025, 5000, 4280, 3800, 5005, 4000, 2950, 5700, 5420, 4200, 4050, 4150],
-      },
-    ],
-  });
+  const { inputsVersusOutputsState, isLoadingFinanceNotes } = useFinanceReportsContext();
 
   // NextJS Requirement
   const isWindowAvailable = () => typeof window !== 'undefined';
@@ -176,11 +41,31 @@ const InputsVersusOutputs: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex w-full flex-col">
-        <div id="InputsVersusOutputs" className="-mx-5 h-[355px] w-[105%]">
-          <ReactApexChart options={options} series={state.series} type="area" width="100%" height="100%" />
+      {!isLoadingFinanceNotes ? (
+        <>
+          <div className="flex w-full flex-col">
+            {inputsVersusOutputsState ? (
+              <div id="InputsVersusOutputs" className="-mx-5 h-[355px] w-[105%]">
+                <ReactApexChart
+                  options={INPUTS_VERSUS_OUTPUTS_CHART_OPTIONS}
+                  series={inputsVersusOutputsState!.series}
+                  type="area"
+                  width="100%"
+                  height="100%"
+                />
+              </div>
+            ) : null}
+          </div>
+        </>
+      ) : (
+        <div className="flex w-full flex-col">
+          <div className="-mx-5 h-[355px] w-[105%]">
+            <div className="flex h-full items-center justify-center bg-white dark:bg-boxdark">
+              <div className="size-16 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"></div>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

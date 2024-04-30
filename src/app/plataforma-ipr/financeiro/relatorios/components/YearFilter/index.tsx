@@ -7,24 +7,30 @@ import React from 'react';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
 
+import { useFinanceReportsContext } from '../../providers/FinanceReportsProvider';
+
 const YearFilter: React.FC = () => {
   const setReportsReferenceYear = useFinance(state => state.setReportsReferenceYear);
 
   const reportsReferenceYear = useFinance(state => state.reportsReferenceYear);
 
+  const { updateFinanceNotesInfo } = useFinanceReportsContext();
+
   const years = React.useMemo(() => {
     return generateYearList(2020);
   }, []);
 
-  const onChangeSelectedDate = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChangeSelectedYear = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setReportsReferenceYear(+event.target.value);
+
+    updateFinanceNotesInfo();
   };
 
   return (
     <div className="relative z-20 w-auto max-w-[120px] bg-transparent dark:bg-form-input">
       <select
         value={reportsReferenceYear}
-        onChange={onChangeSelectedDate}
+        onChange={onChangeSelectedYear}
         className="relative z-20 w-full cursor-pointer appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
         <option disabled>Ano....</option>
         {React.Children.toArray(years.map(year => <option value={year}>{year}</option>))}

@@ -42,7 +42,7 @@ const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({ noteI
 
     financeReportsContext.updateLoadingFinanceReports(false);
 
-    financeReportsContext.updateIsDataUpdatedInfo();
+    financeReportsContext.updateFinanceReportsInfo();
   };
 
   const onConfirmDeleteNote = async () => {

@@ -103,7 +103,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
 
     await updateFinanceReportsTotalBalance(valueToUpdateBalance);
 
-    financeReportsContext.updateIsDataUpdatedInfo();
+    financeReportsContext.updateFinanceReportsInfo();
   };
 
   const updateFinanceNoteHandler = async (formData: UpdateFinanceNoteFormData) => {

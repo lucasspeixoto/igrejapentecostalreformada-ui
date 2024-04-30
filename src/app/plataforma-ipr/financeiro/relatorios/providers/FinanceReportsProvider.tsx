@@ -1,21 +1,39 @@
 'use client';
 
+import useFinanceNotes from '@financeiro/store/useFinance';
+import { getFinanceNotesDocumentsByYear } from '@lancamentos/lib/firebase/get-finance-notes';
 import { getFinanceReportsDocuments } from '@relatorios/lib/firebase/get-finance-reports';
 import type { FinanceReport } from '@relatorios/types/finance-report';
 import React from 'react';
 
-const initialValues = {
-  financeReport: null,
-  isLoadingFinanceReports: false,
-  updateLoadingFinanceReports: () => {},
-  updateIsDataUpdatedInfo: () => {},
-};
+import type { InputsVersusOutputsState } from '../types/inputs-versus-output-state';
+import {
+  computeInputsAndOutputsValuesInAYear,
+  createInputsVersusOutputsState,
+} from '../utils/inputs-and-outputs-computes';
 
 type FinanceReportsContextType = {
   financeReport: FinanceReport | null;
   isLoadingFinanceReports: boolean;
   updateLoadingFinanceReports: (isLoading: boolean) => void;
-  updateIsDataUpdatedInfo: () => void;
+  updateFinanceReportsInfo: () => void;
+
+  inputsVersusOutputsState: InputsVersusOutputsState | null;
+  isLoadingFinanceNotes: boolean;
+  updateLoadingFinanceNotes: (isLoading: boolean) => void;
+  updateFinanceNotesInfo: () => void;
+};
+
+const initialValues = {
+  financeReport: null,
+  isLoadingFinanceReports: false,
+  updateLoadingFinanceReports: () => {},
+  updateFinanceReportsInfo: () => {},
+
+  inputsVersusOutputsState: null,
+  isLoadingFinanceNotes: false,
+  updateLoadingFinanceNotes: () => {},
+  updateFinanceNotesInfo: () => {},
 };
 
 export const FinanceReportsContext = React.createContext<FinanceReportsContextType>(initialValues);
@@ -26,19 +44,34 @@ export const FinanceReportsContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [financeReport, setFinanceReport] = React.useState<FinanceReport | null>(null);
-
-  const [isDataUpdated, setIsDataUpdated] = React.useState(false);
-
+  const [isFinanceReportDataUpdated, setIsFinanceReportDataUpdated] = React.useState(false);
   const [isLoadingFinanceReports, setIsLoadingFinanceReports] = React.useState(false);
+
+  const [inputsVersusOutputsState, setInputsVersusOutputsState] =
+    React.useState<InputsVersusOutputsState | null>(null);
+
+  const [isFinanceNotesDataUpdated, setIsFinanceNotesDataUpdated] = React.useState(false);
+  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(false);
+
+  const selectedReportsReferenceYear = useFinanceNotes(state => state.reportsReferenceYear);
 
   const updateLoadingFinanceReports = (isLoading: boolean) => {
     setIsLoadingFinanceReports(isLoading);
   };
 
-  const updateIsDataUpdatedInfo = () => {
-    setIsDataUpdated(state => !state);
+  const updateLoadingFinanceNotes = (isLoading: boolean) => {
+    setIsLoadingFinanceNotes(isLoading);
   };
 
+  const updateFinanceReportsInfo = () => {
+    setIsFinanceReportDataUpdated(state => !state);
+  };
+
+  const updateFinanceNotesInfo = () => {
+    setIsFinanceNotesDataUpdated(state => !state);
+  };
+
+  /* Finance Reports */
   React.useEffect(() => {
     const financeReportsData = getFinanceReportsDocuments();
 
@@ -54,7 +87,33 @@ export const FinanceReportsContextProvider: React.FC<{
       });
 
     updateLoadingFinanceReports(false);
-  }, [isDataUpdated]);
+  }, [isFinanceReportDataUpdated]);
+
+  /* Finance Notes */
+  React.useEffect(() => {
+    updateLoadingFinanceNotes(true);
+
+    const year = +selectedReportsReferenceYear;
+
+    const financeNotesData = getFinanceNotesDocumentsByYear(year);
+
+    financeNotesData
+      .then(data => {
+        if (data) {
+          const { inputs, outputs } = computeInputsAndOutputsValuesInAYear(data.financeNotesData);
+          const series = createInputsVersusOutputsState(inputs, outputs);
+
+          setInputsVersusOutputsState(series);
+        }
+      })
+      .catch(error => {
+        throw new Error(error.message);
+      });
+
+    setTimeout(() => {
+      updateLoadingFinanceNotes(false);
+    }, 1000);
+  }, [isFinanceNotesDataUpdated]);
 
   return (
     <FinanceReportsContext.Provider
@@ -62,7 +121,11 @@ export const FinanceReportsContextProvider: React.FC<{
         financeReport,
         isLoadingFinanceReports,
         updateLoadingFinanceReports,
-        updateIsDataUpdatedInfo,
+        updateFinanceReportsInfo,
+        inputsVersusOutputsState,
+        isLoadingFinanceNotes,
+        updateLoadingFinanceNotes,
+        updateFinanceNotesInfo,
       }}>
       {children}
     </FinanceReportsContext.Provider>

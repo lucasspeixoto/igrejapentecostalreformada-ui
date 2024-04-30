@@ -1,6 +1,6 @@
 'use client';
 
-import { getFinanceNotesDocuments } from '@lancamentos/lib/firebase/get-finance-notes';
+import { getFinanceNotesDocumentsByMonthAndYear } from '@lancamentos/lib/firebase/get-finance-notes';
 import type { FinanceNote } from '@lancamentos/types/finance-note';
 import React from 'react';
 
@@ -49,13 +49,12 @@ export const FinanceNotesContextProvider: React.FC<{
     const month = +selectedFinanceDetailDate.split('/')[0];
     const year = +selectedFinanceDetailDate.split('/')[1];
 
-    const financeNotesData = getFinanceNotesDocuments(month, year);
+    const financeNotesData = getFinanceNotesDocumentsByMonthAndYear(month, year);
 
     financeNotesData
       .then(data => {
         if (data) {
           const sortedNotes = orderNotesByDate(data.financeNotesData);
-
           setFinanceNotes(sortedNotes);
         }
       })

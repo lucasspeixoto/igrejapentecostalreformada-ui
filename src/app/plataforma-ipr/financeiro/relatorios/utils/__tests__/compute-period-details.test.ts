@@ -8,10 +8,9 @@ import { computePeriodDetail } from '../compute-period-detail';
 
 describe('computePeriodDetail', () => {
   it('should return the current year for the "yearly" period', () => {
-    const date = new Date();
-    const year = date.getFullYear();
+    const year = 2024;
 
-    const result = computePeriodDetail('yearly');
+    const result = computePeriodDetail('yearly', year);
 
     expect(result).toEqual(year.toString());
   });
@@ -23,7 +22,7 @@ describe('computePeriodDetail', () => {
     const startMonth = getMonthDescriptionFromMonthIndex(start);
     const endMonth = getMonthDescriptionFromMonthIndex(end);
 
-    const result = computePeriodDetail('weekly');
+    const result = computePeriodDetail('weekly', start.getFullYear());
 
     expect(result).toEqual(
       `${startDay.toString().padStart(2, '0')}/${startMonth} - ${endDay.toString().padStart(2, '0')}/${endMonth}`
@@ -37,7 +36,7 @@ describe('computePeriodDetail', () => {
     const startMonth = getMonthDescriptionFromMonthIndex(start);
     const endMonth = getMonthDescriptionFromMonthIndex(end);
 
-    const result = computePeriodDetail('monthly');
+    const result = computePeriodDetail('monthly', start.getFullYear());
 
     expect(result).toEqual(
       `${startDay.toString().padStart(2, '0')}/${startMonth} - ${endDay.toString().padStart(2, '0')}/${endMonth}`

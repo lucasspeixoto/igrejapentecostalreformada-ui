@@ -65,7 +65,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
 
     await updateFinanceReportsTotalBalance(valueToUpdateBalance);
 
-    financeReportsContext.updateIsDataUpdatedInfo();
+    financeReportsContext.updateFinanceReportsInfo();
   };
 
   const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
