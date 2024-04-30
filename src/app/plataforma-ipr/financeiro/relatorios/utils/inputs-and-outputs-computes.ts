@@ -9,6 +9,12 @@ type InputsAndOutputs = {
   outputs: number[];
 };
 
+/**
+ * Computes the inputs and outputs values for each month in a given year.
+ *
+ * @param data - The finance notes data for the year.
+ * @returns An object containing the inputs and outputs values for each month.
+ */
 export function computeInputsAndOutputsValuesInAYear(data: FinanceNote[]): InputsAndOutputs {
   const inputs = [];
   const outputs = [];
@@ -35,6 +41,13 @@ export function computeInputsAndOutputsValuesInAYear(data: FinanceNote[]): Input
   return { inputs, outputs };
 }
 
+/**
+ * Creates an InputsVersusOutputsState object with the given inputs and outputs.
+ *
+ * @param inputs - The input values for each month.
+ * @param outputs - The output values for each month.
+ * @returns The InputsVersusOutputsState object.
+ */
 export function createInputsVersusOutputsState(
   inputs: number[],
   outputs: number[]

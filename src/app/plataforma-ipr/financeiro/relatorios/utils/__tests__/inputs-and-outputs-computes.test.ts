@@ -1,6 +1,22 @@
-import { createInputsVersusOutputsState } from '../inputs-and-outputs-computes';
+import { MOCKED_FINANCE_NOTES2 } from '@lancamentos/__mocks__/finance-notes';
+
+import {
+  computeInputsAndOutputsValuesInAYear,
+  createInputsVersusOutputsState,
+} from '../inputs-and-outputs-computes';
 
 describe('Inputs And Outputs Computes', () => {
+  describe('computeInputsAndOutputsValuesInAYear', () => {
+    it('should return the correct inputs and outputs for a given year of finance notes', () => {
+      const financeNotes = MOCKED_FINANCE_NOTES2;
+
+      const { inputs, outputs } = computeInputsAndOutputsValuesInAYear(financeNotes);
+
+      expect(inputs).toEqual([6900, 4700, 12702, 11950, 0, 0, 0, 0, 0, 0, 0, 0]);
+      expect(outputs).toEqual([8430, 9200, 3800, 9285, 0, 0, 0, 0, 0, 0, 0, 0]);
+    });
+  });
+
   describe('createInputsVersusOutputsState', () => {
     it('should handle an array of inputs and an array of outputs', () => {
       const inputs = [1, 2, 3];

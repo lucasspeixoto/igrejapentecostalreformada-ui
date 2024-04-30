@@ -101,6 +101,7 @@ export const FinanceReportsContextProvider: React.FC<{
       .then(data => {
         if (data) {
           const { inputs, outputs } = computeInputsAndOutputsValuesInAYear(data.financeNotesData);
+
           const series = createInputsVersusOutputsState(inputs, outputs);
 
           setInputsVersusOutputsState(series);
