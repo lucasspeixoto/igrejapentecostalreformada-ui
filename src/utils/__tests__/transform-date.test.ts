@@ -99,11 +99,11 @@ describe('Transform Date tests', () => {
 
   describe('getDayDescriptionFomDate', () => {
     it('should return the day description from the date', () => {
-      const date1 = new Date('2023-02-11');
-      const date2 = new Date('2023-02-05');
+      const date1 = new Date(2024, 4, 1); // 01/05/2024;
+      const date2 = new Date(2024, 4, 11);
 
-      expect(getDayDescriptionFomDate(date1)).toEqual('10');
-      expect(getDayDescriptionFomDate(date2)).toEqual('04');
+      expect(getDayDescriptionFomDate(date1)).toEqual('01');
+      expect(getDayDescriptionFomDate(date2)).toEqual('11');
     });
   });
 });
