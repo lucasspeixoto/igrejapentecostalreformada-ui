@@ -102,8 +102,8 @@ describe('Transform Date tests', () => {
       const date1 = new Date('2023-02-11');
       const date2 = new Date('2023-02-05');
 
-      expect(getDayDescriptionFomDate(date1)).toBe('10');
-      expect(getDayDescriptionFomDate(date2)).toBe('04');
+      expect(getDayDescriptionFomDate(date1)).toEqual('10');
+      expect(getDayDescriptionFomDate(date2)).toEqual('04');
     });
   });
 });
