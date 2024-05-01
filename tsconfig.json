@@ -48,6 +48,9 @@
       "@signin/*": [
         "./src/app/login/*"
       ],
+      "@membros/*": [
+        "./src/app/plataforma-ipr/membros/*"
+      ],
       "@financeiro/*": [
         "./src/app/plataforma-ipr/financeiro/*"
       ],
