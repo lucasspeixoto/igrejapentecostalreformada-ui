@@ -111,10 +111,8 @@ export const FinanceReportsContextProvider: React.FC<{
         throw new Error(error.message);
       });
 
-    setTimeout(() => {
-      updateLoadingFinanceNotes(false);
-    }, 1000);
-  }, [isFinanceNotesDataUpdated]);
+    setTimeout(() => updateLoadingFinanceNotes(false), 1000);
+  }, [isFinanceReportDataUpdated, isFinanceNotesDataUpdated]);
 
   return (
     <FinanceReportsContext.Provider
