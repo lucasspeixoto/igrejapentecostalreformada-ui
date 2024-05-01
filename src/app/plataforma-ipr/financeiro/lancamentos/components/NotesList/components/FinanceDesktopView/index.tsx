@@ -1,4 +1,4 @@
-import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
+import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
 import React from 'react';
 import { FaEye } from 'react-icons/fa';
 
@@ -18,24 +18,12 @@ const FinanceDesktopView = () => {
         <table className="w-full table-auto">
           <thead>
             <tr className="bg-gray-2 text-left dark:bg-meta-4">
-              <th className="w-auto p-4 font-medium text-black dark:text-white">
-                Autor
-              </th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">
-                Inclusão
-              </th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">
-                Tipo
-              </th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">
-                Categoria
-              </th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">
-                Valor (R$)
-              </th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">
-                Ações
-              </th>
+              <th className="w-auto p-4 font-medium text-black dark:text-white">Autor</th>
+              <th className="w-auto p-4 font-medium text-black dark:text-white">Inclusão</th>
+              <th className="w-auto p-4 font-medium text-black dark:text-white">Tipo</th>
+              <th className="w-auto p-4 font-medium text-black dark:text-white">Categoria</th>
+              <th className="w-auto p-4 font-medium text-black dark:text-white">Valor (R$)</th>
+              <th className="w-auto p-4 font-medium text-black dark:text-white">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -65,15 +53,11 @@ const FinanceDesktopView = () => {
                           )}
                         </>
                       </div>
-                      <p className="hidden text-black dark:text-white sm:block">
-                        {note.owner}
-                      </p>
+                      <p className="hidden text-black dark:text-white sm:block">{note.owner}</p>
                     </div>
                   </td>
                   <td className="w-auto border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                    <p className="text-black dark:text-white">
-                      {formatFirebaseTimestampDate(note.date)}
-                    </p>
+                    <p className="text-black dark:text-white">{formatFirebaseTimestampDate(note.date)}</p>
                   </td>
                   <td className="w-auto border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <p className="text-black dark:text-white">
@@ -85,22 +69,18 @@ const FinanceDesktopView = () => {
                     </p>
                   </td>
                   <td className="w-auto border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                    <p className="text-black dark:text-white">
-                      {note.category}
-                    </p>
+                    <p className="text-black dark:text-white">{note.category}</p>
                   </td>
                   <td className="w-auto border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <p className="text-black dark:text-white">{note.value}</p>
                   </td>
                   <td className="w-auto border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                     <div className="flex items-center space-x-3.5">
-                      <Tooltip
-                        className="hover:text-meta-3"
-                        text={note.description}>
+                      <Tooltip className="hover:text-meta-3" text={note.description}>
                         <FaEye size={18} />
                       </Tooltip>
                       <FinanceNoteUpdateAction noteId={note.id} />
-                      <FinanceNoteDeleteAction noteId={note.id} />
+                      <FinanceNoteDeleteAction noteId={note.id} value={note.value} type={note.type} />
                     </div>
                   </td>
                 </tr>

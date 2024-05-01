@@ -6,9 +6,7 @@ import type { FirebaseAuthError } from '@/types/firebase-auth-error';
 
 const auth = getAuth(firebase_app);
 
-const recoveryPasswordHandler = async (
-  email: string
-): Promise<{ error: FirebaseAuthError }> => {
+const recoveryPasswordHandler = async (email: string): Promise<{ error: FirebaseAuthError }> => {
   let error: FirebaseAuthError | null = null;
 
   try {

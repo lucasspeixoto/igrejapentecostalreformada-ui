@@ -6,10 +6,7 @@ import { getActualDate } from './get-actual-date';
  * @param startMonth - the month of the first date in the range (1-indexed)
  * @returns an array of dates in the specified range
  */
-export function generateDatesArray(
-  startYear: number,
-  startMonth: number
-): string[] {
+export function generateMonthAndYearList(startYear: number, startMonth: number): string[] {
   const datesArray = [];
 
   const currentDate = getActualDate();
@@ -27,4 +24,17 @@ export function generateDatesArray(
   }
 
   return datesArray.reverse();
+}
+
+export function generateYearList(startYear: number): number[] {
+  const years = [];
+
+  const currentDate = getActualDate();
+  const endYear = +currentDate.split('/')[1];
+
+  for (let year = startYear; year <= endYear; year += 1) {
+    years.push(year);
+  }
+
+  return years.reverse();
 }

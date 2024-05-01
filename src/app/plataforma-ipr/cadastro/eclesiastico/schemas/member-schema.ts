@@ -8,6 +8,4 @@ export const createEcclesiasticalMemberFormSchema = z.object({
   interests: z.string(),
 });
 
-export type CreateEcclesiasticalMemberFormData = z.infer<
-  typeof createEcclesiasticalMemberFormSchema
->;
+export type CreateEcclesiasticalMemberFormData = z.infer<typeof createEcclesiasticalMemberFormSchema>;

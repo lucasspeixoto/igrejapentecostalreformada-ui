@@ -35,9 +35,7 @@ const UserBio: React.FC = () => {
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar biografia. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar biografia. Tente novamente mais tarde ou contate admin.');
     } else {
       personalContext.updateIsDataUpdatedInfo();
 
@@ -54,16 +52,12 @@ const UserBio: React.FC = () => {
   return (
     <div className="h-full rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="flex justify-between border-b border-stroke px-7 py-4 dark:border-strokedark">
-        <h3 className="font-medium text-black dark:text-white">
-          Dados Pessoais
-        </h3>
+        <h3 className="font-medium text-black dark:text-white">Dados Pessoais</h3>
       </div>
       <div className="p-7">
         <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
           <div className="flex w-full flex-col items-start sm:w-1/2">
-            <label
-              className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="name">
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="name">
               Nome Completo
             </label>
             <div className="relative w-full">
@@ -83,9 +77,7 @@ const UserBio: React.FC = () => {
           </div>
 
           <div className="flex w-full flex-col items-start sm:w-1/2">
-            <label
-              className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="cellphone">
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="cellphone">
               Celular
             </label>
             <div className="relative w-full">
@@ -107,9 +99,7 @@ const UserBio: React.FC = () => {
 
         <div className="mb-5.5 flex w-full flex-col">
           <div className="flex w-full flex-col items-start">
-            <label
-              className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="email">
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="email">
               E-mail
             </label>
           </div>
@@ -131,9 +121,7 @@ const UserBio: React.FC = () => {
 
         <div className="mb-5.5">
           <div className="flex w-full flex-col items-start">
-            <label
-              className="mb-3 block text-sm font-medium text-black dark:text-white"
-              htmlFor="bio">
+            <label className="mb-3 block text-sm font-medium text-black dark:text-white" htmlFor="bio">
               Biografia
             </label>
           </div>

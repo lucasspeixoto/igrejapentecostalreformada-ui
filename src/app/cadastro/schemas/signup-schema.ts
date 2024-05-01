@@ -14,17 +14,9 @@ export const createUserFormSchema = z
           })
           .join(' ');
       }),
-    email: z
-      .string()
-      .min(1, 'E-mail é obrigatório!')
-      .email('E-mail em formato inválido!')
-      .toLowerCase(),
-    password: z
-      .string()
-      .min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
-    confirmedPassword: z
-      .string()
-      .min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
+    email: z.string().min(1, 'E-mail é obrigatório!').email('E-mail em formato inválido!').toLowerCase(),
+    password: z.string().min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
+    confirmedPassword: z.string().min(6, 'A senha precisa conter no mínimo 6 caracteres!'),
   })
   .refine(data => data.password === data.confirmedPassword, {
     message: 'As senhas precisam ser iguais',

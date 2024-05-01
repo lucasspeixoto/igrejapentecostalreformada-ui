@@ -43,9 +43,7 @@ const FamilyForm = () => {
     }
   }, [supplementaryContext.supplementaryData, isDataUpdated]);
 
-  const getSupplementaryUserContactDataHandler = async (
-    data: CreateSupplementaryFamilyFormData
-  ) => {
+  const getSupplementaryUserContactDataHandler = async (data: CreateSupplementaryFamilyFormData) => {
     setIsLoading(true);
 
     const supplementaryData = data;
@@ -55,9 +53,7 @@ const FamilyForm = () => {
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar dados de família. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar dados de família. Tente novamente mais tarde ou contate admin.');
     } else {
       supplementaryContext.updateIsDataUpdatedInfo();
 
@@ -82,9 +78,7 @@ const FamilyForm = () => {
               className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
               <option value="">Estado civil</option>
               {React.Children.toArray(
-                maritalStatusOptions.map(status => (
-                  <option value={status}>{status}</option>
-                ))
+                maritalStatusOptions.map(status => <option value={status}>{status}</option>)
               )}
             </select>
             <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -93,17 +87,13 @@ const FamilyForm = () => {
           </div>
           <>
             {errors.maritalStatus && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.maritalStatus.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.maritalStatus.message}</span>
             )}
           </>
         </div>
 
         <div className="w-full xl:w-1/2">
-          <label className="mb-2.5 block text-black dark:text-white">
-            Nome do Cônjuge
-          </label>
+          <label className="mb-2.5 block text-black dark:text-white">Nome do Cônjuge</label>
           <input
             type="text"
             placeholder="Digite o nome do Cônjuge"
@@ -112,18 +102,14 @@ const FamilyForm = () => {
           />
           <>
             {errors.spouseName && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.spouseName.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.spouseName.message}</span>
             )}
           </>
         </div>
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-2.5 block text-black dark:text-white">
-          Data de casamento
-        </label>
+        <label className="mb-2.5 block text-black dark:text-white">Data de casamento</label>
         <div className="relative">
           <input
             type="date"
@@ -134,9 +120,7 @@ const FamilyForm = () => {
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-2.5 block text-black dark:text-white">
-          Nome do pai
-        </label>
+        <label className="mb-2.5 block text-black dark:text-white">Nome do pai</label>
         <div className="relative">
           <input
             type="text"
@@ -145,18 +129,14 @@ const FamilyForm = () => {
           />
           <>
             {errors.fatherName && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.fatherName.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.fatherName.message}</span>
             )}
           </>
         </div>
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-2.5 block text-black dark:text-white">
-          Nome da mãe
-        </label>
+        <label className="mb-2.5 block text-black dark:text-white">Nome da mãe</label>
         <div className="relative">
           <input
             type="text"
@@ -166,9 +146,7 @@ const FamilyForm = () => {
           />
           <>
             {errors.motherName && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.motherName.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.motherName.message}</span>
             )}
           </>
         </div>

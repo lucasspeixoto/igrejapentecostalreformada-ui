@@ -7,11 +7,7 @@ import React from 'react';
 import { FirebaseAuthContextProvider } from '@/providers/FirebaseAuthContextProvider';
 import { ToastProvider } from '@/providers/ToastProvider';
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html suppressHydrationWarning lang="en">
       <body>

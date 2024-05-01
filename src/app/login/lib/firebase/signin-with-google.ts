@@ -1,11 +1,6 @@
 /* eslint-disable camelcase */
 import type { UserCredential } from 'firebase/auth';
-import {
-  getAdditionalUserInfo,
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from 'firebase/auth';
+import { getAdditionalUserInfo, getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 import firebase_app from '@/lib/firebase/config';
 

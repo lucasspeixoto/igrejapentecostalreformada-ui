@@ -20,9 +20,7 @@ function Input(
   return (
     <div className="flex w-full flex-col">
       <input ref={ref} className={inputClassName} {...props} />
-      {error && errorMessage && (
-        <span className="mt-1 text-xs text-danger">{errorMessage}</span>
-      )}
+      {error && errorMessage && <span className="mt-1 text-xs text-danger">{errorMessage}</span>}
     </div>
   );
 }

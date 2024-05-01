@@ -1,20 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  getFirestore,
-  query,
-} from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 
 import firebase_app from '@/lib/firebase/config';
 
 import type { FinanceNote } from '../../types/finance-note';
-import {
-  getMonthFromTimestampDate,
-  getYearFromTimestampDate,
-} from '../../utils/timestamp-to-date';
+import { getMonthFromTimestampDate, getYearFromTimestampDate } from '../../utils/timestamp-to-date';
 
 export const db = getFirestore(firebase_app);
 
@@ -22,7 +12,7 @@ export const financeNotesRef = collection(db, 'finance-notes');
 
 export const financeNotesQuery = query(financeNotesRef);
 
-export async function getFinanceNotesDocuments(month: number, year: number) {
+export async function getFinanceNotesDocumentsByMonthAndYear(month: number, year: number) {
   const financeNotesData: FinanceNote[] = [];
 
   let error = null;
@@ -38,6 +28,35 @@ export async function getFinanceNotesDocuments(month: number, year: number) {
       const financeNoteYear = getYearFromTimestampDate(financeNote.date);
 
       if (financeNoteMonth === month && financeNoteYear === year) {
+        const data = {
+          ...financeNote,
+          id: document.ref.id,
+        };
+
+        financeNotesData.push(data);
+      }
+    });
+  } catch (_error) {
+    error = _error;
+  }
+
+  return { financeNotesData, error };
+}
+
+export async function getFinanceNotesDocumentsByYear(year: number) {
+  const financeNotesData: FinanceNote[] = [];
+
+  let error = null;
+
+  try {
+    const docsSnap = await getDocs(financeNotesQuery);
+
+    docsSnap.forEach(document => {
+      const financeNote = document.data() as FinanceNote;
+
+      const financeNoteYear = getYearFromTimestampDate(financeNote.date);
+
+      if (financeNoteYear === year) {
         const data = {
           ...financeNote,
           id: document.ref.id,
@@ -86,11 +105,7 @@ export async function getDocument(_collection: string, id: string) {
   return { result, error };
 }
 
-export async function getCollection(
-  _collection: string,
-  id: string,
-  target: string
-) {
+export async function getCollection(_collection: string, id: string, target: string) {
   let result = null;
   let error = null;
 

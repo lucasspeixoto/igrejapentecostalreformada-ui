@@ -10,51 +10,28 @@ import CardDataStats from '@/components/CardDataStats';
 import type { UserData } from '@/types/user-data';
 
 const StatisticTotals: React.FC<{ userData: UserData[] }> = ({ userData }) => {
-  const authData = React.useMemo(
-    () => userData.map(user => user.auth),
-    [userData]
-  );
+  const authData = React.useMemo(() => userData.map(user => user.auth), [userData]);
 
-  const processData = React.useMemo(
-    () => userData.map(user => user.process),
-    [userData]
-  );
+  const processData = React.useMemo(() => userData.map(user => user.process), [userData]);
 
   const totalOfMembers = userData.length;
 
   const isRegisteredTotal = React.useMemo(() => {
-    return processData.reduce(
-      (element, process) => (process?.isRegistered ? element + 1 : element),
-      0
-    );
+    return processData.reduce((element, process) => (process?.isRegistered ? element + 1 : element), 0);
   }, [userData]);
 
   const isAdminTotal = React.useMemo(() => {
-    return authData.reduce(
-      (element, auth) => (auth.isAdmin ? element + 1 : element),
-      0
-    );
+    return authData.reduce((element, auth) => (auth.isAdmin ? element + 1 : element), 0);
   }, [userData]);
 
   const isNormalMember = React.useMemo(() => {
-    return authData.reduce(
-      (element, personal) =>
-        personal?.role === 'Irmão(ã)' ? element + 1 : element,
-      0
-    );
+    return authData.reduce((element, personal) => (personal?.role === 'Irmão(ã)' ? element + 1 : element), 0);
   }, [userData]);
 
   return (
     <>
-      <CardDataStats
-        title="Membros"
-        total={totalOfMembers.toString()}
-        rate="100%"
-        levelUp>
-        <HiOutlineUsers
-          size={22}
-          className="font-bold text-primary dark:text-white"
-        />
+      <CardDataStats title="Membros" total={totalOfMembers.toString()} rate="100%" levelUp>
+        <HiOutlineUsers size={22} className="font-bold text-primary dark:text-white" />
       </CardDataStats>
       <CardDataStats
         title="Completo"
@@ -62,10 +39,7 @@ const StatisticTotals: React.FC<{ userData: UserData[] }> = ({ userData }) => {
         rate={`${((isRegisteredTotal / totalOfMembers) * 100).toFixed(2)}%`}
         levelUp={isRegisteredTotal === totalOfMembers}
         levelDown={isRegisteredTotal !== totalOfMembers}>
-        <FaWpforms
-          size={22}
-          className="font-bold text-primary dark:text-white"
-        />
+        <FaWpforms size={22} className="font-bold text-primary dark:text-white" />
       </CardDataStats>
 
       <CardDataStats
@@ -74,10 +48,7 @@ const StatisticTotals: React.FC<{ userData: UserData[] }> = ({ userData }) => {
         rate={`${((isAdminTotal / totalOfMembers) * 100).toFixed(2)}%`}
         levelUp={isAdminTotal === totalOfMembers}
         levelDown={isAdminTotal !== totalOfMembers}>
-        <RiAdminLine
-          size={22}
-          className="font-bold text-primary dark:text-white"
-        />
+        <RiAdminLine size={22} className="font-bold text-primary dark:text-white" />
       </CardDataStats>
       <CardDataStats
         title="Sem Função"
@@ -85,10 +56,7 @@ const StatisticTotals: React.FC<{ userData: UserData[] }> = ({ userData }) => {
         rate={`${((isNormalMember / totalOfMembers) * 100).toFixed(2)}%`}
         levelUp={isNormalMember === totalOfMembers}
         levelDown={isNormalMember !== totalOfMembers}>
-        <IoManOutline
-          size={22}
-          className="font-bold text-primary dark:text-white"
-        />
+        <IoManOutline size={22} className="font-bold text-primary dark:text-white" />
       </CardDataStats>
     </>
   );

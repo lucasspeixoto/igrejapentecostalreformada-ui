@@ -44,9 +44,7 @@ const EducationForm = () => {
     }
   }, [supplementaryContext.supplementaryData, isDataUpdated]);
 
-  const getSupplementaryEducationDataHandler = async (
-    data: CreateSupplementaryEducationFormData
-  ) => {
+  const getSupplementaryEducationDataHandler = async (data: CreateSupplementaryEducationFormData) => {
     setIsLoading(true);
 
     const supplementaryData = data;
@@ -56,9 +54,7 @@ const EducationForm = () => {
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar dados de educação. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar dados de educação. Tente novamente mais tarde ou contate admin.');
     } else {
       supplementaryContext.updateIsDataUpdatedInfo();
 
@@ -82,9 +78,7 @@ const EducationForm = () => {
             className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
             <option value="">Selecione a escolaridade</option>
             {React.Children.toArray(
-              schoolingOptions.map(schooling => (
-                <option value={schooling}>{schooling}</option>
-              ))
+              schoolingOptions.map(schooling => <option value={schooling}>{schooling}</option>)
             )}
           </select>
           <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -93,17 +87,13 @@ const EducationForm = () => {
         </div>
         <>
           {errors.schooling && (
-            <span className="text-xs text-meta-1 dark:text-meta-7">
-              {errors.schooling.message}
-            </span>
+            <span className="text-xs text-meta-1 dark:text-meta-7">{errors.schooling.message}</span>
           )}
         </>
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-3 block text-black dark:text-white">
-          Profissão
-        </label>
+        <label className="mb-3 block text-black dark:text-white">Profissão</label>
         <div className="relative">
           <input
             type="text"
@@ -112,9 +102,7 @@ const EducationForm = () => {
           />
           <>
             {errors.profession && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.profession.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.profession.message}</span>
             )}
           </>
         </div>

@@ -7,9 +7,7 @@ const CheckboxFour = () => {
 
   return (
     <div>
-      <label
-        htmlFor="checkboxLabelFour"
-        className="flex cursor-pointer select-none items-center">
+      <label htmlFor="checkboxLabelFour" className="flex cursor-pointer select-none items-center">
         <div className="relative">
           <input
             type="checkbox"
@@ -23,12 +21,7 @@ const CheckboxFour = () => {
             className={`mr-4 flex size-5 items-center justify-center rounded-full border ${
               isChecked && 'border-primary'
             }`}>
-            <span
-              className={`size-2.5 rounded-full bg-transparent ${
-                isChecked && '!bg-primary'
-              }`}>
-              {' '}
-            </span>
+            <span className={`size-2.5 rounded-full bg-transparent ${isChecked && '!bg-primary'}`}> </span>
           </div>
         </div>
         Checkbox Text

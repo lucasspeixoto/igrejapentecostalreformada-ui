@@ -35,8 +35,7 @@ const ContactForm = () => {
 
   React.useEffect(() => {
     if (personalContext.personalData) {
-      const { name, sex, cellphone, telephone, birthday } =
-        personalContext.personalData;
+      const { name, sex, cellphone, telephone, birthday } = personalContext.personalData;
       reset({
         name,
         sex,
@@ -47,9 +46,7 @@ const ContactForm = () => {
     }
   }, [personalContext, isDataUpdated]);
 
-  const getPersonalUserContactDataHandler = async (
-    data: CreatePersonalContactFormData
-  ) => {
+  const getPersonalUserContactDataHandler = async (data: CreatePersonalContactFormData) => {
     setIsLoading(true);
 
     const { name, sex, cellphone, telephone, birthday } = data;
@@ -67,9 +64,7 @@ const ContactForm = () => {
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar dados de contato. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar dados de contato. Tente novamente mais tarde ou contate admin.');
     } else {
       personalContext.updateIsDataUpdatedInfo();
 
@@ -94,11 +89,7 @@ const ContactForm = () => {
           className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
         />
         <>
-          {errors.name && (
-            <span className="text-xs text-meta-1 dark:text-meta-7">
-              {errors.name.message}
-            </span>
-          )}
+          {errors.name && <span className="text-xs text-meta-1 dark:text-meta-7">{errors.name.message}</span>}
         </>
       </div>
 
@@ -119,11 +110,7 @@ const ContactForm = () => {
           </span>
         </div>
         <>
-          {errors.sex && (
-            <span className="text-xs text-meta-1 dark:text-meta-7">
-              {errors.sex.message}
-            </span>
-          )}
+          {errors.sex && <span className="text-xs text-meta-1 dark:text-meta-7">{errors.sex.message}</span>}
         </>
       </div>
 
@@ -140,17 +127,13 @@ const ContactForm = () => {
           />
           <>
             {errors.cellphone && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.cellphone.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.cellphone.message}</span>
             )}
           </>
         </div>
 
         <div className="w-full xl:w-1/2">
-          <label className="mb-2.5 block text-black dark:text-white">
-            Telefone
-          </label>
+          <label className="mb-2.5 block text-black dark:text-white">Telefone</label>
           <input
             type="text"
             placeholder="Digite seu telefone"
@@ -159,9 +142,7 @@ const ContactForm = () => {
           />
           <>
             {errors.telephone && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.telephone.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.telephone.message}</span>
             )}
           </>
         </div>

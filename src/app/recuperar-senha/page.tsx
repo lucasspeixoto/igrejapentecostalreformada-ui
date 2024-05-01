@@ -28,11 +28,7 @@ const RecoveryPassword: React.FC = () => {
                 <RecoveryPasswordForm />
 
                 <div className="mt-6 text-center">
-                  <RedirectLink
-                    text="Ja possui conta ?"
-                    textLink="Logar"
-                    route="/login"
-                  />
+                  <RedirectLink text="Ja possui conta ?" textLink="Logar" route="/login" />
                 </div>
               </div>
             </div>

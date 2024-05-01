@@ -1,11 +1,6 @@
 import type { IconSvgProps } from '@/types/icon';
 
-export const GoogleLogo: React.FC<IconSvgProps> = ({
-  size = 36,
-  width,
-  height,
-  ...props
-}) => (
+export const GoogleLogo: React.FC<IconSvgProps> = ({ size = 36, width, height, ...props }) => (
   <svg
     width={size || width}
     height={size || height}
@@ -39,12 +34,7 @@ export const GoogleLogo: React.FC<IconSvgProps> = ({
   </svg>
 );
 
-export const SpinnerLogo: React.FC<IconSvgProps> = ({
-  size = 36,
-  width,
-  height,
-  ...props
-}) => (
+export const SpinnerLogo: React.FC<IconSvgProps> = ({ size = 36, width, height, ...props }) => (
   <svg
     width={size || width}
     height={size || height}
@@ -64,12 +54,7 @@ export const SpinnerLogo: React.FC<IconSvgProps> = ({
   </svg>
 );
 
-export const SelectChevroletLogo: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => (
+export const SelectChevroletLogo: React.FC<IconSvgProps> = ({ size = 24, width, height, ...props }) => (
   <svg
     width={size || width}
     height={size || height}

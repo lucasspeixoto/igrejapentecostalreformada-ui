@@ -38,8 +38,7 @@ const BaptismForm = () => {
 
   React.useEffect(() => {
     if (ecclesiasticalContext.ecclesiasticalData) {
-      const { baptism, baptismDate, baptismShepherd } =
-        ecclesiasticalContext.ecclesiasticalData;
+      const { baptism, baptismDate, baptismShepherd } = ecclesiasticalContext.ecclesiasticalData;
       reset({
         baptism,
         baptismDate,
@@ -48,9 +47,7 @@ const BaptismForm = () => {
     }
   }, [ecclesiasticalContext.ecclesiasticalData, isDataUpdated]);
 
-  const getEcclesiasticalBaptismDataHandler = async (
-    data: CreateEcclesiasticalBaptismFormData
-  ) => {
+  const getEcclesiasticalBaptismDataHandler = async (data: CreateEcclesiasticalBaptismFormData) => {
     setIsLoading(true);
 
     const { error } = await addData('users', firebaseAuthContext.user?.uid!, {
@@ -58,9 +55,7 @@ const BaptismForm = () => {
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar dados eclesiásticos. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar dados eclesiásticos. Tente novamente mais tarde ou contate admin.');
     } else {
       ecclesiasticalContext.updateIsDataUpdatedInfo();
 
@@ -85,9 +80,7 @@ const BaptismForm = () => {
               className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
               <option value="">Selecione se é batizado</option>
               {React.Children.toArray(
-                baptismOption.map(baptism => (
-                  <option value={baptism}>{baptism}</option>
-                ))
+                baptismOption.map(baptism => <option value={baptism}>{baptism}</option>)
               )}
             </select>
             <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -97,9 +90,7 @@ const BaptismForm = () => {
         </div>
 
         <div className="w-full xl:w-1/2">
-          <label className="mb-2.5 block text-black dark:text-white">
-            Data de Batismo
-          </label>
+          <label className="mb-2.5 block text-black dark:text-white">Data de Batismo</label>
 
           <div className="relative">
             <input
@@ -109,9 +100,7 @@ const BaptismForm = () => {
             />
             <>
               {errors.baptismDate && (
-                <span className="text-xs text-meta-1 dark:text-meta-7">
-                  {errors.baptismDate.message}
-                </span>
+                <span className="text-xs text-meta-1 dark:text-meta-7">{errors.baptismDate.message}</span>
               )}
             </>
           </div>
@@ -119,9 +108,7 @@ const BaptismForm = () => {
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-2.5 block text-black dark:text-white">
-          Pastor de Batismo
-        </label>
+        <label className="mb-2.5 block text-black dark:text-white">Pastor de Batismo</label>
         <input
           type="text"
           placeholder="Digite o pastor de batismo"
@@ -130,9 +117,7 @@ const BaptismForm = () => {
         />
         <>
           {errors.baptismShepherd && (
-            <span className="text-xs text-meta-1 dark:text-meta-7">
-              {errors.baptismShepherd.message}
-            </span>
+            <span className="text-xs text-meta-1 dark:text-meta-7">{errors.baptismShepherd.message}</span>
           )}
         </>
       </div>

@@ -1,9 +1,6 @@
 import { Timestamp } from 'firebase/firestore';
 
-import {
-  getMonthFromTimestampDate,
-  getYearFromTimestampDate,
-} from '../timestamp-to-date';
+import { getMonthFromTimestampDate, getYearFromTimestampDate } from '../timestamp-to-date';
 
 describe('timestamp-utils', () => {
   describe('getYearFromTimestampDate', () => {

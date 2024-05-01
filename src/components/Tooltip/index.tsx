@@ -8,10 +8,7 @@ interface TooltipProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 const Tooltip: React.FC<TooltipProps> = ({ className, children, text }) => {
-  const compositeClassName = twMerge(
-    'group relative flex cursor-pointer justify-center',
-    className
-  );
+  const compositeClassName = twMerge('group relative flex cursor-pointer justify-center', className);
 
   return (
     <div className={compositeClassName}>

@@ -2,17 +2,11 @@ import { SupplementaryContextProvider } from '../complementar/providers/Suppleme
 import { EcclesiasticalContextProvider } from '../eclesiastico/providers/EcclesiasticalContextProvider';
 import { PersonalContextProvider } from '../pessoal/providers/PersonalContextProvider';
 
-const UserFormDataContextProviders = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const UserFormDataContextProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <PersonalContextProvider>
       <SupplementaryContextProvider>
-        <EcclesiasticalContextProvider>
-          {children}
-        </EcclesiasticalContextProvider>
+        <EcclesiasticalContextProvider>{children}</EcclesiasticalContextProvider>
       </SupplementaryContextProvider>
     </PersonalContextProvider>
   );

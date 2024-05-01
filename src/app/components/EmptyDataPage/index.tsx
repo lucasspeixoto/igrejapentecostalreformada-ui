@@ -7,19 +7,11 @@ type EmptyDataPageProps = {
   description: string;
 };
 
-const EmptyDataPage: React.FC<EmptyDataPageProps> = ({
-  title,
-  description,
-}) => {
+const EmptyDataPage: React.FC<EmptyDataPageProps> = ({ title, description }) => {
   return (
     <div className="flex w-auto flex-col items-center gap-2">
       {/* Image */}
-      <Image
-        src={'/no-data.svg'}
-        alt="Imagem Sem resultados"
-        width={300}
-        height={80}
-      />
+      <Image src={'/no-data.svg'} alt="Imagem Sem resultados" width={300} height={80} />
       {/* Title */}
       {title ? (
         <span

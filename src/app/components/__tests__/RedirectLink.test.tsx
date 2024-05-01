@@ -10,14 +10,7 @@ describe('RedirectLink', () => {
     const textLink = 'Logar';
     const route = '/login';
 
-    render(
-      <RedirectLink
-        data-testid="redirect-link"
-        text={text}
-        textLink={textLink}
-        route={route}
-      />
-    );
+    render(<RedirectLink data-testid="redirect-link" text={text} textLink={textLink} route={route} />);
 
     const redirectLinkElement = screen.getByText(text);
 

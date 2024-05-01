@@ -19,15 +19,13 @@ import UserUploadPhoto from '../UserUploadPhoto';
 const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
   const userContext = useAuthContext()!;
 
-  const [selectedPersonalUserData, setSelectedPersonalUserData] =
-    React.useState<Personal | null>(null);
+  const [selectedPersonalUserData, setSelectedPersonalUserData] = React.useState<Personal | null>(null);
 
-  const [selectedAuthUserData, setSelectedAuthUserData] =
-    React.useState<Auth | null>(null);
+  const [selectedAuthUserData, setSelectedAuthUserData] = React.useState<Auth | null>(null);
 
-  const [selectedProcessUserData, setSelectedProcessUserData] = React.useState<
-    Process | undefined
-  >(undefined);
+  const [selectedProcessUserData, setSelectedProcessUserData] = React.useState<Process | undefined>(
+    undefined
+  );
 
   const [isAdminOption, setIsAdminOption] = React.useState(false);
 
@@ -99,9 +97,7 @@ const UserContainer: React.FC<{ userId: string }> = ({ userId }) => {
                 role={selectedAuthUserData?.role!}
                 birthday={selectedPersonalUserData?.birthday!}
                 cardMemberDate={selectedPersonalUserData?.cardMemberDate!}
-                cardMemberEmission={
-                  selectedPersonalUserData?.cardMemberEmission!
-                }
+                cardMemberEmission={selectedPersonalUserData?.cardMemberEmission!}
               />
 
               <UserUploadPhoto

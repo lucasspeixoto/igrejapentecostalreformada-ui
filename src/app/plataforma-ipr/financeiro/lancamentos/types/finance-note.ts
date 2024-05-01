@@ -10,4 +10,5 @@ export type FinanceNote = {
   value: number;
   category: string;
   member: string;
+  paymentVoucher: string;
 };

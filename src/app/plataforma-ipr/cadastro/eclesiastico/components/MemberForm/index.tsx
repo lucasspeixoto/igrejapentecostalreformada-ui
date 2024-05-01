@@ -23,8 +23,7 @@ const MemberForm = () => {
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const { membershipOption, craftOption, interestsOption, communitiesOption } =
-    registerParameters;
+  const { membershipOption, craftOption, interestsOption, communitiesOption } = registerParameters;
 
   const {
     register,
@@ -37,8 +36,7 @@ const MemberForm = () => {
 
   React.useEffect(() => {
     if (ecclesiasticalContext.ecclesiasticalData) {
-      const { membership, craft, communities, interests } =
-        ecclesiasticalContext.ecclesiasticalData;
+      const { membership, craft, communities, interests } = ecclesiasticalContext.ecclesiasticalData;
       reset({
         membership,
         craft,
@@ -48,9 +46,7 @@ const MemberForm = () => {
     }
   }, [ecclesiasticalContext.ecclesiasticalData, isDataUpdated]);
 
-  const getEcclesiasticalMemberDataHandler = async (
-    data: CreateEcclesiasticalMemberFormData
-  ) => {
+  const getEcclesiasticalMemberDataHandler = async (data: CreateEcclesiasticalMemberFormData) => {
     setIsLoading(true);
 
     const { error } = await addData('users', firebaseAuthContext.user?.uid!, {
@@ -58,9 +54,7 @@ const MemberForm = () => {
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar dados eclesiásticos. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar dados eclesiásticos. Tente novamente mais tarde ou contate admin.');
     } else {
       ecclesiasticalContext.updateIsDataUpdatedInfo();
 
@@ -85,9 +79,7 @@ const MemberForm = () => {
               className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
               <option value="">Selecione o tipo de membro</option>
               {React.Children.toArray(
-                membershipOption.map(member => (
-                  <option value={member}>{member}</option>
-                ))
+                membershipOption.map(member => <option value={member}>{member}</option>)
               )}
             </select>
             <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -96,9 +88,7 @@ const MemberForm = () => {
           </div>
           <>
             {errors.membership && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.membership.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.membership.message}</span>
             )}
           </>
         </div>
@@ -112,9 +102,7 @@ const MemberForm = () => {
               {...register('craft')}
               className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
               <option value="">Selecione o ofício</option>
-              {React.Children.toArray(
-                craftOption.map(craft => <option value={craft}>{craft}</option>)
-              )}
+              {React.Children.toArray(craftOption.map(craft => <option value={craft}>{craft}</option>))}
             </select>
             <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
               <SelectChevroletLogo size={24} />
@@ -122,9 +110,7 @@ const MemberForm = () => {
           </div>
           <>
             {errors.craft && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">
-                {errors.craft.message}
-              </span>
+              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.craft.message}</span>
             )}
           </>
         </div>
@@ -140,9 +126,7 @@ const MemberForm = () => {
             className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
             <option value="">Selecione a igreja</option>
             {React.Children.toArray(
-              communitiesOption.map(community => (
-                <option value={community}>{community}</option>
-              ))
+              communitiesOption.map(community => <option value={community}>{community}</option>)
             )}
           </select>
           <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -151,9 +135,7 @@ const MemberForm = () => {
         </div>
         <>
           {errors.communities && (
-            <span className="text-xs text-meta-1 dark:text-meta-7">
-              {errors.communities.message}
-            </span>
+            <span className="text-xs text-meta-1 dark:text-meta-7">{errors.communities.message}</span>
           )}
         </>
       </div>
@@ -168,9 +150,7 @@ const MemberForm = () => {
             className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
             <option value="">Selecione o interesse</option>
             {React.Children.toArray(
-              interestsOption.map(interest => (
-                <option value={interest}>{interest}</option>
-              ))
+              interestsOption.map(interest => <option value={interest}>{interest}</option>)
             )}
           </select>
           <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -179,9 +159,7 @@ const MemberForm = () => {
         </div>
         <>
           {errors.interests && (
-            <span className="text-xs text-meta-1 dark:text-meta-7">
-              {errors.interests.message}
-            </span>
+            <span className="text-xs text-meta-1 dark:text-meta-7">{errors.interests.message}</span>
           )}
         </>
       </div>

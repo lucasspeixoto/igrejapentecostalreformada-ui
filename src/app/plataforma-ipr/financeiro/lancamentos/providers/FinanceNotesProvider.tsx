@@ -1,10 +1,12 @@
 'use client';
 
+import { getFinanceNotesDocumentsByMonthAndYear } from '@lancamentos/lib/firebase/get-finance-notes';
+import type { FinanceNote } from '@lancamentos/types/finance-note';
 import React from 'react';
 
-import { getFinanceNotesDocuments } from '../lancamentos/lib/firebase/get-finance-notes';
-import useFinanceNotes from '../lancamentos/store/useFinanceNotes';
-import type { FinanceNote } from '../lancamentos/types/finance-note';
+import useFinanceNotes from '@/app/plataforma-ipr/financeiro/store/useFinance';
+
+import { orderNotesByDate } from '../utils/order-notes-by-date';
 
 const initialValues = {
   financeNotes: [],
@@ -20,11 +22,9 @@ type FinanceNotesContextType = {
   updateIsDataUpdatedInfo: () => void;
 };
 
-export const FinanceNotesContext =
-  React.createContext<FinanceNotesContextType>(initialValues);
+export const FinanceNotesContext = React.createContext<FinanceNotesContextType>(initialValues);
 
-export const useFinanceNotesContext = () =>
-  React.useContext(FinanceNotesContext);
+export const useFinanceNotesContext = () => React.useContext(FinanceNotesContext);
 
 export const FinanceNotesContextProvider: React.FC<{
   children: React.ReactNode;
@@ -33,12 +33,9 @@ export const FinanceNotesContextProvider: React.FC<{
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] =
-    React.useState(false);
+  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(false);
 
-  const selectedFinanceDetailDate = useFinanceNotes(
-    state => state.referenceMonth
-  );
+  const selectedFinanceDetailDate = useFinanceNotes(state => state.notesListReferenceMonth);
 
   const updateLoadingFinanceNotes = (isLoading: boolean) => {
     setIsLoadingFinanceNotes(isLoading);
@@ -52,12 +49,13 @@ export const FinanceNotesContextProvider: React.FC<{
     const month = +selectedFinanceDetailDate.split('/')[0];
     const year = +selectedFinanceDetailDate.split('/')[1];
 
-    const financeNotesData = getFinanceNotesDocuments(month, year);
+    const financeNotesData = getFinanceNotesDocumentsByMonthAndYear(month, year);
 
     financeNotesData
       .then(data => {
         if (data) {
-          setFinanceNotes(data.financeNotesData);
+          const sortedNotes = orderNotesByDate(data.financeNotesData);
+          setFinanceNotes(sortedNotes);
         }
       })
       .catch(error => {

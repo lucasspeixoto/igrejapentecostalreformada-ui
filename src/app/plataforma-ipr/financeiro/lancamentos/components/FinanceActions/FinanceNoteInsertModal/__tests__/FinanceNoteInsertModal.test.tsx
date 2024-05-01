@@ -22,10 +22,7 @@ describe('FinanceNoteInsertModal', () => {
 
   beforeEach(() => {
     render(
-      <FinanceNoteInsertModal
-        onCancelInsertNote={onCancelInsertNote}
-        insertNoteHandler={insertNoteHandler}
-      />
+      <FinanceNoteInsertModal onCancelInsertNote={onCancelInsertNote} insertNoteHandler={insertNoteHandler} />
     );
   });
 

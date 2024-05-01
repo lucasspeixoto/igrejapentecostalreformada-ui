@@ -6,9 +6,7 @@ import UserFormDataContextProviders from './providers/UserFormDataContextProvide
 const CadastroLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <UserFormDataContextProviders>
-      <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-        {children}
-      </div>
+      <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">{children}</div>
     </UserFormDataContextProviders>
   );
 };

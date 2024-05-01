@@ -5,11 +5,7 @@ import firebase_app from '../config';
 
 export const db = getFirestore(firebase_app);
 
-export default async function addData(
-  collection: string,
-  id: string,
-  data: PartialWithFieldValue<unknown>
-) {
+export default async function addData(collection: string, id: string, data: PartialWithFieldValue<unknown>) {
   let result = null;
   let error = null;
 

@@ -41,9 +41,7 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
     });
 
     if (error) {
-      toast.error(
-        'Error ao salvar foto de membro. Tente novamente mais tarde ou contate admin.'
-      );
+      toast.error('Error ao salvar foto de membro. Tente novamente mais tarde ou contate admin.');
     } else {
       setIsLoadingUploadPhoto(false);
 
@@ -71,8 +69,7 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
     uploadTask.on(
       'state_changed',
       snapshot => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setLoadPhotoProgress(progress);
       },
       error => {
@@ -89,14 +86,9 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
   return (
     <div className="mt-5 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark md:w-full">
       <div className="flex items-start border-b border-stroke px-7 py-4 dark:border-strokedark">
-        <h3 className="font-medium text-black dark:text-white">
-          Alterar Foto de membro
-        </h3>
+        <h3 className="font-medium text-black dark:text-white">Alterar Foto de membro</h3>
       </div>
-      <div
-        className={`p-7 ${
-          isLoadingUploadPhoto ? 'opacity-40' : 'opacity-100'
-        }`}>
+      <div className={`p-7 ${isLoadingUploadPhoto ? 'opacity-40' : 'opacity-100'}`}>
         <div className="mb-4 flex items-center justify-start gap-3">
           <div className="relative size-14 rounded-full">
             {hasPhotoUploaded ? (
@@ -118,15 +110,11 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
             )}
           </div>
           <div className="flex flex-col items-start">
-            <span className="text-md mb-1.5 font-bold text-black dark:text-white">
-              Editar foto
-            </span>
+            <span className="text-md mb-1.5 font-bold text-black dark:text-white">Editar foto</span>
             {isLoadingUploadPhoto ? (
               <div className="flex flex-row items-center gap-1">
                 <span className="text-sm">Carregando... </span>
-                <span className="text-sm">
-                  ({loadPhotoProgress.toFixed(0)} %)
-                </span>
+                <span className="text-sm">({loadPhotoProgress.toFixed(0)} %)</span>
               </div>
             ) : (
               <span className="text-sm text-black dark:text-white">{name}</span>
@@ -149,8 +137,7 @@ const UserUploadPhoto: React.FC<UserUploadPhotoProps> = ({
               <LuUpload className="text-primary" />
             </span>
             <p>
-              <span className="text-primary">Clique para upload</span> ou
-              arraste e solte
+              <span className="text-primary">Clique para upload</span> ou arraste e solte
             </p>
             <p className="mt-1.5">SVG, PNG, JPG or GIF</p>
             <p>(max, 800 X 800px)</p>

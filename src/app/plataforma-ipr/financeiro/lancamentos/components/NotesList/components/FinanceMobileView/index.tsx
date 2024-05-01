@@ -1,4 +1,4 @@
-import { useFinanceNotesContext } from '@financeiro/providers/FinanceNotesProvider';
+import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
 import React from 'react';
 
 import Image from '@/components/Image';
@@ -38,9 +38,7 @@ const FinanceMobileView = () => {
                 </>
 
                 <div className="flex flex-col">
-                  <p className="text-lg font-semibold text-primary dark:text-white">
-                    {note.owner}
-                  </p>
+                  <p className="text-lg font-semibold text-primary dark:text-white">{note.owner}</p>
                   <p className="text-md font-medium text-meta-3 dark:text-white">
                     {formatFirebaseTimestampDate(note.date)}
                   </p>
@@ -65,7 +63,7 @@ const FinanceMobileView = () => {
                 </div>
                 <div className="flex gap-2">
                   <FinanceNoteUpdateAction noteId={note.id} />
-                  <FinanceNoteDeleteAction noteId={note.id} />
+                  <FinanceNoteDeleteAction noteId={note.id} type={note.type} value={note.value} />
                 </div>
               </div>
             </div>

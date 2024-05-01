@@ -1,8 +1,8 @@
+'use client';
+
 /* eslint-disable max-len */
 /* eslint-disable tailwindcss/classnames-order */
 /* eslint-disable prettier/prettier */
-
-'use client';
 
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -12,7 +12,7 @@ import Loader from '@/components/common/Loader';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 
-import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
+import { useFinanceNotesContext } from '../../providers/FinanceNotesProvider';
 import FinanceDesktopView from './components/FinanceDesktopView';
 import FinanceMobileView from './components/FinanceMobileView';
 import TableHeaderInfo from './components/TableHeaderInfo';
@@ -43,7 +43,7 @@ const NotesList: React.FC = () => {
   return (
     <>
       {isAdminOption ? (
-        <div className="">
+        <>
           <TableHeaderInfo />
 
           <div className="pb-10">
@@ -55,7 +55,6 @@ const NotesList: React.FC = () => {
                   <>
                     {isMobileSize ? (
                       <FinanceMobileView />
-                      
                     ) : (
                       <FinanceDesktopView />
                     )}
@@ -66,7 +65,7 @@ const NotesList: React.FC = () => {
               </>
             )}
           </div>
-        </div>
+        </>
       ) : null}
     </>
   );

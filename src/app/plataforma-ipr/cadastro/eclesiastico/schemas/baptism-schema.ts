@@ -10,6 +10,4 @@ export const createEcclesiasticalBaptismFormSchema = z.object({
     .or(z.literal('')),
 });
 
-export type CreateEcclesiasticalBaptismFormData = z.infer<
-  typeof createEcclesiasticalBaptismFormSchema
->;
+export type CreateEcclesiasticalBaptismFormData = z.infer<typeof createEcclesiasticalBaptismFormSchema>;

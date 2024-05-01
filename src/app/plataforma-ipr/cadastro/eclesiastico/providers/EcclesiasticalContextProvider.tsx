@@ -24,19 +24,16 @@ type EcclesiasticalContextType = {
   updateIsDataUpdatedInfo: () => void;
 };
 
-export const EcclesiasticalContext =
-  createContext<EcclesiasticalContextType>(initialValues);
+export const EcclesiasticalContext = createContext<EcclesiasticalContextType>(initialValues);
 
 export const useEcclesiasticalContext = () => useContext(EcclesiasticalContext);
 
 export const EcclesiasticalContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [ecclesiasticalData, setEcclesiasticalData] =
-    useState<Ecclesiastical | null>(null);
+  const [ecclesiasticalData, setEcclesiasticalData] = useState<Ecclesiastical | null>(null);
 
-  const [isLoadingEcclesiasticalProcess, setIsLoadingEcclesiasticalProcess] =
-    useState(false);
+  const [isLoadingEcclesiasticalProcess, setIsLoadingEcclesiasticalProcess] = useState(false);
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
@@ -51,11 +48,7 @@ export const EcclesiasticalContextProvider: React.FC<{
   React.useEffect(() => {
     const authStateUnsubscribe = onAuthStateChanged(auth, _user => {
       if (_user) {
-        const ecclesiasticalDataUserData = getCollection(
-          'users',
-          _user.uid,
-          'ecclesiastical'
-        );
+        const ecclesiasticalDataUserData = getCollection('users', _user.uid, 'ecclesiastical');
         ecclesiasticalDataUserData
           .then(data => {
             setEcclesiasticalData(data?.result);

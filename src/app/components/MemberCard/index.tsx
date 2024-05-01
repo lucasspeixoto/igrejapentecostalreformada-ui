@@ -46,9 +46,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
               </div>
               <div className="flex flex-col items-start">
                 <p className="font-light">Aniversário</p>
-                <p className="text-sm font-semibold tracking-widest">
-                  {longDateConvert(birthday)}
-                </p>
+                <p className="text-sm font-semibold tracking-widest">{longDateConvert(birthday)}</p>
               </div>
             </div>
 
@@ -56,9 +54,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
               <div className="flex justify-start gap-10">
                 <div className="flex flex-col items-start">
                   <p className="text-xs font-light">Membro desde</p>
-                  <p className="text-sm font-semibold tracking-wider">
-                    {shortDateConvert(cardMemberDate)}
-                  </p>
+                  <p className="text-sm font-semibold tracking-wider">{shortDateConvert(cardMemberDate)}</p>
                 </div>
                 <div className="flex flex-col items-start">
                   <p className="text-xs font-light">Emissão</p>
@@ -70,9 +66,7 @@ const MemberCard: React.FC<MemberCardProps> = ({
             </div>
 
             <div className="mb-1 mt-2 flex w-full items-center justify-center">
-              <p className="text-xs font-semibold uppercase">
-                Fazer tudo para a glória de Deus, 1 Co 10.21
-              </p>
+              <p className="text-xs font-semibold uppercase">Fazer tudo para a glória de Deus, 1 Co 10.21</p>
             </div>
           </div>
         </div>

@@ -49,6 +49,4 @@ export const createSupplementaryFamilyFormSchema = z.object({
     .or(z.literal('')),
 });
 
-export type CreateSupplementaryFamilyFormData = z.infer<
-  typeof createSupplementaryFamilyFormSchema
->;
+export type CreateSupplementaryFamilyFormData = z.infer<typeof createSupplementaryFamilyFormSchema>;

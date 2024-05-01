@@ -33,6 +33,9 @@
       "@fire/*": [
         "./src/lib/firebase/*"
       ],
+      "@components/*": [
+        "./src/components/*"
+      ],
       "@appC/*": [
         "./src/app/components/*"
       ],
@@ -45,11 +48,17 @@
       "@signin/*": [
         "./src/app/login/*"
       ],
+      "@membros/*": [
+        "./src/app/plataforma-ipr/membros/*"
+      ],
       "@financeiro/*": [
         "./src/app/plataforma-ipr/financeiro/*"
       ],
       "@lancamentos/*": [
         "./src/app/plataforma-ipr/financeiro/lancamentos/*"
+      ],
+      "@relatorios/*": [
+        "./src/app/plataforma-ipr/financeiro/relatorios/*"
       ]
     }
   },
