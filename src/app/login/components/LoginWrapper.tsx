@@ -1,6 +1,6 @@
 'use client';
 
-import addDocumentData from '@fire/firestore/addData';
+import addData from '@fire/firestore/addData';
 import firebaseMessages from '@fire/messages';
 import signInUserHandler from '@signin/lib/firebase/signin';
 import signInWithGoogle from '@signin/lib/firebase/signin-with-google';
@@ -9,8 +9,6 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import { useFirebaseAuthContext } from '@/providers/FirebaseAuthContextProvider';
-import type { Auth } from '@/types/auth';
-import type { Process } from '@/types/process';
 
 import type { LoginUserFormData } from '../schemas/signin-schema';
 import LoginForm from './LoginForm';
@@ -23,17 +21,13 @@ const LoginWrapper: React.FC = () => {
   const singInWithGoogleHandler = async (): Promise<void> => {
     const { result, error, isTheUserNew } = await signInWithGoogle();
 
-    let userAuthCollection: Auth;
-
-    let processCollection: Process;
-
     if (error) {
       toast.error(firebaseMessages[error.code]);
 
       authContext.updateLoadingAuthProcess(false);
     } else {
       if (isTheUserNew) {
-        userAuthCollection = {
+        const userAuthCollection = {
           isAdmin: false,
           role: 'Irmão(ã)',
           name: result?.user.displayName!,
@@ -42,15 +36,15 @@ const LoginWrapper: React.FC = () => {
           userId: result?.user.uid!,
         };
 
-        processCollection = {
+        const processCollection = {
           isRegistered: false,
         };
 
-        await addDocumentData('users', result?.user.uid!, {
+        await addData('users', result?.user.uid!, {
           auth: userAuthCollection,
         });
 
-        await addDocumentData('users', result?.user.uid!, {
+        await addData('users', result?.user.uid!, {
           process: processCollection,
         });
 

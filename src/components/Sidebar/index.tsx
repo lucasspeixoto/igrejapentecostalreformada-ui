@@ -2,15 +2,20 @@
 
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { AiOutlinePieChart } from 'react-icons/ai';
-import { BiUser } from 'react-icons/bi';
+import { BiBible, BiUser } from 'react-icons/bi';
 import { BsCalendarDate, BsLink45Deg, BsPeople } from 'react-icons/bs';
+import { CgWebsite } from 'react-icons/cg';
 import { FaChartLine, FaRegMoneyBillAlt, FaTable, FaWpforms } from 'react-icons/fa';
+import { FaPerson } from 'react-icons/fa6';
+import { GoArrowLeft } from 'react-icons/go';
+import { IoMdPersonAdd } from 'react-icons/io';
+import { MdPieChartOutline } from 'react-icons/md';
+import { PiChurch } from 'react-icons/pi';
 import { SiStorybook } from 'react-icons/si';
 
 import { useAuthContext } from '@/providers/AuthContextProvider';
@@ -42,14 +47,6 @@ const Sidebar = () => {
     setSidebarOpen();
   }, []);
 
-  /* The click handler is responsible for closing the sidebar when
-  a click event occurs outside of the sidebar or the trigger element. It adds an
-  event listener for the 'click' event on the document, and when the event is
-  triggered, it checks if the sidebar is open and if the click target is not
-  within the sidebar or the trigger element. If these conditions are met, it
-  sets the sidebarOpen state to false, effectively closing the sidebar. The code
-  also includes a cleanup function that removes the event listener when the
-  component is */
   React.useEffect(() => {
     const clickHandler = ({ target }: Event) => {
       if (!sidebar.current || !trigger.current) return;
@@ -67,10 +64,6 @@ const Sidebar = () => {
     return () => document.removeEventListener('click', clickHandler);
   });
 
-  /* Adds an event listener to the
- document for the 'keydown' event. When a key is pressed, it checks if the
- sidebar is open and if the key pressed is the 'Escape' key. If both conditions
- are true, it sets the sidebarOpen state to false. */
   React.useEffect(() => {
     const keyHandler = ({ key }: KeyboardEvent) => {
       if (!sidebarOpen || key !== 'Escape') return;
@@ -83,12 +76,6 @@ const Sidebar = () => {
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  /* It checks if the `sidebarExpanded` variable is true or
-  false. If it is true, it sets the value of `sidebar-expanded` in the
-  localStorage to true and adds the class `sidebar-expanded` to the body
-  element. If it is false, it removes the class `sidebar-expanded` from the body
-  element. The useEffect hook is triggered whenever the value of
-  `sidebarExpanded` changes. */
   React.useEffect(() => {
     if (sidebarExpanded) {
       localStorage.setItem('sidebar-expanded', sidebarExpanded.toString());
@@ -116,18 +103,7 @@ const Sidebar = () => {
           aria-controls="sidebar"
           aria-expanded={sidebarOpen}
           className="block lg:hidden">
-          <svg
-            className="fill-current"
-            width="20"
-            height="18"
-            viewBox="0 0 20 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M19 8.175H2.98748L9.36248 1.6875C9.69998 1.35 9.69998 0.825 9.36248 0.4875C9.02498 0.15 8.49998 0.15 8.16248 0.4875L0.399976 8.3625C0.0624756 8.7 0.0624756 9.225 0.399976 9.5625L8.16248 17.4375C8.31248 17.5875 8.53748 17.7 8.76248 17.7C8.98748 17.7 9.17498 17.625 9.36248 17.475C9.69998 17.1375 9.69998 16.6125 9.36248 16.275L3.02498 9.8625H19C19.45 9.8625 19.825 9.4875 19.825 9.0375C19.825 8.55 19.45 8.175 19 8.175Z"
-              fill=""
-            />
-          </svg>
+          <GoArrowLeft size={28} className="text-gray" />
         </button>
       </div>
 
@@ -168,7 +144,7 @@ const Sidebar = () => {
                           e.preventDefault();
                           sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}>
-                        <FaWpforms size={20} className="text-gray" />
+                        <FaWpforms size={20} className="text-white" />
                         Cadastro
                         <MenuChevroletIcon open={open} />
                       </Link>
@@ -181,6 +157,7 @@ const Sidebar = () => {
                               className={`first-letter:group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
                                 pathname === '/plataforma-ipr/cadastro/pessoal' && 'text-white'
                               }`}>
+                              <FaPerson size={16} className="text-white" />
                               Pessoal
                             </Link>
                           </li>
@@ -190,6 +167,7 @@ const Sidebar = () => {
                               className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
                                 pathname === '/plataforma-ipr/cadastro/complementar' && 'text-white'
                               }`}>
+                              <IoMdPersonAdd size={16} className="text-white" />
                               Complementar
                             </Link>
                           </li>
@@ -199,6 +177,7 @@ const Sidebar = () => {
                               className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
                                 pathname === '/plataforma-ipr/cadastro/eclesiastico' && 'text-white'
                               }`}>
+                              <PiChurch size={16} className="text-white" />
                               Eclesiástico
                             </Link>
                           </li>
@@ -291,7 +270,7 @@ const Sidebar = () => {
                             e.preventDefault();
                             sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                           }}>
-                          <AiOutlinePieChart size={20} className="text-gray" />
+                          <AiOutlinePieChart size={16} className="text-gray" />
                           Indicadores
                           <MenuChevroletIcon open={open} />
                         </Link>
@@ -304,20 +283,10 @@ const Sidebar = () => {
                                 className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
                                   pathname === '/plataforma-ipr/indicadores/estatisticos' && 'text-white'
                                 } `}>
+                                <MdPieChartOutline size={16} className="text-white" />
                                 Estatísticos
                               </Link>
                             </li>
-                            {/* <li>
-                              <Link
-                                href="/plataforma-ipr/indicadores/economicos"
-                                className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${
-                                  pathname ===
-                                    '/plataforma-ipr/indicadores/economicos' &&
-                                  'text-white'
-                                } `}>
-                                Econômicos
-                              </Link>
-                            </li> */}
                           </ul>
                         </div>
                       </React.Fragment>
@@ -370,6 +339,7 @@ const Sidebar = () => {
                               target="_blanck"
                               href="https://www.igrejapentecostalreformada.com.br/"
                               className="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white">
+                              <CgWebsite size={16} className="text-white" />
                               Site IPR
                             </Link>
                           </li>
@@ -378,6 +348,7 @@ const Sidebar = () => {
                               target="_blanck"
                               href="https://ipr-biblia.vercel.app/"
                               className="group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white">
+                              <BiBible size={16} className="text-white" />
                               Bíblia Online
                             </Link>
                           </li>

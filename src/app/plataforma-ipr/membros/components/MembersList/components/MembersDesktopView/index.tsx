@@ -47,9 +47,7 @@ const MembersDesktopView: React.FC<MembersDesktopViewProps> = ({ members }) => {
                           )}
                         </>
                       </div>
-                      <p className="hidden text-black dark:text-white sm:block">
-                        {member.auth?.name.split(' ')[0]}{' '}
-                      </p>
+                      <p className="hidden text-black dark:text-white sm:block">{member.auth?.name} </p>
                     </div>
                   </td>
                   <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
