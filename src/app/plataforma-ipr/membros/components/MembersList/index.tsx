@@ -1,32 +1,24 @@
+'use client';
+
 /* eslint-disable tailwindcss/classnames-order */
 /* eslint-disable prettier/prettier */
 
-'use client';
-
+import Loader from '@components/common/Loader';
+import { getUsersDocuments } from '@fire/firestore/getData';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { AiOutlineCheckCircle, AiOutlineEye } from 'react-icons/ai';
-import { BiBlock, BiTrash } from 'react-icons/bi';
-import { toast } from 'react-toastify';
+import { AiOutlineCheckCircle } from 'react-icons/ai';
+import { BiBlock } from 'react-icons/bi';
 
-import deleteData from '@/lib/firebase/firestore/deleteData';
-import deletePhoto from '@/lib/firebase/firestore/deletePhoto';
-import { getUsersDocuments } from '@/lib/firebase/firestore/getData';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { UserData } from '@/types/user-data';
 import { orderMembersListByName } from '@/utils/array-operations';
 
-import Loader from '../../../../../components/common/Loader';
-import Modal from '../../../../../components/ConfirmModal';
+import MemberDeleteAction from './components/MemberDeleteAction';
+import MemberDetailAction from './components/MemberDetailAction';
+import MembersTableColumns from './components/MembersTableColumns';
 import MembersTableInfo from './components/MembersTableInfo';
-
-const DELETE_MODAL_TITLE = 'Deletar membro';
-
-const DELETE_MODAL_SUBTITLE =
-  'Deseja realmente deletar este usuário ? A exclusão remove todos os dados ja cadastrados.';
-const DELETE_MODAL_CANCEL_TITLE = 'Cancelar';
-const DELETE_MODAL_CONFIRM_TITLE = 'Confirmar';
 
 const MembersList: React.FC = () => {
   const userContext = useAuthContext();
@@ -36,10 +28,6 @@ const MembersList: React.FC = () => {
   const [isLoadingUsers, setIsLoadingUsers] = React.useState(true);
 
   const [isAdminOption, setIsAdminOption] = React.useState(false);
-
-  const [userId, setUserId] = React.useState<string | null>(null);
-
-  const [showDeleteUserModal, setShowDeleteUserModal] = React.useState(false);
 
   const router = useRouter();
 
@@ -68,52 +56,8 @@ const MembersList: React.FC = () => {
     };
   }, [userContext]);
 
-  const seeUserDetailHandler = (selectedUserId: string) => {
-    setUserId(selectedUserId);
-    router.push(`detalhe-irmao/${selectedUserId}`);
-  };
-
-  const deleteUserHandler = (selectedUserId: string) => {
-    setUserId(selectedUserId);
-    setShowDeleteUserModal(true);
-  };
-
-  const onCancelDeleteUser = () => {
-    setShowDeleteUserModal(false);
-  };
-
-  const onConfirmDeleteUser = async () => {
-    userContext.updateIsLoadingData(true);
-
-    setShowDeleteUserModal(false);
-
-    const { error: deleteUserDataError } = await deleteData('users', userId!);
-
-    const { error: deletePhotoError } = await deletePhoto('photos', userId!);
-
-    if (deleteUserDataError || deletePhotoError) {
-      toast.error('Error ao excluir dados de membro. Tente novamente mais tarde ou contate admim.');
-    } else {
-      toast.success('Dados de membros excluídos com sucesso!');
-    }
-
-    userContext.updateIsLoadingData(false);
-  };
-
   return (
     <>
-      <>
-        {showDeleteUserModal ? (
-          <Modal
-            title={DELETE_MODAL_TITLE}
-            subtitle={DELETE_MODAL_SUBTITLE}
-            cancelTitle={DELETE_MODAL_CANCEL_TITLE}
-            confirmTitle={DELETE_MODAL_CONFIRM_TITLE}
-            onCancel={onCancelDeleteUser}
-            onConfirm={onConfirmDeleteUser}
-          />
-        ) : null}
-      </>
       {isAdminOption ? (
         <>
           <MembersTableInfo total={userLoadedData.length} />
@@ -126,21 +70,7 @@ const MembersList: React.FC = () => {
                 <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                   <div className="max-w-full overflow-x-auto">
                     <table className="w-full table-auto">
-                      <thead>
-                        <tr className="bg-gray-2 text-left dark:bg-meta-4">
-                          <th className="min-w-[180px] p-4 font-medium text-black dark:text-white xl:pl-11">
-                            Nome
-                          </th>
-                          <th className="min-w-[120px] p-4 font-medium text-black dark:text-white">
-                            Atuação
-                          </th>
-                          <th className="min-w-[120px] p-4 font-medium text-black dark:text-white">Perfil</th>
-                          <th className="min-w-[120px] p-4 font-medium text-black dark:text-white">
-                            Cadastro
-                          </th>
-                          <th className="p-4 font-medium text-black dark:text-white">Ações</th>
-                        </tr>
-                      </thead>
+                      <MembersTableColumns />
                       <tbody>
                         {React.Children.toArray(
                           userLoadedData?.sort(orderMembersListByName).map(member => (
@@ -192,17 +122,9 @@ const MembersList: React.FC = () => {
                               </td>
                               <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                                 <div className="flex items-center space-x-3.5">
-                                  <button className="hover:text-meta-5">
-                                    <AiOutlineEye
-                                      size={20}
-                                      onClick={() => seeUserDetailHandler(member?.auth.userId)}
-                                    />
-                                  </button>
-                                  <button
-                                    className="hover:text-meta-7"
-                                    onClick={() => deleteUserHandler(member?.auth.userId)}>
-                                    <BiTrash size={20} />
-                                  </button>
+                                  <MemberDetailAction userId={member?.auth.userId} />
+
+                                  <MemberDeleteAction userId={member?.auth.userId} />
                                 </div>
                               </td>
                             </tr>

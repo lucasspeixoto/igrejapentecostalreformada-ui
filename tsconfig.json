@@ -33,6 +33,9 @@
       "@fire/*": [
         "./src/lib/firebase/*"
       ],
+      "@components/*": [
+        "./src/components/*"
+      ],
       "@appC/*": [
         "./src/app/components/*"
       ],
