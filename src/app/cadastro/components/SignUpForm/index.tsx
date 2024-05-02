@@ -208,7 +208,7 @@ const SignUpForm: React.FC = () => {
         </>
       </div>
 
-      <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
+      <div className="mt-6 flex flex-col items-center justify-between gap-2 md:flex-row">
         {/* <div className=""> */}
         <button
           disabled={authContext.isLoadingAuthProcess}
