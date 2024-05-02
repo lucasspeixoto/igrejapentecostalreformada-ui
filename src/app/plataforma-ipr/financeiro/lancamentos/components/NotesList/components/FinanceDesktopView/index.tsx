@@ -8,6 +8,7 @@ import { formatFirebaseTimestampDate } from '@/utils/transform-date';
 
 import FinanceNoteDeleteAction from '../FinanceNoteDeleteAction';
 import FinanceNoteUpdateAction from '../FinanceNoteUpdateAction';
+import FinanceTableColumns from '../FinanceTableColumns';
 
 const FinanceDesktopView = () => {
   const { financeNotes } = useFinanceNotesContext();
@@ -16,16 +17,7 @@ const FinanceDesktopView = () => {
     <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ">
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
-          <thead>
-            <tr className="bg-gray-2 text-left dark:bg-meta-4">
-              <th className="w-auto p-4 font-medium text-black dark:text-white">Autor</th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">Inclusão</th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">Tipo</th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">Categoria</th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">Valor (R$)</th>
-              <th className="w-auto p-4 font-medium text-black dark:text-white">Ações</th>
-            </tr>
-          </thead>
+          <FinanceTableColumns />
           <tbody>
             {React.Children.toArray(
               financeNotes.map(note => (

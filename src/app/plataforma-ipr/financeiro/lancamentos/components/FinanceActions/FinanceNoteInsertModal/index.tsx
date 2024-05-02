@@ -12,11 +12,13 @@ import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsPr
 import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { MdOutlineEventNote } from 'react-icons/md';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
+
+import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
 
 type FinanceNoteInsertModalProps = {
   onCancelInsertNote: () => void;
@@ -33,10 +35,17 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
 
   const [isMounted, setIsMounted] = React.useState(false);
 
+  const [alreadyExistsNoteValueMessage, setAlreadyExistsNoteValueMessage] = React.useState<string | null>(
+    null
+  );
+
   const financeReportsContext = useFinanceReportsContext();
+
+  const { financeNotes } = useFinanceNotesContext();
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
     reset,
@@ -90,6 +99,16 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
     await computeNewTotalBalance(type, value);
   };
 
+  const handleSelectedValueCheck = (value: number) => {
+    const alreadyExists = financeNotes.some((note: FinanceNote) => note.value === +value);
+
+    if (alreadyExists) {
+      setAlreadyExistsNoteValueMessage('Valor já cadastrado, confirme!');
+    } else {
+      setAlreadyExistsNoteValueMessage(null);
+    }
+  };
+
   return isMounted
     ? createPortal(
         <div className="fixed left-0 top-0 z-999999 flex size-full max-h-full min-h-screen items-center justify-center bg-black/90 p-2">
@@ -136,20 +155,27 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                 </div>
 
                 {/* Value */}
-                <div className="flex w-full flex-col self-start md:w-1/2">
+                <div className="flex w-full flex-col items-start md:w-1/2">
                   <label
                     htmlFor="value"
                     data-testid="value"
                     className="mb-2.5 block self-start text-black dark:text-white">
                     Valor <span className="font-semibold text-meta-1">*</span>
                   </label>
-                  <input
-                    type="number"
-                    id="value"
-                    aria-label="value"
-                    placeholder="Digite o valor"
-                    {...register('value')}
-                    className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
+                  <Controller
+                    name="value"
+                    control={control}
+                    render={({ field }) => (
+                      <input
+                        {...field}
+                        onBlur={() => handleSelectedValueCheck(field.value)}
+                        type="number"
+                        id="value"
+                        aria-label="value"
+                        placeholder="Digite o valor"
+                        className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
+                      />
+                    )}
                   />
                   <>
                     {errors.value && (
@@ -160,6 +186,16 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                         {errors.value.message}
                       </span>
                     )}
+                  </>
+                  <>
+                    {alreadyExistsNoteValueMessage ? (
+                      <span
+                        role="alert"
+                        data-testid="value-error"
+                        className="text-start text-xs font-semibold text-primary dark:text-secondary">
+                        {alreadyExistsNoteValueMessage}
+                      </span>
+                    ) : null}
                   </>
                 </div>
               </div>
@@ -250,7 +286,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
               </div>
 
               {/* Description */}
-              <div className="mb-4 flex w-full flex-col">
+              <div className="mb-4 flex w-full flex-col items-start">
                 <label
                   htmlFor="description"
                   data-testid="description"

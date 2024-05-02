@@ -1,7 +1,7 @@
+'use client';
+
 /* eslint-disable no-console */
 /* eslint-disable tailwindcss/migration-from-tailwind-2 */
-
-'use client';
 
 import addData from '@fire/firestore/addData';
 import firebaseMessages from '@fire/messages';
@@ -136,13 +136,10 @@ const SignUpForm: React.FC = () => {
           <span className="absolute bottom-3.5 right-4">
             <BsPersonLock size={22} opacity=".5" />
           </span>
-
-          <>
-            {errors.name && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.name.message}</span>
-            )}
-          </>
         </div>
+        <>
+          {errors.name && <span className="text-xs text-meta-1 dark:text-meta-7">{errors.name.message}</span>}
+        </>
       </div>
 
       {/* ---------------------------- E-mail ---------------------------- */}
@@ -159,13 +156,12 @@ const SignUpForm: React.FC = () => {
           <span className="absolute bottom-3.5 right-4">
             <MdOutlineMarkEmailUnread size={22} opacity=".5" />
           </span>
-
-          <>
-            {errors.email && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.email.message}</span>
-            )}
-          </>
         </div>
+        <>
+          {errors.email && (
+            <span className="text-xs text-meta-1 dark:text-meta-7">{errors.email.message}</span>
+          )}
+        </>
       </div>
 
       {/* ---------------------------- Senha ---------------------------- */}
@@ -180,17 +176,15 @@ const SignUpForm: React.FC = () => {
             {...register('password')}
             className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
           />
-
           <span className="absolute bottom-3.5 right-4">
             <MdLockOutline size={22} opacity=".5" />
           </span>
-
-          <>
-            {errors.password && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.password.message}</span>
-            )}
-          </>
         </div>
+        <>
+          {errors.password && (
+            <span className="text-xs text-meta-1 dark:text-meta-7">{errors.password.message}</span>
+          )}
+        </>
       </div>
 
       {/* ---------------------------- Confirmação Senha ---------------------------- */}
@@ -203,36 +197,36 @@ const SignUpForm: React.FC = () => {
             {...register('confirmedPassword')}
             className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
           />
-
           <span className="absolute bottom-3.5 right-4">
             <MdLockOutline size={22} opacity=".5" />
           </span>
-
-          <>
-            {errors.confirmedPassword && (
-              <span className="text-xs text-meta-1 dark:text-meta-7">{errors.confirmedPassword.message}</span>
-            )}
-          </>
         </div>
+        <>
+          {errors.confirmedPassword && (
+            <span className="text-xs text-meta-1 dark:text-meta-7">{errors.confirmedPassword.message}</span>
+          )}
+        </>
       </div>
 
-      <div className="mb-4 mt-5">
+      <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
+        {/* <div className=""> */}
         <button
           disabled={authContext.isLoadingAuthProcess}
           type="submit"
-          className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+          className="flex w-full cursor-pointer items-center justify-center gap-3.5 rounded-lg border border-primary bg-primary p-2 text-white transition hover:bg-opacity-90 disabled:cursor-not-allowed disabled:opacity-50 md:w-[220px]">
           Cadastrar
         </button>
-      </div>
+        {/* </div> */}
 
-      <button
-        disabled={authContext.isLoadingAuthProcess}
-        onClick={singUpWithGoogleHandler}
-        type="button"
-        className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
-        <GoogleLogo size={22} />
-        Cadastrar com Google
-      </button>
+        <button
+          disabled={authContext.isLoadingAuthProcess}
+          onClick={singUpWithGoogleHandler}
+          type="button"
+          className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-2 hover:bg-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50 md:w-[220px]">
+          <GoogleLogo size={22} />
+          Cadastrar com Google
+        </button>
+      </div>
     </form>
   );
 };

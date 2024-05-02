@@ -7,13 +7,12 @@ import Image from '@/components/Image';
 import AuthPagePresentation from '../AuthPagePresentation';
 
 describe('AuthPagePresentation', () => {
-  it('should have some especific text', () => {
-    const text = '(Rm 1.16,17)';
+  it('should render heading (h1) title with correct text', async () => {
     render(<AuthPagePresentation />);
+    const headingElement = screen.getByRole('heading', { level: 1 });
 
-    const myTestElement = screen.getByText((_, element) => element!.textContent === text);
-
-    expect(myTestElement).toBeInTheDocument();
+    expect(headingElement).toBeInTheDocument();
+    expect(headingElement).toHaveTextContent('Plataforma Igreja pentecostal refomada');
   });
 
   it('should adds correct src and alt to the Logo Image', () => {
