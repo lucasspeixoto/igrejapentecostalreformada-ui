@@ -9,7 +9,6 @@ import { insertFinanceNoteFormSchema } from '@lancamentos/schemas/insert-finance
 import type { FinanceNote } from '@lancamentos/types/finance-note';
 import updateFinanceReportsTotalBalance from '@relatorios/lib/firebase/update-finance-reports';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
-import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { Controller, useForm } from 'react-hook-form';
@@ -17,6 +16,7 @@ import { MdOutlineEventNote } from 'react-icons/md';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
 import { useAuthContext } from '@/providers/AuthContextProvider';
+import { generateTimestampFromStringDate } from '@/utils/transform-date';
 
 import { useFinanceNotesContext } from '../../../providers/FinanceNotesProvider';
 
@@ -48,7 +48,6 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
     control,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<InsertFinanceNoteFormData>({
     resolver: zodResolver(insertFinanceNoteFormSchema),
   });
@@ -78,12 +77,14 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
   };
 
   const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
-    const { description, type, value, category, member, paymentVoucher } = formData;
+    const { description, type, value, category, member, paymentVoucher, date } = formData;
+
+    const timestampDate = generateTimestampFromStringDate(date);
 
     const newFinanceNote: Partial<FinanceNote> = {
       photoUrl: authData?.photoUrl,
       owner: authData?.name,
-      date: Timestamp.fromDate(new Date()),
+      date: timestampDate,
       description,
       type,
       value,
@@ -93,8 +94,6 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
     };
 
     insertNoteHandler(newFinanceNote);
-
-    reset();
 
     await computeNewTotalBalance(type, value);
   };
@@ -283,6 +282,21 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                     <SelectChevroletLogo size={24} />
                   </span>
                 </div>
+              </div>
+
+              {/* Date */}
+              <div className="mb-4 flex w-full flex-col items-start">
+                <label
+                  htmlFor="date"
+                  data-testid="date"
+                  className="mb-2.5 block self-start text-black dark:text-white">
+                  Data <span className="font-semibold text-meta-1">*</span>
+                </label>
+                <input
+                  type="date"
+                  {...register('date')}
+                  className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
+                />
               </div>
 
               {/* Description */}

@@ -26,6 +26,12 @@ export function generateMonthAndYearList(startYear: number, startMonth: number):
   return datesArray.reverse();
 }
 
+/**
+ * Generate an array of dates between two specified dates.
+ * @param startYear - the year of the first date in the range
+ * @param startMonth - the month of the first date in the range (1-indexed)
+ * @returns an array of dates in the specified range
+ */
 export function generateYearList(startYear: number): number[] {
   const years = [];
 

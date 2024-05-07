@@ -2,9 +2,9 @@
 import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 
 import firebase_app from '@/lib/firebase/config';
+import { getMonthFromTimestampDate, getYearFromTimestampDate } from '@/utils/transform-date';
 
 import type { FinanceNote } from '../../types/finance-note';
-import { getMonthFromTimestampDate, getYearFromTimestampDate } from '../../utils/timestamp-to-date';
 
 export const db = getFirestore(firebase_app);
 

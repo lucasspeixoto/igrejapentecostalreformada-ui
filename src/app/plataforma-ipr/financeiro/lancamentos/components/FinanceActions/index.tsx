@@ -3,6 +3,7 @@
 'use client';
 
 import React from 'react';
+import { toast } from 'react-toastify';
 
 import addFinanceNote from '../../lib/firebase/add-finance-note';
 import { useFinanceNotesContext } from '../../providers/FinanceNotesProvider';
@@ -27,7 +28,7 @@ const FinanceActions: React.FC = () => {
 
     updateLoadingFinanceNotes(false);
 
-    setShowInsertNoteModal(false);
+    toast.success('Nota adicionada com sucesso!');
   };
 
   return (
