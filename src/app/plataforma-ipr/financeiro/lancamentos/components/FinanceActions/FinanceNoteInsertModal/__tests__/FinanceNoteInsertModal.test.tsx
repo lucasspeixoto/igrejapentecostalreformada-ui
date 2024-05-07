@@ -1,9 +1,8 @@
 import '@testing-library/jest-dom';
 
+import { financeParameters } from '@lancamentos/constants/form-parameters';
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-
-import { financeParameters } from '@/app/plataforma-ipr/financeiro/lancamentos/constants/form-parameters';
 
 import FinanceNoteInsertModal from '..';
 

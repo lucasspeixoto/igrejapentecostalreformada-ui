@@ -10,7 +10,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
   return (
     <>
       {children}
-      <ToastContainer />
+      <ToastContainer style={{ zIndex: 1000000 }} />
     </>
   );
 };

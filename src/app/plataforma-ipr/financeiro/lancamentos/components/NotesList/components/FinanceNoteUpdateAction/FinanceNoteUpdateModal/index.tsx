@@ -19,6 +19,7 @@ import { MdOutlineEventNote } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
+import { generateTimestampFromStringDate, getStringDateFromTimestampDate } from '@/utils/transform-date';
 
 type FinanceNoteUpdateModalProps = {
   noteId: string;
@@ -73,9 +74,11 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
       setActualFinanceNote(financeNote);
 
       if (mounted && financeNote) {
-        const { type, value, description, category, member, paymentVoucher } = financeNote;
+        const { type, value, description, category, member, paymentVoucher, date } = financeNote;
 
-        reset({ type, value, description, category, member, paymentVoucher });
+        const stringDate = getStringDateFromTimestampDate(date);
+
+        reset({ type, value, description, category, member, paymentVoucher, date: stringDate });
       }
     };
 
@@ -109,7 +112,14 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
   const updateFinanceNoteHandler = async (formData: UpdateFinanceNoteFormData) => {
     updateLoadingFinanceNotes(true);
 
-    const { error: updateNoteError } = await updateFinanceNote(noteId, formData);
+    const timestampDate = generateTimestampFromStringDate(formData.date);
+
+    const updatedFormData = {
+      ...formData,
+      date: timestampDate,
+    };
+
+    const { error: updateNoteError } = await updateFinanceNote(noteId, updatedFormData);
 
     if (updateNoteError) {
       toast.error('Error ao alterar nota Tente novamente mais tarde ou contate admin.');
@@ -285,6 +295,21 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
                     <SelectChevroletLogo size={24} />
                   </span>
                 </div>
+              </div>
+
+              {/* Date */}
+              <div className="mb-4 flex w-full flex-col items-start">
+                <label
+                  htmlFor="date"
+                  data-testid="date"
+                  className="mb-2.5 block self-start text-black dark:text-white">
+                  Data <span className="font-semibold text-meta-1">*</span>
+                </label>
+                <input
+                  type="date"
+                  {...register('date')}
+                  className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
+                />
               </div>
 
               {/* Description */}

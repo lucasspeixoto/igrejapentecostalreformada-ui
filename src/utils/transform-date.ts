@@ -1,5 +1,5 @@
 import { Months } from '@relatorios/constants/months';
-import type { Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 /**
  * @status: Tested
@@ -105,4 +105,56 @@ export function getMonthDescriptionFromMonthIndex(date: Date): string {
  */
 export function getDayDescriptionFomDate(date: Date): string {
   return date.getDate().toString().padStart(2, '0');
+}
+
+/**
+ * Generates a Firebase Firestore Timestamp from a string date in the format "yyyy-mm-dd".
+ *
+ * @param date - The string date to convert to a Timestamp.
+ * @returns A Firebase Firestore Timestamp object.
+ */
+export function generateTimestampFromStringDate(date: string): Timestamp {
+  const year = +date.split('-')[0];
+  const month = +date.split('-')[1] - 1;
+  const day = +date.split('-')[2];
+
+  return Timestamp.fromDate(new Date(year, month, day));
+}
+
+/**
+ * Returns the year from a given Firestore timestamp.
+ *
+ * @param timestamp - the Firestore timestamp
+ * @returns the year from the timestamp
+ */
+export function getYearFromTimestampDate(timestamp: Timestamp): number {
+  const time = timestamp.toDate();
+  return time.getFullYear();
+}
+
+/**
+ * Returns the month from a given Firestore timestamp.
+ *
+ * @param timestamp - the Firestore timestamp
+ * @returns the month from the timestamp (1-indexed)
+ */
+export function getMonthFromTimestampDate(timestamp: Timestamp): number {
+  const time = timestamp.toDate();
+  return time.getMonth() + 1;
+}
+
+/**
+ * Returns a string representation of a Firebase Firestore timestamp in the format "MM/DD/YYYY".
+ *
+ * @param timestamp - A Firebase Firestore timestamp.
+ * @returns A string representation of the timestamp in the format "MM/DD/YYYY".
+ */
+export function getStringDateFromTimestampDate(timestamp: Timestamp): string {
+  const time = timestamp.toDate();
+
+  const month = time.getMonth() + 1;
+  const day = time.getDate();
+  const year = time.getFullYear();
+
+  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 }

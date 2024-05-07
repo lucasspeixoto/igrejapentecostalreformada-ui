@@ -9,6 +9,7 @@ export const insertFinanceNoteFormSchema = z.object({
   member: z.string().optional(),
   category: z.string(),
   paymentVoucher: z.string(),
+  date: z.string(),
 });
 
 export type InsertFinanceNoteFormData = z.infer<typeof insertFinanceNoteFormSchema>;

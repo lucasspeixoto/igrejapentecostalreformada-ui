@@ -1,12 +1,16 @@
 import { Months } from '@relatorios/constants/months';
-import type { Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 import {
   formatFirebaseTimestampDate,
+  generateTimestampFromStringDate,
   getDayDescriptionFomDate,
   getMonthDescriptionFromMonthIndex,
+  getMonthFromTimestampDate,
   getStartAndEndOfMonth,
   getStartAndEndOfWeek,
+  getStringDateFromTimestampDate,
+  getYearFromTimestampDate,
   longDateConvert,
   shortDateConvert,
 } from '../transform-date';
@@ -104,6 +108,49 @@ describe('Transform Date tests', () => {
 
       expect(getDayDescriptionFomDate(date1)).toEqual('01');
       expect(getDayDescriptionFomDate(date2)).toEqual('11');
+    });
+  });
+
+  describe('generateTimestampFromStringDate', () => {
+    it('should return a valid Timestamp', () => {
+      const dateString = '2024-05-02';
+      const expectedTimestamp = new Timestamp(1714618800, 0);
+
+      const result = generateTimestampFromStringDate(dateString);
+
+      expect(result).toEqual(expectedTimestamp);
+    });
+  });
+
+  describe('getYearFromTimestampDate', () => {
+    it('should return the year from the given timestamp', () => {
+      const timestamp = Timestamp.fromDate(new Date('2024-04-18T00:00:00'));
+      const year = getYearFromTimestampDate(timestamp);
+      expect(year).toEqual(2024);
+    });
+  });
+
+  describe('getMonthFromTimestampDate', () => {
+    it('should return the month from the given timestamp', () => {
+      const timestamp = Timestamp.fromDate(new Date('2024-04-18T00:00:00'));
+      const month = getMonthFromTimestampDate(timestamp);
+      expect(month).toEqual(4);
+    });
+  });
+
+  describe('getStringDateFromTimestampDate', () => {
+    it('should return a string representation of a timestamp in the format "MM/DD/YYYY"', () => {
+      const timestamp = Timestamp.fromDate(new Date('2024-04-18T00:00:00')); // October 25, 2022
+      const expected = '2024-04-18';
+
+      expect(getStringDateFromTimestampDate(timestamp)).toEqual(expected);
+    });
+
+    it('should pad single-digit months and days with a leading zero', () => {
+      const timestamp = Timestamp.fromDate(new Date('2024-01-08T00:00:00')); // January 10, 2022
+      const expected = '2024-01-08';
+
+      expect(getStringDateFromTimestampDate(timestamp)).toEqual(expected);
     });
   });
 });
