@@ -113,8 +113,8 @@ describe('Transform Date tests', () => {
 
   describe('generateTimestampFromStringDate', () => {
     it('should return a valid Timestamp', () => {
-      const dateString = '2024-05-02';
-      const expectedTimestamp = new Timestamp(1714618800, 0);
+      const dateString = '2024-04-18';
+      const expectedTimestamp = Timestamp.fromDate(new Date('2024-04-18T00:00:00'));
 
       const result = generateTimestampFromStringDate(dateString);
 
