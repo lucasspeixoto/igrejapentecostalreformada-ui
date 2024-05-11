@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-
-const useWindowDimensions = (innerWidth: number) => {
+/* const useWindowDimensions = (innerWidth: number) => {
   const [isMobileSize, setIsMobileSize] = useState(window.innerWidth <= innerWidth);
 
   useEffect(() => {
@@ -21,29 +20,22 @@ const useWindowDimensions = (innerWidth: number) => {
   return isMobileSize;
 };
 
-export default useWindowDimensions;
-
-/*
-import { useEffect, useState } from 'react';
-
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window as Window &
-    typeof globalThis;
-
-  return {
-    width,
-    height,
-  };
-}
+export default useWindowDimensions; */
 
 export default function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState(
-    getWindowDimensions()
-  );
+  const { innerWidth: width, innerHeight: height } = window as Window & typeof globalThis;
+
+  const [windowDimensions, setWindowDimensions] = useState({
+    width,
+    height,
+  });
 
   useEffect(() => {
     function handleResize() {
-      setWindowDimensions(getWindowDimensions());
+      setWindowDimensions({
+        width,
+        height,
+      });
     }
 
     window.addEventListener('resize', handleResize);
@@ -52,4 +44,3 @@ export default function useWindowDimensions() {
 
   return windowDimensions;
 }
-*/

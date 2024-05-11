@@ -29,7 +29,9 @@ const MembersList: React.FC = () => {
 
   const router = useRouter();
 
-  const isMobileSize = useWindowDimensions(MAX_MOBILE_WIDTH);
+  // const isMobileSize = useWindowDimensions(MAX_MOBILE_WIDTH);
+
+  const isMobileSize = useWindowDimensions();
 
   React.useEffect(() => {
     let mounted = true;
