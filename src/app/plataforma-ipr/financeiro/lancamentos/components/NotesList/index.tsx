@@ -52,13 +52,7 @@ const NotesList: React.FC = () => {
             ) : (
               <>
                 {financeNotes.length > 0 ? (
-                  <>
-                    {isMobileSize ? (
-                      <FinanceMobileView />
-                    ) : (
-                      <FinanceDesktopView />
-                    )}
-                  </>
+                  <>{isMobileSize ? <FinanceMobileView /> : <FinanceDesktopView />}</> 
                 ) : (
                   <EmptyDataPage description="Não há nenhuma nota lançada para o período selecionado!" />
                 )}
