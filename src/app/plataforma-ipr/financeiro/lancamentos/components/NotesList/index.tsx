@@ -28,9 +28,7 @@ const NotesList: React.FC = () => {
 
   const router = useRouter();
 
-  // const isMobileSize = useWindowDimensions(MAX_MOBILE_WIDTH);
-
-  const isMobileSize = useWindowDimensions();
+  const isMobileSize = useWindowDimensions(MAX_MOBILE_WIDTH);
 
   React.useEffect(() => {
     const isAdmin = userContext.authData?.isAdmin!;
