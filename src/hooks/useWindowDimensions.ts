@@ -22,20 +22,21 @@ import { useEffect, useState } from 'react';
 
 export default useWindowDimensions; */
 
-export default function useWindowDimensions() {
+function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window as Window & typeof globalThis;
 
-  const [windowDimensions, setWindowDimensions] = useState({
+  return {
     width,
     height,
-  });
+  };
+}
+
+export default function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
   useEffect(() => {
     function handleResize() {
-      setWindowDimensions({
-        width,
-        height,
-      });
+      setWindowDimensions(getWindowDimensions());
     }
 
     window.addEventListener('resize', handleResize);
