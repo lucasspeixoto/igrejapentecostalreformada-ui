@@ -37,7 +37,7 @@ const RecoveryPasswordForm = () => {
     } else {
       authContext.updateLoadingAuthProcess(false);
 
-      toast.success(`Link de recuperação enviado para ${email}`);
+      toast.success(`Link de recuperação enviado para ${email}!`);
     }
   };
 
