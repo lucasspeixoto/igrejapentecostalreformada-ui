@@ -26,25 +26,6 @@ O projeto Foi desenvolvido com as seguintes tecnologias:
 
 ![interface](public/images/layout3.png 'Layout Atual')
 
-## 🚀 Instalação
-
-```bash
-# Clone o repositório e entre na pasta do projeto
-$ git clone https://github.com/lucasspeixoto/ipr-master && cd ipr-master
-
-# Instale as dependências
-$ npm install
-# ou
-$ yarn install
-
-# Execute a aplicação
-$ npm start
-# ou
-$ yarn start
-
-# Abra http://localhost:4200 no seu navegador para ver a aplicação rodando!
-```
-
 ## 📝 Licença
 
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo [LICENSE](https://opensource.org/licenses/MIT) para obter mais detalhes.

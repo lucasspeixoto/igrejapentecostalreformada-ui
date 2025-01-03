@@ -9,7 +9,7 @@ import React from 'react';
 
 import EmptyDataPage from '@/app/components/EmptyDataPage';
 import Loader from '@/components/common/Loader';
-import useWindowDimensions from '@/hooks/useWindowDimensions';
+import useIsWindowWidthMatched from '@/hooks/useIsWindowWidthMatched';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 
 import { useFinanceNotesContext } from '../../providers/FinanceNotesProvider';
@@ -28,7 +28,7 @@ const NotesList: React.FC = () => {
 
   const router = useRouter();
 
-  const isMobileSize = useWindowDimensions(MAX_MOBILE_WIDTH);
+  const isMobileSize = useIsWindowWidthMatched(MAX_MOBILE_WIDTH);
 
   React.useEffect(() => {
     const isAdmin = userContext.authData?.isAdmin!;
@@ -52,7 +52,7 @@ const NotesList: React.FC = () => {
             ) : (
               <>
                 {financeNotes.length > 0 ? (
-                  <>{isMobileSize ? <FinanceMobileView /> : <FinanceDesktopView />}</> 
+                  <>{isMobileSize ? <FinanceMobileView /> : <FinanceDesktopView />}</>
                 ) : (
                   <EmptyDataPage description="Não há nenhuma nota lançada para o período selecionado!" />
                 )}
