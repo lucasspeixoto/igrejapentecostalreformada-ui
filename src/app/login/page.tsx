@@ -7,7 +7,7 @@ import LoginWrapper from './components/LoginWrapper';
 
 export const metadata: Metadata = {
   title: 'Entrar',
-  description: 'Plataforma de membros da igreja pentecostal reformada (IPR)',
+  description: 'Plataforma de membros da Igreja Pentecostal Reformada (IPR)',
 };
 
 const SignIn: React.FC = () => {
