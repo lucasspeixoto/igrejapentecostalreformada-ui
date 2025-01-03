@@ -14,7 +14,7 @@
     "@hookform/resolvers": "^3.3.1",
     "@react-jvectormap/core": "^1.0.4",
     "@react-jvectormap/unitedstates": "^1.0.1",
-    "apexcharts": "^3.41.1",
+    "apexcharts": "^4.3.0",
     "autoprefixer": "10.4.14",
     "axios": "^1.6.0",
     "eslint": "8.48.0",
