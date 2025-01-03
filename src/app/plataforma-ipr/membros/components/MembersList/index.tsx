@@ -8,7 +8,7 @@ import { getUsersDocuments } from '@fire/firestore/getData';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-import useWindowDimensions from '@/hooks/useWindowDimensions';
+import useIsWindowWidthMatched from '@/hooks/useIsWindowWidthMatched';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 import type { UserData } from '@/types/user-data';
 
@@ -29,7 +29,7 @@ const MembersList: React.FC = () => {
 
   const router = useRouter();
 
-  const isMobileSize = useWindowDimensions(MAX_MOBILE_WIDTH);
+  const isMobileSize = useIsWindowWidthMatched(MAX_MOBILE_WIDTH);
 
   React.useEffect(() => {
     let mounted = true;
