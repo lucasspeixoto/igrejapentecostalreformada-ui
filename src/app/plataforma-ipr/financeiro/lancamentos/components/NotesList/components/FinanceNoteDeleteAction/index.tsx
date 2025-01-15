@@ -6,7 +6,7 @@ import {
 } from '@lancamentos/constants/messages';
 import deleteFinanceNote from '@lancamentos/lib/firebase/delete-finance-note';
 import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
-import updateFinanceReportsTotalBalance from '@relatorios/lib/firebase/update-finance-reports';
+import { updateFinanceReportsTotalBalance } from '@relatorios/lib/firebase/update-finance-reports';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import React from 'react';
 import { BiTrash } from 'react-icons/bi';

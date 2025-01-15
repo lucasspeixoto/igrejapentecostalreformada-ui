@@ -8,7 +8,7 @@ import { getFinanceReportsDocuments } from './get-finance-reports';
 
 export const db = getFirestore(firebase_app);
 
-export default async function updateFinanceReportsTotalBalance(note: number) {
+export const updateFinanceReportsTotalBalance = async (note: number) => {
   let result = null;
   let error = null;
 
@@ -27,4 +27,25 @@ export default async function updateFinanceReportsTotalBalance(note: number) {
   }
 
   return { result, error };
-}
+};
+
+export const updateFinanceReportsMonthBalance = async (note: number) => {
+  let result = null;
+  let error = null;
+
+  const { financeReportData } = await getFinanceReportsDocuments();
+
+  const updatedData = {
+    monthBalance: +financeReportData!.monthBalance + note,
+  } as PartialWithFieldValue<FinanceReport>;
+
+  try {
+    result = await setDoc(doc(db, 'finance-reports', financeReportData!.id), updatedData, {
+      merge: true,
+    });
+  } catch (_error) {
+    error = _error;
+  }
+
+  return { result, error };
+};

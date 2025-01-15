@@ -7,7 +7,7 @@ import { MEMBERS } from '@lancamentos/constants/members-list';
 import type { InsertFinanceNoteFormData } from '@lancamentos/schemas/insert-finance-note-schema';
 import { insertFinanceNoteFormSchema } from '@lancamentos/schemas/insert-finance-note-schema';
 import type { FinanceNote } from '@lancamentos/types/finance-note';
-import updateFinanceReportsTotalBalance from '@relatorios/lib/firebase/update-finance-reports';
+import { updateFinanceReportsTotalBalance } from '@relatorios/lib/firebase/update-finance-reports';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import React from 'react';
 import { createPortal } from 'react-dom';
