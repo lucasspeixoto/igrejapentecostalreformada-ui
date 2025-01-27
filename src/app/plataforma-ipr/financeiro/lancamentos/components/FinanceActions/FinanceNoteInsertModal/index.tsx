@@ -7,8 +7,9 @@ import { MEMBERS } from '@lancamentos/constants/members-list';
 import type { InsertFinanceNoteFormData } from '@lancamentos/schemas/insert-finance-note-schema';
 import { insertFinanceNoteFormSchema } from '@lancamentos/schemas/insert-finance-note-schema';
 import type { FinanceNote } from '@lancamentos/types/finance-note';
-import { updateFinanceReportsTotalBalance } from '@relatorios/lib/firebase/update-finance-reports';
+import { updateFinanceReportsMonthBalance } from '@relatorios/lib/firebase/update-finance-reports';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
+import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { Controller, useForm } from 'react-hook-form';
@@ -71,7 +72,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
 
     const valueToUpdateBalance = type === 'C' ? value : -value;
 
-    await updateFinanceReportsTotalBalance(valueToUpdateBalance);
+    await updateFinanceReportsMonthBalance(valueToUpdateBalance);
 
     financeReportsContext.updateFinanceReportsInfo();
   };
@@ -79,18 +80,19 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
   const insertNewNoteHandler = async (formData: InsertFinanceNoteFormData) => {
     const { description, type, value, category, member, paymentVoucher, date } = formData;
 
-    const timestampDate = generateTimestampFromStringDate(date);
+    const transformedDate = generateTimestampFromStringDate(date);
 
     const newFinanceNote: Partial<FinanceNote> = {
       photoUrl: authData?.photoUrl,
       owner: authData?.name,
-      date: timestampDate,
+      date: transformedDate,
       description,
       type,
       value,
       member,
       category,
       paymentVoucher,
+      createdAt: Timestamp.now(),
     };
 
     insertNoteHandler(newFinanceNote);
@@ -167,6 +169,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
                     render={({ field }) => (
                       <input
                         {...field}
+                        value={field.value}
                         onBlur={() => handleSelectedValueCheck(field.value)}
                         type="number"
                         id="value"

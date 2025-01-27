@@ -158,3 +158,29 @@ export function getStringDateFromTimestampDate(timestamp: Timestamp): string {
 
   return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 }
+
+/**
+ * Transforms a date string in the format 'YYYY-MM-DD' to a Date object.
+ *
+ * @param dateString - The date string to transform.
+ * @returns A Date object representing the given date string.
+ */
+export const transformStringToDate = (dateString: string): Date => {
+  const [year, month, day] = dateString.split('-').map(Number);
+  const now = new Date();
+  return new Date(year, month - 1, day, now.getHours(), now.getMinutes(), now.getSeconds());
+};
+
+/**
+ * Transforms a Date object into a string formatted as "DD/MM/YYYY".
+ *
+ * @param date - The Date object to be transformed.
+ * @returns A string representing the date in "DD/MM/YYYY" format.
+ */
+export function transformDateToString(date: Date) {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+}

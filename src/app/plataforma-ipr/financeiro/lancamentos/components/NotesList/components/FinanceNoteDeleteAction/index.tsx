@@ -6,7 +6,7 @@ import {
 } from '@lancamentos/constants/messages';
 import deleteFinanceNote from '@lancamentos/lib/firebase/delete-finance-note';
 import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
-import { updateFinanceReportsTotalBalance } from '@relatorios/lib/firebase/update-finance-reports';
+import { updateFinanceReportsMonthBalance } from '@relatorios/lib/firebase/update-finance-reports';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import React from 'react';
 import { BiTrash } from 'react-icons/bi';
@@ -38,7 +38,7 @@ const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({ noteI
 
     const valueToUpdateBalance = type === 'C' ? -value : value;
 
-    await updateFinanceReportsTotalBalance(valueToUpdateBalance);
+    await updateFinanceReportsMonthBalance(valueToUpdateBalance);
 
     financeReportsContext.updateLoadingFinanceReports(false);
 

@@ -15,6 +15,7 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
     value: 150.0,
     member: 'Lucas',
     paymentVoucher: 'Pendente',
+    createdAt: new Timestamp(1714140925, 817000000), // 26/04/2024
   },
   {
     id: 'cfa7fa7D7ahdU876',
@@ -28,6 +29,7 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
     member: 'Lucas',
     paymentVoucher: 'Pendente',
     value: 146.81,
+    createdAt: new Timestamp(1714243682, 987000000), // 27/04/2024
   },
   {
     id: 'cfa7fa7D7ahdU876',
@@ -37,6 +39,7 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
     owner: 'Daniel',
     category: 'Dízimo',
     date: Timestamp.fromDate(new Date('2024-02-03T00:00:00')),
+    createdAt: Timestamp.fromDate(new Date('2024-02-03T00:00:00')),
     type: 'D',
     member: 'Lucas',
     paymentVoucher: 'Pendente',
@@ -50,6 +53,7 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
     owner: 'Rodrigo',
     category: 'Dízimo',
     date: Timestamp.fromDate(new Date('2024-01-04T00:00:00')),
+    createdAt: Timestamp.fromDate(new Date('2024-01-04T00:00:00')),
     type: 'D',
     member: 'Lucas',
     paymentVoucher: 'Pendente',
@@ -63,6 +67,7 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
     owner: 'Lucas',
     category: 'Dízimo',
     date: Timestamp.fromDate(new Date('2023-12-05T00:00:00')),
+    createdAt: Timestamp.fromDate(new Date('2023-12-05T00:00:00')),
     type: 'C',
     member: 'Lucas',
     paymentVoucher: 'Pendente',
@@ -76,6 +81,7 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
     owner: 'Rodrigo',
     category: 'Dízimo',
     date: Timestamp.fromDate(new Date('2023-11-07T00:00:00')),
+    createdAt: Timestamp.fromDate(new Date('2023-11-07T00:00:00')),
     type: 'C',
     member: 'Lucas',
     paymentVoucher: 'Pendente',
@@ -89,6 +95,7 @@ export const MOCKED_FINANCE_NOTES: FinanceNote[] = [
     owner: 'Rodrigo',
     category: 'Dízimo',
     date: Timestamp.fromDate(new Date('2023-11-07T00:00:00')),
+    createdAt: Timestamp.fromDate(new Date('2023-11-07T00:00:00')),
     type: 'C',
     member: 'Lucas',
     paymentVoucher: 'Pendente',
@@ -108,6 +115,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     category: 'Patrimônio',
     value: 5400,
     date: new Timestamp(1706137390, 113000000),
+    createdAt: new Timestamp(1706137390, 113000000),
     id: '5VV5bcASHYmAOuyUUeuy',
   },
   {
@@ -115,6 +123,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     owner: 'Lucas Peixoto',
     value: 4700,
     date: new Timestamp(1707606186, 216000000),
+    createdAt: new Timestamp(1707606186, 216000000),
     category: 'Patrimônio',
     type: 'C',
     photoUrl:
@@ -132,6 +141,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     description: 'Teste',
     member: '',
     date: new Timestamp(1714431659, 845000000),
+    createdAt: new Timestamp(1714431659, 845000000),
     paymentVoucher: 'Não se aplica',
     owner: 'Lucas Peixoto',
     id: '9RN7RkdIpiTvScZrC3Xh',
@@ -143,6 +153,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     type: 'C',
     description: 'Teste',
     date: new Timestamp(1711062198, 231000000),
+    createdAt: new Timestamp(1711062198, 231000000),
     photoUrl:
       'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FU6tkvy5k7dfmGNlIYvKWv79Ssen1.jpg?alt=media&token=c9bdf6d1-52e7-4949-9352-2f3d08d40500',
     category: 'Patrimônio',
@@ -159,12 +170,14 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     owner: 'Lucas Peixoto',
     value: 4280,
     date: new Timestamp(1704841205, 504000000),
+    createdAt: new Timestamp(1704841205, 504000000),
     paymentVoucher: 'Não se aplica',
     id: 'Us6JkcqcrHxKN96YMvbF',
   },
   {
     type: 'C',
     date: new Timestamp(1705437539, 58000000),
+    createdAt: new Timestamp(1705437539, 58000000),
     photoUrl:
       'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FU6tkvy5k7dfmGNlIYvKWv79Ssen1.jpg?alt=media&token=c9bdf6d1-52e7-4949-9352-2f3d08d40500',
     category: 'Doações',
@@ -184,12 +197,14 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     category: 'Patrimônio',
     value: 4852,
     date: new Timestamp(1710716452, 972000000),
+    createdAt: new Timestamp(1710716452, 972000000),
     owner: 'Lucas Peixoto',
     member: '',
     id: 'XuAH07Nc6krisADXKdWd',
   },
   {
     date: new Timestamp(1707606040, 947000000),
+    createdAt: new Timestamp(1707606040, 947000000),
     owner: 'Lucas Peixoto',
     type: 'D',
     description: 'Teste',
@@ -210,6 +225,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     member: '',
     description: 'Teste',
     date: new Timestamp(1710975724, 479000000),
+    createdAt: new Timestamp(1710975724, 479000000),
     paymentVoucher: 'Não se aplica',
     category: 'Patrimônio',
     id: 'doOakmSLremTwrnoWysR',
@@ -218,6 +234,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     category: 'Patrimônio',
     paymentVoucher: 'Não se aplica',
     date: new Timestamp(1714431729, 24000000),
+    createdAt: new Timestamp(1714431729, 24000000),
     photoUrl:
       'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FU6tkvy5k7dfmGNlIYvKWv79Ssen1.jpg?alt=media&token=c9bdf6d1-52e7-4949-9352-2f3d08d40500',
     description: 'Teste',
@@ -231,6 +248,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     member: '',
     description: 'Teste',
     date: new Timestamp(1714431684, 880000000),
+    createdAt: new Timestamp(1714431684, 880000000),
     category: 'Patrimônio',
     value: 8450,
     paymentVoucher: 'Não se aplica',
@@ -250,6 +268,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     description: 'Teste',
     member: '',
     date: new Timestamp(1706137247, 346000000),
+    createdAt: new Timestamp(1706137247, 346000000),
     value: 4150,
     id: 'mSvyvWMlaWJMNpFETMh5',
   },
@@ -261,6 +280,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
       'https://firebasestorage.googleapis.com/v0/b/ipr-master.appspot.com/o/photos%2FU6tkvy5k7dfmGNlIYvKWv79Ssen1.jpg?alt=media&token=c9bdf6d1-52e7-4949-9352-2f3d08d40500',
     paymentVoucher: 'Não se aplica',
     date: new Timestamp(1708037994, 773000000),
+    createdAt: new Timestamp(1708037994, 773000000),
     type: 'D',
     value: 5000,
     member: '',
@@ -277,6 +297,7 @@ export const MOCKED_FINANCE_NOTES2: FinanceNote[] = [
     type: 'D',
     owner: 'Lucas Peixoto',
     date: new Timestamp(1714431720, 23000000),
+    createdAt: new Timestamp(1714431720, 23000000),
     id: 'wnP22ufZ5Jo4zJtedpo2',
   },
 ];
@@ -290,6 +311,7 @@ export const NO_SORTED_NOTES_MOCK: FinanceNote[] = [
     owner: 'Lucas',
     category: 'Dízimo',
     date: new Timestamp(1714140925, 817000000), // 26/04/2024
+    createdAt: new Timestamp(1714140925, 817000000), // 26/04/2024
     type: 'D',
     value: 150.0,
     member: 'Lucas',
@@ -303,6 +325,7 @@ export const NO_SORTED_NOTES_MOCK: FinanceNote[] = [
     owner: 'Rodrigo',
     category: 'Dízimo',
     date: new Timestamp(1714243682, 987000000), // 27/04/2024
+    createdAt: new Timestamp(1714243682, 987000000), // 27/04/2024
     type: 'C',
     member: 'Lucas',
     paymentVoucher: 'Pendente',

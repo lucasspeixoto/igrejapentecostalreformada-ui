@@ -1,3 +1,5 @@
+import './styles.scss';
+
 import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
 import { getMonthBalance } from '@lancamentos/utils/get-balance';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
@@ -19,43 +21,50 @@ const TableHeaderInfo: React.FC = () => {
     return 0;
   }, [financeReport]);
 
-  return (
-    <div className="flex w-full flex-col items-start justify-between sm:flex-row sm:items-center">
-      <>
-        {financeNotes.length > 0 ? (
-          <>
-            <div className="mb-2 flex flex-col justify-start gap-1">
-              <p className="text-xl font-semibold text-black dark:text-white">
-                Saldo Mês:
-                {isLoadingFinanceNotes ? null : (
-                  <span
-                    className={`ml-2 mt-1 text-lg font-bold ${
-                      totalMonthBalance >= 0 ? 'text-meta-3' : 'text-meta-7'
-                    }`}>
-                    R$ {totalMonthBalance}
-                  </span>
-                )}
-              </p>
-            </div>
-          </>
-        ) : null}
-      </>
+  const monthBalance = React.useMemo(
+    () => totalBalance + totalMonthBalance,
+    [totalMonthBalance, totalBalance]
+  );
 
-      <>
-        <div className="mb-2 flex flex-col justify-start gap-1">
-          <p className="text-xl font-semibold text-black dark:text-white">
-            Caixa
-            {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
-              <span
-                className={`ml-2 mt-1 text-lg font-bold ${
-                  totalBalance >= 0 ? 'text-meta-3' : 'text-meta-7'
-                }`}>
-                R$ {totalBalance}
-              </span>
-            )}
-          </p>
-        </div>
-      </>
+  return (
+    <div className="container">
+      <div className="container__item">
+        <p className="container__item-value">
+          Caixa anterior:
+          {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
+            <span
+              className={`ml-2 mt-1 text-lg font-bold ${totalBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
+              R$ {totalBalance}
+            </span>
+          )}
+        </p>
+      </div>
+
+      <div className="container__item">
+        <p className="container__item-value">
+          Saldo Mês:
+          {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
+            <span
+              className={`ml-2 mt-1 text-lg font-bold ${
+                totalMonthBalance >= 0 ? 'text-meta-3' : 'text-meta-7'
+              }`}>
+              R$ {totalMonthBalance}
+            </span>
+          )}
+        </p>
+      </div>
+
+      <div className="container__item">
+        <p className="container__item-value">
+          Balanço mês:
+          {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
+            <span
+              className={`ml-2 mt-1 text-lg font-bold ${monthBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
+              R$ {monthBalance}
+            </span>
+          )}
+        </p>
+      </div>
     </div>
   );
 };
