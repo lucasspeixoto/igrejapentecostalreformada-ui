@@ -10,7 +10,7 @@ import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvi
 import type { UpdateFinanceNoteFormData } from '@lancamentos/schemas/update-finance-note-schema';
 import { updateFinanceNoteFormSchema } from '@lancamentos/schemas/update-finance-note-schema';
 import type { FinanceNote } from '@lancamentos/types/finance-note';
-import { updateFinanceReportsTotalBalance } from '@relatorios/lib/firebase/update-finance-reports';
+import { updateFinanceReportsMonthBalance } from '@relatorios/lib/firebase/update-finance-reports';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -98,7 +98,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
 
     const valueToUpdateBalance = actualType === 'C' ? -actualValue : actualValue;
 
-    await updateFinanceReportsTotalBalance(valueToUpdateBalance);
+    await updateFinanceReportsMonthBalance(valueToUpdateBalance);
   };
 
   const computeNewTotalBalance = async (type: 'C' | 'D', value: number) => {
@@ -108,7 +108,7 @@ const FinanceNoteUpdateModal: React.FC<FinanceNoteUpdateModalProps> = ({
 
     const valueToUpdateBalance = type === 'C' ? value : -value;
 
-    await updateFinanceReportsTotalBalance(valueToUpdateBalance);
+    await updateFinanceReportsMonthBalance(valueToUpdateBalance);
 
     financeReportsContext.updateFinanceReportsInfo();
   };

@@ -1,0 +1,15 @@
+.container {
+  @apply hidden w-[500px] lg:block;
+
+  &__title {
+    @apply mr-5 text-center text-2xl font-extrabold leading-10 tracking-tight text-black dark:text-white 2xl:mb-4 2xl:w-[450px] 2xl:text-4xl
+  }
+
+  &__link {
+    @apply mr-5 inline-block
+  }
+
+  &__description {
+    @apply mr-5 text-center text-lg tracking-tight 2xl:w-[450px] 2xl:text-lg
+  }
+}

@@ -6,8 +6,8 @@ import type { FinanceNote } from '../types/finance-note';
  * @param note - a finance note
  * @returns the number of milliseconds since the Unix epoch
  */
-function getDayFromDate(note: FinanceNote): number {
-  return note.date.toDate().getDay();
+function getTimeFromDate(note: FinanceNote): number {
+  return note!.createdAt!.toDate().getTime();
 }
 
 /**
@@ -18,6 +18,6 @@ function getDayFromDate(note: FinanceNote): number {
  */
 export function orderNotesByDate(financesNotes: FinanceNote[]): FinanceNote[] {
   return Object.values(financesNotes).sort(
-    (firstNote, secondNote) => getDayFromDate(secondNote) - getDayFromDate(firstNote)
+    (firstNote, secondNote) => getTimeFromDate(firstNote) - getTimeFromDate(secondNote)
   );
 }
