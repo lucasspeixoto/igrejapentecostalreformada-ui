@@ -1,12 +1,11 @@
 .container {
-  @apply flex flex-col items-start justify-between sm:flex-row sm:items-center;
+  @apply flex w-full flex-col items-start justify-between sm:flex-row sm:items-center;
 
   &__item {
     @apply mb-2 flex flex-col justify-start gap-1;
 
     &-value {
-      @apply text-xl font-semibold text-black dark:text-white;
+      @apply text-xl font-semibold text-black dark:text-white tracking-wide;
     }
   }
-
 }
