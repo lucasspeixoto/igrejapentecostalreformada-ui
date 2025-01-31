@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
-import InputsVersusOutputs from './components/InputsVersusOutputs';
+import MonthAndYearFilter from '../components/MonthAndYearFilter';
+import MonthBalanceCategoryChart from '../components/MonthBalanceCategoryChart';
+import InputsAndOutputsByYear from './components/InputsAndOutputsByYear';
 import YearFilter from './components/YearFilter';
 
 export const metadata: Metadata = {
@@ -12,15 +14,17 @@ export const metadata: Metadata = {
 
 const Reports = () => {
   return (
-    <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+    <div className="mx-auto max-w-screen-2xl gap-8 p-4 md:p-6 2xl:p-10">
       <Breadcrumb pageName="Relatórios" />
 
-      <div className="flex flex-col gap-5">
-        <div className="flex w-full justify-between">
-          <YearFilter />
-        </div>
+      <div className="mb-8 mt-2 flex w-full flex-col gap-3">
+        <YearFilter />
+        <InputsAndOutputsByYear />
+      </div>
 
-        <InputsVersusOutputs />
+      <div className="mb-8 mt-2 flex w-full flex-col gap-3">
+        <MonthAndYearFilter />
+        <MonthBalanceCategoryChart />
       </div>
     </div>
   );

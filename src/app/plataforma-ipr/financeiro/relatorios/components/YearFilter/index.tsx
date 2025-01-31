@@ -17,7 +17,7 @@ const YearFilter: React.FC = () => {
   const { updateFinanceNotesInfo } = useFinanceReportsContext();
 
   const years = React.useMemo(() => {
-    return generateYearList(2020);
+    return generateYearList(2024);
   }, []);
 
   const onChangeSelectedYear = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -27,7 +27,7 @@ const YearFilter: React.FC = () => {
   };
 
   return (
-    <div className="relative z-20 w-auto max-w-[120px] bg-transparent dark:bg-form-input">
+    <div className="relative z-20 w-auto max-w-[100px] bg-transparent dark:bg-form-input">
       <select
         value={reportsReferenceYear}
         onChange={onChangeSelectedYear}

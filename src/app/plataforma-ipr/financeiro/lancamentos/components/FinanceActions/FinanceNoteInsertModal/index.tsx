@@ -6,7 +6,7 @@ import { financeParameters } from '@lancamentos/constants/form-parameters';
 import { MEMBERS } from '@lancamentos/constants/members-list';
 import type { InsertFinanceNoteFormData } from '@lancamentos/schemas/insert-finance-note-schema';
 import { insertFinanceNoteFormSchema } from '@lancamentos/schemas/insert-finance-note-schema';
-import type { FinanceNote } from '@lancamentos/types/finance-note';
+import type { FinanceNote, FinanceNoteType } from '@lancamentos/types/finance-note';
 import { updateFinanceReportsMonthBalance } from '@relatorios/lib/firebase/update-finance-reports';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import { Timestamp } from 'firebase/firestore';
@@ -67,7 +67,7 @@ const FinanceNoteInsertModal: React.FC<FinanceNoteInsertModalProps> = ({
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
-  const computeNewTotalBalance = async (type: 'C' | 'D', value: number) => {
+  const computeNewTotalBalance = async (type: FinanceNoteType, value: number) => {
     financeReportsContext.updateLoadingFinanceReports(true);
 
     const valueToUpdateBalance = type === 'C' ? value : -value;

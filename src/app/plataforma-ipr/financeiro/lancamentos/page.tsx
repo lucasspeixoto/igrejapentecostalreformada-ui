@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 
+import MonthAndYearFilter from '../components/MonthAndYearFilter';
 import FinanceActions from './components/FinanceActions';
-import MonthAndYearFilter from './components/MonthAndYearFilter';
 import NotesList from './components/NotesList';
 
 export const metadata: Metadata = {

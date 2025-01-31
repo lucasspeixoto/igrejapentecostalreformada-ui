@@ -14,16 +14,16 @@ const TableHeaderInfo: React.FC = () => {
     return +getMonthBalance(financeNotes).toFixed(2);
   }, [financeNotes]);
 
-  const totalBalance = React.useMemo(() => {
+  const currentBalance = React.useMemo(() => {
     if (financeReport) {
       return +financeReport.totalBalance;
     }
     return 0;
   }, [financeReport]);
 
-  const monthBalance = React.useMemo(
-    () => totalBalance + totalMonthBalance,
-    [totalMonthBalance, totalBalance]
+  const newBalance = React.useMemo(
+    () => currentBalance + totalMonthBalance,
+    [totalMonthBalance, currentBalance]
   );
 
   return (
@@ -33,8 +33,8 @@ const TableHeaderInfo: React.FC = () => {
           Caixa anterior:
           {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
             <span
-              className={`ml-2 mt-1 text-lg font-bold ${totalBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
-              R$ {totalBalance}
+              className={`ml-2 mt-1 text-lg font-bold ${currentBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
+              R$ {currentBalance}
             </span>
           )}
         </p>
@@ -59,8 +59,8 @@ const TableHeaderInfo: React.FC = () => {
           Balanço mês:
           {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
             <span
-              className={`ml-2 mt-1 text-lg font-bold ${monthBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
-              R$ {monthBalance}
+              className={`ml-2 mt-1 text-lg font-bold ${newBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
+              R$ {newBalance}
             </span>
           )}
         </p>

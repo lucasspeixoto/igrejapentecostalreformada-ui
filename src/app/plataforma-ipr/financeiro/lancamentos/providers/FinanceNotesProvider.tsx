@@ -11,6 +11,7 @@ import { orderNotesByDate } from '../utils/order-notes-by-date';
 const initialValues = {
   financeNotes: [],
   isLoadingFinanceNotes: false,
+  totalValuesByCategory: {},
   updateLoadingFinanceNotes: () => {},
   updateIsDataUpdatedInfo: () => {},
 };
@@ -18,6 +19,7 @@ const initialValues = {
 type FinanceNotesContextType = {
   financeNotes: FinanceNote[];
   isLoadingFinanceNotes: boolean;
+  totalValuesByCategory: Record<string, number>;
   updateLoadingFinanceNotes: (isLoading: boolean) => void;
   updateIsDataUpdatedInfo: () => void;
 };
@@ -35,6 +37,8 @@ export const FinanceNotesContextProvider: React.FC<{
 
   const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(false);
 
+  const [totalValuesByCategory, setTotalValuesByCategory] = React.useState<Record<string, number>>({});
+
   const selectedFinanceDetailDate = useFinanceNotes(state => state.notesListReferenceMonth);
 
   const updateLoadingFinanceNotes = (isLoading: boolean) => {
@@ -43,6 +47,25 @@ export const FinanceNotesContextProvider: React.FC<{
 
   const updateIsDataUpdatedInfo = () => {
     setIsDataUpdated(state => !state);
+  };
+
+  const computeTotalValuesByCategory = (notes: FinanceNote[]) => {
+    const computedTotalValuesByCategory = notes
+      .filter(note => note.category !== 'Prebenda' && note.type === 'D')
+      .reduce(
+        (acc, note) => {
+          const { category } = note;
+          const value = parseFloat(note.value.toFixed(2));
+          if (!acc[category]) {
+            acc[category] = 0;
+          }
+          acc[category] += value;
+          return acc;
+        },
+        {} as Record<string, number>
+      );
+
+    setTotalValuesByCategory(computedTotalValuesByCategory);
   };
 
   React.useEffect(() => {
@@ -56,6 +79,7 @@ export const FinanceNotesContextProvider: React.FC<{
         if (data) {
           const sortedNotes = orderNotesByDate(data.financeNotesData);
           setFinanceNotes(sortedNotes);
+          computeTotalValuesByCategory(sortedNotes);
         }
       })
       .catch(error => {
@@ -70,6 +94,7 @@ export const FinanceNotesContextProvider: React.FC<{
       value={{
         financeNotes,
         isLoadingFinanceNotes,
+        totalValuesByCategory,
         updateLoadingFinanceNotes,
         updateIsDataUpdatedInfo,
       }}>
