@@ -10,7 +10,7 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), {
   ssr: false,
 });
 
-const InputsVersusOutputs: React.FC = () => {
+const InputsAndOutputsByYear: React.FC = () => {
   const { inputsVersusOutputsState, isLoadingFinanceNotes } = useFinanceReportsContext();
 
   // NextJS Requirement
@@ -70,4 +70,4 @@ const InputsVersusOutputs: React.FC = () => {
   );
 };
 
-export default InputsVersusOutputs;
+export default InputsAndOutputsByYear;

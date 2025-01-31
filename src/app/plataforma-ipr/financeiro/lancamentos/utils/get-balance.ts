@@ -1,4 +1,4 @@
-import type { FinanceNote } from '../types/finance-note';
+import type { FinanceNote, FinanceNoteType } from '../types/finance-note';
 
 /**
  * Calculates the balance of a list of finance notes.
@@ -9,6 +9,13 @@ import type { FinanceNote } from '../types/finance-note';
 export function getMonthBalance(notes: FinanceNote[]): number {
   return notes.reduce((accumulator, currentValue) => {
     const increment = currentValue.type === 'C' ? currentValue.value : -currentValue.value;
+    return accumulator + increment;
+  }, 0);
+}
+
+export function getMonthCreditOrDebitNotes(notes: FinanceNote[], type: FinanceNoteType): number {
+  return notes.reduce((accumulator, currentValue) => {
+    const increment = currentValue.type === type ? currentValue.value : 0;
     return accumulator + increment;
   }, 0);
 }

@@ -1,0 +1,24 @@
+.main {
+  @apply my-2 flex w-full justify-center gap-4;
+
+  &__month {
+    @apply flex w-1/2 flex-col items-start gap-2;    
+  }
+
+  &__divider {
+    @apply inline-block h-auto min-h-[1em] w-[1.5px] self-stretch bg-meta-4 opacity-10 dark:bg-body;
+  }
+
+  &__balance {
+    @apply flex w-1/2 flex-col items-start gap-2 
+  }
+
+}
+
+.item {
+  @apply text-lg font-medium tracking-wide text-meta-4 dark:text-meta-9;
+}
+
+.item-heading {
+  @apply text-xl font-semibold tracking-wide text-meta-4 dark:text-meta-9;
+}

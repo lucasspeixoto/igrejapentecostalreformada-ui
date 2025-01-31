@@ -1,0 +1,11 @@
+.area {
+  @apply mt-1 gap-2 flex flex-col w-full items-center bg-white dark:bg-boxdark py-4;
+
+  &__title {
+    @apply text-xl font-semibold tracking-wide text-meta-4 dark:text-meta-9;
+  }
+
+  &__chart {
+    @apply -mx-5 h-[300px] w-[95%];
+  }
+}

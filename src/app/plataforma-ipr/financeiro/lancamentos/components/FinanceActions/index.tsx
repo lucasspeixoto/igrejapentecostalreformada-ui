@@ -8,16 +8,19 @@ import { toast } from 'react-toastify';
 import addFinanceNote from '../../lib/firebase/add-finance-note';
 import { useFinanceNotesContext } from '../../providers/FinanceNotesProvider';
 import type { FinanceNote } from '../../types/finance-note';
-import FinanceNoteInsert from './FinanceNoteInsertModal';
+import FinanceNoteInsertModal from './FinanceNoteInsertModal';
+import MonthlyAuditModal from './MonthlyAuditModal';
 
 const FinanceActions: React.FC = () => {
   const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } = useFinanceNotesContext();
 
   const [showInsertNoteModal, setShowInsertNoteModal] = React.useState(false);
 
-  const onCancelInsertNote = () => {
-    setShowInsertNoteModal(false);
-  };
+  const [showMonthlyAuditModal, setShowMonthlyAuditModal] = React.useState(false);
+
+  const onCancelInsertNote = () => setShowInsertNoteModal(false);
+
+  const onCancelAudit = () => setShowMonthlyAuditModal(false);
 
   const insertNoteHandler = async (newFinanceNote: Partial<FinanceNote>) => {
     updateLoadingFinanceNotes(true);
@@ -35,7 +38,15 @@ const FinanceActions: React.FC = () => {
     <>
       <>
         {showInsertNoteModal ? (
-          <FinanceNoteInsert onCancelInsertNote={onCancelInsertNote} insertNoteHandler={insertNoteHandler} />
+          <FinanceNoteInsertModal
+            onCancelInsertNote={onCancelInsertNote}
+            insertNoteHandler={insertNoteHandler}
+          />
+        ) : null}
+      </>
+      <>
+        {showMonthlyAuditModal ? (
+          <MonthlyAuditModal onCancelAudit={onCancelAudit} processMonthlyAuditHandler={() => {}} />
         ) : null}
       </>
       <div className="flex gap-2">
@@ -46,7 +57,7 @@ const FinanceActions: React.FC = () => {
           Novo
         </button>
         <button
-          disabled
+          onClick={() => setShowMonthlyAuditModal(true)}
           type="button"
           className="max-w-[80px] cursor-pointer rounded-lg border border-meta-8 bg-meta-8 p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
           Auditoria

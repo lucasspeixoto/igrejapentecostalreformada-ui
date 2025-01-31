@@ -63,7 +63,11 @@ export const INPUTS_VERSUS_OUTPUTS_CHART_OPTIONS: ApexOptions = {
     },
   },
   dataLabels: {
-    enabled: false,
+    enabled: true,
+    formatter: value => {
+      const val = value as number;
+      return val.toFixed(2);
+    },
   },
   markers: {
     size: 4,
@@ -105,6 +109,9 @@ export const INPUTS_VERSUS_OUTPUTS_CHART_OPTIONS: ApexOptions = {
       },
     },
     labels: {
+      formatter(val) {
+        return val.toFixed(0);
+      },
       style: {
         colors: ['#8A99AF'],
         fontSize: '12px',
@@ -114,6 +121,5 @@ export const INPUTS_VERSUS_OUTPUTS_CHART_OPTIONS: ApexOptions = {
       },
     },
     min: 0,
-    /* max: 20000, */
   },
 };
