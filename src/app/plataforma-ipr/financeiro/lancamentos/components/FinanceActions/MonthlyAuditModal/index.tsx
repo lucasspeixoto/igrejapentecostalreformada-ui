@@ -72,6 +72,7 @@ const MonthlyAuditModal: React.FC<MonthlyAuditModalProps> = ({
   const processMonthlyAudit = () => {
     processMonthlyAuditHandler();
   };
+
   return isMounted
     ? createPortal(
         <div className="modal">
@@ -113,8 +114,8 @@ const MonthlyAuditModal: React.FC<MonthlyAuditModalProps> = ({
               </button>
               <button
                 data-testid="update-button"
-                type="submit"
-                onAbort={processMonthlyAudit}
+                type="button"
+                onClick={() => processMonthlyAudit()}
                 className="block w-auto min-w-[100px] rounded border border-meta-3 bg-meta-3 p-3 text-center font-medium text-white transition hover:bg-opacity-90">
                 Fechar mês
               </button>

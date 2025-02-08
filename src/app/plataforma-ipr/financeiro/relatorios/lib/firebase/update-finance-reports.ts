@@ -49,3 +49,26 @@ export const updateFinanceReportsMonthBalance = async (note: number) => {
 
   return { result, error };
 };
+
+export const updateTotalBalanceAndCloseCurrentMonth = async () => {
+  const result = null;
+  const error = null;
+
+  const { financeReportData } = await getFinanceReportsDocuments();
+
+  console.log(financeReportData);
+
+  /* const updatedData = {
+    monthBalance: +financeReportData!.monthBalance + note,
+  } as PartialWithFieldValue<FinanceReport>;
+
+  try {
+    result = await setDoc(doc(db, 'finance-reports', financeReportData!.id), updatedData, {
+      merge: true,
+    });
+  } catch (_error) {
+    error = _error;
+  } */
+
+  return { result, error };
+};

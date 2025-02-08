@@ -1,5 +1,7 @@
 'use client';
 
+import './styles.scss';
+
 /* eslint-disable max-len */
 import useFinance from '@financeiro/store/useFinance';
 import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
@@ -7,6 +9,9 @@ import { generateMonthAndYearList } from '@lancamentos/utils/generate-dates-arra
 import React from 'react';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
+import { isDateGreaterThanCurrentMonth } from '@/utils/compare-dates';
+
+import { useFinanceReportsContext } from '../../relatorios/providers/FinanceReportsProvider';
 
 const MonthAndYearFilter: React.FC = () => {
   const setNotesListReferenceMonth = useFinance(state => state.setNotesListReferenceMonth);
@@ -14,6 +19,8 @@ const MonthAndYearFilter: React.FC = () => {
   const selectedFinanceDetailDate = useFinance(state => state.notesListReferenceMonth);
 
   const { updateIsDataUpdatedInfo } = useFinanceNotesContext();
+
+  const { financeReport } = useFinanceReportsContext();
 
   const optionalDates = React.useMemo(() => {
     const dates = generateMonthAndYearList(2024, 12);
@@ -27,15 +34,18 @@ const MonthAndYearFilter: React.FC = () => {
   };
 
   return (
-    <div className="relative z-20 w-auto max-w-[120px] bg-transparent dark:bg-form-input">
-      <select
-        value={selectedFinanceDetailDate}
-        onChange={onChangeSelectedDate}
-        className="relative z-20 w-full cursor-pointer appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
+    <div className="select-box">
+      <select value={selectedFinanceDetailDate} onChange={onChangeSelectedDate}>
         <option disabled>Referência...</option>
-        {React.Children.toArray(optionalDates.map(date => <option value={date}>{date}</option>))}
+        {React.Children.toArray(
+          optionalDates.map(date => (
+            <option disabled={isDateGreaterThanCurrentMonth(date, financeReport?.currentMonth!)} value={date}>
+              {date}
+            </option>
+          ))
+        )}
       </select>
-      <span className="absolute right-1 top-1/2 z-20 -translate-y-1/2">
+      <span>
         <SelectChevroletLogo size={24} />
       </span>
     </div>

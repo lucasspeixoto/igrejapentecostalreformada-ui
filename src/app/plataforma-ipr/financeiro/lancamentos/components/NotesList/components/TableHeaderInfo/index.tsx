@@ -60,7 +60,7 @@ const TableHeaderInfo: React.FC = () => {
           {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
             <span
               className={`ml-2 mt-1 text-lg font-bold ${newBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
-              R$ {newBalance}
+              R$ {newBalance.toFixed(2)}
             </span>
           )}
         </p>

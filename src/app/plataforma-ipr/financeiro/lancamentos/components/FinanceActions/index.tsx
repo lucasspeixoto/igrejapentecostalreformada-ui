@@ -2,6 +2,7 @@
 
 'use client';
 
+import { updateTotalBalanceAndCloseCurrentMonth } from '@relatorios/lib/firebase/update-finance-reports';
 import React from 'react';
 import { toast } from 'react-toastify';
 
@@ -34,6 +35,12 @@ const FinanceActions: React.FC = () => {
     toast.success('Nota adicionada com sucesso!');
   };
 
+  const processMonthlyAuditHandler = async () => {
+    console.log('Fechamento mês!');
+
+    await updateTotalBalanceAndCloseCurrentMonth();
+  };
+
   return (
     <>
       <>
@@ -46,7 +53,10 @@ const FinanceActions: React.FC = () => {
       </>
       <>
         {showMonthlyAuditModal ? (
-          <MonthlyAuditModal onCancelAudit={onCancelAudit} processMonthlyAuditHandler={() => {}} />
+          <MonthlyAuditModal
+            onCancelAudit={onCancelAudit}
+            processMonthlyAuditHandler={processMonthlyAuditHandler}
+          />
         ) : null}
       </>
       <div className="flex gap-2">
