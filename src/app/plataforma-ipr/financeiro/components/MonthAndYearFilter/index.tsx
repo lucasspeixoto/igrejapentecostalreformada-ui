@@ -9,7 +9,7 @@ import { generateMonthAndYearList } from '@lancamentos/utils/generate-dates-arra
 import React from 'react';
 
 import { SelectChevroletLogo } from '@/components/common/Icons';
-import { isDateGreaterThanCurrentMonth } from '@/utils/compare-dates';
+import { isDateGreaterThanCurrentMonth } from '@/app/plataforma-ipr/financeiro/lancamentos/utils/compare-dates';
 
 import { useFinanceReportsContext } from '../../relatorios/providers/FinanceReportsProvider';
 
