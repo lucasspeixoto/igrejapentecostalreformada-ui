@@ -2,6 +2,8 @@
 
 'use client';
 
+import './styles.scss';
+
 import { updateTotalBalanceAndCloseCurrentMonth } from '@relatorios/lib/firebase/update-finance-reports';
 import React from 'react';
 import { toast } from 'react-toastify';
@@ -36,7 +38,7 @@ const FinanceActions: React.FC = () => {
   };
 
   const processMonthlyAuditHandler = async () => {
-    console.log('Fechamento mês!');
+    // console.log('Fechamento mês!');
 
     await updateTotalBalanceAndCloseCurrentMonth();
   };
@@ -59,17 +61,14 @@ const FinanceActions: React.FC = () => {
           />
         ) : null}
       </>
-      <div className="flex gap-2">
+      <div className="notes-actions">
         <button
+          className="notes-actions__new-note"
           onClick={() => setShowInsertNoteModal(true)}
-          type="button"
-          className="max-w-[80px] cursor-pointer rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+          type="button">
           Novo
         </button>
-        <button
-          onClick={() => setShowMonthlyAuditModal(true)}
-          type="button"
-          className="max-w-[80px] cursor-pointer rounded-lg border border-meta-8 bg-meta-8 p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+        <button className="notes-actions__audit" onClick={() => setShowMonthlyAuditModal(true)} type="button">
           Auditoria
         </button>
       </div>

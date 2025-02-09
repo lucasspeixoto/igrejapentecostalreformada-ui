@@ -1,15 +1,17 @@
+/* eslint-disable max-len */
+
 'use client';
 
 import './styles.scss';
 
-/* eslint-disable max-len */
 import useFinance from '@financeiro/store/useFinance';
 import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
 import { generateMonthAndYearList } from '@lancamentos/utils/generate-dates-array';
 import React from 'react';
 
-import { SelectChevroletLogo } from '@/components/common/Icons';
 import { isDateGreaterThanCurrentMonth } from '@/app/plataforma-ipr/financeiro/lancamentos/utils/compare-dates';
+import { SelectChevroletLogo } from '@/components/common/Icons';
+import LoadingSelect from '@/components/EmptySelect';
 
 import { useFinanceReportsContext } from '../../relatorios/providers/FinanceReportsProvider';
 
@@ -20,7 +22,7 @@ const MonthAndYearFilter: React.FC = () => {
 
   const { updateIsDataUpdatedInfo } = useFinanceNotesContext();
 
-  const { financeReport } = useFinanceReportsContext();
+  const { financeReport, isLoadingFinanceReports } = useFinanceReportsContext();
 
   const optionalDates = React.useMemo(() => {
     const dates = generateMonthAndYearList(2024, 12);
@@ -35,19 +37,27 @@ const MonthAndYearFilter: React.FC = () => {
 
   return (
     <div className="select-box">
-      <select value={selectedFinanceDetailDate} onChange={onChangeSelectedDate}>
-        <option disabled>Referência...</option>
-        {React.Children.toArray(
-          optionalDates.map(date => (
-            <option disabled={isDateGreaterThanCurrentMonth(date, financeReport?.currentMonth!)} value={date}>
-              {date}
-            </option>
-          ))
-        )}
-      </select>
-      <span>
-        <SelectChevroletLogo size={24} />
-      </span>
+      {isLoadingFinanceReports ? (
+        <LoadingSelect text="Aguarde ..." />
+      ) : (
+        <>
+          <select value={selectedFinanceDetailDate} onChange={onChangeSelectedDate}>
+            <option disabled>Referência...</option>
+            {React.Children.toArray(
+              optionalDates.map(date => (
+                <option
+                  disabled={isDateGreaterThanCurrentMonth(date, financeReport?.currentMonth!)}
+                  value={date}>
+                  {date}
+                </option>
+              ))
+            )}
+          </select>
+          <span>
+            <SelectChevroletLogo size={24} />
+          </span>
+        </>
+      )}
     </div>
   );
 };

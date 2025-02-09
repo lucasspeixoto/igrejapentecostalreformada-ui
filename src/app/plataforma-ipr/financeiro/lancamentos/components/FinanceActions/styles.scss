@@ -1,0 +1,15 @@
+.notes-actions {
+  @apply flex gap-2;
+
+  & > button {
+    @apply max-w-[80px] cursor-pointer rounded-lg border p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  &__new-note {
+    @apply border-primary bg-primary p-2;
+  }
+
+  &__audit {
+    @apply border-meta-8 bg-meta-8 p-2;
+  }
+}

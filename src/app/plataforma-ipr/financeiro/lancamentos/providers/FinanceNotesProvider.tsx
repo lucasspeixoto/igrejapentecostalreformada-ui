@@ -35,7 +35,7 @@ export const FinanceNotesContextProvider: React.FC<{
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(false);
+  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(true);
 
   const [totalValuesByCategory, setTotalValuesByCategory] = React.useState<Record<string, number>>({});
 
@@ -86,7 +86,7 @@ export const FinanceNotesContextProvider: React.FC<{
         throw new Error(error.message);
       });
 
-    updateLoadingFinanceNotes(false);
+    setTimeout(() => updateLoadingFinanceNotes(false), 1000);
   }, [isDataUpdated]);
 
   return (

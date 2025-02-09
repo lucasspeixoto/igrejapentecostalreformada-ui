@@ -45,13 +45,13 @@ export const FinanceReportsContextProvider: React.FC<{
 }> = ({ children }) => {
   const [financeReport, setFinanceReport] = React.useState<FinanceReport | null>(null);
   const [isFinanceReportDataUpdated, setIsFinanceReportDataUpdated] = React.useState(false);
-  const [isLoadingFinanceReports, setIsLoadingFinanceReports] = React.useState(false);
+  const [isLoadingFinanceReports, setIsLoadingFinanceReports] = React.useState(true);
 
   const [inputsVersusOutputsState, setInputsVersusOutputsState] =
     React.useState<InputsVersusOutputsState | null>(null);
 
   const [isFinanceNotesDataUpdated, setIsFinanceNotesDataUpdated] = React.useState(false);
-  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(false);
+  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(true);
 
   const selectedReportsReferenceYear = useFinanceNotes(state => state.reportsReferenceYear);
 
@@ -86,13 +86,11 @@ export const FinanceReportsContextProvider: React.FC<{
         throw new Error(error.message);
       });
 
-    updateLoadingFinanceReports(false);
+    setTimeout(() => updateLoadingFinanceReports(false), 5000);
   }, [isFinanceReportDataUpdated]);
 
   /* Finance Notes */
   React.useEffect(() => {
-    updateLoadingFinanceNotes(true);
-
     const year = +selectedReportsReferenceYear;
 
     const financeNotesData = getFinanceNotesDocumentsByYear(year);
@@ -111,7 +109,7 @@ export const FinanceReportsContextProvider: React.FC<{
         throw new Error(error.message);
       });
 
-    setTimeout(() => updateLoadingFinanceNotes(false), 1000);
+    updateLoadingFinanceNotes(false);
   }, [isFinanceReportDataUpdated, isFinanceNotesDataUpdated]);
 
   return (

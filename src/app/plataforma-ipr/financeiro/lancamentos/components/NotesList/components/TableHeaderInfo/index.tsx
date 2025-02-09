@@ -5,6 +5,8 @@ import { getMonthBalance } from '@lancamentos/utils/get-balance';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import React from 'react';
 
+import { LoadingText } from '@/components/LoadingText';
+
 const TableHeaderInfo: React.FC = () => {
   const { financeNotes, isLoadingFinanceNotes } = useFinanceNotesContext();
 
@@ -31,9 +33,10 @@ const TableHeaderInfo: React.FC = () => {
       <div className="container__item">
         <p className="container__item-value">
           Caixa anterior:
-          {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
-            <span
-              className={`ml-2 mt-1 text-lg font-bold ${currentBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
+          {isLoadingFinanceReports || isLoadingFinanceNotes ? (
+            <LoadingText />
+          ) : (
+            <span className={` ${currentBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
               R$ {currentBalance}
             </span>
           )}
@@ -43,11 +46,10 @@ const TableHeaderInfo: React.FC = () => {
       <div className="container__item">
         <p className="container__item-value">
           Saldo Mês:
-          {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
-            <span
-              className={`ml-2 mt-1 text-lg font-bold ${
-                totalMonthBalance >= 0 ? 'text-meta-3' : 'text-meta-7'
-              }`}>
+          {isLoadingFinanceReports || isLoadingFinanceNotes ? (
+            <LoadingText />
+          ) : (
+            <span className={` ${totalMonthBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
               R$ {totalMonthBalance}
             </span>
           )}
@@ -57,9 +59,10 @@ const TableHeaderInfo: React.FC = () => {
       <div className="container__item">
         <p className="container__item-value">
           Balanço mês:
-          {isLoadingFinanceReports || isLoadingFinanceNotes ? null : (
-            <span
-              className={`ml-2 mt-1 text-lg font-bold ${newBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
+          {isLoadingFinanceReports || isLoadingFinanceNotes ? (
+            <LoadingText />
+          ) : (
+            <span className={` ${newBalance >= 0 ? 'text-meta-3' : 'text-meta-7'}`}>
               R$ {newBalance.toFixed(2)}
             </span>
           )}
