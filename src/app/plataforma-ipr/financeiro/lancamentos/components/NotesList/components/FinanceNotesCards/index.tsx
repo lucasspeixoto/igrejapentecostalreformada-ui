@@ -1,14 +1,22 @@
 import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvider';
 import React from 'react';
 
+import { useFinanceReportsContext } from '@/app/plataforma-ipr/financeiro/relatorios/providers/FinanceReportsProvider';
+import useFinance from '@/app/plataforma-ipr/financeiro/store/useFinance';
 import Image from '@/components/Image';
 import { formatFirebaseTimestampDate } from '@/utils/transform-date';
 
 import FinanceNoteDeleteAction from '../FinanceNoteDeleteAction';
 import FinanceNoteUpdateAction from '../FinanceNoteUpdateAction';
 
-const FinanceMobileView = () => {
+const FinanceNotesCards = () => {
   const { financeNotes } = useFinanceNotesContext();
+
+  const { financeReport } = useFinanceReportsContext();
+
+  const selectedFinanceDetailDate = useFinance(state => state.notesListReferenceMonth);
+
+  const isSelectedMonthTheCurrentMonth = selectedFinanceDetailDate !== financeReport?.currentMonth!;
 
   return (
     <div className="py-2">
@@ -62,8 +70,16 @@ const FinanceMobileView = () => {
                   )}
                 </div>
                 <div className="flex gap-2">
-                  <FinanceNoteUpdateAction noteId={note.id} />
-                  <FinanceNoteDeleteAction noteId={note.id} type={note.type} value={note.value} />
+                  <FinanceNoteUpdateAction
+                    isSelectedMonthTheCurrentMonth={isSelectedMonthTheCurrentMonth}
+                    noteId={note.id}
+                  />
+                  <FinanceNoteDeleteAction
+                    isSelectedMonthTheCurrentMonth={isSelectedMonthTheCurrentMonth}
+                    noteId={note.id}
+                    type={note.type}
+                    value={note.value}
+                  />
                 </div>
               </div>
             </div>
@@ -74,4 +90,4 @@ const FinanceMobileView = () => {
   );
 };
 
-export default FinanceMobileView;
+export default FinanceNotesCards;

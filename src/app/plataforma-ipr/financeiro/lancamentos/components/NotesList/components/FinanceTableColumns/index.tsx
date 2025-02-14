@@ -1,6 +1,6 @@
 import React from 'react';
 
-const COLUMNS = ['Quem lançou', 'Inclusão', 'Tipo', 'Categoria', 'Valor (R$)', ''];
+const COLUMNS = ['Tesoureiro', 'Data', 'Tipo', 'Categoria', 'Valor (R$)', ''];
 
 const FinanceTableColumns: React.FC = () => {
   return (

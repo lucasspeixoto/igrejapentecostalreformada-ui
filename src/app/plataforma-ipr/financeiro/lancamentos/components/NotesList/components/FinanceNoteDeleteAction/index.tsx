@@ -15,12 +15,18 @@ import { toast } from 'react-toastify';
 import ConfirmModal from '@/components/ConfirmModal';
 
 type FinanceNoteDeleteActionProps = {
+  isSelectedMonthTheCurrentMonth: boolean;
   noteId: string;
   type: 'C' | 'D';
   value: number;
 };
 
-const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({ noteId, type, value }) => {
+const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({
+  isSelectedMonthTheCurrentMonth,
+  noteId,
+  type,
+  value,
+}) => {
   const financeNotesContext = useFinanceNotesContext();
 
   const financeReportsContext = useFinanceReportsContext();
@@ -77,7 +83,9 @@ const FinanceNoteDeleteAction: React.FC<FinanceNoteDeleteActionProps> = ({ noteI
           />
         ) : null}
       </>
-      <button className="hover:text-meta-7">
+      <button
+        disabled={isSelectedMonthTheCurrentMonth}
+        className="hover:text-meta-7 disabled:cursor-not-allowed disabled:opacity-40">
         <BiTrash size={20} onClick={() => deleteNoteHandler(noteId)} />
       </button>
     </>
