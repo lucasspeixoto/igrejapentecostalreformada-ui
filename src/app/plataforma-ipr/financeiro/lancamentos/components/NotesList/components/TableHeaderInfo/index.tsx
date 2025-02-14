@@ -5,12 +5,15 @@ import { getMonthBalance } from '@lancamentos/utils/get-balance';
 import { useFinanceReportsContext } from '@relatorios/providers/FinanceReportsProvider';
 import React from 'react';
 
+import useFinance from '@/app/plataforma-ipr/financeiro/store/useFinance';
 import { LoadingText } from '@/components/LoadingText';
 
 const TableHeaderInfo: React.FC = () => {
   const { financeNotes, isLoadingFinanceNotes } = useFinanceNotesContext();
 
   const { financeReport, isLoadingFinanceReports } = useFinanceReportsContext();
+
+  const selectedFinanceDetailDate = useFinance(state => state.notesListReferenceMonth);
 
   const totalMonthBalance = React.useMemo(() => {
     return +getMonthBalance(financeNotes).toFixed(2);
@@ -27,6 +30,9 @@ const TableHeaderInfo: React.FC = () => {
     () => currentBalance + totalMonthBalance,
     [totalMonthBalance, currentBalance]
   );
+
+  // Mostrar balanço mensal apenas no mês atual
+  if (selectedFinanceDetailDate !== financeReport?.currentMonth!) return null;
 
   return (
     <div className="container">

@@ -1,13 +1,13 @@
-/* eslint-disable max-len */
-
 'use client';
 
 import './styles.scss';
 
-import { updateTotalBalanceAndCloseCurrentMonth } from '@relatorios/lib/firebase/update-finance-reports';
 import React from 'react';
 import { toast } from 'react-toastify';
 
+import { updateTotalBalanceAndCloseCurrentMonth } from '../../../relatorios/lib/firebase/update-finance-reports';
+import { useFinanceReportsContext } from '../../../relatorios/providers/FinanceReportsProvider';
+import useFinance from '../../../store/useFinance';
 import addFinanceNote from '../../lib/firebase/add-finance-note';
 import { useFinanceNotesContext } from '../../providers/FinanceNotesProvider';
 import type { FinanceNote } from '../../types/finance-note';
@@ -20,6 +20,10 @@ const FinanceActions: React.FC = () => {
   const [showInsertNoteModal, setShowInsertNoteModal] = React.useState(false);
 
   const [showMonthlyAuditModal, setShowMonthlyAuditModal] = React.useState(false);
+
+  const { financeReport } = useFinanceReportsContext();
+
+  const selectedFinanceDetailDate = useFinance(state => state.notesListReferenceMonth);
 
   const onCancelInsertNote = () => setShowInsertNoteModal(false);
 
@@ -38,10 +42,14 @@ const FinanceActions: React.FC = () => {
   };
 
   const processMonthlyAuditHandler = async () => {
-    // console.log('Fechamento mês!');
-
     await updateTotalBalanceAndCloseCurrentMonth();
+
+    // close audit modal
+    setShowMonthlyAuditModal(false);
   };
+
+  // Mostrar ações apenas no mês atual
+  if (selectedFinanceDetailDate !== financeReport?.currentMonth!) return null;
 
   return (
     <>
@@ -61,6 +69,7 @@ const FinanceActions: React.FC = () => {
           />
         ) : null}
       </>
+
       <div className="notes-actions">
         <button
           className="notes-actions__new-note"

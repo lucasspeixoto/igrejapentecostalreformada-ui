@@ -11,7 +11,7 @@ import React from 'react';
 
 import { isDateGreaterThanCurrentMonth } from '@/app/plataforma-ipr/financeiro/lancamentos/utils/compare-dates';
 import { SelectChevroletLogo } from '@/components/common/Icons';
-import LoadingSelect from '@/components/EmptySelect';
+import LoadingSelect from '@/components/LoadingSelect';
 
 import { useFinanceReportsContext } from '../../relatorios/providers/FinanceReportsProvider';
 
