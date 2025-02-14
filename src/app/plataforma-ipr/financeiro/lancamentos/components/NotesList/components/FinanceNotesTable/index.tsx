@@ -2,6 +2,8 @@ import { useFinanceNotesContext } from '@lancamentos/providers/FinanceNotesProvi
 import React from 'react';
 import { FaEye } from 'react-icons/fa';
 
+import { useFinanceReportsContext } from '@/app/plataforma-ipr/financeiro/relatorios/providers/FinanceReportsProvider';
+import useFinance from '@/app/plataforma-ipr/financeiro/store/useFinance';
 import Image from '@/components/Image';
 import Tooltip from '@/components/Tooltip';
 import { formatFirebaseTimestampDate } from '@/utils/transform-date';
@@ -10,8 +12,14 @@ import FinanceNoteDeleteAction from '../FinanceNoteDeleteAction';
 import FinanceNoteUpdateAction from '../FinanceNoteUpdateAction';
 import FinanceTableColumns from '../FinanceTableColumns';
 
-const FinanceDesktopView = () => {
+const FinanceNotesTable = () => {
   const { financeNotes } = useFinanceNotesContext();
+
+  const { financeReport } = useFinanceReportsContext();
+
+  const selectedFinanceDetailDate = useFinance(state => state.notesListReferenceMonth);
+
+  const isSelectedMonthTheCurrentMonth = selectedFinanceDetailDate !== financeReport?.currentMonth!;
 
   return (
     <div className="max-w-full overflow-x-auto rounded-2xl border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark ">
@@ -70,8 +78,16 @@ const FinanceDesktopView = () => {
                     <Tooltip className="hover:text-meta-3" text={note.description}>
                       <FaEye size={18} />
                     </Tooltip>
-                    <FinanceNoteUpdateAction noteId={note.id} />
-                    <FinanceNoteDeleteAction noteId={note.id} value={note.value} type={note.type} />
+                    <FinanceNoteUpdateAction
+                      isSelectedMonthTheCurrentMonth={isSelectedMonthTheCurrentMonth}
+                      noteId={note.id}
+                    />
+                    <FinanceNoteDeleteAction
+                      isSelectedMonthTheCurrentMonth={isSelectedMonthTheCurrentMonth}
+                      noteId={note.id}
+                      value={note.value}
+                      type={note.type}
+                    />
                   </div>
                 </td>
               </tr>
@@ -83,4 +99,4 @@ const FinanceDesktopView = () => {
   );
 };
 
-export default FinanceDesktopView;
+export default FinanceNotesTable;

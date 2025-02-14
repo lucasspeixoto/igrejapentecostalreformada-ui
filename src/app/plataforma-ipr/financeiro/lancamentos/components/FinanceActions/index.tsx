@@ -1,10 +1,13 @@
-/* eslint-disable max-len */
-
 'use client';
+
+import './styles.scss';
 
 import React from 'react';
 import { toast } from 'react-toastify';
 
+import { updateTotalBalanceAndCloseCurrentMonth } from '../../../relatorios/lib/firebase/update-finance-reports';
+import { useFinanceReportsContext } from '../../../relatorios/providers/FinanceReportsProvider';
+import useFinance from '../../../store/useFinance';
 import addFinanceNote from '../../lib/firebase/add-finance-note';
 import { useFinanceNotesContext } from '../../providers/FinanceNotesProvider';
 import type { FinanceNote } from '../../types/finance-note';
@@ -17,6 +20,10 @@ const FinanceActions: React.FC = () => {
   const [showInsertNoteModal, setShowInsertNoteModal] = React.useState(false);
 
   const [showMonthlyAuditModal, setShowMonthlyAuditModal] = React.useState(false);
+
+  const { financeReport } = useFinanceReportsContext();
+
+  const selectedFinanceDetailDate = useFinance(state => state.notesListReferenceMonth);
 
   const onCancelInsertNote = () => setShowInsertNoteModal(false);
 
@@ -34,6 +41,16 @@ const FinanceActions: React.FC = () => {
     toast.success('Nota adicionada com sucesso!');
   };
 
+  const processMonthlyAuditHandler = async () => {
+    await updateTotalBalanceAndCloseCurrentMonth();
+
+    // close audit modal
+    setShowMonthlyAuditModal(false);
+  };
+
+  // Mostrar ações apenas no mês atual
+  if (selectedFinanceDetailDate !== financeReport?.currentMonth!) return null;
+
   return (
     <>
       <>
@@ -46,20 +63,21 @@ const FinanceActions: React.FC = () => {
       </>
       <>
         {showMonthlyAuditModal ? (
-          <MonthlyAuditModal onCancelAudit={onCancelAudit} processMonthlyAuditHandler={() => {}} />
+          <MonthlyAuditModal
+            onCancelAudit={onCancelAudit}
+            processMonthlyAuditHandler={processMonthlyAuditHandler}
+          />
         ) : null}
       </>
-      <div className="flex gap-2">
+
+      <div className="notes-actions">
         <button
+          className="notes-actions__new-note"
           onClick={() => setShowInsertNoteModal(true)}
-          type="button"
-          className="max-w-[80px] cursor-pointer rounded-lg border border-primary bg-primary p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+          type="button">
           Novo
         </button>
-        <button
-          onClick={() => setShowMonthlyAuditModal(true)}
-          type="button"
-          className="max-w-[80px] cursor-pointer rounded-lg border border-meta-8 bg-meta-8 p-2 text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+        <button className="notes-actions__audit" onClick={() => setShowMonthlyAuditModal(true)} type="button">
           Auditoria
         </button>
       </div>

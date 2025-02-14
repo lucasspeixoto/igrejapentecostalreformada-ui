@@ -5,6 +5,7 @@ import type { FinanceNote } from '@lancamentos/types/finance-note';
 import React from 'react';
 
 import useFinanceNotes from '@/app/plataforma-ipr/financeiro/store/useFinance';
+import { generateTimestampFromStringDate } from '@/utils/transform-date';
 
 import { orderNotesByDate } from '../utils/order-notes-by-date';
 
@@ -14,6 +15,7 @@ const initialValues = {
   totalValuesByCategory: {},
   updateLoadingFinanceNotes: () => {},
   updateIsDataUpdatedInfo: () => {},
+  filterFinanceNotes: () => {},
 };
 
 type FinanceNotesContextType = {
@@ -22,6 +24,7 @@ type FinanceNotesContextType = {
   totalValuesByCategory: Record<string, number>;
   updateLoadingFinanceNotes: (isLoading: boolean) => void;
   updateIsDataUpdatedInfo: () => void;
+  filterFinanceNotes: (category: string, date: string, value: string) => void;
 };
 
 export const FinanceNotesContext = React.createContext<FinanceNotesContextType>(initialValues);
@@ -35,7 +38,7 @@ export const FinanceNotesContextProvider: React.FC<{
 
   const [isDataUpdated, setIsDataUpdated] = React.useState(false);
 
-  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(false);
+  const [isLoadingFinanceNotes, setIsLoadingFinanceNotes] = React.useState(true);
 
   const [totalValuesByCategory, setTotalValuesByCategory] = React.useState<Record<string, number>>({});
 
@@ -68,6 +71,43 @@ export const FinanceNotesContextProvider: React.FC<{
     setTotalValuesByCategory(computedTotalValuesByCategory);
   };
 
+  const filterFinanceNotes = (category: string, date: string, value: string): void => {
+    updateLoadingFinanceNotes(true);
+
+    const month = +selectedFinanceDetailDate.split('/')[0];
+    const year = +selectedFinanceDetailDate.split('/')[1];
+
+    const financeNotesByMonthAndYear = getFinanceNotesDocumentsByMonthAndYear(month, year);
+
+    financeNotesByMonthAndYear
+      .then(data => {
+        if (data) {
+          let filteredNotes =
+            category !== 'all'
+              ? data.financeNotesData.filter(note => note.category === category)
+              : data.financeNotesData;
+
+          if (date !== '') {
+            const formatedDate = generateTimestampFromStringDate(date);
+
+            filteredNotes = filteredNotes.filter(note => note.date.toMillis() === formatedDate.toMillis());
+          }
+
+          if (value !== '') {
+            filteredNotes = filteredNotes.filter(note => note.value === Number(value));
+          }
+
+          setFinanceNotes(filteredNotes);
+          computeTotalValuesByCategory(filteredNotes);
+        }
+      })
+      .catch(error => {
+        throw new Error(error.message);
+      });
+
+    setTimeout(() => updateLoadingFinanceNotes(false), 1000);
+  };
+
   React.useEffect(() => {
     const month = +selectedFinanceDetailDate.split('/')[0];
     const year = +selectedFinanceDetailDate.split('/')[1];
@@ -86,7 +126,7 @@ export const FinanceNotesContextProvider: React.FC<{
         throw new Error(error.message);
       });
 
-    updateLoadingFinanceNotes(false);
+    setTimeout(() => updateLoadingFinanceNotes(false), 1000);
   }, [isDataUpdated]);
 
   return (
@@ -97,6 +137,7 @@ export const FinanceNotesContextProvider: React.FC<{
         totalValuesByCategory,
         updateLoadingFinanceNotes,
         updateIsDataUpdatedInfo,
+        filterFinanceNotes,
       }}>
       {children}
     </FinanceNotesContext.Provider>

@@ -13,8 +13,9 @@ import useIsWindowWidthMatched from '@/hooks/useIsWindowWidthMatched';
 import { useAuthContext } from '@/providers/AuthContextProvider';
 
 import { useFinanceNotesContext } from '../../providers/FinanceNotesProvider';
-import FinanceDesktopView from './components/FinanceDesktopView';
-import FinanceMobileView from './components/FinanceMobileView';
+import FinanceNotesCards from './components/FinanceNotesCards';
+import FinanceNotesFilters from './components/FinanceNotesFilters';
+import FinanceNotesTable from './components/FinanceNotesTable';
 import TableHeaderInfo from './components/TableHeaderInfo';
 
 const MAX_MOBILE_WIDTH = 768;
@@ -46,13 +47,15 @@ const NotesList: React.FC = () => {
         <>
           <TableHeaderInfo />
 
+          <FinanceNotesFilters />
+
           <div className="pb-10">
             {isLoadingFinanceNotes ? (
               <Loader />
             ) : (
               <>
                 {financeNotes.length > 0 ? (
-                  <>{isMobileSize ? <FinanceMobileView /> : <FinanceDesktopView />}</>
+                  <>{isMobileSize ? <FinanceNotesCards /> : <FinanceNotesTable />}</>
                 ) : (
                   <EmptyDataPage description="Não há nenhuma nota lançada para o período selecionado!" />
                 )}

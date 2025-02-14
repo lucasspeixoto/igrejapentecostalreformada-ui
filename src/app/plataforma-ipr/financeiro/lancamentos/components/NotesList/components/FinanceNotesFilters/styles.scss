@@ -1,0 +1,31 @@
+.filters {
+  @apply gap-6 flex w-full flex-col items-start justify-start sm:flex-row;
+
+  &__item {
+    @apply flex flex-col items-start;
+
+    &-select_box {
+      @apply relative z-20 bg-transparent dark:bg-form-input;
+
+      & > select {
+        @apply relative z-20 w-full cursor-pointer disabled:cursor-not-allowed appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary;
+      }
+    }
+
+    & > label {
+      @apply mb-2.5 block self-start text-black dark:text-white;
+    }
+
+    & > input {
+      @apply w-full cursor-pointer disabled:cursor-not-allowed rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary;
+    }
+  }
+}
+
+.actions {
+  @apply gap-6 flex w-full flex-col items-start justify-start sm:flex-row mb-2;
+
+  & > button {
+    @apply border-primary bg-primary p-2 cursor-pointer rounded-lg border text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}

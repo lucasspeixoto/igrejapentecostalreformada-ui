@@ -9,6 +9,7 @@ type MonthBalanceProps = {
   currentBalance: number;
   newBalance: number;
 };
+
 const MonthBalance: React.FC<MonthBalanceProps> = ({
   inputs,
   outputs,
