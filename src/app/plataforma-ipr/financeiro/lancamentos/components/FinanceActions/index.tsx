@@ -2,6 +2,7 @@
 
 import './styles.scss';
 
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { toast } from 'react-toastify';
 
@@ -15,6 +16,8 @@ import FinanceNoteInsertModal from './FinanceNoteInsertModal';
 import MonthlyAuditModal from './MonthlyAuditModal';
 
 const FinanceActions: React.FC = () => {
+  const router = useRouter();
+
   const { updateLoadingFinanceNotes, updateIsDataUpdatedInfo } = useFinanceNotesContext();
 
   const [showInsertNoteModal, setShowInsertNoteModal] = React.useState(false);
@@ -46,6 +49,8 @@ const FinanceActions: React.FC = () => {
 
     // close audit modal
     setShowMonthlyAuditModal(false);
+
+    router.push('/plataforma-ipr/financeiro/relatorios');
   };
 
   // Mostrar ações apenas no mês atual
