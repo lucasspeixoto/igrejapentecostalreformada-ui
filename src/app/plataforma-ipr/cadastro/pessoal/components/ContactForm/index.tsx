@@ -2,6 +2,8 @@
 
 /* eslint-disable max-len */
 
+import './styles.scss';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -101,9 +103,15 @@ const ContactForm = () => {
           <select
             {...register('sex')}
             className="strokedark relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary">
-            <option value="">Selecione seu sexo</option>
-            <option value="Feminino">Feminino</option>
-            <option value="Masculino">Masculino</option>
+            <option className="option" value="">
+              Selecione seu sexo
+            </option>
+            <option className="option" value="Feminino">
+              Feminino
+            </option>
+            <option className="option" value="Masculino">
+              Masculino
+            </option>
           </select>
           <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
             <SelectChevroletLogo size={24} />

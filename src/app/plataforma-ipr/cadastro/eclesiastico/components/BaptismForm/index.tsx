@@ -108,10 +108,10 @@ const BaptismForm = () => {
       </div>
 
       <div className="mb-4.5">
-        <label className="mb-2.5 block text-black dark:text-white">Pastor de Batismo</label>
+        <label className="mb-2.5 block text-black dark:text-white">Igreja de Batismo</label>
         <input
           type="text"
-          placeholder="Digite o pastor de batismo"
+          placeholder="Digite a Igreja de batismo"
           {...register('baptismShepherd')}
           className="strokedark w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-white dark:border-strokedark dark:bg-form-input dark:text-[#ccc] dark:focus:border-primary"
         />

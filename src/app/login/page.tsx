@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const SignIn: React.FC = () => {
   return (
-    <div className="flex h-full flex-col justify-between rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark md:h-[calc(100vh-0rem)]">
+    <div className="flex h-full flex-col justify-between overflow-y-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark md:h-[calc(100vh-0rem)]">
       <div className="flex h-full items-center justify-center gap-5 lg:min-h-[90%]">
         <AuthPagePresentation />
 
