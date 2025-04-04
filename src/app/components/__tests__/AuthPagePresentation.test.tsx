@@ -12,7 +12,7 @@ describe('AuthPagePresentation', () => {
     const headingElement = screen.getByRole('heading', { level: 1 });
 
     expect(headingElement).toBeInTheDocument();
-    expect(headingElement).toHaveTextContent('Plataforma Igreja pentecostal refomada');
+    expect(headingElement).toHaveTextContent('Plataforma Igreja Pentecostal Refomada');
   });
 
   it('should adds correct src and alt to the Logo Image', () => {

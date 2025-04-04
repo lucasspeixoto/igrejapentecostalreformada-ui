@@ -5,7 +5,7 @@ import Link from 'next/link';
 const AuthPagePresentation = () => {
   return (
     <div className="container">
-      <h1 className="container__title">Plataforma Igreja pentecostal refomada</h1>
+      <h1 className="container__title">Plataforma Igreja Pentecostal Refomada</h1>
 
       <Link className="container__link" href="/">
         <img src={'/images/logo/logo.svg'} alt="Logo" className="h-80 max-h-[75%] w-[30rem] max-w-[600px]" />

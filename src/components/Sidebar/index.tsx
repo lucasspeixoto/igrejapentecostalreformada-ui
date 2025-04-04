@@ -1,5 +1,7 @@
 'use client';
 
+import './styles.scss';
+
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import Image from 'next/image';
@@ -117,13 +119,11 @@ const Sidebar = () => {
             {/* Listagem de items do menu */}
             <ul className="mb-6 flex flex-col gap-1.5">
               {/* <!-- Perfil --> */}
-              <li>
+              <li className={`${pathname.includes('perfil') && 'selected-link'}`}>
                 <Link
                   href="/plataforma-ipr/perfil"
-                  className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
-                  }`}>
-                  <BiUser size={20} className="text-gray" />
+                  className="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4">
+                  <BiUser size={20} />
                   Perfil
                 </Link>
               </li>
@@ -138,13 +138,16 @@ const Sidebar = () => {
                         href="#"
                         className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                           (pathname === '/plataforma-ipr/cadastro' || pathname.includes('cadastro')) &&
-                          'bg-graydark dark:bg-meta-4'
+                          'selected-link'
                         }`}
                         onClick={e => {
                           e.preventDefault();
                           sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                         }}>
-                        <FaWpforms size={20} className="text-white" />
+                        <FaWpforms
+                          size={20}
+                          className={`${pathname.includes('cadastro') && 'selected-link'}`}
+                        />
                         Cadastro
                         <MenuChevroletIcon open={open} />
                       </Link>
@@ -194,9 +197,12 @@ const Sidebar = () => {
                   <Link
                     href="/plataforma-ipr/membros"
                     className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                      pathname.includes('listagens-de-membros') && 'bg-graydark dark:bg-meta-4'
+                      pathname.includes('membros') && 'selected-link'
                     }`}>
-                    <BsPeople size={20} className="text-gray" />
+                    <BsPeople
+                      size={20}
+                      className={`${pathname === '/plataforma-ipr/membros' || (pathname.includes('membros') && 'selected-link')}`}
+                    />
                     Membros IPR
                   </Link>
                 </li>
@@ -212,13 +218,16 @@ const Sidebar = () => {
                           href="#"
                           className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                             (pathname === '/plataforma-ipr/financeiro' || pathname.includes('financeiro')) &&
-                            'bg-graydark dark:bg-meta-4'
+                            'selected-link'
                           }`}
                           onClick={e => {
                             e.preventDefault();
                             sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                           }}>
-                          <FaRegMoneyBillAlt size={20} className="text-gray" />
+                          <FaRegMoneyBillAlt
+                            size={20}
+                            className={`${pathname.includes('financeiro') && 'selected-link'}`}
+                          />
                           Financeiro
                           <MenuChevroletIcon open={open} />
                         </Link>
@@ -264,13 +273,16 @@ const Sidebar = () => {
                           className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
                             (pathname === '/plataforma-ipr/indicadores' ||
                               pathname.includes('indicadores')) &&
-                            'bg-graydark dark:bg-meta-4'
+                            'selected-link'
                           }`}
                           onClick={e => {
                             e.preventDefault();
                             sidebarExpanded ? handleClick() : setSidebarExpanded(true);
                           }}>
-                          <AiOutlinePieChart size={16} className="text-gray" />
+                          <AiOutlinePieChart
+                            size={16}
+                            className={`${pathname.includes('indicadores') && 'selected-link'}`}
+                          />
                           Indicadores
                           <MenuChevroletIcon open={open} />
                         </Link>
@@ -300,9 +312,12 @@ const Sidebar = () => {
                 <Link
                   href="/plataforma-ipr/calendario"
                   className={`group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-normal text-gray duration-300 ease-in-out hover:rounded-xl hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes('calendario') && 'bg-graydark dark:bg-meta-4'
+                    pathname.includes('calendario') && 'selected-link'
                   }`}>
-                  <BsCalendarDate size={20} className="text-gray" />
+                  <BsCalendarDate
+                    size={20}
+                    className={`${pathname.includes('calendario') && 'selected-link'}`}
+                  />
                   Calendário
                 </Link>
               </li>
